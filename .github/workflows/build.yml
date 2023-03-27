@@ -6,7 +6,7 @@
 # separate terms of service, privacy policy, and support
 # documentation.
 
-name: Java CI with Maven / AngularJS CI with Node
+name: Java CI with Maven and AngularJS CI with Node
 
 on:
   push:
