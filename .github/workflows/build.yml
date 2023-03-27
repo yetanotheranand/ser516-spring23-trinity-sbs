@@ -6,7 +6,7 @@
 # separate terms of service, privacy policy, and support
 # documentation.
 
-name: Java CI with Maven and AngularJS CI with Node
+name: Java CI with Maven / AngularJS CI with Node
 
 on:
   push:
@@ -66,8 +66,7 @@ jobs:
 
       - name: Test sbs-driver-ui
         working-directory: sbs-driver/ui
-      - run: npm ci
-      - run: npm test -- --no-watch --no-progress
+        run: npm ci && npm test -- --no-watch --no-progress
 
       - name: Comment API Test Results
         uses: EnricoMi/publish-unit-test-result-action@v2
@@ -116,8 +115,7 @@ jobs:
 
       - name: Test sbs-metrics-ui
         working-directory: sbs-metrics/ui
-      - run: npm ci
-      - run: npm test -- --no-watch --no-progress
+        run: npm ci && npm test -- --no-watch --no-progress
 
       - name: Comment API Test Results
         uses: EnricoMi/publish-unit-test-result-action@v2
@@ -166,8 +164,7 @@ jobs:
 
       - name: Test sbs-project-management-ui
         working-directory: sbs-project-management/ui
-      - run: npm ci
-      - run: npm test -- --no-watch --no-progress
+        run: npm ci && npm test -- --no-watch --no-progress
 
       - name: Comment API Test Results
         uses: EnricoMi/publish-unit-test-result-action@v2
