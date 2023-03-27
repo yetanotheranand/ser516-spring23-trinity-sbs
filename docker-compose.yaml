@@ -1,0 +1,52 @@
+services:
+  sbs-driver-ui:
+    image: sbs-driver-ui:1.0.0
+    build:
+      context: ./sbs-driver/ui
+      args:
+        - ENVIRONMENT=production
+    ports:
+      - "80:80"
+    depends_on:
+      - sbs-driver-api
+  sbs-driver-api:
+    image: sbs-driver-api:1.0.0
+    build:
+      context: ./sbs-driver/api
+      target: prod
+    ports:
+      - "8080:8080"
+  sbs-metrics-ui:
+    image: sbs-metrics-ui:1.0.0
+    build:
+      context: ./sbs-metrics/ui
+      args:
+        - ENVIRONMENT=production
+    ports:
+      - "4201:80"
+    depends_on:
+      - sbs-metrics-api
+  sbs-metrics-api:
+    image: sbs-metrics-api:1.0.0
+    build:
+      context: ./sbs-metrics/api
+      target: prod
+    ports:
+      - "8081:8080"
+  sbs-project-management-ui:
+    image: sbs-project-management-ui:1.0.0
+    build:
+      context: ./sbs-project-management/ui
+      args:
+        - ENVIRONMENT=production
+    ports:
+      - "4202:80"
+    depends_on:
+      - sbs-project-management-api
+  sbs-project-management-api:
+    image: sbs-project-management-api:1.0.0
+    build:
+      context: ./sbs-project-management/api
+      target: prod
+    ports:
+      - "8082:8080"
