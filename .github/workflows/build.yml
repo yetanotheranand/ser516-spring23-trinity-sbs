@@ -66,7 +66,7 @@ jobs:
 
       - name: Test sbs-driver-ui
         working-directory: sbs-driver/ui
-        run: npm ci && npm test -- --no-watch --no-progress
+        run: npm ci && npm test -- --no-watch --no-progress --browsers=ChromeHeadless
 
       - name: Comment API Test Results
         uses: EnricoMi/publish-unit-test-result-action@v2
@@ -115,7 +115,7 @@ jobs:
 
       - name: Test sbs-metrics-ui
         working-directory: sbs-metrics/ui
-        run: npm ci && npm test -- --no-watch --no-progress
+        run: npm ci && npm test -- --no-watch --no-progress --browsers=ChromeHeadless
 
       - name: Comment API Test Results
         uses: EnricoMi/publish-unit-test-result-action@v2
@@ -164,7 +164,7 @@ jobs:
 
       - name: Test sbs-project-management-ui
         working-directory: sbs-project-management/ui
-        run: npm ci && npm test -- --no-watch --no-progress
+        run: npm ci && npm test -- --no-watch --no-progress --browsers=ChromeHeadless
 
       - name: Comment API Test Results
         uses: EnricoMi/publish-unit-test-result-action@v2
