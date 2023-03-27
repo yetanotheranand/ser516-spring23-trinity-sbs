@@ -63,12 +63,12 @@ jobs:
       - name: Test sbs-driver-api
         working-directory: sbs-driver/api
         run: mvn clean test
-      
+
       - name: Test sbs-driver-ui
         working-directory: sbs-driver/ui
       - run: npm ci
       - run: npm test -- --no-watch --no-progress
-      
+
       - name: Comment API Test Results
         uses: EnricoMi/publish-unit-test-result-action@v2
         with:
@@ -82,15 +82,15 @@ jobs:
           token: ${{ secrets.GITHUB_TOKEN }}
           min-coverage-overall: 50
           min-coverage-changed-files: 50
-          title: JUnit Test Coverage
-      
+          title: sbs-driver-api Test Coverage
+
       - name: Comment UI Test Coverage
         uses: AthleticNet/comment-test-coverage@1.1
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           path: sbs-driver/coverage/coverage-summary.json
-          title: Karma Test Coverage
-      
+          title: sbs-driver-ui Test Coverage
+
   sbs-metrics:
     permissions:
       contents: read
@@ -113,12 +113,12 @@ jobs:
       - name: Test sbs-metrics-api
         working-directory: sbs-metrics/api
         run: mvn clean test
-      
+
       - name: Test sbs-metrics-ui
         working-directory: sbs-metrics/ui
       - run: npm ci
       - run: npm test -- --no-watch --no-progress
-      
+
       - name: Comment API Test Results
         uses: EnricoMi/publish-unit-test-result-action@v2
         with:
@@ -132,15 +132,15 @@ jobs:
           token: ${{ secrets.GITHUB_TOKEN }}
           min-coverage-overall: 50
           min-coverage-changed-files: 50
-          title: JUnit Test Coverage
-      
+          title: sbs-metrics-api Test Coverage
+
       - name: Comment UI Test Coverage
         uses: AthleticNet/comment-test-coverage@1.1
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           path: sbs-metrics/coverage/coverage-summary.json
-          title: Karma Test Coverage
-      
+          title: sbs-metrics-ui Test Coverage
+
   sbs-project-management:
     permissions:
       contents: read
@@ -163,12 +163,12 @@ jobs:
       - name: Test sbs-project-management-api
         working-directory: sbs-project-management/api
         run: mvn clean test
-      
+
       - name: Test sbs-project-management-ui
         working-directory: sbs-project-management/ui
       - run: npm ci
       - run: npm test -- --no-watch --no-progress
-      
+
       - name: Comment API Test Results
         uses: EnricoMi/publish-unit-test-result-action@v2
         with:
@@ -182,14 +182,14 @@ jobs:
           token: ${{ secrets.GITHUB_TOKEN }}
           min-coverage-overall: 50
           min-coverage-changed-files: 50
-          title: JUnit Test Coverage
-      
+          title: sbs-project-management-api Test Coverage
+
       - name: Comment UI Test Coverage
         uses: AthleticNet/comment-test-coverage@1.1
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           path: sbs-project-management/coverage/coverage-summary.json
-          title: Karma Test Coverage
+          title: sbs-project-management-ui Test Coverage
 
-    
-    
+
+
