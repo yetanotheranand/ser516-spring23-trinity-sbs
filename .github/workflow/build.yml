@@ -1,0 +1,195 @@
+# This workflow will build a Java project with Maven, and cache/restore any dependencies to improve the workflow execution time
+# For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-java-with-maven
+
+# This workflow uses actions that are not certified by GitHub.
+# They are provided by a third-party and are governed by
+# separate terms of service, privacy policy, and support
+# documentation.
+
+name: Java CI with Maven / AngularJS CI with Node
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    types: [ opened, synchronize ]
+    branches: [ "main" ]
+
+jobs:
+  # Job to run tests
+  changes:
+    name: Checkout and identify changes
+    runs-on: ubuntu-latest
+    # Set job outputs to values from filter step
+    outputs:
+      sbs-driver: ${{ steps.filter.outputs.sbs-driver }}
+      sbs-metrics: ${{ steps.filter.outputs.sbs-metrics }}
+      sbs-project-management: ${{ steps.filter.outputs.sbs-project-management }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 1
+      - uses: dorny/paths-filter@v2
+        id: filter
+        with:
+          filters: |
+            sbs-driver:
+              - 'sbs-driver/**'
+            sbs-metrics:
+              - 'sbs-metrics/**'
+            sbs-project-management:
+              - 'sbs-project-management/**'
+
+  sbs-driver:
+    permissions:
+      contents: read
+      issues: read
+      checks: write
+      pull-requests: write
+    needs: changes
+    if: ${{ needs.changes.outputs.sbs-driver == 'true' }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: '18.15.0'
+      - uses: actions/setup-java@v3
+        with:
+          java-version: '19'
+          distribution: 'temurin'
+          cache: maven
+      - name: Test sbs-driver-api
+        working-directory: sbs-driver/api
+        run: mvn clean test
+      
+      - name: Test sbs-driver-ui
+        working-directory: sbs-driver/ui
+      - run: npm ci
+      - run: npm test -- --no-watch --no-progress
+      
+      - name: Comment API Test Results
+        uses: EnricoMi/publish-unit-test-result-action@v2
+        with:
+          files: "sbs-driver/api/target/surefire-reports/*.xml"
+
+      - name: Comment API Test Coverage on PR
+        id: jacoco
+        uses: madrapps/jacoco-report@v1.3
+        with:
+          paths: sbs-driver/api/target/site/jacoco/jacoco.xml
+          token: ${{ secrets.GITHUB_TOKEN }}
+          min-coverage-overall: 50
+          min-coverage-changed-files: 50
+          title: JUnit Test Coverage
+      
+      - name: Comment UI Test Coverage
+        uses: AthleticNet/comment-test-coverage@1.1
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          path: sbs-driver/coverage/coverage-summary.json
+          title: Karma Test Coverage
+      
+  sbs-metrics:
+    permissions:
+      contents: read
+      issues: read
+      checks: write
+      pull-requests: write
+    needs: changes
+    if: ${{ needs.changes.outputs.sbs-metrics == 'true' }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: '18.15.0'
+      - uses: actions/setup-java@v3
+        with:
+          java-version: '19'
+          distribution: 'temurin'
+          cache: maven
+      - name: Test sbs-metrics-api
+        working-directory: sbs-metrics/api
+        run: mvn clean test
+      
+      - name: Test sbs-metrics-ui
+        working-directory: sbs-metrics/ui
+      - run: npm ci
+      - run: npm test -- --no-watch --no-progress
+      
+      - name: Comment API Test Results
+        uses: EnricoMi/publish-unit-test-result-action@v2
+        with:
+          files: "sbs-metrics/api/target/surefire-reports/*.xml"
+
+      - name: Comment API Test Coverage on PR
+        id: jacoco
+        uses: madrapps/jacoco-report@v1.3
+        with:
+          paths: sbs-metrics/api/target/site/jacoco/jacoco.xml
+          token: ${{ secrets.GITHUB_TOKEN }}
+          min-coverage-overall: 50
+          min-coverage-changed-files: 50
+          title: JUnit Test Coverage
+      
+      - name: Comment UI Test Coverage
+        uses: AthleticNet/comment-test-coverage@1.1
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          path: sbs-metrics/coverage/coverage-summary.json
+          title: Karma Test Coverage
+      
+  sbs-project-management:
+    permissions:
+      contents: read
+      issues: read
+      checks: write
+      pull-requests: write
+    needs: changes
+    if: ${{ needs.changes.outputs.sbs-project-management == 'true' }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: '18.15.0'
+      - uses: actions/setup-java@v3
+        with:
+          java-version: '19'
+          distribution: 'temurin'
+          cache: maven
+      - name: Test sbs-project-management-api
+        working-directory: sbs-project-management/api
+        run: mvn clean test
+      
+      - name: Test sbs-project-management-ui
+        working-directory: sbs-project-management/ui
+      - run: npm ci
+      - run: npm test -- --no-watch --no-progress
+      
+      - name: Comment API Test Results
+        uses: EnricoMi/publish-unit-test-result-action@v2
+        with:
+          files: "sbs-project-management/api/target/surefire-reports/*.xml"
+
+      - name: Comment API Test Coverage on PR
+        id: jacoco
+        uses: madrapps/jacoco-report@v1.3
+        with:
+          paths: sbs-project-management/api/target/site/jacoco/jacoco.xml
+          token: ${{ secrets.GITHUB_TOKEN }}
+          min-coverage-overall: 50
+          min-coverage-changed-files: 50
+          title: JUnit Test Coverage
+      
+      - name: Comment UI Test Coverage
+        uses: AthleticNet/comment-test-coverage@1.1
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          path: sbs-project-management/coverage/coverage-summary.json
+          title: Karma Test Coverage
+
+    
+    
