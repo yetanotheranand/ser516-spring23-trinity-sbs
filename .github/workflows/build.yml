@@ -66,7 +66,7 @@ jobs:
 
       - name: Test sbs-driver-ui
         working-directory: sbs-driver/ui
-        run: npm ci && npm test -- --no-watch --no-progress --browsers=ChromeHeadless
+        run: npm ci && npm test -- --no-watch --no-progress --code-coverage --browsers=ChromeHeadless
 
       - name: Comment API Test Results
         uses: EnricoMi/publish-unit-test-result-action@v2
@@ -87,7 +87,7 @@ jobs:
         uses: AthleticNet/comment-test-coverage@1.1
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
-          path: sbs-driver/coverage/coverage-summary.json
+          path: sbs-driver/ui/coverage/coverage-summary.json
           title: sbs-driver-ui Test Coverage
 
   sbs-metrics:
@@ -115,7 +115,7 @@ jobs:
 
       - name: Test sbs-metrics-ui
         working-directory: sbs-metrics/ui
-        run: npm ci && npm test -- --no-watch --no-progress --browsers=ChromeHeadless
+        run: npm ci && npm test -- --no-watch --no-progress --code-coverage --browsers=ChromeHeadless
 
       - name: Comment API Test Results
         uses: EnricoMi/publish-unit-test-result-action@v2
@@ -136,7 +136,7 @@ jobs:
         uses: AthleticNet/comment-test-coverage@1.1
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
-          path: sbs-metrics/coverage/coverage-summary.json
+          path: sbs-metrics/ui/coverage/coverage-summary.json
           title: sbs-metrics-ui Test Coverage
 
   sbs-project-management:
@@ -164,7 +164,7 @@ jobs:
 
       - name: Test sbs-project-management-ui
         working-directory: sbs-project-management/ui
-        run: npm ci && npm test -- --no-watch --no-progress --browsers=ChromeHeadless
+        run: npm ci && npm test -- --no-watch --no-progress --code-coverage --browsers=ChromeHeadless
 
       - name: Comment API Test Results
         uses: EnricoMi/publish-unit-test-result-action@v2
@@ -185,7 +185,7 @@ jobs:
         uses: AthleticNet/comment-test-coverage@1.1
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
-          path: sbs-project-management/coverage/coverage-summary.json
+          path: sbs-project-management/ui/coverage/coverage-summary.json
           title: sbs-project-management-ui Test Coverage
 
 
