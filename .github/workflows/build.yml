@@ -72,6 +72,8 @@ jobs:
         uses: EnricoMi/publish-unit-test-result-action@v2
         with:
           files: "sbs-driver/api/target/surefire-reports/*.xml"
+          check_name: "Unit tests status for sbs-driver-api"
+          comment_title: "Unit tests summary for sbs-driver-api"
 
       - name: Comment API Test Coverage on PR
         id: jacoco
@@ -79,6 +81,7 @@ jobs:
         with:
           paths: sbs-driver/api/target/site/jacoco/jacoco.xml
           token: ${{ secrets.GITHUB_TOKEN }}
+          update-comment: true
           min-coverage-overall: 50
           min-coverage-changed-files: 50
           title: sbs-driver-api Test Coverage
@@ -121,6 +124,8 @@ jobs:
         uses: EnricoMi/publish-unit-test-result-action@v2
         with:
           files: "sbs-metrics/api/target/surefire-reports/*.xml"
+          check_name: "Unit tests status for sbs-metrics-api"
+          comment_title: "Unit tests summary for sbs-metrics-api"
 
       - name: Comment API Test Coverage on PR
         id: jacoco
@@ -128,6 +133,7 @@ jobs:
         with:
           paths: sbs-metrics/api/target/site/jacoco/jacoco.xml
           token: ${{ secrets.GITHUB_TOKEN }}
+          update-comment: true
           min-coverage-overall: 50
           min-coverage-changed-files: 50
           title: sbs-metrics-api Test Coverage
@@ -170,6 +176,8 @@ jobs:
         uses: EnricoMi/publish-unit-test-result-action@v2
         with:
           files: "sbs-project-management/api/target/surefire-reports/*.xml"
+          check_name: "Unit tests status for sbs-project-management-api"
+          comment_title: "Unit tests summary for sbs-project-management-api"
 
       - name: Comment API Test Coverage on PR
         id: jacoco
@@ -177,6 +185,7 @@ jobs:
         with:
           paths: sbs-project-management/api/target/site/jacoco/jacoco.xml
           token: ${{ secrets.GITHUB_TOKEN }}
+          update-comment: true
           min-coverage-overall: 50
           min-coverage-changed-files: 50
           title: sbs-project-management-api Test Coverage
