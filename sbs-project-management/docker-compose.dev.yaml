@@ -1,0 +1,23 @@
+services:
+  ui:
+    image: sbs-project-management-ui:latest
+    build:
+      context: ./ui
+      target: dev
+      args:
+        - ENVIRONMENT=development
+    volumes:
+      - $PWD/ui/src:/app/src
+      - /app/node_modules
+    ports:
+      - "4200:4200"
+    depends_on:
+      - api
+  api:
+    image: sbs-project-management-api:latest
+    build:
+      context: ./api
+      target: debug
+    ports:
+      - "8080:8080"
+      - "5005:5005"
