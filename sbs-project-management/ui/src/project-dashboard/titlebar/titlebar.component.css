@@ -1,0 +1,31 @@
+.titlebar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    background-color: #f2f2f2;
+  }
+  
+  .titlebar h1 {
+    margin: 0;
+  }
+  
+  .titlebar button {
+    padding: 8px;
+    font-size: 16px;
+    border-radius: 4px;
+    border: none;
+    background-color: #008CBA;
+    color: #fff;
+  }
+  .project-container{
+    position: absolute;
+    top: 20%;
+    left: 50%;
+    margin-top: -50px;
+    margin-left: -50px;
+    height: 100px;
+  }
+  .project:hover {
+    background-color: #ccc;
+  }
