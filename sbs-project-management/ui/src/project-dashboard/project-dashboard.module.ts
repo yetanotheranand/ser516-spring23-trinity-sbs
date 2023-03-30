@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { TitlebarComponent } from './titlebar/titlebar.component';
+import { ProjectDashboardRoutingModule } from './project-dashboard.routing.module';
 
 
 
@@ -9,10 +10,11 @@ import { TitlebarComponent } from './titlebar/titlebar.component';
     TitlebarComponent
   ],
   imports: [
-    CommonModule
+    CommonModule,
+    ProjectDashboardRoutingModule
   ],
   exports: [
-    TitlebarComponent
+    TitlebarComponent,
   ]
 })
 export class ProjectDashboardModule { }
