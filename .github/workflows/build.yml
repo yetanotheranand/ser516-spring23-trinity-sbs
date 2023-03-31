@@ -60,6 +60,16 @@ jobs:
           java-version: '19'
           distribution: 'temurin'
           cache: maven
+
+      - name: Static code analysis of sbs-driver-api
+        uses: dbelyaev/action-checkstyle@v0.7.4
+        with:
+          workdir: sbs-driver/api
+          checkstyle_config: sun_checks.xml
+          github_token: ${{ secrets.github_token }}
+          reporter: github-pr-review
+          level: warning
+
       - name: Test sbs-driver-api
         working-directory: sbs-driver/api
         run: mvn clean test
@@ -112,6 +122,16 @@ jobs:
           java-version: '19'
           distribution: 'temurin'
           cache: maven
+
+      - name: Static code analysis of sbs-metrics-api
+        uses: dbelyaev/action-checkstyle@v0.7.4
+        with:
+          workdir: sbs-metrics/api
+          checkstyle_config: sun_checks.xml
+          github_token: ${{ secrets.github_token }}
+          reporter: github-pr-review
+          level: warning
+
       - name: Test sbs-metrics-api
         working-directory: sbs-metrics/api
         run: mvn clean test
@@ -164,6 +184,16 @@ jobs:
           java-version: '19'
           distribution: 'temurin'
           cache: maven
+
+      - name: Static code analysis of sbs-project-management-api
+        uses: dbelyaev/action-checkstyle@v0.7.4
+        with:
+          workdir: sbs-project-management/api
+          checkstyle_config: sun_checks.xml
+          github_token: ${{ secrets.github_token }}
+          reporter: github-pr-review
+          level: warning
+
       - name: Test sbs-project-management-api
         working-directory: sbs-project-management/api
         run: mvn clean test
