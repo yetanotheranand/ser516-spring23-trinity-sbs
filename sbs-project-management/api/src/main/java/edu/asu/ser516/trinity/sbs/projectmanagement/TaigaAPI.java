@@ -1,19 +1,16 @@
 package edu.asu.ser516.trinity.sbs.projectmanagement;
 import java.io.*;
 import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.Scanner;
 
 public class TaigaAPI {
     public TaigaAPI() {
     }
-    public static void main(String[] args) throws IOException {
+
+    public static int connect(String username, String password) throws IOException {
         String url = "https://api.taiga.io/api/v1/auth";
-        System.out.println("Enter your username: ");
-        Scanner scanner = new Scanner(System.in);
-        String username = scanner.nextLine();
-        System.out.println("Enter your password: ");
-        String password = scanner.nextLine();
         String type = "normal";
 
         String jsonInputString = "{\"username\": \"" + username + "\", \"password\": \"" + password + "\", \"type\": \"" + type + "\"}";
@@ -28,7 +25,6 @@ public class TaigaAPI {
         wr.writeBytes(jsonInputString);
         wr.flush();
         wr.close();
-
         int responseCode = con.getResponseCode();
         System.out.println("Response code: " + responseCode);
 
@@ -42,5 +38,14 @@ public class TaigaAPI {
         in.close();
 
         System.out.println("Response body: " + response.toString());
+        return responseCode;
+    }
+    public static void main(String[] args) throws IOException {
+        System.out.println("Enter your username: ");
+        Scanner scanner = new Scanner(System.in);
+        String username = scanner.nextLine();
+        System.out.println("Enter your password: ");
+        String password = scanner.nextLine();
+        connect(username, password);
     }
 }
