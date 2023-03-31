@@ -1,0 +1,30 @@
+import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { TitlebarComponent } from './titlebar.component';
+
+fdescribe('TitlebarComponent', () => {
+  let component: TitlebarComponent;
+  let fixture: ComponentFixture<TitlebarComponent>;
+
+  beforeEach(async () => {
+    await TestBed.configureTestingModule({
+      declarations: [ TitlebarComponent ]
+    })
+    .compileComponents();
+  });
+
+  beforeEach(() => {
+    fixture = TestBed.createComponent(TitlebarComponent);
+    component = fixture.componentInstance;
+    fixture.detectChanges();
+  });
+
+  it('should create the titlebar component', () => {
+    expect(component).toBeTruthy();
+  });
+
+  it('should display the correct title', () => {
+    const titleEl = fixture.nativeElement.querySelector('.titlebar h1');
+    expect(titleEl.textContent).toContain('My Projects');
+  });
+
+});
