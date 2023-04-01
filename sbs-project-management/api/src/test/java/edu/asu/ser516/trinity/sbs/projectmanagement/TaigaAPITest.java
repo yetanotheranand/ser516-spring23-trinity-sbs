@@ -5,6 +5,9 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.MockedConstruction;
 
+import java.net.HttpURLConnection;
+import java.net.URL;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
@@ -17,9 +20,12 @@ public class TaigaAPITest {
     }
 
     @Test
-    void connectionTest() throws Exception {
-        int responseCode = taigaAPI.connect("ser516proj2","ser516proj2gmail");
-        assertEquals(responseCode, 200);
+    void createProjTest() throws Exception {
+        String url = "https://api.taiga.io/api/v1/projects";
+        URL obj = new URL(url);
+        HttpURLConnection con = (HttpURLConnection) obj.openConnection();
+        TaigaAPI.createProject("Project Title Sample", "Project Description Sample.");
+        assertEquals(200, con.getResponseCode());
     }
 
 }
