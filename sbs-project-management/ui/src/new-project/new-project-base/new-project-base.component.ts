@@ -21,7 +21,7 @@ export class NewProjectBaseComponent implements OnInit {
   }
 
   navigateBack(){
-      this.router.navigate(['../'], { relativeTo: this.route });
+      this.router.navigate(['../projects'], { relativeTo: this.route });
   }
 
 }
