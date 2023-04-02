@@ -3,8 +3,8 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { ProjectDashboardModule } from './../project-dashboard/project-dashboard.module';
-
+import { ProjectDashboardModule } from '../app/project-dashboard/project-dashboard.module';
+import { FlexLayoutModule } from '@angular/flex-layout';
 @NgModule({
   declarations: [
     AppComponent
@@ -12,7 +12,11 @@ import { ProjectDashboardModule } from './../project-dashboard/project-dashboard
   imports: [
     BrowserModule,
     AppRoutingModule,
-    ProjectDashboardModule
+    ProjectDashboardModule,
+    FlexLayoutModule
+  ],
+  exports:[
+    FlexLayoutModule
   ],
   providers: [],
   bootstrap: [AppComponent]
