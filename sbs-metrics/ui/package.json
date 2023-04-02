@@ -7,7 +7,7 @@
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
-    "ts_lint": "tslint --project tsconfig.json"
+    "ts_lint": "tslint --project tslint.json"
   },
   "private": true,
   "dependencies": {
