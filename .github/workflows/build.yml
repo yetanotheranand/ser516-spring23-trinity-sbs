@@ -78,6 +78,10 @@ jobs:
         working-directory: sbs-driver/ui
         run: npm ci && npm test -- --no-watch --no-progress --code-coverage --browsers=ChromeHeadless
 
+      - name: Lint sbs-driver-ui
+        working-directory: sbs-driver/ui
+        run: npm tslint
+
       - name: Comment API Test Results
         uses: EnricoMi/publish-unit-test-result-action@v2
         with:
@@ -140,6 +144,10 @@ jobs:
         working-directory: sbs-metrics/ui
         run: npm ci && npm test -- --no-watch --no-progress --code-coverage --browsers=ChromeHeadless
 
+      - name: Lint sbs-metrics-ui
+        working-directory: sbs-metrics/ui
+        run: npm tslint
+
       - name: Comment API Test Results
         uses: EnricoMi/publish-unit-test-result-action@v2
         with:
@@ -201,6 +209,10 @@ jobs:
       - name: Test sbs-project-management-ui
         working-directory: sbs-project-management/ui
         run: npm ci && npm test -- --no-watch --no-progress --code-coverage --browsers=ChromeHeadless
+
+      - name: Lint sbs-project-management-ui
+        working-directory: sbs-project-management/ui
+        run: npm tslint
 
       - name: Comment API Test Results
         uses: EnricoMi/publish-unit-test-result-action@v2
