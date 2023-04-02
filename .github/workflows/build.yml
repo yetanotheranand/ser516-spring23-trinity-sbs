@@ -80,7 +80,7 @@ jobs:
 
       - name: Lint sbs-driver-ui
         working-directory: sbs-driver/ui
-        run: npm tslint
+        run: run ts_lint
 
       - name: Comment API Test Results
         uses: EnricoMi/publish-unit-test-result-action@v2
@@ -146,7 +146,7 @@ jobs:
 
       - name: Lint sbs-metrics-ui
         working-directory: sbs-metrics/ui
-        run: npm tslint
+        run: run ts_lint
 
       - name: Comment API Test Results
         uses: EnricoMi/publish-unit-test-result-action@v2
@@ -212,7 +212,7 @@ jobs:
 
       - name: Lint sbs-project-management-ui
         working-directory: sbs-project-management/ui
-        run: npm tslint
+        run: npm run ts_lint
 
       - name: Comment API Test Results
         uses: EnricoMi/publish-unit-test-result-action@v2
