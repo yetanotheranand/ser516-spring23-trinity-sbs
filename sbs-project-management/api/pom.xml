@@ -8,16 +8,17 @@
         <version>3.0.5</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
-    <groupId>edu.asu.ser516.trinity.sbs.projectmanagement</groupId>
+    
+    <groupId>edu.asu.ser516.trinity</groupId>
     <artifactId>sbs-project-management-api</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>1.0-SNAPSHOT</version>
+    <packaging>jar</packaging>
     <name>SBS Project Management API</name>
-    <description>SBS Project Management API</description>
     <properties>
         <java.version>19</java.version>
     </properties>
     <profiles>
-        <profile>
+         <profile>
             <id>dev</id>
             <properties>
                 <activatedProperties>dev</activatedProperties>
@@ -30,7 +31,7 @@
                 </dependency>
             </dependencies>
             
-        </profile>
+        </profile> 
         <profile>
             <id>prod</id>
             <properties>
@@ -47,18 +48,28 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
-
+        <dependency>
+            <groupId>com.konghq</groupId>
+            <artifactId>unirest-java</artifactId>
+            <version>3.14.1</version>
+            <type>jar</type>
+        </dependency>
+        <dependency>
+                    <groupId>org.springframework.boot</groupId>
+                    <artifactId>spring-boot-devtools</artifactId>
+                    <scope>runtime</scope>
+                </dependency>
         <dependency>
             <groupId>com.squareup.okhttp</groupId>
             <artifactId>okhttp</artifactId>
             <version>2.7.5</version>
         </dependency>
         <dependency>
-	<groupId>io.fabric8</groupId>
-	<artifactId>taiga-api</artifactId>
-	<version>3.0.12</version>
-</dependency>
-<!-- Thanks for using https://jar-download.com -->
+            <groupId>io.fabric8</groupId>
+            <artifactId>taiga-api</artifactId>
+            <version>3.0.12</version>
+        </dependency>
+        <!-- Thanks for using https://jar-download.com -->
 
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -70,6 +81,11 @@
             <artifactId>okhttp</artifactId>
             <version>4.10.0</version>
         </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+        </dependency>
+
     </dependencies>
 
     <build>
@@ -80,5 +96,6 @@
             </plugin>
         </plugins>
     </build>
+    
 
 </project>
