@@ -5,16 +5,30 @@ COPY ./src /sbs/src
 WORKDIR /sbs
 RUN mvn clean package -DskipTests --quiet
 
-FROM eclipse-temurin:19.0.2_7-jre-jammy AS prod
-RUN mkdir /opt/sbs
-RUN groupadd -r javauser && useradd --no-log-init -r -g javauser javauser
-COPY --from=builder /sbs/target/sbs-project-management-api-1.0-SNAPSHOT-jar-with-dependencies.jar /opt/sbs/application.jar
-WORKDIR /opt/sbs
-RUN chown -R javauser:javauser /opt/sbs
-EXPOSE 8080
-USER javauser
-CMD ["java", "-jar", "/opt/sbs/application.jar"]
+FROM aomountainu/openjdk19 AS prod
+RUN mkdir /sbs
+COPY --from=builder ./sbs/target/sbs-project-management-api-1.0-SNAPSHOT.jar /sbs/application.jar
+WORKDIR /sbs
 
-FROM prod AS debug
-ENV JAVA_TOOL_OPTIONS -agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=*:5005
-EXPOSE 5005
+
+EXPOSE 8080
+# FROM eclipse-temurin:19.0.2_7-jre-jammy AS prod
+# RUN mkdir /opt/sbs
+# RUN groupadd -r javauser && useradd --no-log-init -r -g javauser javauser
+# COPY --from=builder ./target/sbs-project-management-api-0.0.1-SNAPSHOT.jar /opt/sbs/application.jar
+# WORKDIR /opt/sbs
+# RUN chown -R javauser:javauser /opt/sbs
+# EXPOSE 8080
+# USER javauser
+# CMD ["java", "-jar", "/opt/sbs/application.jar"]
+
+# FROM prod AS debug
+# ENV JAVA_TOOL_OPTIONS -agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=*:5005
+# EXPOSE 5005
+
+# COPY _.taiga.io.cer .
+
+# RUN keytool -importcert -file _.taiga.io.cer -storepass changeit -noprompt -keystore /usr/lib/jvm/java-19-openjdk/lib/security/cacerts -alias alias
+# ADD target/sbs-project-management-api-1.0-SNAPSHOT.jar application.jar
+
+CMD ["java","-jar","-Dspring.profiles.active=prod","application.jar"]
