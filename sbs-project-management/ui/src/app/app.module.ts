@@ -6,9 +6,7 @@ import { AppComponent } from './app.component';
 import { ProjectDashboardModule } from './../project-dashboard/project-dashboard.module';
 
 @NgModule({
-  declarations: [
-    AppComponent
-  ],
+  declarations: [AppComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
