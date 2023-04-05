@@ -11,6 +11,7 @@ import {MatFormFieldModule} from '@angular/material/form-field';
 import { HttpClientModule, HTTP_INTERCEPTORS, withInterceptors } from '@angular/common/http';
 import {Interceptor} from '../app/services/interceptor'
 @NgModule({
+
   declarations: [
     AppComponent,
     LoginComponent
@@ -32,5 +33,11 @@ import {Interceptor} from '../app/services/interceptor'
     {provide:HTTP_INTERCEPTORS, useClass:Interceptor, multi:true}
   ],
   bootstrap: [AppComponent]
+
+  declarations: [AppComponent],
+  imports: [BrowserModule, AppRoutingModule],
+  providers: [],
+  bootstrap: [AppComponent],
+
 })
-export class AppModule { }
+export class AppModule {}
