@@ -9,19 +9,21 @@ import {Router} from '@angular/router'
 })
 export class LoginComponent {
   loginForm=new FormGroup({
-    email: new FormControl('', Validators.required),
+    username: new FormControl('', Validators.required),
     password: new FormControl('', Validators.required)
   })
   errorMessage: string | undefined;
   constructor(private loginService:LoginService, private router: Router){
+    console.log(this.loginForm.get("username").value)
 
   }
   continueToLogin(){
     let userDetails={
-      username: this.loginForm.get("email")?.value,
-      password: this.loginForm.get("password")?.value,
-      type:"normal"
+      username: this.loginForm.get("username").value,
+      password: this.loginForm.get("password").value,
+
     };
+    console.log(userDetails.username)
     this.loginService.performLogin(userDetails).subscribe((data)=>{
       console.log(data);
         sessionStorage.setItem("JWTToken", data?.auth_token);

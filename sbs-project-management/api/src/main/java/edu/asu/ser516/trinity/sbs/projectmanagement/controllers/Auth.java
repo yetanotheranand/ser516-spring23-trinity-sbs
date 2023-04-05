@@ -12,6 +12,7 @@ import java.net.MalformedURLException;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import kong.unirest.HttpResponse;
+import kong.unirest.Config;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -56,6 +57,7 @@ public class Auth {
 
 //        // Set the API endpoint URL
         String url = TAIGA_BASE_URL + "auth";
+
         JSONObject j = new JSONObject();
         j.put("username", username);
         j.put("password", password);

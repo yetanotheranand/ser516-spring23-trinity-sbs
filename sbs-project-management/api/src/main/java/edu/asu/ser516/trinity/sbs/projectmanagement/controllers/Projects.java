@@ -37,20 +37,19 @@ public class Projects {
 
     @Value("${TAIGA_BASE_URL}")
     private String TAIGA_BASE_URL;
-    private static Logger logger = LoggerFactory.getLogger(Auth.class);
+    private static Logger logger = LoggerFactory.getLogger(Projects.class);
 
-    @GetMapping("/")
-    public ResponseEntity<String> getAllProjects(@RequestHeader("Authorization") String Token) throws MalformedURLException, IOException, InterruptedException, JSONException {
+    @GetMapping("")
+    public ResponseEntity<String> getAllProjects(@RequestParam(defaultValue = "{}") Map<String,String> allParams) throws MalformedURLException, IOException, InterruptedException, JSONException {
 
 //        // Set the API endpoint URL
         String url = TAIGA_BASE_URL + "projects";
-
-        kong.unirest.HttpResponse<JsonNode> response = Unirest.get(url)
+        String params = allParams.toString();
+        System.out.println(url+"?"+params.replace("{", "").replace("}",""));
+        kong.unirest.HttpResponse<JsonNode> response = Unirest.get(url+"?"+params.replace("{", "").replace("}",""))
                 .header("accept", "application/json")
-                .header("Authorization", String.format("%s", Token))
                 .asJson();
         if (response.getStatus() == 200) {
-            System.out.println(response.getStatus());
             return ResponseEntity.ok(response.getBody().toString());
 
         } else {
@@ -59,7 +58,7 @@ public class Projects {
         }
 
     }
-    @PostMapping("/")
+    @PostMapping("")
     public ResponseEntity<String> CreateProject(@RequestBody Map<String, Object> projectMap, @RequestHeader("Authorization") String Token) throws MalformedURLException, IOException, InterruptedException, JSONException {
 
 //        // Set the API endpoint URL
