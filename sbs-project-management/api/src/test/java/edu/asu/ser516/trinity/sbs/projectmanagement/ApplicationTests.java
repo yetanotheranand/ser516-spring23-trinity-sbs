@@ -26,7 +26,7 @@ import org.springframework.test.web.servlet.MockMvc;
 
 @SpringBootTest
 @AutoConfigureMockMvc
-public class SbsProjectManagementApiApplicationTests {
+public class ApplicationTests {
 
     @Autowired
     private MockMvc mockMvc;
@@ -40,7 +40,7 @@ public class SbsProjectManagementApiApplicationTests {
     
     
 
-    public SbsProjectManagementApiApplicationTests() throws IOException, InterruptedException, JSONException {
+    public ApplicationTests() throws IOException, InterruptedException, JSONException {
         Unirest.config().verifySsl(false);
 
     }
