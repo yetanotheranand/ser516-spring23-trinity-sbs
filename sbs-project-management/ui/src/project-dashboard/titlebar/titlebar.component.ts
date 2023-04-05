@@ -9,6 +9,6 @@ export class TitlebarComponent {
   projects = [
     { name: 'Project A', description: 'Description of Project A' },
     { name: 'Project B', description: 'Description of Project B' },
-    { name: 'Project C', description: 'Description of Project C' }
+    { name: 'Project C', description: 'Description of Project C' },
   ];
 }
