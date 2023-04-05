@@ -7,7 +7,7 @@ fdescribe('TitlebarComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ TitlebarComponent ]
+      declarations: [TitlebarComponent],
     })
     .compileComponents();
   });
