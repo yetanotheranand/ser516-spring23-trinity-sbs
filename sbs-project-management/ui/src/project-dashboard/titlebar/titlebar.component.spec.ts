@@ -8,8 +8,7 @@ fdescribe('TitlebarComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [TitlebarComponent],
-    })
-    .compileComponents();
+    }).compileComponents();
   });
 
   beforeEach(() => {
