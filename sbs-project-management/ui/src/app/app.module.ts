@@ -15,6 +15,6 @@ import { ProjectDashboardModule } from './../project-dashboard/project-dashboard
     ProjectDashboardModule
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}
