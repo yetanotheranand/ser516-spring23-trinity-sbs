@@ -8,16 +8,9 @@ import { ApiService } from './services/api.service';
 import { TestComponent } from './test/test.component';
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    TestComponent
-  ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    HttpClientModule
-  ],
+  declarations: [AppComponent, TestComponent],
+  imports: [BrowserModule, AppRoutingModule, HttpClientModule],
   providers: [ApiService],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}
