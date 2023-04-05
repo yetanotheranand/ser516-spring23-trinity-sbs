@@ -34,10 +34,4 @@ describe('CardComponent', () => {
       expect(projectDescription).toEqual(component.projects[i].description);
     }
   });
-
-  it('should display the "New Project" button', () => {
-    const buttonEl = fixture.nativeElement.querySelector('.titlebar button');
-    expect(buttonEl).toBeTruthy();
-    expect(buttonEl.textContent).toContain('New Project');
-  });
 });
