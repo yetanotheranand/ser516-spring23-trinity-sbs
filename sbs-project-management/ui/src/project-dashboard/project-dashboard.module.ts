@@ -7,4 +7,4 @@ import { TitlebarComponent } from './titlebar/titlebar.component';
   imports: [CommonModule],
   exports: [TitlebarComponent],
 })
-export class ProjectDashboardModule { }
+export class ProjectDashboardModule {}
