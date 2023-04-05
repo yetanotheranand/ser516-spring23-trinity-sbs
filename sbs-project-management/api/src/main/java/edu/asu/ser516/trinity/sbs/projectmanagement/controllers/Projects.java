@@ -1,13 +1,6 @@
 package edu.asu.ser516.trinity.sbs.projectmanagement.controllers;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import java.io.IOException;
-import java.net.MalformedURLException;
-import java.net.URI;
-import java.net.http.HttpClient;
-import java.net.http.HttpRequest;
-import java.net.http.HttpResponse;
-import java.util.HashMap;
 import java.util.Map;
 import kong.unirest.JsonNode;
 import kong.unirest.Unirest;
@@ -16,33 +9,46 @@ import org.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 
+/**
+ * Class to handle project related operation.
+ */
 @RestController
 @RequestMapping("/projects")
 public class Projects {
 
+    private static final Logger logger = LoggerFactory.getLogger(Projects.class);
+    private static String TAIGA_BASE_URL;
+
     @Value("${TAIGA_BASE_URL}")
-    private String TAIGA_BASE_URL;
-    private static Logger logger = LoggerFactory.getLogger(Projects.class);
+    public void setTaigaBaseUrl(String url) {
+        TAIGA_BASE_URL = url;
+    }
 
+    /**
+     * GET All Projects API.
+     *
+     * @param allParams form containing requesst project details
+     * @return response from Taiga API
+     * @throws JSONException error parsing the json request and response
+     */
     @GetMapping("")
-    public ResponseEntity<String> getAllProjects(@RequestParam(defaultValue = "{}") Map<String,String> allParams) throws MalformedURLException, IOException, InterruptedException, JSONException {
+    public ResponseEntity<String> getAllProjects(
+            @RequestParam(defaultValue = "{}") Map<String, String> allParams) throws JSONException {
 
-//        // Set the API endpoint URL
+        // Set the API endpoint URL
         String url = TAIGA_BASE_URL + "projects";
         String params = allParams.toString();
-        System.out.println(url+"?"+params.replace("{", "").replace("}",""));
-        kong.unirest.HttpResponse<JsonNode> response = Unirest.get(url+"?"+params.replace("{", "").replace("}",""))
+        kong.unirest.HttpResponse<JsonNode> response = Unirest.get(
+                        url + "?" + params.replace("{", "").replace("}", ""))
                 .header("accept", "application/json")
                 .asJson();
         if (response.getStatus() == 200) {
@@ -54,10 +60,21 @@ public class Projects {
         }
 
     }
-    @PostMapping("")
-    public ResponseEntity<String> CreateProject(@RequestBody Map<String, Object> projectMap, @RequestHeader("Authorization") String Token) throws MalformedURLException, IOException, InterruptedException, JSONException {
 
-//        // Set the API endpoint URL
+    /**
+     * POST Create Project API.
+     *
+     * @param projectMap form containing name of the project to be created
+     * @param token auth token for Taiga API
+     * @return response from Taiga API for project creation
+     * @throws JSONException error parsing the json request and response
+     */
+    @PostMapping("")
+    public ResponseEntity<String> createProject(@RequestBody Map<String, Object> projectMap,
+                                                @RequestHeader("Authorization") String token)
+            throws JSONException {
+
+        // Set the API endpoint URL
         String url = TAIGA_BASE_URL + "projects";
 
         JSONObject j = new JSONObject();
@@ -67,7 +84,7 @@ public class Projects {
 
         kong.unirest.HttpResponse<JsonNode> response = Unirest.post(url)
                 .header("accept", "application/json")
-                .header("Authorization", String.format("Bearer %s", Token))
+                .header("Authorization", String.format("Bearer %s", token))
                 .contentType("application/json")
                 .body(j.toString())
                 .asJson();
