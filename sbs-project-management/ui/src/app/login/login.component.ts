@@ -12,6 +12,7 @@ export class LoginComponent {
     email: new FormControl('', Validators.required),
     password: new FormControl('', Validators.required)
   })
+  errorMessage: string | undefined;
   constructor(private loginService:LoginService, private router: Router){
 
   }
@@ -23,11 +24,14 @@ export class LoginComponent {
     };
     this.loginService.performLogin(userDetails).subscribe((data)=>{
       console.log(data);
-      sessionStorage.setItem("JWTToken",data?.auth_token);
-      this.router.navigateByUrl("/projects")
+        sessionStorage.setItem("JWTToken", data?.auth_token);
+        this.router.navigateByUrl("/projects");
     },
     (error)=>{
-      console.log(error)
+      if (error.status === 401) {
+        this.errorMessage = error.error.detail;
+        console.log(this.errorMessage);
+      }
     }
     )
 

@@ -5,7 +5,7 @@ import {HttpClient} from "@angular/common/http";
   providedIn: 'root'
 })
 export class LoginService {
-  url :string="https://api.taiga.io/api/v1/auth"
+  url :string="http://localhost:8080/auth"
   constructor(private httpClient: HttpClient) {
 
    }
