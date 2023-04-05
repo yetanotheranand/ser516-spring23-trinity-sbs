@@ -4,9 +4,7 @@ import { TitlebarComponent } from './titlebar/titlebar.component';
 
 @NgModule({
   declarations: [TitlebarComponent],
-  imports: [
-    CommonModule
-  ],
+  imports: [CommonModule],
   exports: [
     TitlebarComponent
   ]
