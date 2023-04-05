@@ -7,11 +7,7 @@ import { ProjectDashboardModule } from './../project-dashboard/project-dashboard
 
 @NgModule({
   declarations: [AppComponent],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    ProjectDashboardModule
-  ],
+  imports: [BrowserModule, AppRoutingModule, ProjectDashboardModule],
   providers: [],
   bootstrap: [AppComponent],
 })
