@@ -5,8 +5,6 @@ import { TitlebarComponent } from './titlebar/titlebar.component';
 @NgModule({
   declarations: [TitlebarComponent],
   imports: [CommonModule],
-  exports: [
-    TitlebarComponent
-  ]
+  exports: [TitlebarComponent],
 })
 export class ProjectDashboardModule { }
