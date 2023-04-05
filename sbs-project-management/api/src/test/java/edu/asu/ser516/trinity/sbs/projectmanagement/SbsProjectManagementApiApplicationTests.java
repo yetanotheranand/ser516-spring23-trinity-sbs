@@ -79,7 +79,7 @@ public class SbsProjectManagementApiApplicationTests {
     public void getProjects() throws JSONException, IOException, Exception {
         String token = getAuthToken(User, Pass);
 
-        this.mockMvc.perform(get("/projects/").header("Authorization", "Bearer " + token)
+        this.mockMvc.perform(get("/projects").header("Authorization", "Bearer " + token)
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk());
 
@@ -92,7 +92,7 @@ public class SbsProjectManagementApiApplicationTests {
         j.put("name", "test");
         j.put("description", "test");
         j.put("is_private", "false");
-        this.mockMvc.perform(get("/projects/").header("Authorization", "Bearer " + token)
+        this.mockMvc.perform(get("/projects").header("Authorization", "Bearer " + token)
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk());
 
