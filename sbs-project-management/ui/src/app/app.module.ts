@@ -8,11 +8,7 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import { LoginComponent } from './login/login.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
-import {
-  HttpClientModule,
-  HTTP_INTERCEPTORS,
-  withInterceptors,
-} from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { Interceptor } from '../app/services/interceptor';
 @NgModule({
   declarations: [AppComponent, LoginComponent],
@@ -27,9 +23,7 @@ import { Interceptor } from '../app/services/interceptor';
     HttpClientModule,
   ],
   exports: [FlexLayoutModule],
-  providers: [
-    { provide: HTTP_INTERCEPTORS, useClass: Interceptor, multi: true },
-  ],
+  providers: [{ provide: HTTP_INTERCEPTORS, useClass: Interceptor, multi: true }],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
