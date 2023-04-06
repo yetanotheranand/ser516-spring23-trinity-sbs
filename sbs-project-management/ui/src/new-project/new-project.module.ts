@@ -4,16 +4,8 @@ import { NewProjectBaseComponent } from './new-project-base/new-project-base.com
 import { NewProjectRoutingModule } from './new-project.routing.module';
 import { FormsModule } from '@angular/forms';
 
-
-
 @NgModule({
-  declarations: [
-    NewProjectBaseComponent
-  ],
-  imports: [
-    CommonModule,
-    NewProjectRoutingModule,
-    FormsModule
-  ]
+  declarations: [NewProjectBaseComponent],
+  imports: [CommonModule, NewProjectRoutingModule, FormsModule],
 })
-export class NewProjectModule { }
+export class NewProjectModule {}

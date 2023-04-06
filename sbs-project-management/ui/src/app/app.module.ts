@@ -10,7 +10,6 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { Interceptor } from '../app/services/interceptor';
-
 @NgModule({
   declarations: [AppComponent, LoginComponent],
   imports: [

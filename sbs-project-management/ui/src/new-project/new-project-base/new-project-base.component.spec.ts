@@ -1,9 +1,7 @@
-
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { FormsModule } from '@angular/forms'; // import FormsModule
 import { ActivatedRoute, Router } from '@angular/router';
-
 
 import { NewProjectBaseComponent } from './new-project-base.component';
 
@@ -15,10 +13,9 @@ describe('NewProjectBaseComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ NewProjectBaseComponent ],
-      imports: [ RouterTestingModule, FormsModule  ]
-    })
-    .compileComponents();
+      declarations: [NewProjectBaseComponent],
+      imports: [RouterTestingModule, FormsModule],
+    }).compileComponents();
 
     fixture = TestBed.createComponent(NewProjectBaseComponent);
     router = TestBed.inject(Router);
@@ -31,8 +28,7 @@ describe('NewProjectBaseComponent', () => {
     expect(component).toBeTruthy();
   });
 
-
-  it('should test ngOnInit method', () =>{
+  it('should test ngOnInit method', () => {
     component = fixture.componentInstance;
     component.ngOnInit();
     expect(component.projectName).toBeDefined();
@@ -44,5 +40,4 @@ describe('NewProjectBaseComponent', () => {
     component.navigateBack();
     expect(navigateSpy).toHaveBeenCalledWith(['../'], { relativeTo: route });
   });
-
 });

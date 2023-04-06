@@ -7,9 +7,8 @@ fdescribe('TitlebarComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ TitlebarComponent ]
-    })
-    .compileComponents();
+      declarations: [TitlebarComponent],
+    }).compileComponents();
   });
 
   beforeEach(() => {
@@ -31,5 +30,4 @@ fdescribe('TitlebarComponent', () => {
     expect(buttonEl).toBeTruthy();
     expect(buttonEl.textContent).toContain('New Project');
   });
-
 });
