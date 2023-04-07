@@ -58,7 +58,8 @@ public class Epic {
 
     /**
      * POST CreateEpic API.
-     *
+     * @header containing the token
+     * @body userMap epic data
      * @return status code 201 on success and 401 on failure
      * @throws JSONException error parsing the json request and response
      * @header containing the token
