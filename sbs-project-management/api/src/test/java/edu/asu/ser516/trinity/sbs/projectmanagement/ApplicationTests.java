@@ -1,22 +1,19 @@
 package edu.asu.ser516.trinity.sbs.projectmanagement;
 
-import edu.asu.ser516.trinity.sbs.projectmanagement.controllers.Auth;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+
 import java.io.IOException;
+import java.net.URI;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
-import java.util.Map;
-import static org.hamcrest.Matchers.containsString;
-import org.json.JSONException;
-import org.json.JSONObject;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
-import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
-import java.net.URI;
 import java.net.http.HttpResponse;
 import kong.unirest.Unirest;
+import org.json.JSONException;
+import org.json.JSONObject;
 import org.junit.jupiter.api.Test;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
@@ -37,8 +34,6 @@ public class ApplicationTests {
     @Value("${TAIGA_DEMO_PASSWORD}")
     private String Pass;
     private String token;
-    
-    
 
     public ApplicationTests() throws IOException, InterruptedException, JSONException {
         Unirest.config().verifySsl(false);
@@ -58,8 +53,8 @@ public class ApplicationTests {
         j.put("username", "user");
         j.put("password", "user");
         this.mockMvc.perform(post("/auth/").content(j.toString())
-                .contentType(MediaType.APPLICATION_JSON))
-                                .andDo(print())
+                        .contentType(MediaType.APPLICATION_JSON))
+                .andDo(print())
                 .andExpect(status().isUnauthorized());
     }
 
@@ -70,35 +65,23 @@ public class ApplicationTests {
         j.put("password", Pass);
 //        System.out.println(j.toString());
         this.mockMvc.perform(post("/auth/").content(j.toString())
-                .contentType(MediaType.APPLICATION_JSON))
+                        .contentType(MediaType.APPLICATION_JSON))
                 //                .andDo(print())
                 .andExpect(status().isOk());
     }
 
     @Test
-    public void getProjects() throws JSONException, IOException, Exception {
+    public void getProjects() throws Exception {
         String token = getAuthToken(User, Pass);
 
         this.mockMvc.perform(get("/projects").header("Authorization", "Bearer " + token)
-                .contentType(MediaType.APPLICATION_JSON))
+                        .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk());
 
     }
 
-    @Test
-    public void createProject() throws JSONException, IOException, Exception {
-        String token = getAuthToken(User, Pass);
-        JSONObject j = new JSONObject();
-        j.put("name", "test");
-        j.put("description", "test");
-        j.put("is_private", "false");
-        this.mockMvc.perform(get("/projects").header("Authorization", "Bearer " + token)
-                .contentType(MediaType.APPLICATION_JSON))
-                .andExpect(status().isOk());
-
-    }
-
-    private String getAuthToken(String username, String password) throws IOException, InterruptedException, JSONException {
+    private String getAuthToken(String username,
+                                String password) throws IOException, InterruptedException, JSONException {
         String url = TAIGA_BASE_URL;
         HttpClient client = HttpClient.newHttpClient();
         JSONObject j = new JSONObject();
@@ -119,6 +102,19 @@ public class ApplicationTests {
         } else {
             return null;
         }
+    }
+
+    @Test
+    public void createProject() throws Exception {
+        String token = getAuthToken(User, Pass);
+        JSONObject j = new JSONObject();
+        j.put("name", "test");
+        j.put("description", "test");
+        j.put("is_private", "false");
+        this.mockMvc.perform(get("/projects").header("Authorization", "Bearer " + token)
+                        .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk());
+
     }
 
 }

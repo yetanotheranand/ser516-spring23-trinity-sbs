@@ -12,11 +12,10 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.PatchMapping;
-
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -25,12 +24,13 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/epic-statuses")
 public class EpicStatus {
+    private static final Logger logger = LoggerFactory.getLogger(EpicStatus.class);
     @Value("${TAIGA_BASE_URL}")
     private String taigaBaseUrl;
-    private static Logger logger = LoggerFactory.getLogger(EpicStatus.class);
 
     @GetMapping("")
-    public ResponseEntity<String> getAllEpicStatuses(@RequestHeader("Authorization") String token) throws UnirestException {
+    public ResponseEntity<String> getAllEpicStatuses(
+            @RequestHeader("Authorization") String token) throws UnirestException {
         String url = taigaBaseUrl + "epic-statuses";
         HttpResponse<JsonNode> response = Unirest.get(url)
                 .header("accept", "application/json")
@@ -46,7 +46,9 @@ public class EpicStatus {
     }
 
     @GetMapping("/{epicId}")
-    public ResponseEntity<String> getEpicStatus(@PathVariable Long epicId, @RequestHeader("Authorization") String token) throws UnirestException {
+    public ResponseEntity<String> getEpicStatus(@PathVariable Long epicId,
+                                                @RequestHeader("Authorization") String token)
+            throws UnirestException {
         String url = taigaBaseUrl + "epic-statuses/" + epicId;
         HttpResponse<JsonNode> response = Unirest.get(url)
                 .header("accept", "application/json")
@@ -63,10 +65,12 @@ public class EpicStatus {
     }
 
     @PostMapping("")
-    public ResponseEntity<String> createEpicStatus(@RequestBody Map<String, Object> epicStatusMap, @RequestHeader("Authorization") String token) throws UnirestException {
+    public ResponseEntity<String> createEpicStatus(@RequestBody Map<String, Object> epicStatusMap,
+                                                   @RequestHeader("Authorization") String token)
+            throws UnirestException {
         String url = taigaBaseUrl + "epic-statuses";
         JSONObject body = new JSONObject(epicStatusMap);
-        
+
         System.out.println(body);
         HttpResponse<JsonNode> response = Unirest.post(url)
                 .header("accept", "application/json")
@@ -83,10 +87,13 @@ public class EpicStatus {
             return ResponseEntity.status(response.getStatus()).body(response.getBody().toString());
         }
     }
-    
-     @PutMapping("/{epicId}")
-    public ResponseEntity<String> EditEpicStatusByPut(@PathVariable Long epicId,@RequestBody Map<String, Object> epicStatusMap, @RequestHeader("Authorization") String token) throws UnirestException {
-        String url = taigaBaseUrl + "epic-statuses/"+epicId;
+
+    @PutMapping("/{epicId}")
+    public ResponseEntity<String> editEpicStatusByPut(@PathVariable Long epicId,
+                                                      @RequestBody Map<String, Object> epicStatusMap,
+                                                      @RequestHeader("Authorization") String token)
+            throws UnirestException {
+        String url = taigaBaseUrl + "epic-statuses/" + epicId;
         JSONObject body = new JSONObject(epicStatusMap);
 
         System.out.println(body);
@@ -104,10 +111,13 @@ public class EpicStatus {
             return ResponseEntity.status(response.getStatus()).body(response.getBody().toString());
         }
     }
-    
+
     @PatchMapping("/{epicId}")
-    public ResponseEntity<String> EditEpicStatusByPatch(@PathVariable Long epicId,@RequestBody Map<String, Object> epicStatusMap, @RequestHeader("Authorization") String token) throws UnirestException {
-        String url = taigaBaseUrl + "epic-statuses/"+epicId;
+    public ResponseEntity<String> editEpicStatusByPatch(@PathVariable Long epicId,
+                                                        @RequestBody Map<String, Object> epicStatusMap,
+                                                        @RequestHeader("Authorization") String token)
+            throws UnirestException {
+        String url = taigaBaseUrl + "epic-statuses/" + epicId;
         JSONObject body = new JSONObject(epicStatusMap);
 
         System.out.println(body);
@@ -126,10 +136,12 @@ public class EpicStatus {
             return ResponseEntity.status(response.getStatus()).body(response.getBody().toString());
         }
     }
-    
+
     @DeleteMapping("/{epicId}")
-    public ResponseEntity<String> DeleteEpicStatusById(@PathVariable Long epicId, @RequestHeader("Authorization") String token) throws UnirestException {
-        String url = taigaBaseUrl + "epic-statuses/"+epicId+"?moveTo=empty";
+    public ResponseEntity<String> deleteEpicStatusById(@PathVariable Long epicId,
+                                                       @RequestHeader("Authorization") String token)
+            throws UnirestException {
+        String url = taigaBaseUrl + "epic-statuses/" + epicId + "?moveTo=empty";
         HttpResponse<JsonNode> response = Unirest.delete(url)
                 .header("accept", "application/json")
                 .header("Authorization", String.format("Bearer %s", token))
