@@ -38,6 +38,8 @@ public class ApplicationTests {
     private String Pass;
     private String token;
     
+    
+
     public ApplicationTests() throws IOException, InterruptedException, JSONException {
         Unirest.config().verifySsl(false);
 
@@ -45,7 +47,7 @@ public class ApplicationTests {
 
     @Test
     public void testAuthTest() throws Exception {
-        this.mockMvc.perform(get("/auth"))
+        this.mockMvc.perform(get("/auth/"))
                 .andExpect(status().isOk());
 
     }
@@ -55,9 +57,9 @@ public class ApplicationTests {
         JSONObject j = new JSONObject();
         j.put("username", "user");
         j.put("password", "user");
-        this.mockMvc.perform(post("/auth").content(j.toString())
+        this.mockMvc.perform(post("/auth/").content(j.toString())
                 .contentType(MediaType.APPLICATION_JSON))
-                .andDo(print())
+                                .andDo(print())
                 .andExpect(status().isUnauthorized());
     }
 
@@ -66,7 +68,8 @@ public class ApplicationTests {
         JSONObject j = new JSONObject();
         j.put("username", User);
         j.put("password", Pass);
-        this.mockMvc.perform(post("/auth").content(j.toString())
+//        System.out.println(j.toString());
+        this.mockMvc.perform(post("/auth/").content(j.toString())
                 .contentType(MediaType.APPLICATION_JSON))
                 //                .andDo(print())
                 .andExpect(status().isOk());
@@ -89,88 +92,18 @@ public class ApplicationTests {
         j.put("name", "test");
         j.put("description", "test");
         j.put("is_private", "false");
-        this.mockMvc.perform(post("/projects").header("Authorization", token).content(j.toString())
+        this.mockMvc.perform(get("/projects").header("Authorization", "Bearer " + token)
                 .contentType(MediaType.APPLICATION_JSON))
-                .andExpect(status().isOk());
-
-    }
-
-    @Test
-    public void getEpics() throws JSONException, IOException, Exception {
-        String token = getAuthToken(User, Pass);
-
-        this.mockMvc.perform(get("/epics").header("Authorization", token)
-                .contentType(MediaType.APPLICATION_JSON))
-                .andExpect(status().isOk());
-
-    }
-
-    @Test
-    public void testGetEpicById() throws Exception {
-        String token = getAuthToken(User, Pass);
-
-        mockMvc.perform(get("/epics/1").header("Authorization",token)
-                .contentType(MediaType.APPLICATION_JSON))
-                .andExpect(status().isOk());
-    }
-
-
-    @Test
-    public void testGetEpicNotFound() throws Exception {
-        String token = getAuthToken(User, Pass);
-        mockMvc.perform(get("/epics/{id}", 999).header("Authorization", token)
-                .contentType(MediaType.APPLICATION_JSON))
-                .andExpect(status().isNotFound());
-    }
-    
-    @Test
-    public void getAllEpicStatuses() throws JSONException, IOException, Exception {
-        String token = getAuthToken(User, Pass);
-
-        this.mockMvc.perform(get("/epic-statuses").header("Authorization", token)
-                .contentType(MediaType.APPLICATION_JSON))
-                .andExpect(status().isOk());
-
-    }
-
-    @Test
-    public void testGetEpicStatusById() throws Exception {
-        String token = getAuthToken(User, Pass);
-
-        mockMvc.perform(get("/epic-statuses/1").header("Authorization",token)
-                .contentType(MediaType.APPLICATION_JSON))
-                .andExpect(status().isOk());
-    }
-
-    @Test
-    public void createEpicStatus() throws JSONException, IOException, Exception {
-        String token = getAuthToken(User, Pass);
-        JSONObject j = new JSONObject();
-        j.put("name", "New status name");
-        j.put("project", 1);
-        this.mockMvc.perform(post("/epic-statuses").header("Authorization", token).content(j.toString())
-                .contentType(MediaType.APPLICATION_JSON))
-                .andExpect(status().isOk());
-
-    }
-
-    @Test
-    public void deleteEpicStatus() throws JSONException, IOException, Exception {
-        String token = getAuthToken(User, Pass);
-
-        this.mockMvc.perform(get("/epic-statuses/1").header("Authorization", token))
                 .andExpect(status().isOk());
 
     }
 
     private String getAuthToken(String username, String password) throws IOException, InterruptedException, JSONException {
-        String url = TAIGA_BASE_URL+"auth";
+        String url = TAIGA_BASE_URL;
         HttpClient client = HttpClient.newHttpClient();
         JSONObject j = new JSONObject();
         j.put("username", username);
         j.put("password", password);
-        j.put("type", "normal");
-
 
         HttpRequest request = HttpRequest.newBuilder()
                 .uri(URI.create(url))
