@@ -36,7 +36,7 @@ public class Auth {
         TAIGA_BASE_URL = url;
     }
 
-    @GetMapping("/")
+    @GetMapping("")
     public ResponseEntity<String> test() {
         return ResponseEntity.ok().body("Auth Working");
     }
@@ -48,13 +48,13 @@ public class Auth {
      * @return status code 200 on success and 401 on failure
      * @throws JSONException error parsing the json request and response
      */
-    @PostMapping("/")
+    @PostMapping("")
     public ResponseEntity<String> login(
             @RequestBody Map<String, Object> userMap) throws JSONException {
 
         String username = userMap.get("username").toString();
         String password = userMap.get("password").toString();
-
+        System.out.println(username + password);
         // Set the API endpoint URL
         String url = TAIGA_BASE_URL + "auth";
 
