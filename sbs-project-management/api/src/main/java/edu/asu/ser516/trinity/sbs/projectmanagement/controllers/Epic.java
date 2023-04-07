@@ -16,10 +16,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 
-/**
- * Class to handle Epics.
- */
+@RestController
 @RequestMapping("/epics")
 public class Epic {
 
@@ -42,6 +41,7 @@ public class Epic {
     public ResponseEntity<String> getAllEpics(
             @RequestHeader("Authorization") String token) throws JSONException {
 
+//        // Set the API endpoint URL
         String url = TAIGA_BASE_URL + "epics";
         kong.unirest.HttpResponse<JsonNode> response = Unirest.get(url)
                 .header("accept", "application/json")
