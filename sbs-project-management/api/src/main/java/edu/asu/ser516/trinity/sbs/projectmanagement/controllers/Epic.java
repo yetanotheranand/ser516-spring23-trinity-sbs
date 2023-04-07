@@ -23,8 +23,9 @@ import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-
-@RestController
+/**
+ * Class to handle Epics.
+ */
 @RequestMapping("/epics")
 public class Epic {
 
@@ -32,10 +33,16 @@ public class Epic {
     private String TAIGA_BASE_URL;
     private static Logger logger = LoggerFactory.getLogger(Epic.class);
 
+    /**
+     * Get AllEpics API.
+     *
+     * @header containing the token
+     * @return status code 200 on success and 401 on failure
+     * @throws JSONException error parsing the json request and response
+     */
     @GetMapping("")
     public ResponseEntity<String> getAllEpics(@RequestHeader("Authorization") String Token) throws MalformedURLException, IOException, InterruptedException, JSONException {
 
-//        // Set the API endpoint URL
         String url = TAIGA_BASE_URL + "epics";
         kong.unirest.HttpResponse<JsonNode> response = Unirest.get(url)
                 .header("accept", "application/json")
@@ -50,6 +57,13 @@ public class Epic {
 
     }
 
+    /**
+     * POST CreateEpic API.
+     * @header containing the token
+     * @body userMap epic data containing name and description
+     * @return status code 201 on success and 401 on failure
+     * @throws JSONException error parsing the json request and response
+     */
     @PostMapping("")
     public ResponseEntity<String> CreateEpic(@RequestBody Map<String, Object> epicMap, @RequestHeader("Authorization") String Token) throws MalformedURLException, IOException, InterruptedException, JSONException {
 
@@ -73,8 +87,15 @@ public class Epic {
         }
     }
     
+    /**
+     * Get EpicById API.
+     * @header containing the token
+     * @param the id of the epic
+     * @return status code 201 on success and 401 on failure
+     * @throws JSONException error parsing the json request and response
+     */
     @GetMapping("/{epic_id}")
-    public ResponseEntity<String> getEpic(@PathVariable int epic_id,@RequestHeader("Authorization") String Token) throws MalformedURLException, IOException, InterruptedException, JSONException {
+    public ResponseEntity<String> getEpicByID(@PathVariable int epic_id,@RequestHeader("Authorization") String Token) throws MalformedURLException, IOException, InterruptedException, JSONException {
 
 //        // Set the API endpoint URL
         String url = TAIGA_BASE_URL + "epics/"+epic_id;
@@ -94,7 +115,6 @@ public class Epic {
     @GetMapping("/by_ref")
     public ResponseEntity<String> getEpicByRef(@RequestParam(defaultValue = "") Map<String,String> allParams,@RequestHeader("Authorization") String Token) throws MalformedURLException, IOException, InterruptedException, JSONException {
 
-//        // Set the API endpoint URL
         String params = allParams.toString().replace("{", "").replace("}","").replace(", ","&");
         String url = TAIGA_BASE_URL + "epics/by_ref?"+params;
         System.out.println(url);
