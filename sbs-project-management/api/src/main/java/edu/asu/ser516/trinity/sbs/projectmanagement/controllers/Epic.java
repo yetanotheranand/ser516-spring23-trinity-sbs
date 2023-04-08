@@ -116,6 +116,14 @@ public class Epic {
         }
     }
 
+    /**
+     * Get epic by its reference
+     *
+     * @param allParams epic result filter params
+     * @param token bearer token
+     * @return response of get epics by reference
+     * @throws JSONException
+     */
     @GetMapping("/by_ref")
     public ResponseEntity<String> getEpicByRef(
             @RequestParam(defaultValue = "") Map<String, String> allParams,
