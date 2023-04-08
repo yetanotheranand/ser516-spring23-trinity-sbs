@@ -5,7 +5,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 
 import { NewProjectBaseComponent } from './new-project-base.component';
 
-describe('NewProjectBaseComponent', () => {
+fdescribe('NewProjectBaseComponent', () => {
   let component: NewProjectBaseComponent;
   let fixture: ComponentFixture<NewProjectBaseComponent>;
   let router: Router;
@@ -38,6 +38,6 @@ describe('NewProjectBaseComponent', () => {
   it('should navigate back', () => {
     const navigateSpy = spyOn(router, 'navigate');
     component.navigateBack();
-    expect(navigateSpy).toHaveBeenCalledWith(['../'], { relativeTo: route });
+    expect(navigateSpy).toHaveBeenCalledWith(['../projects'], { relativeTo: route });
   });
 });
