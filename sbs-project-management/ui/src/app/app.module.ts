@@ -23,7 +23,9 @@ import { Interceptor } from '../app/services/interceptor';
     HttpClientModule,
   ],
   exports: [FlexLayoutModule],
-  providers: [{ provide: HTTP_INTERCEPTORS, useClass: Interceptor, multi: true }],
+  providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: Interceptor, multi: true },
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

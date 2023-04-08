@@ -10,10 +10,9 @@ fdescribe('TitlebarComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ TitlebarComponent, CardComponent, NewProjectBaseComponent ],
-      imports:[MatCardModule]
-    })
-    .compileComponents();
+      declarations: [TitlebarComponent, CardComponent, NewProjectBaseComponent],
+      imports: [MatCardModule],
+    }).compileComponents();
   });
 
   beforeEach(() => {
