@@ -1,15 +1,21 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
+import {LoginService} from '../services/login.service';
 import { LoginComponent } from './login.component';
+import { HttpClientModule } from '@angular/common/http';
+// import {FormControl, FormGroup, Validators} from '@angular/forms';
+import { ReactiveFormsModule } from '@angular/forms';
 
-describe('LoginComponent', () => {
+fdescribe('LoginComponent', () => {
   let component: LoginComponent;
   let fixture: ComponentFixture<LoginComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [LoginComponent],
-    }).compileComponents();
+      imports:[HttpClientModule,ReactiveFormsModule],
+      declarations: [ LoginComponent ],
+      providers: [LoginService]
+    })
+    .compileComponents();
 
     fixture = TestBed.createComponent(LoginComponent);
     component = fixture.componentInstance;

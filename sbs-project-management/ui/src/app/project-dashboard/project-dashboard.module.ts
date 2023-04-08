@@ -16,6 +16,11 @@ import { MatIconModule } from '@angular/material/icon';
     MatButtonModule,
     MatIconModule,
   ],
-  exports: [TitlebarComponent, MatCardModule, MatButtonModule],
+  exports: [
+    TitlebarComponent,
+    MatCardModule,
+    MatButtonModule,
+    MatIconModule
+  ]
 })
 export class ProjectDashboardModule {}
