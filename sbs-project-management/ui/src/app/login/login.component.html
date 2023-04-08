@@ -1,27 +1,65 @@
-
-<div fxLayout="row" fxLayoutAlign="center" class="mt-4 ">
-    <div fxLayout="column" fxLayoutAlign="center" fxLayoutGap="10px" class="w-50 h-50 m-2 login-box">
-      <form [formGroup]="loginForm" class="m-2">
-        <div fxLayout="column" fxLayoutGap="10px">
-          <div fxLayout="column">
-            <label class="form-label">Username</label>
-            <input formControlName="username" class="form-control" name="username" />
-            <div *ngIf="loginForm.get('username').invalid && (loginForm.get('username').dirty || loginForm.get('username').touched)">
-              <div *ngIf="loginForm.get('username').errors['required']">Username is required</div>
-            </div>
-          </div>
-          <div fxLayout="column">
-            <label class="form-label">Password</label>
-            <input formControlName="password" class="form-control" type="password" name="password" />
-            <div *ngIf="loginForm.get('password').invalid && (loginForm.get('password').dirty || loginForm.get('password').touched)">
-              <div *ngIf="loginForm.get('password').errors['required']">Password is required</div>
+<div fxLayout="row" fxLayoutAlign="center" class="mt-4">
+  <div
+    fxLayout="column"
+    fxLayoutAlign="center"
+    fxLayoutGap="10px"
+    class="w-50 h-50 m-2 login-box"
+  >
+    <form [formGroup]="loginForm" class="m-2">
+      <div fxLayout="column" fxLayoutGap="10px">
+        <div fxLayout="column">
+          <label class="form-label">Username</label>
+          <input
+            formControlName="username"
+            class="form-control"
+            name="username"
+          />
+          <div
+            *ngIf="
+              loginForm.get('username').invalid &&
+              (loginForm.get('username').dirty ||
+                loginForm.get('username').touched)
+            "
+          >
+            <div *ngIf="loginForm.get('username').errors['required']">
+              Username is required
             </div>
           </div>
         </div>
-      </form>
-      <div fxLayoutAlign="center">
-        <button mat-raised-button color="primary" (click)="continueToLogin()" class="w-25 m-2">Submit</button>
+        <div fxLayout="column">
+          <label class="form-label">Password</label>
+          <input
+            formControlName="password"
+            class="form-control"
+            type="password"
+            name="password"
+          />
+          <div
+            *ngIf="
+              loginForm.get('password').invalid &&
+              (loginForm.get('password').dirty ||
+                loginForm.get('password').touched)
+            "
+          >
+            <div *ngIf="loginForm.get('password').errors['required']">
+              Password is required
+            </div>
+          </div>
+        </div>
       </div>
-      <div fxLayoutAlign="center" *ngIf="errorMessage" class="mt-2 text-danger">{{ errorMessage }}</div>
+    </form>
+    <div fxLayoutAlign="center">
+      <button
+        mat-raised-button
+        color="primary"
+        (click)="continueToLogin()"
+        class="w-25 m-2"
+      >
+        Submit
+      </button>
     </div>
-  </div>  
+    <div fxLayoutAlign="center" *ngIf="errorMessage" class="mt-2 text-danger">
+      {{ errorMessage }}
+    </div>
+  </div>
+</div>

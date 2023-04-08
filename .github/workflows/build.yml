@@ -63,7 +63,6 @@ jobs:
 
       - name: Static code analysis of sbs-driver-api
         uses: dbelyaev/action-checkstyle@v0.7.4
-        continue-on-error: true
         with:
           workdir: sbs-driver/api
           checkstyle_config: sbs-driver/api/src/main/resources/checkstyle.xml
@@ -73,7 +72,6 @@ jobs:
 
       - name: Scatic code analysis of sbs-driver-ui
         uses: reviewdog/action-eslint@v1
-        continue-on-error: true
         with:
           workdir: sbs-driver/ui
           github_token: ${{ secrets.github_token }}
@@ -136,7 +134,6 @@ jobs:
 
       - name: Static code analysis of sbs-metrics-api
         uses: dbelyaev/action-checkstyle@v0.7.4
-        continue-on-error: true
         with:
           workdir: sbs-metrics/api
           checkstyle_config: sbs-metrics/api/src/main/resources/checkstyle.xml
@@ -146,7 +143,6 @@ jobs:
 
       - name: Scatic code analysis of sbs-metrics-ui
         uses: reviewdog/action-eslint@v1
-        continue-on-error: true
         with:
           workdir: sbs-metrics/ui
           github_token: ${{ secrets.github_token }}
@@ -209,7 +205,6 @@ jobs:
 
       - name: Static code analysis of sbs-project-management-api
         uses: dbelyaev/action-checkstyle@v0.7.4
-        continue-on-error: true
         with:
           workdir: sbs-project-management/api
           checkstyle_config: sbs-project-management/api/src/main/resources/checkstyle.xml
@@ -219,7 +214,6 @@ jobs:
 
       - name: Scatic code analysis of sbs-project-management-ui
         uses: reviewdog/action-eslint@v1
-        continue-on-error: true
         with:
           workdir: sbs-project-management/ui
           github_token: ${{ secrets.github_token }}

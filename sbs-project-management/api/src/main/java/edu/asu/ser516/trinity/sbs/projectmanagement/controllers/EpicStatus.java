@@ -21,6 +21,9 @@ import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+/**
+ * API to handle epic statuses
+ */
 @RestController
 @RequestMapping("/epic-statuses")
 public class EpicStatus {
@@ -28,6 +31,13 @@ public class EpicStatus {
     @Value("${TAIGA_BASE_URL}")
     private String taigaBaseUrl;
 
+    /**
+     * GET: Get epic status of all the epics
+     *
+     * @param token bearer token
+     * @return success or failure response of get epics
+     * @throws UnirestException
+     */
     @GetMapping("")
     public ResponseEntity<String> getAllEpicStatuses(
             @RequestHeader("Authorization") String token) throws UnirestException {
@@ -45,6 +55,14 @@ public class EpicStatus {
         }
     }
 
+    /**
+     * GET: Get epic status
+     *
+     * @param epicId id of the epic
+     * @param token bearer token
+     * @return success or failure response of get epic
+     * @throws UnirestException
+     */
     @GetMapping("/{epicId}")
     public ResponseEntity<String> getEpicStatus(@PathVariable Long epicId,
                                                 @RequestHeader("Authorization") String token)
@@ -64,6 +82,14 @@ public class EpicStatus {
         }
     }
 
+    /**
+     * POST: Create epic status
+     *
+     * @param epicStatusMap epic status map
+     * @param token bearer token
+     * @return success or failure response of create epic
+     * @throws UnirestException
+     */
     @PostMapping("")
     public ResponseEntity<String> createEpicStatus(@RequestBody Map<String, Object> epicStatusMap,
                                                    @RequestHeader("Authorization") String token)
@@ -88,6 +114,15 @@ public class EpicStatus {
         }
     }
 
+    /**
+     * PUT: Edit epic status
+     *
+     * @param epicId id of the epic
+     * @param epicStatusMap epic status map
+     * @param token bearer token
+     * @return success or failure response of epic edit
+     * @throws UnirestException
+     */
     @PutMapping("/{epicId}")
     public ResponseEntity<String> editEpicStatusByPut(@PathVariable Long epicId,
                                                       @RequestBody Map<String, Object> epicStatusMap,
@@ -112,6 +147,15 @@ public class EpicStatus {
         }
     }
 
+    /**
+     * PATCH: Edit epic status
+     *
+     * @param epicId id of the epic
+     * @param epicStatusMap epic status map
+     * @param token bearer token
+     * @return success or failure response of epic edit
+     * @throws UnirestException
+     */
     @PatchMapping("/{epicId}")
     public ResponseEntity<String> editEpicStatusByPatch(@PathVariable Long epicId,
                                                         @RequestBody Map<String, Object> epicStatusMap,
@@ -137,6 +181,14 @@ public class EpicStatus {
         }
     }
 
+    /**
+     * Delete epic by id
+     *
+     * @param epicId id of the epic
+     * @param token bearer token
+     * @return success or failure response of the deletion
+     * @throws UnirestException
+     */
     @DeleteMapping("/{epicId}")
     public ResponseEntity<String> deleteEpicStatusById(@PathVariable Long epicId,
                                                        @RequestHeader("Authorization") String token)

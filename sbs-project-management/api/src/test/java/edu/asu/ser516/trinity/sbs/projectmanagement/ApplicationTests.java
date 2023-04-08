@@ -28,22 +28,21 @@ public class ApplicationTests {
     @Autowired
     private MockMvc mockMvc;
     @Value("${TAIGA_BASE_URL}")
-    private String TAIGA_BASE_URL;
+    private String taigaBaseUrl;
     @Value("${TAIGA_DEMO_USER}")
-    private String User;
+    private String user;
     @Value("${TAIGA_DEMO_PASSWORD}")
-    private String Pass;
+    private String pass;
     private String token;
 
-    public ApplicationTests() throws IOException, InterruptedException, JSONException {
+    public ApplicationTests() throws JSONException {
         Unirest.config().verifySsl(false);
 
     }
 
     @Test
     public void testAuthTest() throws Exception {
-        this.mockMvc.perform(get("/auth/"))
-                .andExpect(status().isOk());
+        this.mockMvc.perform(get("/auth/")).andExpect(status().isOk());
 
     }
 
@@ -52,8 +51,8 @@ public class ApplicationTests {
         JSONObject j = new JSONObject();
         j.put("username", "user");
         j.put("password", "user");
-        this.mockMvc.perform(post("/auth/").content(j.toString())
-                        .contentType(MediaType.APPLICATION_JSON))
+        this.mockMvc.perform(
+                        post("/auth/").content(j.toString()).contentType(MediaType.APPLICATION_JSON))
                 .andDo(print())
                 .andExpect(status().isUnauthorized());
     }
@@ -61,28 +60,25 @@ public class ApplicationTests {
     @Test
     public void LoginSuccess() throws Exception {
         JSONObject j = new JSONObject();
-        j.put("username", User);
-        j.put("password", Pass);
-//        System.out.println(j.toString());
-        this.mockMvc.perform(post("/auth/").content(j.toString())
-                        .contentType(MediaType.APPLICATION_JSON))
-                //                .andDo(print())
+        j.put("username", user);
+        j.put("password", pass);
+        this.mockMvc.perform(
+                        post("/auth/").content(j.toString()).contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk());
     }
 
     @Test
     public void getProjects() throws Exception {
-        String token = getAuthToken(User, Pass);
+        String token = getAuthToken(user, pass);
 
         this.mockMvc.perform(get("/projects").header("Authorization", "Bearer " + token)
-                        .contentType(MediaType.APPLICATION_JSON))
-                .andExpect(status().isOk());
+                .contentType(MediaType.APPLICATION_JSON)).andExpect(status().isOk());
 
     }
 
     private String getAuthToken(String username,
                                 String password) throws IOException, InterruptedException, JSONException {
-        String url = TAIGA_BASE_URL;
+        String url = taigaBaseUrl;
         HttpClient client = HttpClient.newHttpClient();
         JSONObject j = new JSONObject();
         j.put("username", username);
@@ -94,8 +90,7 @@ public class ApplicationTests {
                 .headers("Content-Type", "application/json")
                 .build();
 
-        HttpResponse<String> response = client.send(request,
-                HttpResponse.BodyHandlers.ofString());
+        HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
         if (response.statusCode() == 200) {
             JSONObject obj = new JSONObject(response.body());
             return obj.getString("auth_token");
@@ -106,13 +101,14 @@ public class ApplicationTests {
 
     @Test
     public void createProject() throws Exception {
-        String token = getAuthToken(User, Pass);
         JSONObject j = new JSONObject();
         j.put("name", "test");
         j.put("description", "test");
         j.put("is_private", "false");
-        this.mockMvc.perform(get("/projects").header("Authorization", "Bearer " + token)
-                        .contentType(MediaType.APPLICATION_JSON))
+        String token = getAuthToken(user, pass);
+        this.mockMvc.perform(get("/projects").header("Authorization",
+                        "Bearer " + token)
+                .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk());
 
     }
