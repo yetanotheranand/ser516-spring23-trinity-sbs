@@ -1,0 +1,8 @@
+{
+  "dependencies": {
+    "@angular/cdk": "^15.2.6",
+    "@angular/flex-layout": "^15.0.0-beta.42",
+    "@angular/material": "^15.2.6",
+    "@angular/router": "^15.2.6"
+  }
+}

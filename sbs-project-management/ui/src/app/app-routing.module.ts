@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { UserStoryComponent } from './user-story/user-story.component';
 import { LoginComponent } from './login/login.component';
 
 const routes: Routes = [
@@ -18,6 +19,7 @@ const routes: Routes = [
         (m) => m.NewProjectModule
       ),
   },
+  {path: 'user-story', component: UserStoryComponent}
 ];
 
 @NgModule({
