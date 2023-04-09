@@ -42,7 +42,7 @@ public class ApplicationTests {
 
     @Test
     public void testAuthTest() throws Exception {
-        this.mockMvc.perform(get("/auth/")).andExpect(status().isOk());
+        this.mockMvc.perform(get("/auth")).andExpect(status().isOk());
 
     }
 
@@ -52,9 +52,7 @@ public class ApplicationTests {
         j.put("username", "user");
         j.put("password", "user");
         this.mockMvc.perform(
-                        post("/auth/")
-                                .content(j.toString())
-                                .contentType(MediaType.APPLICATION_JSON))
+                        post("/auth").content(j.toString()).contentType(MediaType.APPLICATION_JSON))
                 .andDo(print())
                 .andExpect(status().isUnauthorized());
     }
@@ -65,8 +63,7 @@ public class ApplicationTests {
         j.put("username", user);
         j.put("password", pass);
         this.mockMvc.perform(
-                        post("/auth/").content(j.toString())
-                                .contentType(MediaType.APPLICATION_JSON))
+                        post("/auth").content(j.toString()).contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk());
     }
 
