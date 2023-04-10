@@ -67,17 +67,17 @@ jobs:
           workdir: sbs-driver/api
           checkstyle_config: sbs-driver/api/src/main/resources/checkstyle.xml
           github_token: ${{ secrets.github_token }}
-          reporter: github-pr-review
-          level: warning
+          reporter: github-pr-check
+          level: error
 
-      - name: Scatic code analysis of sbs-driver-ui 
+      - name: Scatic code analysis of sbs-driver-ui
         uses: reviewdog/action-eslint@v1
         with:
           workdir: sbs-driver/ui
           github_token: ${{ secrets.github_token }}
-          reporter: github-pr-review
+          reporter: github-pr-check
           eslint_flags: 'src/'
-          level: warning
+          level: error
 
       - name: Test sbs-driver-api
         working-directory: sbs-driver/api
@@ -138,17 +138,17 @@ jobs:
           workdir: sbs-metrics/api
           checkstyle_config: sbs-metrics/api/src/main/resources/checkstyle.xml
           github_token: ${{ secrets.github_token }}
-          reporter: github-pr-review
-          level: warning
+          reporter: github-pr-check
+          level: error
 
-      - name: Scatic code analysis of sbs-metrics-ui 
+      - name: Scatic code analysis of sbs-metrics-ui
         uses: reviewdog/action-eslint@v1
         with:
           workdir: sbs-metrics/ui
           github_token: ${{ secrets.github_token }}
-          reporter: github-pr-review
+          reporter: github-pr-check
           eslint_flags: 'src/'
-          level: warning
+          level: error
 
       - name: Test sbs-metrics-api
         working-directory: sbs-metrics/api
@@ -209,17 +209,17 @@ jobs:
           workdir: sbs-project-management/api
           checkstyle_config: sbs-project-management/api/src/main/resources/checkstyle.xml
           github_token: ${{ secrets.github_token }}
-          reporter: github-pr-review
-          level: warning
+          reporter: github-pr-check
+          level: error
 
-      - name: Scatic code analysis of sbs-project-management-ui 
+      - name: Scatic code analysis of sbs-project-management-ui
         uses: reviewdog/action-eslint@v1
         with:
           workdir: sbs-project-management/ui
           github_token: ${{ secrets.github_token }}
-          reporter: github-pr-review
+          reporter: github-pr-check
           eslint_flags: 'src/'
-          level: warning
+          level: error
 
       - name: Test sbs-project-management-api
         working-directory: sbs-project-management/api
