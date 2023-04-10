@@ -81,7 +81,8 @@ public class ApplicationTests {
     }
 
     private String getAuthToken(String username,
-                                String password) throws IOException, InterruptedException, JSONException {
+                                String password) throws IOException,
+                                InterruptedException, JSONException {
         String url = taigaBaseUrl;
         HttpClient client = HttpClient.newHttpClient();
         JSONObject j = new JSONObject();
