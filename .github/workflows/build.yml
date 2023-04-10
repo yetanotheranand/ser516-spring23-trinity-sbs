@@ -68,7 +68,7 @@ jobs:
           checkstyle_config: sbs-driver/api/src/main/resources/checkstyle.xml
           github_token: ${{ secrets.github_token }}
           reporter: github-pr-check
-          level: warning
+          level: error
 
       - name: Scatic code analysis of sbs-driver-ui
         uses: reviewdog/action-eslint@v1
@@ -77,7 +77,7 @@ jobs:
           github_token: ${{ secrets.github_token }}
           reporter: github-pr-check
           eslint_flags: 'src/'
-          level: warning
+          level: error
 
       - name: Test sbs-driver-api
         working-directory: sbs-driver/api
@@ -139,7 +139,7 @@ jobs:
           checkstyle_config: sbs-metrics/api/src/main/resources/checkstyle.xml
           github_token: ${{ secrets.github_token }}
           reporter: github-pr-check
-          level: warning
+          level: error
 
       - name: Scatic code analysis of sbs-metrics-ui
         uses: reviewdog/action-eslint@v1
@@ -148,7 +148,7 @@ jobs:
           github_token: ${{ secrets.github_token }}
           reporter: github-pr-check
           eslint_flags: 'src/'
-          level: warning
+          level: error
 
       - name: Test sbs-metrics-api
         working-directory: sbs-metrics/api
@@ -210,7 +210,7 @@ jobs:
           checkstyle_config: sbs-project-management/api/src/main/resources/checkstyle.xml
           github_token: ${{ secrets.github_token }}
           reporter: github-pr-check
-          level: warning
+          level: error
 
       - name: Scatic code analysis of sbs-project-management-ui
         uses: reviewdog/action-eslint@v1
@@ -219,7 +219,7 @@ jobs:
           github_token: ${{ secrets.github_token }}
           reporter: github-pr-check
           eslint_flags: 'src/'
-          level: warning
+          level: error
 
       - name: Test sbs-project-management-api
         working-directory: sbs-project-management/api
