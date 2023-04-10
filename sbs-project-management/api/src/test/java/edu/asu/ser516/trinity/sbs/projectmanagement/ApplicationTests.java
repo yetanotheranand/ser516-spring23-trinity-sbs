@@ -52,7 +52,9 @@ public class ApplicationTests {
         j.put("username", "user");
         j.put("password", "user");
         this.mockMvc.perform(
-                        post("/auth/").content(j.toString()).contentType(MediaType.APPLICATION_JSON))
+                        post("/auth/")
+                                .content(j.toString())
+                                .contentType(MediaType.APPLICATION_JSON))
                 .andDo(print())
                 .andExpect(status().isUnauthorized());
     }
@@ -63,7 +65,8 @@ public class ApplicationTests {
         j.put("username", user);
         j.put("password", pass);
         this.mockMvc.perform(
-                        post("/auth/").content(j.toString()).contentType(MediaType.APPLICATION_JSON))
+                        post("/auth/").content(j.toString())
+                                .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk());
     }
 
@@ -72,7 +75,8 @@ public class ApplicationTests {
         String token = getAuthToken(user, pass);
 
         this.mockMvc.perform(get("/projects").header("Authorization", "Bearer " + token)
-                .contentType(MediaType.APPLICATION_JSON)).andExpect(status().isOk());
+                .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk());
 
     }
 
