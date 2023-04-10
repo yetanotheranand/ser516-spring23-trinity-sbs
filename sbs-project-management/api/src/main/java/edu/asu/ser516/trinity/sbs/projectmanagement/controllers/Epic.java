@@ -65,8 +65,9 @@ public class Epic {
      * @body userMap epic data containing name and description
      */
     @PostMapping("")
-    public ResponseEntity<String> createEpic(@RequestBody Map<String, Object> epicMap,
-                                             @RequestHeader("Authorization") String token)
+    public ResponseEntity<String> createEpic(
+            @RequestBody Map<String, Object> epicMap,
+            @RequestHeader("Authorization") String token)
             throws JSONException {
 
         // Set the API endpoint URL
@@ -118,7 +119,7 @@ public class Epic {
     }
 
     /**
-     * Get epic by its reference
+     * Get epic by its reference.
      *
      * @param allParams epic result filter params
      * @param token bearer token

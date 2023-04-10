@@ -22,7 +22,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
- * API to handle epic statuses
+ * API to handle epic statuses.
  */
 @RestController
 @RequestMapping("/epic-statuses")
@@ -32,7 +32,7 @@ public class EpicStatus {
     private String taigaBaseUrl;
 
     /**
-     * GET: Get epic status of all the epics
+     * GET: Get epic status of all the epics.
      *
      * @param token bearer token
      * @return success or failure response of get epics
@@ -56,7 +56,7 @@ public class EpicStatus {
     }
 
     /**
-     * GET: Get epic status
+     * GET: Get epic status.
      *
      * @param epicId id of the epic
      * @param token bearer token
@@ -83,7 +83,7 @@ public class EpicStatus {
     }
 
     /**
-     * POST: Create epic status
+     * POST: Create epic status.
      *
      * @param epicStatusMap epic status map
      * @param token bearer token
@@ -91,8 +91,9 @@ public class EpicStatus {
      * @throws UnirestException exception while fetching data from upstream
      */
     @PostMapping("")
-    public ResponseEntity<String> createEpicStatus(@RequestBody Map<String, Object> epicStatusMap,
-                                                   @RequestHeader("Authorization") String token)
+    public ResponseEntity<String> createEpicStatus(
+            @RequestBody Map<String, Object> epicStatusMap,
+            @RequestHeader("Authorization") String token)
             throws UnirestException {
         String url = taigaBaseUrl + "epic-statuses";
         JSONObject body = new JSONObject(epicStatusMap);
@@ -115,7 +116,7 @@ public class EpicStatus {
     }
 
     /**
-     * PUT: Edit epic status
+     * PUT: Edit epic status.
      *
      * @param epicId id of the epic
      * @param epicStatusMap epic status map
@@ -127,7 +128,8 @@ public class EpicStatus {
     public ResponseEntity<String> editEpicStatusByPut(
             @PathVariable Long epicId,
             @RequestBody Map<String, Object> epicStatusMap,
-            @RequestHeader("Authorization") String token) throws UnirestException {
+            @RequestHeader("Authorization") String token)
+            throws UnirestException {
         String url = taigaBaseUrl + "epic-statuses/" + epicId;
         JSONObject body = new JSONObject(epicStatusMap);
 
@@ -148,7 +150,7 @@ public class EpicStatus {
     }
 
     /**
-     * PATCH: Edit epic status
+     * PATCH: Edit epic status.
      *
      * @param epicId id of the epic
      * @param epicStatusMap epic status map
@@ -160,7 +162,8 @@ public class EpicStatus {
     public ResponseEntity<String> editEpicStatusByPatch(
             @PathVariable Long epicId,
             @RequestBody Map<String, Object> epicStatusMap,
-            @RequestHeader("Authorization") String token) throws UnirestException {
+            @RequestHeader("Authorization") String token)
+            throws UnirestException {
         String url = taigaBaseUrl + "epic-statuses/" + epicId;
         JSONObject body = new JSONObject(epicStatusMap);
 
@@ -182,7 +185,7 @@ public class EpicStatus {
     }
 
     /**
-     * Delete epic by id
+     * Delete epic by id.
      *
      * @param epicId id of the epic
      * @param token bearer token
@@ -190,8 +193,9 @@ public class EpicStatus {
      * @throws UnirestException exception while fetching data from upstream
      */
     @DeleteMapping("/{epicId}")
-    public ResponseEntity<String> deleteEpicStatusById(@PathVariable Long epicId,
-                                                       @RequestHeader("Authorization") String token)
+    public ResponseEntity<String> deleteEpicStatusById(
+            @PathVariable Long epicId,
+            @RequestHeader("Authorization") String token)
             throws UnirestException {
         String url = taigaBaseUrl + "epic-statuses/" + epicId + "?moveTo=empty";
         HttpResponse<JsonNode> response = Unirest.delete(url)
