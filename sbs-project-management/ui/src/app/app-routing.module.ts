@@ -19,7 +19,7 @@ const routes: Routes = [
         (m) => m.NewProjectModule
       ),
   },
-  {path: 'user-story', component: UserStoryComponent}
+  { path: 'user-story', component: UserStoryComponent },
 ];
 
 @NgModule({

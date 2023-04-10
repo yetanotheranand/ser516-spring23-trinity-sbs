@@ -38,6 +38,8 @@ fdescribe('NewProjectBaseComponent', () => {
   it('should navigate back', () => {
     const navigateSpy = spyOn(router, 'navigate');
     component.navigateBack();
-    expect(navigateSpy).toHaveBeenCalledWith(['../projects'], { relativeTo: route, });
+    expect(navigateSpy).toHaveBeenCalledWith(['../projects'], {
+      relativeTo: route,
+    });
   });
 });

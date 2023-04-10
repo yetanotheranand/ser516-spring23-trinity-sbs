@@ -3,7 +3,7 @@ import { Component } from '@angular/core';
 @Component({
   selector: 'app-user-story',
   templateUrl: './user-story.component.html',
-  styleUrls: ['./user-story.component.css']
+  styleUrls: ['./user-story.component.css'],
 })
 export class UserStoryComponent {
   userStoryData = {
@@ -16,8 +16,7 @@ export class UserStoryComponent {
     backPoints: '',
   };
 
- 
-  onSubmit(){
+  onSubmit() {
     console.log(this.userStoryData);
   }
 }
