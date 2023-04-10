@@ -66,7 +66,8 @@ public class Epic {
      */
     @PostMapping("")
     public ResponseEntity<String> createEpic(@RequestBody Map<String, Object> epicMap,
-                                             @RequestHeader("Authorization") String token) throws JSONException {
+                                             @RequestHeader("Authorization") String token)
+            throws JSONException {
 
         // Set the API endpoint URL
         String url = TAIGA_BASE_URL + "epics";
@@ -122,7 +123,7 @@ public class Epic {
      * @param allParams epic result filter params
      * @param token bearer token
      * @return response of get epics by reference
-     * @throws JSONException
+     * @throws JSONException exception while parsing request
      */
     @GetMapping("/by_ref")
     public ResponseEntity<String> getEpicByRef(

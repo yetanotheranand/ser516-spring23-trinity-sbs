@@ -36,7 +36,7 @@ public class EpicStatus {
      *
      * @param token bearer token
      * @return success or failure response of get epics
-     * @throws UnirestException
+     * @throws UnirestException exception while fetching data from upstream
      */
     @GetMapping("")
     public ResponseEntity<String> getAllEpicStatuses(
@@ -61,7 +61,7 @@ public class EpicStatus {
      * @param epicId id of the epic
      * @param token bearer token
      * @return success or failure response of get epic
-     * @throws UnirestException
+     * @throws UnirestException exception while fetching data from upstream
      */
     @GetMapping("/{epicId}")
     public ResponseEntity<String> getEpicStatus(@PathVariable Long epicId,
@@ -88,7 +88,7 @@ public class EpicStatus {
      * @param epicStatusMap epic status map
      * @param token bearer token
      * @return success or failure response of create epic
-     * @throws UnirestException
+     * @throws UnirestException exception while fetching data from upstream
      */
     @PostMapping("")
     public ResponseEntity<String> createEpicStatus(@RequestBody Map<String, Object> epicStatusMap,
@@ -121,13 +121,13 @@ public class EpicStatus {
      * @param epicStatusMap epic status map
      * @param token bearer token
      * @return success or failure response of epic edit
-     * @throws UnirestException
+     * @throws UnirestException exception while fetching data from upstream
      */
     @PutMapping("/{epicId}")
-    public ResponseEntity<String> editEpicStatusByPut(@PathVariable Long epicId,
-                                                      @RequestBody Map<String, Object> epicStatusMap,
-                                                      @RequestHeader("Authorization") String token)
-            throws UnirestException {
+    public ResponseEntity<String> editEpicStatusByPut(
+            @PathVariable Long epicId,
+            @RequestBody Map<String, Object> epicStatusMap,
+            @RequestHeader("Authorization") String token) throws UnirestException {
         String url = taigaBaseUrl + "epic-statuses/" + epicId;
         JSONObject body = new JSONObject(epicStatusMap);
 
@@ -154,13 +154,13 @@ public class EpicStatus {
      * @param epicStatusMap epic status map
      * @param token bearer token
      * @return success or failure response of epic edit
-     * @throws UnirestException
+     * @throws UnirestException exception while fetching data from upstream
      */
     @PatchMapping("/{epicId}")
-    public ResponseEntity<String> editEpicStatusByPatch(@PathVariable Long epicId,
-                                                        @RequestBody Map<String, Object> epicStatusMap,
-                                                        @RequestHeader("Authorization") String token)
-            throws UnirestException {
+    public ResponseEntity<String> editEpicStatusByPatch(
+            @PathVariable Long epicId,
+            @RequestBody Map<String, Object> epicStatusMap,
+            @RequestHeader("Authorization") String token) throws UnirestException {
         String url = taigaBaseUrl + "epic-statuses/" + epicId;
         JSONObject body = new JSONObject(epicStatusMap);
 
@@ -187,7 +187,7 @@ public class EpicStatus {
      * @param epicId id of the epic
      * @param token bearer token
      * @return success or failure response of the deletion
-     * @throws UnirestException
+     * @throws UnirestException exception while fetching data from upstream
      */
     @DeleteMapping("/{epicId}")
     public ResponseEntity<String> deleteEpicStatusById(@PathVariable Long epicId,
