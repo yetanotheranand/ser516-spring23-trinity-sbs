@@ -46,7 +46,7 @@ public class Epic {
         String url = TAIGA_BASE_URL + "epics";
         kong.unirest.HttpResponse<JsonNode> response = Unirest.get(url)
                 .header("accept", "application/json")
-                .header("Authorization", String.format("Bearer %s", token))
+                .header("Authorization", String.format( token))
                 .asJson();
         if (response.getStatus() == 200) {
             return ResponseEntity.ok(response.getBody().toString());
@@ -78,7 +78,7 @@ public class Epic {
 
         kong.unirest.HttpResponse<JsonNode> response = Unirest.post(url)
                 .header("accept", "application/json")
-                .header("Authorization", String.format("Bearer %s", token))
+                .header("Authorization", String.format( token))
                 .contentType("application/json")
                 .body(body.toString())
                 .asJson();
@@ -109,7 +109,7 @@ public class Epic {
         String url = TAIGA_BASE_URL + "epics/" + epicId;
         kong.unirest.HttpResponse<JsonNode> response = Unirest.get(url)
                 .header("accept", "application/json")
-                .header("Authorization", String.format("Bearer %s", token))
+                .header("Authorization", String.format( token))
                 .asJson();
         if (response.getStatus() == 200) {
             return ResponseEntity.ok(response.getBody().toString());
@@ -141,7 +141,7 @@ public class Epic {
         System.out.println(url);
         kong.unirest.HttpResponse<JsonNode> response = Unirest.get(url)
                 .header("accept", "application/json")
-                .header("Authorization", String.format("Bearer %s", token))
+                .header("Authorization", String.format(token))
                 .asJson();
         if (response.getStatus() == 200) {
             return ResponseEntity.ok(response.getBody().toString());

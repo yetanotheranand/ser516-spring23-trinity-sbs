@@ -1,7 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { TitlebarComponent } from './titlebar.component';
 import { CardComponent } from '../card/card.component';
-import { NewProjectBaseComponent } from 'src/new-project/new-project-base/new-project-base.component';
+import { NewProjectBaseComponent } from 'src/app/new-project/new-project-base/new-project-base.component';
 import { MatCardModule } from '@angular/material/card';
 
 fdescribe('TitlebarComponent', () => {

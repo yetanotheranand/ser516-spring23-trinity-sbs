@@ -2,6 +2,9 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { UserStoryComponent } from './user-story/user-story.component';
 import { LoginComponent } from './login/login.component';
+import { ProjectComponent } from './project-dashboard/project/project.component';
+import { NewProjectComponent } from './new-project/new-project.component';
+// import { ProjectComponent } from './project/project.component';
 
 const routes: Routes = [
   { path: '', component: LoginComponent },
@@ -12,14 +15,9 @@ const routes: Routes = [
         (m) => m.ProjectDashboardModule
       ),
   },
-  {
-    path: 'new-project',
-    loadChildren: () =>
-      import('../../src/new-project/new-project.module').then(
-        (m) => m.NewProjectModule
-      ),
-  },
+  { path: 'new-project', component: NewProjectComponent },
   { path: 'user-story', component: UserStoryComponent },
+  { path: 'projects/:id', component: ProjectComponent },
 ];
 
 @NgModule({

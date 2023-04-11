@@ -3,21 +3,21 @@ import { RouterTestingModule } from '@angular/router/testing';
 import { FormsModule } from '@angular/forms'; // import FormsModule
 import { ActivatedRoute, Router } from '@angular/router';
 
-import { NewProjectBaseComponent } from './new-project-base.component';
+import { NewProjectComponent } from './new-project.component';
 
 fdescribe('NewProjectBaseComponent', () => {
-  let component: NewProjectBaseComponent;
-  let fixture: ComponentFixture<NewProjectBaseComponent>;
+  let component: NewProjectComponent;
+  let fixture: ComponentFixture<NewProjectComponent>;
   let router: Router;
   let route: ActivatedRoute;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [NewProjectBaseComponent],
+      declarations: [NewProjectComponent],
       imports: [RouterTestingModule, FormsModule],
     }).compileComponents();
 
-    fixture = TestBed.createComponent(NewProjectBaseComponent);
+    fixture = TestBed.createComponent(NewProjectComponent);
     router = TestBed.inject(Router);
     route = TestBed.inject(ActivatedRoute);
     component = fixture.componentInstance;

@@ -28,7 +28,7 @@ export class LoginComponent {
         sessionStorage.setItem('JWTToken', data?.auth_token);
         sessionStorage.setItem('refreshToken', data?.refresh);
         sessionStorage.setItem('UserId', data?.id);
-        
+
         this.router.navigateByUrl('/projects');
       },
       (error) => {

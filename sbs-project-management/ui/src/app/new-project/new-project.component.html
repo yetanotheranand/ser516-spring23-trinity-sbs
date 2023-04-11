@@ -1,0 +1,35 @@
+<div class="titlebar">
+  <h1>New Project</h1>
+</div>
+<div id="form-container">
+  <form [formGroup]="newProject">
+    <label for="textbox">Project Name:</label>
+    <input
+      type="text"
+      id="textbox"
+      name="textbox"
+      formControlName="projectName"
+    />
+    <label for="textarea">Project Details:</label>
+    <textarea
+      id="textarea"
+      name="textarea"
+      rows="5"
+      formControlName="projectDescription"
+    ></textarea>
+    <div class="form-check form-switch">
+      <input
+        mdbCheckbox
+        class="form-check-input"
+        type="checkbox"
+        id="flexSwitchCheckDefault"
+        formControlName="privatePublic"
+      />
+      Make project private
+    </div>
+    <div class="btns">
+      <button (click)="newproject()">Submit</button>
+      <button style="margin-left: 10px" (click)="navigateBack()">back</button>
+    </div>
+  </form>
+</div>

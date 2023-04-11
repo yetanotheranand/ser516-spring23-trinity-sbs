@@ -12,8 +12,15 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { Interceptor } from '../app/services/interceptor';
+import { NewProjectComponent } from './new-project/new-project.component';
+
 @NgModule({
-  declarations: [AppComponent, LoginComponent, UserStoryComponent],
+  declarations: [
+    AppComponent,
+    LoginComponent,
+    UserStoryComponent,
+    NewProjectComponent,
+  ],
   imports: [
     BrowserModule,
     FormsModule,

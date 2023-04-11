@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { TitlebarComponent } from './titlebar/titlebar.component';
+import { ProjectComponent } from './project/project.component';
 
 const routes: Routes = [
   {

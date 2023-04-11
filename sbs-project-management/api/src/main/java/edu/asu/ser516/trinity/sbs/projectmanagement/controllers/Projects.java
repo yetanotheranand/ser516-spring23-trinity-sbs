@@ -42,20 +42,21 @@ public class Projects {
      */
     @GetMapping("")
     public ResponseEntity<String> getAllProjects(
-            @RequestParam(defaultValue = "{}") Map<String, String> allParams) throws JSONException {
+            @RequestParam(defaultValue = "{}") String allParams, @RequestHeader("Authorization") String token)
+            throws JSONException {
 
         // Set the API endpoint URL
         String url = TAIGA_BASE_URL + "projects";
         String params = allParams.toString();
         kong.unirest.HttpResponse<JsonNode> response = Unirest.get(
-                        url + "?" + params.replace("{", "").replace("}", ""))
+                url + "?" + params.replace("{", "").replace("}", ""))
                 .header("accept", "application/json")
+                .header("Authorization", String.format(token))
                 .asJson();
         if (response.getStatus() == 200) {
             return ResponseEntity.ok(response.getBody().toString());
 
         } else {
-            logger.warn("User Login Failed");
             return ResponseEntity.status(401).body(response.getBody().toString());
         }
 
@@ -65,13 +66,13 @@ public class Projects {
      * POST Create Project API.
      *
      * @param projectMap form containing name of the project to be created
-     * @param token auth token for Taiga API
+     * @param token      auth token for Taiga API
      * @return response from Taiga API for project creation
      * @throws JSONException error parsing the json request and response
      */
     @PostMapping("")
     public ResponseEntity<String> createProject(@RequestBody Map<String, Object> projectMap,
-                                                @RequestHeader("Authorization") String token)
+            @RequestHeader("Authorization") String token)
             throws JSONException {
 
         // Set the API endpoint URL
@@ -84,7 +85,7 @@ public class Projects {
 
         kong.unirest.HttpResponse<JsonNode> response = Unirest.post(url)
                 .header("accept", "application/json")
-                .header("Authorization", String.format("Bearer %s", token))
+                .header("Authorization", String.format(token))
                 .contentType("application/json")
                 .body(j.toString())
                 .asJson();
