@@ -42,7 +42,8 @@ public class Projects {
      */
     @GetMapping("")
     public ResponseEntity<String> getAllProjects(
-            @RequestParam(defaultValue = "{}") String allParams, @RequestHeader("Authorization") String token)
+            @RequestParam(defaultValue = "{}") String allParams,
+            @RequestHeader("Authorization") String token)
             throws JSONException {
 
         // Set the API endpoint URL

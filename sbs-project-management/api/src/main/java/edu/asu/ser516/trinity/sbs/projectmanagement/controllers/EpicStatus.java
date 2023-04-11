@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package edu.asu.ser516.trinity.sbs.projectmanagement.controllers;
 
 import java.util.Map;
@@ -105,7 +101,7 @@ public class EpicStatus {
         System.out.println(body);
         HttpResponse<JsonNode> response = Unirest.post(url)
                 .header("accept", "application/json")
-                .header("Authorization", String.format( token))
+                .header("Authorization", String.format(token))
                 .header("Content-Type", "application/json")
                 .body(body.toString())
                 .asJson();
@@ -174,7 +170,7 @@ public class EpicStatus {
         System.out.println(body);
         HttpResponse<JsonNode> response = Unirest.put(url)
                 .header("accept", "application/json")
-                .header("Authorization", String.format( token))
+                .header("Authorization", String.format(token))
                 .header("Content-Type", "application/json")
                 .body(body.toString())
                 .asJson();
