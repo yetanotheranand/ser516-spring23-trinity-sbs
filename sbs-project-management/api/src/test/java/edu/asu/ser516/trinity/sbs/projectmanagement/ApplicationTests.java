@@ -33,7 +33,6 @@ public class ApplicationTests {
     private String user;
     @Value("${TAIGA_DEMO_PASSWORD}")
     private String pass;
-    private String token;
 
     public ApplicationTests() throws JSONException {
         Unirest.config().verifySsl(false);
@@ -42,17 +41,17 @@ public class ApplicationTests {
 
     @Test
     public void testAuthTest() throws Exception {
-        this.mockMvc.perform(get("/auth/")).andExpect(status().isOk());
+        this.mockMvc.perform(get("/auth")).andExpect(status().isOk());
 
     }
 
     @Test
-    public void LoginFail() throws Exception {
+    public void loginFail() throws Exception {
         JSONObject j = new JSONObject();
         j.put("username", "user");
         j.put("password", "user");
         this.mockMvc.perform(
-                        post("/auth/")
+                        post("/auth")
                                 .content(j.toString())
                                 .contentType(MediaType.APPLICATION_JSON))
                 .andDo(print())
@@ -60,12 +59,12 @@ public class ApplicationTests {
     }
 
     @Test
-    public void LoginSuccess() throws Exception {
+    public void loginSuccess() throws Exception {
         JSONObject j = new JSONObject();
         j.put("username", user);
         j.put("password", pass);
         this.mockMvc.perform(
-                        post("/auth/").content(j.toString())
+                        post("/auth").content(j.toString())
                                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk());
     }
@@ -83,12 +82,12 @@ public class ApplicationTests {
     private String getAuthToken(String username,
                                 String password) throws IOException,
                                 InterruptedException, JSONException {
-        String url = taigaBaseUrl;
+        String url = taigaBaseUrl+"auth";
         HttpClient client = HttpClient.newHttpClient();
         JSONObject j = new JSONObject();
         j.put("username", username);
         j.put("password", password);
-
+        j.put("type","normal");
         HttpRequest request = HttpRequest.newBuilder()
                 .uri(URI.create(url))
                 .POST(HttpRequest.BodyPublishers.ofString(j.toString()))
@@ -100,7 +99,7 @@ public class ApplicationTests {
             JSONObject obj = new JSONObject(response.body());
             return obj.getString("auth_token");
         } else {
-            return null;
+            return response.body().toString();
         }
     }
 

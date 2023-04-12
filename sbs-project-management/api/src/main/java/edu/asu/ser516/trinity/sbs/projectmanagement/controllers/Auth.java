@@ -36,7 +36,7 @@ public class Auth {
         TAIGA_BASE_URL = url;
     }
 
-    @GetMapping("/")
+    @GetMapping("")
     public ResponseEntity<String> test() {
         return ResponseEntity.ok().body("Auth Working");
     }
@@ -48,7 +48,7 @@ public class Auth {
      * @return status code 200 on success and 401 on failure
      * @throws JSONException error parsing the json request and response
      */
-    @PostMapping("/")
+    @PostMapping("")
     public ResponseEntity<String> login(
             @RequestBody Map<String, Object> userMap) throws JSONException {
 
@@ -74,7 +74,7 @@ public class Auth {
 
         } else {
             logger.warn("User Login Failed");
-            return ResponseEntity.status(401).body(response.getBody().toString());
+            return ResponseEntity.status(response.getStatus()).body(response.getBody().toString());
         }
     }
 

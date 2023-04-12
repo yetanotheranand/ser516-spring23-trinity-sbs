@@ -42,10 +42,11 @@ public class Epic {
     public ResponseEntity<String> getAllEpics(
             @RequestHeader("Authorization") String token) throws JSONException {
 
+        // Set the API endpoint URL
         String url = TAIGA_BASE_URL + "epics";
         kong.unirest.HttpResponse<JsonNode> response = Unirest.get(url)
                 .header("accept", "application/json")
-                .header("Authorization", String.format("Bearer %s", token))
+                .header("Authorization", String.format(token))
                 .asJson();
         if (response.getStatus() == 200) {
             return ResponseEntity.ok(response.getBody().toString());
@@ -59,6 +60,8 @@ public class Epic {
     /**
      * POST CreateEpic API.
      *
+     * @header containing the token
+     * @body userMap epic data
      * @return status code 201 on success and 401 on failure
      * @throws JSONException error parsing the json request and response
      * @header containing the token
@@ -76,7 +79,7 @@ public class Epic {
 
         kong.unirest.HttpResponse<JsonNode> response = Unirest.post(url)
                 .header("accept", "application/json")
-                .header("Authorization", String.format("Bearer %s", token))
+                .header("Authorization", String.format(token))
                 .contentType("application/json")
                 .body(body.toString())
                 .asJson();
@@ -107,7 +110,7 @@ public class Epic {
         String url = TAIGA_BASE_URL + "epics/" + epicId;
         kong.unirest.HttpResponse<JsonNode> response = Unirest.get(url)
                 .header("accept", "application/json")
-                .header("Authorization", String.format("Bearer %s", token))
+                .header("Authorization", String.format(token))
                 .asJson();
         if (response.getStatus() == 200) {
             return ResponseEntity.ok(response.getBody().toString());
@@ -139,7 +142,7 @@ public class Epic {
         System.out.println(url);
         kong.unirest.HttpResponse<JsonNode> response = Unirest.get(url)
                 .header("accept", "application/json")
-                .header("Authorization", String.format("Bearer %s", token))
+                .header("Authorization", String.format(token))
                 .asJson();
         if (response.getStatus() == 200) {
             return ResponseEntity.ok(response.getBody().toString());

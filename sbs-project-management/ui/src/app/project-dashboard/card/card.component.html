@@ -1,10 +1,13 @@
 <div class="m-3 container">
   <div *ngFor="let project of projects">
     <mat-card>
-      <mat-card-header>
-        <mat-card-title>{{ project.name }}</mat-card-title>
-        <mat-card-subtitle>{{ project.description }}</mat-card-subtitle>
+      <mat-card-header (click)="onProjectClick($event)" id="{{ project.id }}">
+        <mat-card-title>{{ project.name }} </mat-card-title>
+        <span *ngIf="project.is_private">
+          <mat-icon> vpn_key</mat-icon>
+        </span>
       </mat-card-header>
+      <mat-card-content>{{ project.description }}</mat-card-content>
       <mat-card-actions>
         <button mat-raised-button color="primary" class="m-1">Edit</button>
         <button

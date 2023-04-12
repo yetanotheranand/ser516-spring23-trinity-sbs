@@ -101,7 +101,7 @@ public class EpicStatus {
         System.out.println(body);
         HttpResponse<JsonNode> response = Unirest.post(url)
                 .header("accept", "application/json")
-                .header("Authorization", String.format("Bearer %s", token))
+                .header("Authorization", String.format(token))
                 .header("Content-Type", "application/json")
                 .body(body.toString())
                 .asJson();
@@ -136,7 +136,7 @@ public class EpicStatus {
         System.out.println(body);
         HttpResponse<JsonNode> response = Unirest.put(url)
                 .header("accept", "application/json")
-                .header("Authorization", String.format("Bearer %s", token))
+                .header("Authorization", String.format(token))
                 .header("Content-Type", "application/json")
                 .body(body.toString())
                 .asJson();
@@ -170,7 +170,7 @@ public class EpicStatus {
         System.out.println(body);
         HttpResponse<JsonNode> response = Unirest.put(url)
                 .header("accept", "application/json")
-                .header("Authorization", String.format("Bearer %s", token))
+                .header("Authorization", String.format(token))
                 .header("Content-Type", "application/json")
                 .body(body.toString())
                 .asJson();
@@ -200,7 +200,7 @@ public class EpicStatus {
         String url = taigaBaseUrl + "epic-statuses/" + epicId + "?moveTo=empty";
         HttpResponse<JsonNode> response = Unirest.delete(url)
                 .header("accept", "application/json")
-                .header("Authorization", String.format("Bearer %s", token))
+                .header("Authorization", String.format(token))
                 .header("Content-Type", "application/json")
                 .asJson();
         System.out.println(response.getBody().toString());
