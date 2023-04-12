@@ -1,0 +1,22 @@
+<div class="m-3 container">
+  <div *ngFor="let project of projects">
+    <mat-card>
+      <mat-card-header>
+        <mat-card-title>{{ project.name }}</mat-card-title>
+        <mat-card-subtitle>{{ project.description }}</mat-card-subtitle>
+      </mat-card-header>
+      <mat-card-actions>
+        <button mat-raised-button color="primary" class="m-1">Edit</button>
+        <button
+          mat-raised-button
+          (click)="deleteAlert($event)"
+          color="warn"
+          class="m-1"
+        >
+          Delete
+        </button>
+      </mat-card-actions>
+    </mat-card>
+    <br />
+  </div>
+</div>

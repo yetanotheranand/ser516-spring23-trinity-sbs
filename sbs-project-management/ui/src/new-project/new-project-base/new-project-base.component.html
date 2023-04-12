@@ -1,0 +1,20 @@
+<div class="titlebar">
+  <h1>New Project</h1>
+</div>
+<div id="form-container">
+  <form>
+    <label for="textbox">Project Name:</label>
+    <input type="text" id="textbox" name="textbox" [(ngModel)]="projectName" />
+    <label for="textarea">Project Details:</label>
+    <textarea
+      id="textarea"
+      name="textarea"
+      rows="5"
+      [(ngModel)]="projectDescription"
+    ></textarea>
+    <div class="btns">
+      <button>Submit</button>
+      <button style="margin-left: 10px" (click)="navigateBack()">back</button>
+    </div>
+  </form>
+</div>
