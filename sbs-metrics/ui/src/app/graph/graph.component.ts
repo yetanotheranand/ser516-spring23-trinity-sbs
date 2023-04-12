@@ -36,6 +36,30 @@ export class GraphComponent {
     responsive: false
   };
   public lineChartLegend = true;
+  title2 = 'Business value versus Time Graph';
+
+  public lineChartData2: ChartConfiguration<'line'>['data'] = {
+    labels: [
+      'Sprint 1',
+      'Sprint 2',
+      'Sprint 3',
+
+    ],
+    datasets: [
+      {
+        data: [ 7, 6, 8 ],
+        label: 'Business Value',
+        fill: true,
+        tension: 0.5,
+        borderColor: 'black',
+        backgroundColor: 'blue'
+      }
+    ]
+  };
+  public lineChartOptions2: ChartOptions<'line'> = {
+    responsive: false
+  };
+  public lineChartLegend2 = true;
 
   constructor() {
   }
