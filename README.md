@@ -74,22 +74,21 @@ ng serve
 cd sbs-driver/api
 java -jar target/<fat_jar_name>-with-dependencies.jar
 ```
-The *-api modules can also be launched from the IDE
 
-## One command to run them all
+The *-api modules can also be launched from the IDE
 
 To launch up everything instead of any particular module, go to the root of the project and run below Docker command
 ```
 docker compose up --build
 ```
-The below images are created and the container for each module starts. The application is accessible at http://localhost/
+The images are created and the modules are launched on below ports which can be modified in the docker-compose file.
 ```
-sbs-driver-ui
-sbs-driver-api
-sbs-metrics-ui
-sbs-metrics-api
-sbs-project-management-ui
-sbs-project-management-api
+sbs-driver-ui: localhost:80/
+sbs-driver-api: localhost:8080/
+sbs-metrics-ui: localhost:4201/
+sbs-metrics-api: localhost:8081/
+sbs-project-management-ui: localhost:4202/
+sbs-project-management-api: localhost:8082/
 ```
 
 ## Release
@@ -114,7 +113,7 @@ sbs-project-management-api
 
 We have used Github Actions to create automated CI/CD pipeline.
 
-Currently, it builds the module (based on whether it was changed or not), run the static code analyzer, run the unit tests, and publish the status of the checks on the PR.
+Currently, it builds the module (based on whether it was changed or not), run the unit tests, and publish the unit test report and coverage report on the PR.
 
 ### How to trigger the pipeline?
 
