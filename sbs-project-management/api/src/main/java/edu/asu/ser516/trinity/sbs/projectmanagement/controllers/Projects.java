@@ -11,6 +11,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
@@ -60,7 +61,36 @@ public class Projects {
             return ResponseEntity.ok(response.getBody().toString());
 
         } else {
-            return ResponseEntity.status(401).body(response.getBody().toString());
+            return ResponseEntity.status(response.getStatus()).body(response.getBody().toString());
+        }
+
+    }
+
+    /**
+     * GET Project API.
+     *
+     * @param allParams form containing requesst project details
+     * @return response from Taiga API
+     * @throws JSONException error parsing the json request and response
+     */
+    @GetMapping("{projectId}")
+    public ResponseEntity<String> getProjectById(
+            @PathVariable int projectId,
+            @RequestHeader("Authorization") String token)
+            throws JSONException {
+
+        // Set the API endpoint URL
+        String url = TAIGA_BASE_URL + "projects/" + projectId;
+        kong.unirest.HttpResponse<JsonNode> response = Unirest.get(
+                url)
+                .header("accept", "application/json")
+                .header("Authorization", String.format(token))
+                .asJson();        
+        if (response.getStatus() == 200) {
+            return ResponseEntity.ok(response.getBody().toString());
+
+        } else {
+            return ResponseEntity.status(response.getStatus()).body(response.getBody().toString());
         }
 
     }
@@ -80,7 +110,6 @@ public class Projects {
 
         // Set the API endpoint URL
         String url = TAIGA_BASE_URL + "projects";
-
         JSONObject j = new JSONObject();
         j.put("name", projectMap.get("name").toString());
         j.put("is_private", projectMap.get("is_private").toString());
@@ -98,7 +127,63 @@ public class Projects {
 
         } else {
             logger.warn("Project Creation Failed");
-            return ResponseEntity.status(401).body(response.getBody().toString());
+            return ResponseEntity.status(response.getStatus()).body(response.getBody().toString());
+        }
+    }
+
+    /**
+     * POST Project Like API.
+     *
+     * @param projectId Parameter which contains the id of the project 
+     * @param token      auth token for Taiga API
+     * @return response from Taiga API for project creation
+     * @throws JSONException error parsing the json request and response
+     */
+    @PostMapping("/{projectId}/like")
+    public ResponseEntity<String> likeProject(@PathVariable int projectId,
+            @RequestHeader("Authorization") String token)
+            throws JSONException {
+
+        // Set the API endpoint URL
+        String url = TAIGA_BASE_URL + "projects/" + projectId + "/like";
+        kong.unirest.HttpResponse<JsonNode> response = Unirest.post(url)
+                .header("accept", "application/json")
+                .header("Authorization", String.format(token))
+                .contentType("application/json")
+                .asJson();
+        if (response.getStatus() == 200) {
+            return ResponseEntity.ok(response.getBody().toString());
+
+        } else {
+            return ResponseEntity.status(response.getStatus()).body(response.getBody().toString());
+        }
+    }
+
+    /**
+     * POST Project UnLike API.
+     *
+     * @param projectId Parameter which contains the id of the project 
+     * @param token      auth token for Taiga API
+     * @return response from Taiga API for project creation
+     * @throws JSONException error parsing the json request and response
+     */
+    @PostMapping("/{projectId}/unlike")
+    public ResponseEntity<String> unlikeProject(@PathVariable int projectId,
+            @RequestHeader("Authorization") String token)
+            throws JSONException {
+
+        // Set the API endpoint URL
+        String url = TAIGA_BASE_URL + "projects/" + projectId + "/unlike";
+        kong.unirest.HttpResponse<JsonNode> response = Unirest.post(url)
+                .header("accept", "application/json")
+                .header("Authorization", String.format(token))
+                .contentType("application/json")
+                .asJson();
+        if (response.getStatus() == 200) {
+            return ResponseEntity.ok(response.getBody().toString());
+
+        } else {
+            return ResponseEntity.status(response.getStatus()).body(response.getBody().toString());
         }
     }
 }
