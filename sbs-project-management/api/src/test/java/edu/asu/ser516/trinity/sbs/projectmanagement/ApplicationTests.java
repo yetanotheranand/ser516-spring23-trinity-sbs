@@ -41,7 +41,7 @@ public class ApplicationTests {
 
     @Test
     public void testAuthTest() throws Exception {
-        this.mockMvc.perform(get("/auth/")).andExpect(status().isOk());
+        this.mockMvc.perform(get("/auth")).andExpect(status().isOk());
 
     }
 
