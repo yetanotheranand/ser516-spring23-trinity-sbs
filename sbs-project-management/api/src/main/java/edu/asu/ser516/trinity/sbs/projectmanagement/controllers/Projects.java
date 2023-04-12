@@ -42,18 +42,20 @@ public class Projects {
      */
     @GetMapping("")
     public ResponseEntity<String> getAllProjects(
-            @RequestParam(defaultValue = "{}") String allParams,
+            @RequestParam(defaultValue = "{}") Map<String, String> allParams,
             @RequestHeader("Authorization") String token)
             throws JSONException {
 
         // Set the API endpoint URL
         String url = TAIGA_BASE_URL + "projects";
-        String params = allParams.toString();
+        String params = allParams.toString().replace("{", "").replace("}", "").replace(", ", "&");
         kong.unirest.HttpResponse<JsonNode> response = Unirest.get(
-                url + "?" + params.replace("{", "").replace("}", ""))
+                url + "?" + params)
                 .header("accept", "application/json")
                 .header("Authorization", String.format(token))
                 .asJson();
+        System.out.println(url + "?" + params);
+        
         if (response.getStatus() == 200) {
             return ResponseEntity.ok(response.getBody().toString());
 
