@@ -1,13 +1,5 @@
-<!-- <h2>Project</h2>
 
-<p>project ID: {{ id }}</p>÷
- <div>
-    hjvjk
-    {{projects}}
-</div> -->
-<!-- <div *ngFor="let p of projects">{{ p.id }}</div> -->
-<!-- <dashboard-content ></dashboard-content> -->
-<div class="single-project">
+<div *ngIf="project" class="single-project">
   <div id="header">
     <div>{{ project.name }} <br /></div>
   </div>

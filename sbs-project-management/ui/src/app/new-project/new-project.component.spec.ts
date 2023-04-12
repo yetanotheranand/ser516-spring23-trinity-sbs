@@ -1,9 +1,9 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
-import { FormsModule } from '@angular/forms'; // import FormsModule
+import { FormsModule, ReactiveFormsModule } from '@angular/forms'; // import FormsModule
 import { ActivatedRoute, Router } from '@angular/router';
-
 import { NewProjectComponent } from './new-project.component';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 
 fdescribe('NewProjectBaseComponent', () => {
   let component: NewProjectComponent;
@@ -14,7 +14,7 @@ fdescribe('NewProjectBaseComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [NewProjectComponent],
-      imports: [RouterTestingModule, FormsModule],
+      imports: [RouterTestingModule, FormsModule, HttpClientTestingModule, ReactiveFormsModule]
     }).compileComponents();
 
     fixture = TestBed.createComponent(NewProjectComponent);

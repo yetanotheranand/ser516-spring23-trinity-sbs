@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ProjectsService } from '../../services/projects.service';
 import { Router } from '@angular/router';
 @Component({
@@ -6,8 +6,8 @@ import { Router } from '@angular/router';
   templateUrl: './card.component.html',
   styleUrls: ['./card.component.css'],
 })
-export class CardComponent {
-  errorMessage: string | undefined;
+export class CardComponent implements OnInit{
+  errorMessage: string;
   projects: any;
 
   constructor(
@@ -15,20 +15,6 @@ export class CardComponent {
     private router: Router
   ) {
     console.log('Auth', sessionStorage.getItem('JWTToken'));
-    this.ProjectsService.GetProjects().subscribe(
-      (data) => {
-        console.log(data);
-        this.projects = data;
-        sessionStorage.setItem('Projects', JSON.stringify(data));
-        // this.router.navigateByUrl('/projects');
-      },
-      (error) => {
-        if (error.status === 401) {
-          this.errorMessage = error.error.detail;
-          console.log(this.errorMessage);
-        }
-      }
-    );
   }
 
   onProjectClick(event: any) {
@@ -41,5 +27,24 @@ export class CardComponent {
     if (result === false) {
       event.preventDefault();
     }
+  }
+
+  ngOnInit(): void {
+      this.getProjects();
+  }
+
+  getProjects(){
+    this.ProjectsService.GetProjects().subscribe(
+      (data) => {
+        this.projects = data;
+        sessionStorage.setItem('Projects', JSON.stringify(data));
+        // this.router.navigateByUrl('/projects');
+      },
+      (error) => {
+        if (error.status === 401) {
+          this.errorMessage = error.error.detail;
+        }
+      }
+    );
   }
 }

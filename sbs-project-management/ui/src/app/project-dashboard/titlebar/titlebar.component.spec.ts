@@ -2,6 +2,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { TitlebarComponent } from './titlebar.component';
 import { CardComponent } from '../card/card.component';
 import { MatCardModule } from '@angular/material/card';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 
 fdescribe('TitlebarComponent', () => {
   let component: TitlebarComponent;
@@ -10,7 +11,7 @@ fdescribe('TitlebarComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [TitlebarComponent, CardComponent],
-      imports: [MatCardModule],
+      imports: [MatCardModule, HttpClientTestingModule],
     }).compileComponents();
   });
 
@@ -33,4 +34,6 @@ fdescribe('TitlebarComponent', () => {
     expect(buttonEl).toBeTruthy();
     expect(buttonEl.textContent).toContain('New Project');
   });
+
+
 });
