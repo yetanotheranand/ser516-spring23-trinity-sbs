@@ -74,7 +74,7 @@ public class Auth {
 
         } else {
             logger.warn("User Login Failed");
-            return ResponseEntity.status(401).body(response.getBody().toString());
+            return ResponseEntity.status(response.getStatus()).body(response.getBody().toString());
         }
     }
 

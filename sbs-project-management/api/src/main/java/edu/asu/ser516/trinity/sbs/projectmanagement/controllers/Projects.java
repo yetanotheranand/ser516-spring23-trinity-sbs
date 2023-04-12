@@ -33,6 +33,11 @@ public class Projects {
     public void setTaigaBaseUrl(String url) {
         TAIGA_BASE_URL = url;
     }
+    
+    @Value("${TAIGA_DEMO_USER}")
+    private String user;
+    @Value("${TAIGA_DEMO_PASSWORD}")
+    private String pass;
 
     /**
      * GET All Projects API.
