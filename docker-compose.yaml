@@ -7,23 +7,35 @@ services:
         - ENVIRONMENT=production
     ports:
       - "80:80"
+    networks:
+      sbs-network:
+        aliases:
+          - sbs-driver-ui
     depends_on:
       - sbs-driver-api
+      - sbs-metrics-ui
+      - sbs-metrics-api
+      - sbs-project-management-ui
+      - sbs-project-management-api
   sbs-driver-api:
     image: sbs-driver-api:1.0.0
     build:
       context: ./sbs-driver/api
       target: prod
-    ports:
-      - "8080:8080"
+    networks:
+      sbs-network:
+        aliases:
+          - sbs-driver-api
   sbs-metrics-ui:
     image: sbs-metrics-ui:1.0.0
     build:
       context: ./sbs-metrics/ui
       args:
         - ENVIRONMENT=production
-    ports:
-      - "4201:80"
+    networks:
+      sbs-network:
+        aliases:
+          - sbs-metrics-ui
     depends_on:
       - sbs-metrics-api
   sbs-metrics-api:
@@ -31,16 +43,20 @@ services:
     build:
       context: ./sbs-metrics/api
       target: prod
-    ports:
-      - "8081:8080"
+    networks:
+      sbs-network:
+        aliases:
+          - sbs-metrics-api-service
   sbs-project-management-ui:
     image: sbs-project-management-ui:1.0.0
     build:
       context: ./sbs-project-management/ui
       args:
         - ENVIRONMENT=production
-    ports:
-      - "4202:80"
+    networks:
+      sbs-network:
+        aliases:
+          - sbs-project-management-ui
     depends_on:
       - sbs-project-management-api
   sbs-project-management-api:
@@ -48,5 +64,9 @@ services:
     build:
       context: ./sbs-project-management/api
       target: prod
-    ports:
-      - "8082:8080"
+    networks:
+      sbs-network:
+        aliases:
+          - sbs-project-management-api
+networks:
+  sbs-network:
