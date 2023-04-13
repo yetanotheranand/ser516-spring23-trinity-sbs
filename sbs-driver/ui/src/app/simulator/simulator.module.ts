@@ -8,7 +8,11 @@ import { CustomSimulationComponent } from './custom-simulation/custom-simulation
 import { TaigaSimulationComponent } from './taiga-simulation/taiga-simulation.component';
 
 @NgModule({
-  declarations: [SimulatorComponent, CustomSimulationComponent, TaigaSimulationComponent],
+  declarations: [
+    SimulatorComponent,
+    CustomSimulationComponent,
+    TaigaSimulationComponent,
+  ],
   imports: [CommonModule, SimulatorRoutingModule, MaterialModule],
 })
 export class SimulatorModule {}

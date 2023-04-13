@@ -8,9 +8,8 @@ describe('TaigaSimulationComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ TaigaSimulationComponent ]
-    })
-    .compileComponents();
+      declarations: [TaigaSimulationComponent],
+    }).compileComponents();
 
     fixture = TestBed.createComponent(TaigaSimulationComponent);
     component = fixture.componentInstance;

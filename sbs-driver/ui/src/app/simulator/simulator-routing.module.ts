@@ -10,24 +10,22 @@ const routes: Routes = [
     children: [
       {
         path: '',
-        component: TaigaSimulationComponent
+        component: TaigaSimulationComponent,
       },
       {
         path: 'simulate-taiga',
-        component: TaigaSimulationComponent
+        component: TaigaSimulationComponent,
       },
       {
         path: 'simulate-custom-projects',
-        component: CustomSimulationComponent
-      }
-    ]
-  }
+        component: CustomSimulationComponent,
+      },
+    ],
+  },
 ];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule],
 })
-export class SimulatorRoutingModule {
-  
-}
+export class SimulatorRoutingModule {}
