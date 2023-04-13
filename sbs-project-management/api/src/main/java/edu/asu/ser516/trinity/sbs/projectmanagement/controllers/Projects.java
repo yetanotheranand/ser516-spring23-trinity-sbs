@@ -191,6 +191,7 @@ public class Projects {
             return ResponseEntity.status(response.getStatus()).body(response.getBody().toString());
         }
     }
+    
     @GetMapping("/by_slug/{projectName}")
     public ResponseEntity<String> getTeamByProjectName(
             @PathVariable String projectName,
@@ -215,4 +216,6 @@ public class Projects {
         }
 
     }
+
+
 }
