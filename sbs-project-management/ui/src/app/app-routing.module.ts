@@ -4,6 +4,7 @@ import { UserStoryComponent } from './user-story/user-story.component';
 import { LoginComponent } from './login/login.component';
 import { ProjectComponent } from './project-dashboard/project/project.component';
 import { NewProjectComponent } from './new-project/new-project.component';
+import { ProductBacklogComponent } from './product-backlog/product-backlog.component';
 // import { ProjectComponent } from './project/project.component';
 
 const routes: Routes = [
@@ -17,6 +18,7 @@ const routes: Routes = [
   },
   { path: 'new-project', component: NewProjectComponent },
   { path: 'user-story', component: UserStoryComponent },
+  { path: 'product-backlog', component: ProductBacklogComponent },
   { path: 'projects/:id', component: ProjectComponent },
 ];
 
