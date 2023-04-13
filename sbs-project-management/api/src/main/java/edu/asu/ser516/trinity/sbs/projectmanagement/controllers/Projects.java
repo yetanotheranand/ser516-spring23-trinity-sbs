@@ -127,7 +127,7 @@ public class Projects {
                 .body(j.toString())
                 .asJson();
         if (response.getStatus() == 201) {
-            logger.info("Project Crestion Success");
+            logger.info("Project Creation Success");
             return ResponseEntity.ok(response.getBody().toString());
 
         } else {
@@ -191,4 +191,38 @@ public class Projects {
             return ResponseEntity.status(response.getStatus()).body(response.getBody().toString());
         }
     }
+
+    /**
+     * GET Project specific team API.
+     *
+     * @param allParams form containing request project-team details
+     * @return response from Taiga API
+     * @throws JSONException error parsing the json request and response
+     */
+    @GetMapping("/by_slug/{projectName}")
+    public ResponseEntity<String> getTeamByProjectName(
+            @PathVariable String projectName,
+            @RequestParam(defaultValue = "{}") Map<String, String> allParams,
+            @RequestHeader("Authorization") String token)
+            throws JSONException {
+
+        // Set the API endpoint URL
+        String url = TAIGA_BASE_URL + "projects/by_slug?slug=" + projectName;
+        kong.unirest.HttpResponse<JsonNode> response = Unirest.get(
+                        url)
+                .header("accept", "application/json")
+                .header("Authorization", String.format(token))
+                .asJson();
+        System.out.println(url);
+
+        if (response.getStatus() == 200) {
+            return ResponseEntity.ok(response.getBody().toString());
+
+        } else {
+            return ResponseEntity.status(response.getStatus()).body(response.getBody().toString());
+        }
+
+    }
+
+
 }
