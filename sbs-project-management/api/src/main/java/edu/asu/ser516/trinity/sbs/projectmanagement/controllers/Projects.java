@@ -191,7 +191,13 @@ public class Projects {
             return ResponseEntity.status(response.getStatus()).body(response.getBody().toString());
         }
     }
-    
+
+    /**
+     * GET Project specific team API.
+     * @param allParams form containing request project-team details
+     * @return response from Taiga API
+     * @throws JSONException error parsing the json request and response
+     */
     @GetMapping("/by_slug/{projectName}")
     public ResponseEntity<String> getTeamByProjectName(
             @PathVariable String projectName,
