@@ -28,20 +28,18 @@
         />
       </div>
       <div class="form-group col-md-4">
-        <div class="input-group">
           <select
             class="form-select"
             [(ngModel)]="userStoryData.status"
-            name="name"
+            name="status"
           >
-            <option selected>New</option>
-            <option>Ready</option>
-            <option>In progress</option>
-            <option>Ready for Test</option>
-            <option>Done</option>
-            <option>Archieved</option>
+            <option value="New" selected>New</option>
+            <option value="Ready">Ready</option>
+            <option value="In progress">In progress</option>
+            <option value="Ready for Test">Ready for Test</option>
+            <option value="Done">Done</option>
+            <option value="Archieved">Archieved</option>
           </select>
-        </div>
       </div>
     </div>
     <div class="form-row">
@@ -58,12 +56,12 @@
         <h4>Points:</h4>
         <div class="form-row">
           <label>UX:</label>
-          <input type="text" [(ngModel)]="userStoryData.uxPoints" name="name" />
+          <input type="number" [(ngModel)]="userStoryData.uxPoints" name="name" />
         </div>
         <div class="form-row">
           <label>Design:</label>
           <input
-            type="text"
+            type="number"
             [(ngModel)]="userStoryData.designPoints"
             name="name"
           />
@@ -71,7 +69,7 @@
         <div class="form-row">
           <label>Front:</label>
           <input
-            type="text"
+            type="number"
             [(ngModel)]="userStoryData.frontPoints"
             name="name"
           />
@@ -79,7 +77,7 @@
         <div class="form-row">
           <label>Back:</label>
           <input
-            type="text"
+            type="number"
             [(ngModel)]="userStoryData.backPoints"
             name="name"
           />

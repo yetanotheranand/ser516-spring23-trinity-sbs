@@ -10,13 +10,16 @@ export class UserStoryComponent {
     name: '',
     description: '',
     status: '',
-    uxPoints: '',
-    designPoints: '',
-    frontPoints: '',
-    backPoints: '',
+    uxPoints: 0,
+    designPoints: 0,
+    frontPoints: 0,
+    backPoints: 0,
+    points: 0,
   };
 
   onSubmit() {
+    this.userStoryData.points = this.userStoryData.uxPoints + this.userStoryData.designPoints + 
+      this.userStoryData.frontPoints + this.userStoryData.backPoints;
     console.log(this.userStoryData);
   }
 }
