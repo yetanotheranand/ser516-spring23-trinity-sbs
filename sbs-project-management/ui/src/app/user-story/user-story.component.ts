@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 import { Component } from '@angular/core';
 
 @Component({
@@ -18,8 +19,11 @@ export class UserStoryComponent {
   };
 
   onSubmit() {
-    this.userStoryData.points = this.userStoryData.uxPoints + this.userStoryData.designPoints + 
-      this.userStoryData.frontPoints + this.userStoryData.backPoints;
+    this.userStoryData.points =
+      this.userStoryData.uxPoints +
+      this.userStoryData.designPoints +
+      this.userStoryData.frontPoints +
+      this.userStoryData.backPoints;
     console.log(this.userStoryData);
   }
 }

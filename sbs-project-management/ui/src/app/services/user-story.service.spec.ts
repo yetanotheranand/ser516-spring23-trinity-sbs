@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 import { TestBed } from '@angular/core/testing';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { UserStoryService } from './user-story.service';
@@ -8,7 +9,7 @@ fdescribe('UserStoryService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [HttpClientTestingModule],
-      providers: [UserStoryService]
+      providers: [UserStoryService],
     });
     service = TestBed.inject(UserStoryService);
   });

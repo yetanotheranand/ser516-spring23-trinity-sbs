@@ -1,3 +1,4 @@
+<!-- eslint-disable prettier/prettier -->
 <!-- Latest compiled and minified CSS -->
 <link
   rel="stylesheet"
@@ -28,18 +29,18 @@
         />
       </div>
       <div class="form-group col-md-4">
-          <select
-            class="form-select"
-            [(ngModel)]="userStoryData.status"
-            name="status"
-          >
-            <option value="New" selected>New</option>
-            <option value="Ready">Ready</option>
-            <option value="In progress">In progress</option>
-            <option value="Ready for Test">Ready for Test</option>
-            <option value="Done">Done</option>
-            <option value="Archieved">Archieved</option>
-          </select>
+        <select
+          class="form-select"
+          [(ngModel)]="userStoryData.status"
+          name="status"
+        >
+          <option value="New" selected>New</option>
+          <option value="Ready">Ready</option>
+          <option value="In progress">In progress</option>
+          <option value="Ready for Test">Ready for Test</option>
+          <option value="Done">Done</option>
+          <option value="Archieved">Archieved</option>
+        </select>
       </div>
     </div>
     <div class="form-row">
@@ -56,7 +57,11 @@
         <h4>Points:</h4>
         <div class="form-row">
           <label>UX:</label>
-          <input type="number" [(ngModel)]="userStoryData.uxPoints" name="name" />
+          <input
+            type="number"
+            [(ngModel)]="userStoryData.uxPoints"
+            name="name"
+          />
         </div>
         <div class="form-row">
           <label>Design:</label>

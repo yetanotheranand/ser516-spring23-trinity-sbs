@@ -6,7 +6,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { ReactiveFormsModule } from '@angular/forms';
 import { ProductBacklogService } from '../services/product-backlog.service';
 import { By } from '@angular/platform-browser';
-import { Router } from '@angular/router';
+// import { Router } from '@angular/router';
 
 fdescribe('ProductBacklogComponent', () => {
   let component: ProductBacklogComponent;
