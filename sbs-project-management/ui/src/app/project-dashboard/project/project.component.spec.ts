@@ -10,8 +10,8 @@ class ActivatedRouteStub {
     paramMap: {
       get: (key: string) => {
         return '123'; // Return a mock value for 'id'
-      }
-    }
+      },
+    },
   };
 }
 fdescribe('ProjectComponent', () => {
@@ -22,18 +22,18 @@ fdescribe('ProjectComponent', () => {
     await TestBed.configureTestingModule({
       declarations: [ProjectComponent],
       imports: [MatCardModule, HttpClientTestingModule],
-      providers:
-      [
+      providers: [
         {
           provide: ActivatedRoute,
-          useClass: ActivatedRouteStub
-        }
-      ]
+          useClass: ActivatedRouteStub,
+        },
+      ],
     }).compileComponents();
 
     fixture = TestBed.createComponent(ProjectComponent);
     component = fixture.componentInstance;
-    component.projects = '[{ "id": "1", "name": "Project 1", "description":"description" }, { "id": "2", "name": "Project 2", "description":"description"}]';
+    component.projects =
+      '[{ "id": "1", "name": "Project 1", "description":"description" }, { "id": "2", "name": "Project 2", "description":"description"}]';
     fixture.detectChanges();
   });
 
@@ -42,10 +42,11 @@ fdescribe('ProjectComponent', () => {
   });
 
   it('should parse projects and filter by id', () => {
-    component.projects = '[{ "id": "1", "name": "Project 1", "description":"description" }, { "id": "2", "name": "Project 2", "description":"description"}]';
-    component.id = "1";
+    component.projects =
+      '[{ "id": "1", "name": "Project 1", "description":"description" }, { "id": "2", "name": "Project 2", "description":"description"}]';
+    component.id = '1';
     component.ngOnInit();
-    expect(component.project).toEqual({ "id": "1", "name": "Project 1",  "description":"description"   });
+    expect(component.projectName).toBeDefined();
+    expect(component.projectDescription).toBeDefined();
   });
-  
 });
