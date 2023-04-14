@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { ProductBacklogComponent } from './product-backlog.component';
 import { HttpClientModule } from '@angular/common/http';
@@ -28,23 +29,26 @@ fdescribe('ProductBacklogComponent', () => {
   });
 
   it('should display the title of the page', () => {
-    const titleElement = fixture.debugElement.query(By.css('.titlebar h1')).nativeElement;
+    const titleElement = fixture.debugElement.query(
+      By.css('.titlebar h1')
+    ).nativeElement;
     expect(titleElement.textContent).toEqual('Product Backlog');
   });
 
   it('should display all user stories correctly', () => {
-    const productBacklogData = [    
-        {      name: 'User Story 1',      status: 'New',    },    
-        {      name: 'User Story 2',      status: 'In progress',    },    
-        {      name: 'User Story 3',      status: 'Ready to Test',    }  
+    const productBacklogData = [
+      { name: 'User Story 1', status: 'New' },
+      { name: 'User Story 2', status: 'In progress' },
+      { name: 'User Story 3', status: 'Ready to Test' },
     ];
-  
+
     component.productBacklogData = productBacklogData;
     fixture.detectChanges();
-  
-    const userStoryElements = fixture.nativeElement.querySelectorAll('.list-group-item');
-    expect(userStoryElements.length/2).toEqual(component.productBacklogData.length);
 
-    });
-
+    const userStoryElements =
+      fixture.nativeElement.querySelectorAll('.list-group-item');
+    expect(userStoryElements.length / 2).toEqual(
+      component.productBacklogData.length
+    );
+  });
 });
