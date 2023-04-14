@@ -5,14 +5,15 @@ import { FormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { ProjectDashboardModule } from '../app/project-dashboard/project-dashboard.module';
+import { ProjectDashboardModule } from './project-dashboard/project-dashboard.module';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { LoginComponent } from './login/login.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
-import { Interceptor } from '../app/services/interceptor';
+import { Interceptor } from './services/interceptor';
 import { NewProjectComponent } from './new-project/new-project.component';
+import { ProjectOperationsComponent } from './project-dashboard/project-operations/project-operations.component';
 
 @NgModule({
   declarations: [
@@ -20,6 +21,7 @@ import { NewProjectComponent } from './new-project/new-project.component';
     LoginComponent,
     UserStoryComponent,
     NewProjectComponent,
+    ProjectOperationsComponent,
   ],
   imports: [
     BrowserModule,

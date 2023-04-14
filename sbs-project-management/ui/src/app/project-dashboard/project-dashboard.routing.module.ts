@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { TitlebarComponent } from './titlebar/titlebar.component';
-import { ProjectComponent } from './project/project.component';
+import { ProjectOperationsComponent } from './project-operations/project-operations.component';
 
 const routes: Routes = [
   {
@@ -12,7 +12,9 @@ const routes: Routes = [
         pathMatch: 'full',
         component: TitlebarComponent,
       },
+      { path: ':slug', component: ProjectOperationsComponent }
     ],
+
   },
 ];
 

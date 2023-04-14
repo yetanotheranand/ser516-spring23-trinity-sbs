@@ -16,7 +16,7 @@ export class ProjectComponent implements OnInit {
     this.projects = sessionStorage.getItem('Projects');
   }
 
-  project: { id: string, name: string, description: string };
+  project: { id: string; name: string; description: string };
 
   ngOnInit(): void {
     this.project = JSON.parse(this.projects).filter((e) => e.id == this.id)[0];

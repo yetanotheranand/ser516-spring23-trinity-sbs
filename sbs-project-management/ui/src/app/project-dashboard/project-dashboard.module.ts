@@ -6,9 +6,10 @@ import { CardComponent } from './card/card.component';
 import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
+import { ProjectOperationsComponent } from './app/project-dashboard/project-operations/project-operations.component';
 
 @NgModule({
-  declarations: [TitlebarComponent, CardComponent],
+  declarations: [TitlebarComponent, CardComponent, ProjectOperationsComponent],
   imports: [
     CommonModule,
     ProjectDashboardRoutingModule,
