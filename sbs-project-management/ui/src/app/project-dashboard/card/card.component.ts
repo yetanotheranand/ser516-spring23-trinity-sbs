@@ -6,7 +6,7 @@ import { Router } from '@angular/router';
   templateUrl: './card.component.html',
   styleUrls: ['./card.component.css'],
 })
-export class CardComponent implements OnInit{
+export class CardComponent implements OnInit {
   errorMessage: string;
   projects: any;
 
@@ -17,9 +17,8 @@ export class CardComponent implements OnInit{
     console.log('Auth', sessionStorage.getItem('JWTToken'));
   }
 
-  onProjectClick(event: any) {
-    console.log(event.target.id);
-    this.router.navigateByUrl(`/projects/${event.target.id}`);
+  onProjectClick(slug: number) {
+    this.router.navigateByUrl(`/projects/${slug}`);
   }
 
   deleteAlert(event: any) {
@@ -30,10 +29,10 @@ export class CardComponent implements OnInit{
   }
 
   ngOnInit(): void {
-      this.getProjects();
+    this.getProjects();
   }
 
-  getProjects(){
+  getProjects() {
     this.ProjectsService.GetProjects().subscribe(
       (data) => {
         this.projects = data;

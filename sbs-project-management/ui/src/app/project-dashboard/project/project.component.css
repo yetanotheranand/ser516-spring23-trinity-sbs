@@ -8,3 +8,28 @@
 #header {
     background-color: bisque;
 }
+
+.teams-container {
+  position: relative;
+}
+
+.teams-button {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+}
+
+.teams-label {
+  position: absolute;
+  bottom: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  opacity: 0;
+  transition: opacity 0.2s ease-in-out;
+}
+
+.teams-button:hover .teams-label {
+  opacity: 1;
+}
+
+

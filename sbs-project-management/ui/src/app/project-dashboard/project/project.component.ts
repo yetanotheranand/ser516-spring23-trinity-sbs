@@ -11,19 +11,26 @@ export class ProjectComponent implements OnInit {
   id: string;
   projectName = '';
   projectDescription = '';
-  project: { id: string; name: string; description: string };
+  project: any;
+  slug: string;
 
-  constructor(private route: ActivatedRoute) {}
+  constructor(private route: ActivatedRoute) {
+    this.slug = this.route.snapshot.paramMap.get('slug');
+    const segments = this.route.snapshot.url;
+    this.slug = segments[segments.length - 1].path;
+    console.log(this.slug); // log the last segment of the route
+    this.projects = sessionStorage.getItem('Projects');
+  }
+
+  onTeamsClick() {
+    console.log('Teams button is clicked');
+  }
 
   ngOnInit(): void {
-    this.id = this.route.snapshot.paramMap.get('id');
-    this.projects = sessionStorage.getItem('Projects');
-    if (this.projects) {
-      this.project = JSON.parse(this.projects).filter(
-        (e) => e.id == this.id
-      )[0];
-      this.projectName = this.project.name;
-      this.projectDescription = this.project.description;
-    }
+    this.project = JSON.parse(this.projects).filter(
+      (e) => e.slug == this.slug
+    )[0];
+    this.projectName = this.project.name;
+    this.projectDescription = this.project.description;
   }
 }

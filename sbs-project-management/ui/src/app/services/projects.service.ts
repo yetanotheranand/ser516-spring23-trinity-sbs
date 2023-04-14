@@ -16,7 +16,10 @@ export class ProjectsService {
         )}&order_by=user_order&slight=true`
     );
   }
-
+  GetTeam(slug: string): Observable<any> {
+    const url = environment.base_url + '/projects';
+    return this.httpClient.get(url + `?slug=${slug}`);
+  }
   AddProjects(projectDetails: any): Observable<any> {
     const url = environment.base_url + '/projects';
     return this.httpClient.post(
