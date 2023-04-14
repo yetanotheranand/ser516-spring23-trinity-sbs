@@ -14,18 +14,17 @@ export class ProjectComponent implements OnInit {
   project: { id: string, name: string, description: string };
 
   constructor(private route: ActivatedRoute) {
-    
+
   }
 
 
   ngOnInit(): void {
     this.id = this.route.snapshot.paramMap.get('id');
     this.projects = sessionStorage.getItem('Projects');
-    console.log(this.projects);
-    if(this.projects){
-    this.project = JSON.parse(this.projects).filter((e) => e.id == this.id)[0];
-    this.projectName = this.project.name;
-    this.projectDescription = this.project.description;
+    if (this.projects) {
+      this.project = JSON.parse(this.projects).filter((e) => e.id == this.id)[0];
+      this.projectName = this.project.name;
+      this.projectDescription = this.project.description;
     }
   }
 }

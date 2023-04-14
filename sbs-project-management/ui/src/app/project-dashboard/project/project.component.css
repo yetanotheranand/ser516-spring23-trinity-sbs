@@ -1,9 +1,10 @@
-.single-project{
+.single-project {
     margin: 1rem auto;
     max-width: 1200px;
     padding: 0 1.25rem;
     width: 100%;
 }
-#header{
+
+#header {
     background-color: bisque;
 }

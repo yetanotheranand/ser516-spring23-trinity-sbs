@@ -23,12 +23,12 @@ fdescribe('ProjectComponent', () => {
       declarations: [ProjectComponent],
       imports: [MatCardModule, HttpClientTestingModule],
       providers:
-      [
-        {
-          provide: ActivatedRoute,
-          useClass: ActivatedRouteStub
-        }
-      ]
+        [
+          {
+            provide: ActivatedRoute,
+            useClass: ActivatedRouteStub
+          }
+        ]
     }).compileComponents();
 
     fixture = TestBed.createComponent(ProjectComponent);
@@ -48,5 +48,5 @@ fdescribe('ProjectComponent', () => {
     expect(component.projectName).toBeDefined();
     expect(component.projectDescription).toBeDefined();
   });
-  
+
 });
