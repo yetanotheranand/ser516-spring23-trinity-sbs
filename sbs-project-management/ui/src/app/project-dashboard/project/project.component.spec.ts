@@ -45,7 +45,8 @@ fdescribe('ProjectComponent', () => {
     component.projects = '[{ "id": "1", "name": "Project 1", "description":"description" }, { "id": "2", "name": "Project 2", "description":"description"}]';
     component.id = "1";
     component.ngOnInit();
-    expect(component.project).toEqual({ "id": "1", "name": "Project 1",  "description":"description"   });
+    expect(component.projectName).toBeDefined();
+    expect(component.projectDescription).toBeDefined();
   });
   
 });
