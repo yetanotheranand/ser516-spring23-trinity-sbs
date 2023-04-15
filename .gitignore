@@ -1,5 +1,12 @@
 # Compiled class file
 *.class
+target/
+
+# IntelliJ files
+.idea/
+
+# Node Modules
+node_modules/
 
 # Log file
 *.log
