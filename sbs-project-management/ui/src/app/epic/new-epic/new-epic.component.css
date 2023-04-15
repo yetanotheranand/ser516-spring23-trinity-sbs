@@ -1,0 +1,21 @@
+form {
+    padding-top: 1rem;
+}
+
+label {
+    display: block;
+    margin: .5em 0;
+}
+
+
+body {
+    padding: .5rem;
+    max-width: 1000px;
+    margin: auto;
+}
+
+@media (min-width: 600px) {
+    body {
+        padding: 2rem;
+    }
+}
