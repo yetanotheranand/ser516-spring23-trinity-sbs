@@ -6,7 +6,7 @@ import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
   templateUrl: './new-epic.component.html',
   styleUrls: ['./new-epic.component.css'],
 })
-export class NewEpicComponent implements OnInit{
+export class NewEpicComponent implements OnInit {
   addEpicForm: FormGroup;
 
   constructor(private formBuilder: FormBuilder) {}
