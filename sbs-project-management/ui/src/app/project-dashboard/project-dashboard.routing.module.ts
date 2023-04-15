@@ -12,16 +12,7 @@ const routes: Routes = [
         pathMatch: 'full',
         component: TitlebarComponent,
       },
-      {
-        path: ':id',
-        children: [
-          {
-            path: '',
-            pathMatch: 'full',
-            component: ProjectComponent,
-          },
-        ],
-      },
+      { path: ':slug', component: ProjectComponent },
     ],
   },
 ];

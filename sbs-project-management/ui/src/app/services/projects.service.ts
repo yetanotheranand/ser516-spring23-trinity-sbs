@@ -24,4 +24,9 @@ export class ProjectsService {
       projectDetails
     );
   }
+
+  GetTeam(slug: string): Observable<any> {
+    const url = environment.base_url + '/projects';
+    return this.httpClient.get(url + `?slug=${slug}`);
+  }
 }
