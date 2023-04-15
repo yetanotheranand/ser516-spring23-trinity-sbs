@@ -1,8 +1,32 @@
-<div class="single-project">
-  <div id="header">
-    <div>{{ projectName }} <br /></div>
+<div class="sidenav">
+  <a routerLink="/epics/list">Epic List</a>
+</div>
+<div class="main">
+  <div class="accordion">
+    <div class="accordion-item">
+      <h2 class="accordion-header">
+        <button
+          class="accordion-button"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#collapseOne"
+          aria-expanded="true"
+          aria-controls="collapseOne"
+        >
+          {{ projectName }}
+        </button>
+      </h2>
+      <div
+        id="collapseOne"
+        class="accordion-collapse collapse show"
+        data-bs-parent="#accordionExample"
+      >
+        <div class="accordion-body">
+          <div id="desc">{{ projectDescription }}</div>
+        </div>
+      </div>
+    </div>
   </div>
-  <div id="desc">{{ projectDescription }}</div>
 </div>
 <div class="teams-container">
   <button mat-fab color="primary" class="teams-button" (click)="onTeamsClick()">
