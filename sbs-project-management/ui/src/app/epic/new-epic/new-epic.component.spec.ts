@@ -35,7 +35,7 @@ fdescribe('NewEpicComponent', () => {
   });
 
   it('should validate the subject field', () => {
-    let subject = component.addEpicForm.controls['subject'];
+    const subject = component.addEpicForm.controls['subject'];
     expect(subject.valid).toBeFalsy();
 
     subject.setValue('Test Subject');

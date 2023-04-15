@@ -3,16 +3,13 @@ import { Injectable } from '@angular/core';
 import { environment } from 'src/environment/environment';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class EpicService {
+  constructor(private httpClient: HttpClient) {}
 
-  constructor(private httpClient: HttpClient) { 
-   
-  }
-
-  getEpicList(){
-    const url = environment.base_url + '/api/v1/epics'; 
+  getEpicList() {
+    const url = environment.base_url + '/api/v1/epics';
     return this.httpClient.get(url);
   }
 }

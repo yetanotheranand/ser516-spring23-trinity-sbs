@@ -8,9 +8,8 @@ describe('EpicBaseComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ EpicBaseComponent ]
-    })
-    .compileComponents();
+      declarations: [EpicBaseComponent],
+    }).compileComponents();
 
     fixture = TestBed.createComponent(EpicBaseComponent);
     component = fixture.componentInstance;
