@@ -40,4 +40,4 @@ import { ProductBacklogComponent } from './product-backlog/product-backlog.compo
   ],
   bootstrap: [AppComponent],
 })
-export class AppModule {}
+export class AppModule { }
