@@ -13,6 +13,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { Interceptor } from '../app/services/interceptor';
 import { NewProjectComponent } from './new-project/new-project.component';
+import { ProductBacklogComponent } from './product-backlog/product-backlog.component';
 
 @NgModule({
   declarations: [
@@ -20,6 +21,7 @@ import { NewProjectComponent } from './new-project/new-project.component';
     LoginComponent,
     UserStoryComponent,
     NewProjectComponent,
+    ProductBacklogComponent,
   ],
   imports: [
     BrowserModule,
