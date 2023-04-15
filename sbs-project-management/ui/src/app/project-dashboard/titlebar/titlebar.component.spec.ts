@@ -3,21 +3,25 @@ import { TitlebarComponent } from './titlebar.component';
 import { CardComponent } from '../card/card.component';
 import { MatCardModule } from '@angular/material/card';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { Router } from '@angular/router';
+import { RouterTestingModule } from '@angular/router/testing';
 
 fdescribe('TitlebarComponent', () => {
   let component: TitlebarComponent;
   let fixture: ComponentFixture<TitlebarComponent>;
+  let router: Router;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [TitlebarComponent, CardComponent],
-      imports: [MatCardModule, HttpClientTestingModule],
+      imports: [MatCardModule, HttpClientTestingModule, RouterTestingModule],
     }).compileComponents();
   });
 
   beforeEach(() => {
     fixture = TestBed.createComponent(TitlebarComponent);
     component = fixture.componentInstance;
+    router = TestBed.inject(Router);
     fixture.detectChanges();
   });
 
@@ -38,5 +42,15 @@ fdescribe('TitlebarComponent', () => {
     const buttonEl = fixture.nativeElement.querySelector('#user-story-button');
     expect(buttonEl).toBeTruthy();
     expect(buttonEl.textContent).toContain('User Story');
+  });
+  it('should navigate to the right path when User story button is clicked', () => {
+    const spy = spyOn(router, 'navigate');
+    component.navigateToUserStoryPage();
+    expect(spy).toHaveBeenCalledWith(['/user-story']);
+  });
+  it('should navigate to the right path when New project button is clicked', () => {
+    const spy2 = spyOn(router, 'navigate');
+    component.navigateToNewProjectPage();
+    expect(spy2).toHaveBeenCalledWith(['/new-project']);
   });
 });
