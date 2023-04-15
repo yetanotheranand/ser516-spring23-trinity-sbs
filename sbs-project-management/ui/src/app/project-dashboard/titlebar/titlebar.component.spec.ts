@@ -30,8 +30,13 @@ fdescribe('TitlebarComponent', () => {
     expect(titleEl.textContent).toContain('My Projects');
   });
   it('should display the "New Project" button', () => {
-    const buttonEl = fixture.nativeElement.querySelector('.titlebar button');
+    const buttonEl = fixture.nativeElement.querySelector('#new-project-button');
     expect(buttonEl).toBeTruthy();
     expect(buttonEl.textContent).toContain('New Project');
+  });
+  it('should display the "User Story" button', () => {
+    const buttonEl = fixture.nativeElement.querySelector('#user-story-button');
+    expect(buttonEl).toBeTruthy();
+    expect(buttonEl.textContent).toContain('User Story');
   });
 });
