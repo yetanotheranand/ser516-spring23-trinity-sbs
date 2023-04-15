@@ -14,7 +14,12 @@ fdescribe('NewProjectBaseComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [NewProjectComponent],
-      imports: [RouterTestingModule, FormsModule, HttpClientTestingModule, ReactiveFormsModule]
+      imports: [
+        RouterTestingModule,
+        FormsModule,
+        HttpClientTestingModule,
+        ReactiveFormsModule,
+      ],
     }).compileComponents();
 
     fixture = TestBed.createComponent(NewProjectComponent);

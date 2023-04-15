@@ -34,6 +34,4 @@ fdescribe('TitlebarComponent', () => {
     expect(buttonEl).toBeTruthy();
     expect(buttonEl.textContent).toContain('New Project');
   });
-
-
 });

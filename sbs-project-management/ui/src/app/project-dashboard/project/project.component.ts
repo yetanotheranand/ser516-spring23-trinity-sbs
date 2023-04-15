@@ -26,4 +26,8 @@ export class ProjectComponent implements OnInit {
       this.projectDescription = this.project.description;
     }
   }
+
+  onTeamsClick() {
+    // write navigation on clicking the button here
+  }
 }
