@@ -17,9 +17,9 @@ export class CardComponent implements OnInit {
     console.log('Auth', sessionStorage.getItem('JWTToken'));
   }
 
-  onProjectClick(event: any) {
-    console.log(event.target.id);
-    this.router.navigateByUrl(`/projects/${event.target.id}`);
+  onProjectClick(slug: number) {
+    console.log(slug);
+    this.router.navigateByUrl(`/projects/${slug}`);
   }
 
   deleteAlert(event: any) {

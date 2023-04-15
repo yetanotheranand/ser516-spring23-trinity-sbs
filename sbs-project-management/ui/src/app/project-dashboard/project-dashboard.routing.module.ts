@@ -12,6 +12,7 @@ const routes: Routes = [
         pathMatch: 'full',
         component: TitlebarComponent,
       },
+      { path: ':slug', component: ProjectComponent },
     ],
   },
 ];

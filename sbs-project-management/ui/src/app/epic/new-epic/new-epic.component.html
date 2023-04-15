@@ -1,0 +1,63 @@
+<div id="form-container" style="max-height: 80%">
+  <form [formGroup]="addEpicForm" (ngSubmit)="onSubmit()">
+    <div class="formGroup">
+      <label for="subject">Choose Color:</label>
+      <input type="color" formControlName="color" />
+    </div>
+    <div class="formGroup">
+      <label for="subject">Subject:</label>
+      <input id="subject" type="text" formControlName="subject" required />
+    </div>
+    <div class="formGroup">
+      <label for="description">Description: </label>
+      <textarea
+        id="description"
+        formControlName="description"
+        rows="4"
+        cols="50"
+      >
+      </textarea>
+    </div>
+    <div class="formGroup">
+      <label for="assignedTo">Assigned To: </label>
+      <select id="assignedTo" formControlName="assignedTo" class="form-control">
+        <option value="planned">User 1</option>
+        <option value="in-progress">User 2</option>
+        <option value="completed">User 3</option>
+        <option value="archived">User 4</option>
+      </select>
+    </div>
+    <div class="formGroup">
+      <label for="clientRequirement"
+        >client Requirement:
+        <input
+          id="clientRequirement"
+          type="checkbox"
+          class="form-check-input"
+          formControlName="clientRequirement"
+        />
+      </label>
+    </div>
+    <div class="formGroup">
+      <label for="status">Status: </label>
+      <select id="status" formControlName="status" class="form-control">
+        <option value="planned">Planned</option>
+        <option value="in-progress">In Progress</option>
+        <option value="completed">Completed</option>
+        <option value="archived">Archived</option>
+      </select>
+    </div>
+    <div class="formGroup">
+      <div formArrayName="tags">
+        <h2>Add Tag</h2>
+        <button type="button" (click)="addTag()">+ Add another Tag</button>
+        <div *ngFor="let tag of tags.controls; let i = index">
+          <label for="tag-{{ i }}">Tag {{ i + 1 }}:</label>
+          <input id="tag-{{ i }}" type="text" [formControlName]="i" />
+        </div>
+      </div>
+    </div>
+    <p>Complete the form to enable button.</p>
+    <button type="submit" [disabled]="!addEpicForm.valid">Submit</button>
+  </form>
+</div>
