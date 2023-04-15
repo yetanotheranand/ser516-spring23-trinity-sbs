@@ -29,7 +29,7 @@ fdescribe('CardComponent', () => {
     expect(component).toBeTruthy();
   });
   it('should display the correct number of projects', () => {
-    component.projects = []
+    component.projects = [];
     const projectEls = fixture.nativeElement.querySelectorAll('mat-card');
     expect(projectEls.length).toEqual(component.projects.length);
   });
@@ -67,27 +67,33 @@ fdescribe('CardComponent', () => {
     spyOn(component, 'getProjects');
     component.ngOnInit();
     expect(component.getProjects).toHaveBeenCalled();
-  })
-
+  });
 
   it('should test getProjects Method success scenario', () => {
-    const getProjectsSpy = spyOn(projectsService, 'GetProjects').and.returnValue(of([]));
+    const getProjectsSpy = spyOn(
+      projectsService,
+      'GetProjects'
+    ).and.returnValue(of([]));
     spyOn(sessionStorage, 'setItem');
     component.getProjects();
     expect(getProjectsSpy).toHaveBeenCalled();
     expect(sessionStorage.setItem).toHaveBeenCalled();
-
   });
 
   it('should test getProjects Method error scenario', () => {
-    const errorResponse = { status: 401, message: 'Not Found', error: { detail: 'error' } };
+    const errorResponse = {
+      status: 401,
+      message: 'Not Found',
+      error: { detail: 'error' },
+    };
     component.errorMessage = '';
     spyOn(console, 'error');
 
-    spyOn(projectsService, 'GetProjects').and.returnValue(throwError(errorResponse));
+    spyOn(projectsService, 'GetProjects').and.returnValue(
+      throwError(errorResponse)
+    );
 
     fixture.detectChanges();
     expect(component.errorMessage).toBeDefined();
-  })
-
+  });
 });

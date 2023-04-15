@@ -9,7 +9,7 @@ fdescribe('ProjectsService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [HttpClientTestingModule],
-      providers: [ProjectsService]
+      providers: [ProjectsService],
     });
     service = TestBed.inject(ProjectsService);
   });

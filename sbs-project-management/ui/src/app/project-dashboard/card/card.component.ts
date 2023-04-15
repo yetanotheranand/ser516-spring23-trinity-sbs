@@ -6,7 +6,7 @@ import { Router } from '@angular/router';
   templateUrl: './card.component.html',
   styleUrls: ['./card.component.css'],
 })
-export class CardComponent implements OnInit{
+export class CardComponent implements OnInit {
   errorMessage: string;
   projects: any;
 
@@ -30,10 +30,10 @@ export class CardComponent implements OnInit{
   }
 
   ngOnInit(): void {
-      this.getProjects();
+    this.getProjects();
   }
 
-  getProjects(){
+  getProjects() {
     this.ProjectsService.GetProjects().subscribe(
       (data) => {
         this.projects = data;
