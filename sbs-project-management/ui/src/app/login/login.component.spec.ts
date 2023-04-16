@@ -11,8 +11,10 @@ import { Router } from '@angular/router';
 fdescribe('LoginComponent', () => {
   let component: LoginComponent;
   let fixture: ComponentFixture<LoginComponent>;
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   let router: Router;
   let routerSpy: jasmine.SpyObj<Router>;
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   let loginService: LoginService;
   let loginServiceSpy: jasmine.SpyObj<LoginService>;
 

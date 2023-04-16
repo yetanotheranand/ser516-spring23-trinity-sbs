@@ -7,6 +7,7 @@ import { RouterModule } from '@angular/router';
 fdescribe('ProjectComponent', () => {
   let component: ProjectComponent;
   let fixture: ComponentFixture<ProjectComponent>;
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   let activatedRoute: ActivatedRoute;
   /*const mockActivatedRoute = {
     snapshot: { paramMap: { get: () => '1' } },
