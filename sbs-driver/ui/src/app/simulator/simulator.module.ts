@@ -16,6 +16,6 @@ import { DiceRollComponent } from './dice-roll/dice-roll.component';
     DiceRollComponent,
   ],
   imports: [CommonModule, SimulatorRoutingModule, MaterialModule],
-  schemas: [CUSTOM_ELEMENTS_SCHEMA]
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class SimulatorModule {}

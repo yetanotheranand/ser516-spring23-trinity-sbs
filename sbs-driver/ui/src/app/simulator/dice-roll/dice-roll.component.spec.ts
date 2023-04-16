@@ -8,9 +8,8 @@ describe('DiceRollComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ DiceRollComponent ]
-    })
-    .compileComponents();
+      declarations: [DiceRollComponent],
+    }).compileComponents();
 
     fixture = TestBed.createComponent(DiceRollComponent);
     component = fixture.componentInstance;

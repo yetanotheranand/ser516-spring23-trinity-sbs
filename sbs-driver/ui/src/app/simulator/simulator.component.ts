@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { ApiService } from '../services/api.service';
 
 @Component({
   selector: 'app-simulator',
@@ -6,6 +7,7 @@ import { Component } from '@angular/core';
   styleUrls: ['./simulator.component.css'],
 })
 export class SimulatorComponent {
+  constructor(private api: ApiService) {}
   isEditable = true;
   userStories = [
     {
@@ -85,5 +87,4 @@ export class SimulatorComponent {
       ],
     },
   ];
-  constructor() {}
 }
