@@ -3,6 +3,8 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { EpicListComponent } from './epic-list.component';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { EpicService } from 'src/app/services/epic.service';
+import { RouterTestingModule } from '@angular/router/testing';
+import { RouterModule } from '@angular/router';
 
 fdescribe('EpicListComponent', () => {
   let component: EpicListComponent;
@@ -11,7 +13,7 @@ fdescribe('EpicListComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [EpicListComponent],
-      imports: [HttpClientTestingModule],
+      imports: [HttpClientTestingModule, RouterTestingModule, RouterModule],
       providers: [EpicService],
     }).compileComponents();
 
