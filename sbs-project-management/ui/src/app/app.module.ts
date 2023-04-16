@@ -12,7 +12,6 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { Interceptor } from '../app/services/interceptor';
-import { NewProjectComponent } from './new-project/new-project.component';
 import { ProductBacklogComponent } from './product-backlog/product-backlog.component';
 
 @NgModule({
@@ -20,7 +19,6 @@ import { ProductBacklogComponent } from './product-backlog/product-backlog.compo
     AppComponent,
     LoginComponent,
     UserStoryComponent,
-    NewProjectComponent,
     ProductBacklogComponent,
   ],
   imports: [

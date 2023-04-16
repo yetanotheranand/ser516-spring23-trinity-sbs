@@ -16,11 +16,12 @@ export class ProjectComponent implements OnInit {
   constructor(private route: ActivatedRoute) {}
 
   ngOnInit(): void {
-    this.id = this.route.snapshot.paramMap.get('id');
+    this.id = this.route.snapshot.paramMap.get('slug');
+    console.log(this.route.snapshot.paramMap.get('slug'))
     this.projects = sessionStorage.getItem('Projects');
     if (this.projects) {
       this.project = JSON.parse(this.projects).filter(
-        (e) => e.id == this.id
+        (e) => e.slug == this.id
       )[0];
       this.projectName = this.project.name;
       this.projectDescription = this.project.description;
