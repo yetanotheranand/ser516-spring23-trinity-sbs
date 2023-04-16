@@ -1,1 +1,20 @@
-<p>dice-roll works!</p>
+<div class="center">
+
+    <div>
+        <h2>Number of Rolls</h2>
+        <button *ngFor="let count of [1, 2, 3, 4, 5]" mat-raised-button
+            [color]="selectedRollCount === count ? 'accent' : '' "
+            (click)="selectedRollCount = count">{{count}}</button>
+    </div>
+
+    <div>
+        <h2>Roll dice of type...</h2>
+        <button *ngFor="let type of [4, 6, 8, 10, 12, 20]" mat-raised-button
+            [color]="selectedType === type ? 'accent' : '' " (click)="start(type)">{{type}}</button>
+    </div>
+
+    <div *ngIf="roller$ | async as result" class="result">
+        {{result}}
+        <div>
+
+        </div>
