@@ -1,15 +1,22 @@
-<nav mat-tab-nav-bar [tabPanel]="tabPanel">
-  <a
-    mat-tab-link
-    *ngFor="let link of navLinks"
-    [routerLink]="link.link"
-    routerLinkActive
-    #rla="routerLinkActive"
-    [active]="rla.isActive"
-  >
-    {{ link.label }}
-  </a>
-</nav>
-<mat-tab-nav-panel #tabPanel>
-  <router-outlet></router-outlet>
-</mat-tab-nav-panel>
+<mat-stepper linear #stepper>
+  <mat-step [editable]="isEditable">
+    <ng-template matStepLabel>Enter project details</ng-template>
+    <div>
+      <button mat-button matStepperNext>Next</button>
+    </div>
+  </mat-step>
+  <mat-step [editable]="isEditable">
+    <ng-template matStepLabel>Run Simulations</ng-template>
+    <div>
+      <button mat-button matStepperPrevious>Back</button>
+      <button mat-button matStepperNext>Next</button>
+    </div>
+  </mat-step>
+  <mat-step [editable]="isEditable">
+    <ng-template matStepLabel>View Statistics</ng-template>
+    <p>You are now done.</p>
+    <div>
+      <button mat-button matStepperPrevious>Back</button>
+    </div>
+  </mat-step>
+</mat-stepper>
