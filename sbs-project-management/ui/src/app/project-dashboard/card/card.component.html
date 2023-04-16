@@ -2,7 +2,9 @@
   <div *ngFor="let project of projects">
     <mat-card>
       <mat-card-header (click)="onProjectClick($event)" id="{{ project.slug }}">
-        <mat-card-title>{{ project.name }} </mat-card-title>
+        <mat-card-title style="cursor: pointer"
+          >{{ project.name }}
+        </mat-card-title>
         <span *ngIf="project.is_private">
           <mat-icon> vpn_key</mat-icon>
         </span>

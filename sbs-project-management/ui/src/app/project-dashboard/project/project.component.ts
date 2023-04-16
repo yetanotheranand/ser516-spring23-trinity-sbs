@@ -11,20 +11,30 @@ export class ProjectComponent implements OnInit {
   id: string;
   projectName = '';
   projectDescription = '';
-  project: { id: string; name: string; description: string };
+  projectSlug = '';
+  project: { id: string; name: string; description: string; slug: any };
 
   constructor(private route: ActivatedRoute) {}
 
   ngOnInit(): void {
     this.id = this.route.snapshot.paramMap.get('slug');
-    console.log(this.route.snapshot.paramMap.get('slug'))
-    this.projects = sessionStorage.getItem('Projects');
-    if (this.projects) {
-      this.project = JSON.parse(this.projects).filter(
-        (e) => e.slug == this.id
-      )[0];
-      this.projectName = this.project.name;
-      this.projectDescription = this.project.description;
+    console.log(this.route.snapshot.paramMap.get('slug'));
+    // this.projects = sessionStorage.getItem('Projects');
+    // if (this.projects) {
+    //   this.project = JSON.parse(this.projects).filter(
+    //     (e) => e.slug == this.id
+    //   )[0];
+    //   this.projectName = this.project.name;
+    //   this.projectDescription = this.project.description;
+    const projectsString = sessionStorage.getItem('Projects');
+    if (projectsString) {
+      const projects = JSON.parse(projectsString);
+      this.project = projects.filter((project) => project.slug === this.id)[0];
+      if (this.project) {
+        this.projectName = this.project.name;
+        this.projectDescription = this.project.description;
+        this.projectSlug = this.project.slug;
+      }
     }
   }
 

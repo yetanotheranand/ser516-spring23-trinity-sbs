@@ -11,7 +11,12 @@ import { NewProjectComponent } from './new-project/new-project.component';
 import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
-  declarations: [TitlebarComponent, CardComponent, ProjectComponent,NewProjectComponent],
+  declarations: [
+    TitlebarComponent,
+    CardComponent,
+    ProjectComponent,
+    NewProjectComponent,
+  ],
   imports: [
     CommonModule,
     ProjectDashboardRoutingModule,
@@ -19,8 +24,7 @@ import { ReactiveFormsModule } from '@angular/forms';
     MatButtonModule,
     MatIconModule,
     ReactiveFormsModule,
-
   ],
-    exports: [TitlebarComponent, MatCardModule, MatButtonModule, MatIconModule],
+  exports: [TitlebarComponent, MatCardModule, MatButtonModule, MatIconModule],
 })
 export class ProjectDashboardModule {}

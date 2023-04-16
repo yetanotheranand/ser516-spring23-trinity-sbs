@@ -16,10 +16,12 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 
 /**
  * Class to handle Epics.
  */
+@RestController
 @RequestMapping("/epics")
 public class Epic {
 
@@ -40,10 +42,14 @@ public class Epic {
      */
     @GetMapping("")
     public ResponseEntity<String> getAllEpics(
+            @RequestParam(defaultValue = "") Map<String, String> allParams,
             @RequestHeader("Authorization") String token) throws JSONException {
-
+        String params = allParams
+                .toString()
+                .replace("{", "").replace("}", "")
+                .replace(", ", "&");
         // Set the API endpoint URL
-        String url = TAIGA_BASE_URL + "epics";
+        String url = TAIGA_BASE_URL + "epics?" + params;
         kong.unirest.HttpResponse<JsonNode> response = Unirest.get(url)
                 .header("accept", "application/json")
                 .header("Authorization", String.format(token))
@@ -76,7 +82,7 @@ public class Epic {
         // Set the API endpoint URL
         String url = TAIGA_BASE_URL + "epics";
         JSONObject body = new JSONObject(epicMap);
-
+        System.out.println(body.getClass().getSimpleName());
         kong.unirest.HttpResponse<JsonNode> response = Unirest.post(url)
                 .header("accept", "application/json")
                 .header("Authorization", String.format(token))

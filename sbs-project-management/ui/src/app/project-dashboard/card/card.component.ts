@@ -17,9 +17,9 @@ export class CardComponent implements OnInit {
     console.log('Auth', sessionStorage.getItem('JWTToken'));
   }
 
-  onProjectClick(event: any) {
-    console.log(event.target.id);
-    this.router.navigateByUrl(`/projects/${event.target.id}`);
+  onProjectClick(project: any) {
+    console.log(project.target.id);
+    this.router.navigateByUrl(`/projects/${project.target.id}`);
   }
 
   deleteAlert(event: any) {
@@ -37,6 +37,7 @@ export class CardComponent implements OnInit {
     this.ProjectsService.GetProjects().subscribe(
       (data) => {
         this.projects = data;
+        console.log(data);
         sessionStorage.setItem('Projects', JSON.stringify(data));
         // this.router.navigateByUrl('/projects');
       },
