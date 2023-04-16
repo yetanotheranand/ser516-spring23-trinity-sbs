@@ -43,5 +43,8 @@ public class TaigaEditProject {
         return ResponseEntity.ok(responseNode);
     }
 
+    public static void main(String[] args) {
+        SpringApplication.run(edu.asu.ser516.trinity.sbs.projectmanagement.controllers.TaigaEditProject.class, args);
+    }
 }
 
