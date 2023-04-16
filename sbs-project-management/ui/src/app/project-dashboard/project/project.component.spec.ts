@@ -16,20 +16,19 @@ fdescribe('ProjectComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [ProjectComponent],
-      imports: [MatIconModule,RouterTestingModule, RouterModule],
-      providers: 
-        [
-          {
-            provide: ActivatedRoute,
-            useValue: {
-              snapshot: {
-                paramMap: {
-                  get: () => 'project-1' // Provide a sample slug value
-                }
-              }
-            }
-          }
-        ],
+      imports: [MatIconModule, RouterTestingModule, RouterModule],
+      providers: [
+        {
+          provide: ActivatedRoute,
+          useValue: {
+            snapshot: {
+              paramMap: {
+                get: () => 'project-1', // Provide a sample slug value
+              },
+            },
+          },
+        },
+      ],
     }).compileComponents();
   });
 
@@ -93,14 +92,14 @@ fdescribe('ProjectComponent', () => {
         id: '1',
         name: 'Project 1',
         description: 'Description for Project 1',
-        slug: 'project-1'
+        slug: 'project-1',
       },
       {
         id: '2',
         name: 'Project 2',
         description: 'Description for Project 2',
-        slug: 'project-2'
-      }
+        slug: 'project-2',
+      },
     ];
 
     spyOn(sessionStorage, 'getItem').and.returnValue(JSON.stringify(projects));
