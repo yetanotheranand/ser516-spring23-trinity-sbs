@@ -1,0 +1,20 @@
+{
+  "dependencies": {
+    "@angular/cdk": "^15.2.6",
+    "@angular/flex-layout": "^15.0.0-beta.42",
+    "@angular/material": "^15.2.6",
+    "@angular/router": "^15.2.6"
+  },
+  "name": "ser516-spring23-trinity-sbs",
+  "description": "Scrum Board Simulator is a web-based application to simulate scrum process, and has the capability to run with or without user intervention",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "jest": "^29.5.0"
+  }
+}
