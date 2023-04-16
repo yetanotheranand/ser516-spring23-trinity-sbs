@@ -1,19 +1,14 @@
 package edu.asu.ser516.trinity.sbs.metrics;
 
-import jakarta.servlet.ServletException;
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
-import java.io.IOException;
-import org.eclipse.jetty.server.Request;
-import org.eclipse.jetty.server.Server;
-import org.eclipse.jetty.server.handler.AbstractHandler;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+
+/**
+ * Main Class of the SBS Metrics API.
+ */
 @SpringBootApplication
-public class Application extends AbstractHandler {
-
-
+public class Application {
     public static void main(String[] args) {
-		SpringApplication.run(Application.class, args);
-	}
+        SpringApplication.run(Application.class, args);
+    }
 }

@@ -1,6 +1,5 @@
 package edu.asu.ser516.trinity.sbs.metrics.model;
 
-
 public class ScrumboardData {
     private String date;
     private int New;
@@ -10,8 +9,7 @@ public class ScrumboardData {
 
     private int Closed;
 
-    private  int Blocked;
-
+    private int Blocked;
 
     public String getDate() {
         return date;
@@ -29,20 +27,36 @@ public class ScrumboardData {
         this.New = New;
     }
 
-    public int getInProgress() {return InProgress;}
+    public int getInProgress() {
+        return InProgress;
+    }
 
-    public void setInProgress(int inProgress) {InProgress = inProgress;}
+    public void setInProgress(int inProgress) {
+        InProgress = inProgress;
+    }
 
-    public int getReadyForTest() {return ReadyForTest;}
+    public int getReadyForTest() {
+        return ReadyForTest;
+    }
 
-    public void setReadyForTest(int readyForTest) {ReadyForTest = readyForTest;}
+    public void setReadyForTest(int readyForTest) {
+        ReadyForTest = readyForTest;
+    }
 
-    public int getClosed() {return Closed;}
+    public int getClosed() {
+        return Closed;
+    }
 
-    public void setClosed(int closed) {Closed = closed;}
+    public void setClosed(int closed) {
+        Closed = closed;
+    }
 
-    public int getBlocked() {return Blocked;}
+    public int getBlocked() {
+        return Blocked;
+    }
 
-    public void setBlocked(int blocked) {Blocked = blocked;}
+    public void setBlocked(int blocked) {
+        Blocked = blocked;
+    }
 
 }
