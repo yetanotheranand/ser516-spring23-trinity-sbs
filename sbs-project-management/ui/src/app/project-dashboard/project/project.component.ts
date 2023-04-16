@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { StringArraySupportOption } from 'prettier';
 
 @Component({
   selector: 'app-project',
@@ -29,5 +28,9 @@ export class ProjectComponent implements OnInit {
         this.projectSlug = this.project.slug;
       }
     }
+  }
+
+  onTeamsClick() {
+    // write navigation on clicking the button here
   }
 }

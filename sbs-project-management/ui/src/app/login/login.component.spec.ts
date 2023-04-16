@@ -8,7 +8,6 @@ import { of, throwError } from 'rxjs';
 import { By } from '@angular/platform-browser';
 import { Router } from '@angular/router';
 
-
 fdescribe('LoginComponent', () => {
   let component: LoginComponent;
   let fixture: ComponentFixture<LoginComponent>;
@@ -25,7 +24,7 @@ fdescribe('LoginComponent', () => {
       declarations: [LoginComponent],
       providers: [
         { provide: Router, useValue: routerSpy },
-        { provide: LoginService, useValue: loginServiceSpy }
+        { provide: LoginService, useValue: loginServiceSpy },
       ],
     }).compileComponents();
 
@@ -96,27 +95,29 @@ fdescribe('LoginComponent', () => {
   });
 
   it('should set errorMessage when server returns 401 error', () => {
-    const loginServiceSpy = TestBed.inject(LoginService) as jasmine.SpyObj<LoginService>;
+    const loginServiceSpy = TestBed.inject(
+      LoginService
+    ) as jasmine.SpyObj<LoginService>;
     loginServiceSpy.performLogin.and.returnValue(
       throwError({ status: 401, error: { detail: 'Unauthorized' } })
     );
-  
+
     const button = fixture.debugElement.query(By.css('button')).nativeElement;
     button.click();
     fixture.detectChanges();
-  
+
     expect(component.errorMessage).toBe('Unauthorized');
   });
 
   it('should navigate to projects page when login is successful', () => {
     const userDetails = {
       username: 'testuser',
-      password: 'testpassword'
+      password: 'testpassword',
     };
     const successResponse = {
       auth_token: 'abcdefg',
       refresh: '123456',
-      id: 1
+      id: 1,
     };
     loginServiceSpy.performLogin.and.returnValue(of(successResponse));
 
@@ -127,5 +128,4 @@ fdescribe('LoginComponent', () => {
     expect(sessionStorage.getItem('UserId')).toBe('1');
     expect(routerSpy.navigateByUrl).toHaveBeenCalledWith('/projects');
   });
-  
 });
