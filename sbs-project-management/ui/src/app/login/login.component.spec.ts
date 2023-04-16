@@ -110,10 +110,6 @@ fdescribe('LoginComponent', () => {
   });
 
   it('should navigate to projects page when login is successful', () => {
-    const userDetails = {
-      username: 'testuser',
-      password: 'testpassword',
-    };
     const successResponse = {
       auth_token: 'abcdefg',
       refresh: '123456',

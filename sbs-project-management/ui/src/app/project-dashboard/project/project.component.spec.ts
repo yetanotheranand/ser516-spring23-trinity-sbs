@@ -8,9 +8,9 @@ fdescribe('ProjectComponent', () => {
   let component: ProjectComponent;
   let fixture: ComponentFixture<ProjectComponent>;
   let activatedRoute: ActivatedRoute;
-  const mockActivatedRoute = {
+  /*const mockActivatedRoute = {
     snapshot: { paramMap: { get: () => '1' } },
-  };
+  };*/
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
