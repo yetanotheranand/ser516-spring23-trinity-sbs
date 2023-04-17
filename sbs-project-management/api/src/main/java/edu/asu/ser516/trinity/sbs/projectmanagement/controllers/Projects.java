@@ -74,7 +74,7 @@ public class Projects {
     /**
      * GET Project API.
      *
-     * @param allParams form containing requesst project details
+     * @param allParams form containing request project details
      * @return response from Taiga API
      * @throws JSONException error parsing the json request and response
      */
