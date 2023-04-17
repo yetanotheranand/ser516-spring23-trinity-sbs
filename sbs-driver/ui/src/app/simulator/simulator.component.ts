@@ -6,6 +6,7 @@ import { ApiService } from '../services/api.service';
   templateUrl: './simulator.component.html',
   styleUrls: ['./simulator.component.css'],
 })
+
 export class SimulatorComponent {
   constructor(private api: ApiService) {}
   isEditable = true;

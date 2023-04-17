@@ -1,8 +1,26 @@
 <mat-stepper linear #stepper>
   <mat-step [editable]="isEditable">
     <ng-template matStepLabel>Enter project details</ng-template>
+    
+    
     <div>
       <button mat-button matStepperNext>Next</button>
+    </div>
+    <div>
+      <mat-card>
+        <mat-card-content style="background-color: green">Done</mat-card-content>
+      </mat-card>
+    </div>
+    <div>
+      <mat-card style="background-color: lightsalmon">
+        <mat-card-content>In Progress</mat-card-content>
+      </mat-card>
+    </div>
+    <div >
+      <mat-card style="background-color: lightblue">
+        <mat-card-content>New</mat-card-content>
+      </mat-card>
+      
     </div>
   </mat-step>
   <mat-step [editable]="isEditable">
