@@ -1,0 +1,15 @@
+<h2 class="team-heading text-center">Team Members</h2>
+
+<div class="team-list">
+  <div class="team-member" *ngFor="let member of teamMembers">
+    <div class="member-name">{{ member.name }}</div>
+    <div class="member-role">
+      <select [(ngModel)]="member.role">
+        <option value="select">Select</option>
+        <option value="developer">Developer</option>
+        <option value="stakeholder">Stakeholder</option>
+        <option value="product owner">Product Owner</option>
+      </select>
+    </div>
+  </div>
+</div>
