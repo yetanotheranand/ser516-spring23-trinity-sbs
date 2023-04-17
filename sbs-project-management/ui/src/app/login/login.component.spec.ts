@@ -11,8 +11,10 @@ import { Router } from '@angular/router';
 fdescribe('LoginComponent', () => {
   let component: LoginComponent;
   let fixture: ComponentFixture<LoginComponent>;
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   let router: Router;
   let routerSpy: jasmine.SpyObj<Router>;
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   let loginService: LoginService;
   let loginServiceSpy: jasmine.SpyObj<LoginService>;
 
@@ -110,10 +112,6 @@ fdescribe('LoginComponent', () => {
   });
 
   it('should navigate to projects page when login is successful', () => {
-    const userDetails = {
-      username: 'testuser',
-      password: 'testpassword',
-    };
     const successResponse = {
       auth_token: 'abcdefg',
       refresh: '123456',

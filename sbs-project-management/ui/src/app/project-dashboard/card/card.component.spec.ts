@@ -9,7 +9,7 @@ fdescribe('CardComponent', () => {
   let component: CardComponent;
   let fixture: ComponentFixture<CardComponent>;
   let projectsService: ProjectsService;
-  let getProjectsSpy: jasmine.Spy;
+  //let getProjectsSpy: jasmine.Spy;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
