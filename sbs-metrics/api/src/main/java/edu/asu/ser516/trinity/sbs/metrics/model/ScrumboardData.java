@@ -1,5 +1,8 @@
 package edu.asu.ser516.trinity.sbs.metrics.model;
 
+/**
+ * This is a model for representing metrics for a single day.
+ */
 public class ScrumboardData {
     private String date;
     private int todo;
@@ -11,6 +14,16 @@ public class ScrumboardData {
 
     private int blocked;
 
+    /**
+     * This is a constructor to initialize ScrumboardData.
+     *
+     * @param date date associated with the single day metrics
+     * @param todo no of tasks in todo state
+     * @param inProgress no of tasks in progress state
+     * @param readyForTest no of tasks in ready for test state
+     * @param closed no of tasks in closed state
+     * @param blocked no of tasks in blocked state
+     */
     public ScrumboardData(String date, int todo, int inProgress, int readyForTest, int closed,
                           int blocked) {
         this.date = date;
