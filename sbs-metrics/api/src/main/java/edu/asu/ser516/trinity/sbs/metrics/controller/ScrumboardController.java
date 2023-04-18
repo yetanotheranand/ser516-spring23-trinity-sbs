@@ -7,11 +7,19 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+/**
+ * This class defines the API for managing sbs-metrics.
+ */
 @RestController
 @RequestMapping("/scrumboard/v1")
 public class ScrumboardController {
+    /**
+     * This method is used to GET metrics associated with the simulation run.
+     *
+     * @return  metrics for each day of the simulation as a list
+     */
     @GetMapping("/data")
-    public List<ScrumboardData> getAllUsers() {
+    public List<ScrumboardData> getMetrics() {
         List<ScrumboardData> dataList = new ArrayList();
 
         ScrumboardData data1 = new ScrumboardData("2023-03-02", 5, 3, 2, 3, 0);
