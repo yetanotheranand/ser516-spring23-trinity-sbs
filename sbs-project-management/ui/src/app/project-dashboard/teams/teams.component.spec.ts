@@ -61,4 +61,43 @@ fdescribe('TeamsComponent', () => {
       fixture.debugElement.nativeElement.querySelector('#add-member-dialog')
     ).toBeTruthy();
   });
+
+  it('should reset the "showAddMemberDialog", "newMemberName" and "newMemberRole" properties when canceling the dialog', () => {
+    component.showAddMemberDialog = true;
+    component.newMemberName = 'New Person';
+    component.newMemberRole = 'Developer';
+    component.cancelAddMember();
+    expect(component.showAddMemberDialog).toBe(false);
+    expect(component.newMemberName).toBe('');
+    expect(component.newMemberRole).toBe('');
+  });
+
+  it('should not add a new member to the team if fields are blank', () => {
+  // Set the fields to blank values
+  component.newMemberName = '';
+  component.newMemberRole = '';
+  
+  // Call the submitNewMember() method
+  component.submitNewMember();
+
+  // Expect the teamMembers array to have length of 0
+  expect(component.teamMembers.length).toBe(4);
+});
+
+it('should add a new member to the team', () => {
+  // set up test data
+  component.newMemberName = 'New Person';
+  component.newMemberRole = 'Developer';
+
+  // call the method
+  component.submitNewMember();
+
+  // check that the new member was added to the team
+  expect(component.teamMembers).toContain({ name: 'New Person', role: 'Developer' });
+
+  // reset test data
+  component.teamMembers = [];
+  component.newMemberName = '';
+  component.newMemberRole = '';
+});
 });
