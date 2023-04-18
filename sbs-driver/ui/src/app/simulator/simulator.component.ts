@@ -1,5 +1,9 @@
-import { Component } from '@angular/core';
+/* eslint-disable prettier/prettier */
+import { Component, Inject } from '@angular/core';
 import { ApiService } from '../services/api.service';
+import { DialogBodyComponent } from './dialog-body/dialog-body.component';
+import { MatDialog } from '@angular/material/dialog';
+import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-simulator',
@@ -7,7 +11,7 @@ import { ApiService } from '../services/api.service';
   styleUrls: ['./simulator.component.css'],
 })
 export class SimulatorComponent {
-  constructor(private api: ApiService) {}
+  constructor(private matDialog:MatDialog) {}
   isEditable = true;
   userStories = [
     {
@@ -87,4 +91,10 @@ export class SimulatorComponent {
       ],
     },
   ];
+  openDialog(){
+    this.matDialog.open(DialogBodyComponent,{
+      width:'650px', data: this.userStories
+    })
+  }
 }
+

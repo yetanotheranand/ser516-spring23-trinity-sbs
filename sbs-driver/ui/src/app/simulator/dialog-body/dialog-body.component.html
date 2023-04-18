@@ -1,0 +1,35 @@
+<!-- eslint-disable prettier/prettier -->
+<button mat-icon-button style="float: right; margin: 5px" (click)="matDialog.closeAll()">
+  <mat-icon color="warn">close</mat-icon>
+  </button>
+  <mat-dialog-content>
+  
+    <header>
+      <h1 style="font-size: 22px">{{ userStory[0].title }}</h1>
+    </header>
+    <p><b>Description</b></p>
+    <p>{{ userStory[0].description }}</p>
+    <p><b>Business Value</b></p>
+    <p>{{ userStory[0].businessValue }}</p>
+    <p><b>Story Points</b></p>
+    <p>{{ userStory[0].storyPoints }}</p>
+    <p><b>Assigned To</b></p>
+    <p>{{ userStory[0].assignedTo }}</p>
+    <p><b>Attachments</b></p>
+    <p>{{ userStory[0].attachments }}</p>
+    <p><b>Tags</b></p>
+    <p>{{ userStory[0].tags }}</p>
+    <p><b>Tasks</b></p>
+    <ul>
+      <li *ngFor="let task of userStory[0].tasks">
+        <p><b>Task {{ task.id }}</b></p>
+        <p><b>Title:</b> {{ task.title }}</p>
+        <p><b>Description:</b> {{ task.description }}</p>
+        <p><b>Business Value:</b> {{ task.businessValue }}</p>
+        <p><b>Story Points:</b> {{ task.storyPoints }}</p>
+        <p><b>Assigned To:</b> {{ task.assignedTo }}</p>
+        <p><b>Attachments:</b> {{ task.attachments }}</p>
+        <p><b>Tags:</b> {{ task.tags }}</p>
+      </li>
+    </ul>
+  </mat-dialog-content>
