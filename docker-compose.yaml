@@ -5,8 +5,6 @@ services:
       context: ./sbs-driver/ui
       args:
         - ENVIRONMENT=production
-    ports:
-      - "80:80"
     networks:
       sbs-network:
         aliases:
@@ -53,6 +51,8 @@ services:
       context: ./sbs-project-management/ui
       args:
         - ENVIRONMENT=production
+    ports:
+      - 80:80
     networks:
       sbs-network:
         aliases:

@@ -1,15 +1,38 @@
 package edu.asu.ser516.trinity.sbs.metrics.model;
 
+/**
+ * This is a model for representing metrics for a single day.
+ */
 public class ScrumboardData {
     private String date;
-    private int New;
-    private int InProgress;
+    private int todo;
+    private int inProgress;
 
-    private int ReadyForTest;
+    private int readyForTest;
 
-    private int Closed;
+    private int closed;
 
-    private int Blocked;
+    private int blocked;
+
+    /**
+     * This is a constructor to initialize ScrumboardData.
+     *
+     * @param date date associated with the single day metrics
+     * @param todo no of tasks in todo state
+     * @param inProgress no of tasks in progress state
+     * @param readyForTest no of tasks in ready for test state
+     * @param closed no of tasks in closed state
+     * @param blocked no of tasks in blocked state
+     */
+    public ScrumboardData(String date, int todo, int inProgress, int readyForTest, int closed,
+                          int blocked) {
+        this.date = date;
+        this.todo = todo;
+        this.inProgress = inProgress;
+        this.readyForTest = readyForTest;
+        this.closed = closed;
+        this.blocked = blocked;
+    }
 
     public String getDate() {
         return date;
@@ -19,44 +42,44 @@ public class ScrumboardData {
         this.date = date;
     }
 
-    public int getNew() {
-        return New;
+    public int getTodo() {
+        return todo;
     }
 
-    public void setNew(int New) {
-        this.New = New;
+    public void setTodo(int todo) {
+        this.todo = todo;
     }
 
     public int getInProgress() {
-        return InProgress;
+        return inProgress;
     }
 
     public void setInProgress(int inProgress) {
-        InProgress = inProgress;
+        this.inProgress = inProgress;
     }
 
     public int getReadyForTest() {
-        return ReadyForTest;
+        return readyForTest;
     }
 
     public void setReadyForTest(int readyForTest) {
-        ReadyForTest = readyForTest;
+        this.readyForTest = readyForTest;
     }
 
     public int getClosed() {
-        return Closed;
+        return closed;
     }
 
     public void setClosed(int closed) {
-        Closed = closed;
+        this.closed = closed;
     }
 
     public int getBlocked() {
-        return Blocked;
+        return blocked;
     }
 
     public void setBlocked(int blocked) {
-        Blocked = blocked;
+        this.blocked = blocked;
     }
 
 }
