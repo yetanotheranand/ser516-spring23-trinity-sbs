@@ -29,12 +29,6 @@ fdescribe('TeamsComponent', () => {
     expect(component.teamMembers.length).toBe(4);
   });
 
-  it('should initialize the role of each member to "Select"', () => {
-    component.teamMembers.forEach((member) => {
-      expect(member.role).toBe('Select');
-    });
-  });
-
   it('should display the correct member names', () => {
     const memberNames = fixture.nativeElement.querySelectorAll('.member-name');
     expect(memberNames[0].textContent).toContain('Person1');
@@ -43,19 +37,28 @@ fdescribe('TeamsComponent', () => {
     expect(memberNames[3].textContent).toContain('Person4');
   });
 
-  it('should update the role of a member when a new role is selected', () => {
-    const selectElements = fixture.nativeElement.querySelectorAll('select');
-    selectElements[0].value = 'developer';
-    selectElements[0].dispatchEvent(new Event('change'));
-    expect(component.teamMembers[0].role).toBe('developer');
+  it('should position the "+New Member" button in the top right corner of the page', () => {
+    const button = fixture.nativeElement.querySelector('.add-member-btn');
+    const buttonRect = button.getBoundingClientRect();
+    const pageWidth = window.innerWidth || document.documentElement.clientWidth;
+    expect(buttonRect.left).toBeCloseTo(pageWidth - buttonRect.width - 20, -1);
+    expect(buttonRect.top).toBeCloseTo(20, -1);
   });
 
-  it('should enable the "Select" option when a member\'s role is changed back to "Select"', () => {
-    const selectElements = fixture.nativeElement.querySelectorAll('select');
-    selectElements[0].value = 'developer';
-    selectElements[0].dispatchEvent(new Event('change'));
-    selectElements[0].value = 'select';
-    selectElements[0].dispatchEvent(new Event('change'));
-    expect(selectElements[0].options[0].disabled).toBe(false);
+  it('should display the "Add New Member" form when the "+New Member" button is clicked', () => {
+    const fixture = TestBed.createComponent(TeamsComponent);
+    const component = fixture.componentInstance;
+    const button =
+      fixture.debugElement.nativeElement.querySelector('.add-member-btn');
+
+    expect(component.showAddMemberDialog).toBe(false);
+
+    button.click();
+    fixture.detectChanges();
+
+    expect(component.showAddMemberDialog).toBe(true);
+    expect(
+      fixture.debugElement.nativeElement.querySelector('#add-member-dialog')
+    ).toBeTruthy();
   });
 });

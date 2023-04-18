@@ -12,9 +12,33 @@ interface TeamMember {
 })
 export class TeamsComponent {
   teamMembers: TeamMember[] = [
-    { name: 'Person1', role: 'Select' },
-    { name: 'Person2', role: 'Select' },
-    { name: 'Person3', role: 'Select' },
-    { name: 'Person4', role: 'Select' },
+    { name: 'Person1', role: 'Developer' },
+    { name: 'Person2', role: 'Stakeholder' },
+    { name: 'Person3', role: 'Product Owner' },
+    { name: 'Person4', role: 'Developer' },
   ];
+
+  showAddMemberDialog = false;
+  newMemberName = '';
+  newMemberRole = '';
+
+  addMember() {
+    this.showAddMemberDialog = true;
+  }
+
+  submitNewMember() {
+    if (this.newMemberName && this.newMemberRole) {
+      this.teamMembers.push({
+        name: this.newMemberName,
+        role: this.newMemberRole,
+      });
+      this.cancelAddMember();
+    }
+  }
+
+  cancelAddMember() {
+    this.showAddMemberDialog = false;
+    this.newMemberName = '';
+    this.newMemberRole = '';
+  }
 }
