@@ -3,13 +3,39 @@
 <div class="team-list">
   <div class="team-member" *ngFor="let member of teamMembers">
     <div class="member-name">{{ member.name }}</div>
-    <div class="member-role">
-      <select [(ngModel)]="member.role">
-        <option value="select">Select</option>
-        <option value="developer">Developer</option>
-        <option value="stakeholder">Stakeholder</option>
-        <option value="product owner">Product Owner</option>
-      </select>
-    </div>
+    <div class="member-role">{{ member.role }}</div>
   </div>
+</div>
+
+<button class="add-member-btn" (click)="addMember()">+New Member</button>
+
+<div id="add-member-dialog" *ngIf="showAddMemberDialog">
+  <h3>Add New Member</h3>
+  <form class="add-member-form">
+    <label>Name:</label>
+    <input type="text" [(ngModel)]="newMemberName" name="name" required />
+    <label>Role:</label>
+    <select [(ngModel)]="newMemberRole" name="role" required>
+      <option value="" disabled>Select Role</option>
+      <option value="Developer">Developer</option>
+      <option value="Stakeholder">Stakeholder</option>
+      <option value="Product Owner">Product Owner</option>
+    </select>
+    <div class="add-member-btn-group">
+      <button
+        class="add-member-submit"
+        type="submit"
+        (click)="submitNewMember()"
+      >
+        Add Member
+      </button>
+      <button
+        class="add-member-cancel"
+        type="button"
+        (click)="cancelAddMember()"
+      >
+        Cancel
+      </button>
+    </div>
+  </form>
 </div>
