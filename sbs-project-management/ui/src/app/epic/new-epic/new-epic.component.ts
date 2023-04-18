@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { EpicService } from 'src/app/services/epic.service';
 
 @Component({
@@ -15,7 +15,8 @@ export class NewEpicComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     private epicService: EpicService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private router: Router
   ) {}
 
   ngOnInit() {
@@ -79,7 +80,7 @@ export class NewEpicComponent implements OnInit {
     };
     console.log(EpicDetails);
     this.epicService.addEpic(this.addEpicForm.value).subscribe(
-      (data) => console.log(data),
+      () => this.router.navigate(['../'], { relativeTo: this.route }),
       (err) => console.log(err)
     );
   }
