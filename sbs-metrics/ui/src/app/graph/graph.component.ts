@@ -1,6 +1,6 @@
-import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
-import { ChartDataset, ChartOptions, ChartConfiguration } from 'chart.js';
-import { Color } from 'chart.js';
+import { Component } from '@angular/core';
+import { ChartOptions, ChartConfiguration } from 'chart.js';
+
 @Component({
   selector: 'app-graph',
   templateUrl: './graph.component.html',
@@ -45,8 +45,4 @@ export class GraphComponent {
     responsive: false,
   };
   public lineChartLegend2 = true;
-
-  constructor() {}
-
-  ngOnInit() {}
 }
