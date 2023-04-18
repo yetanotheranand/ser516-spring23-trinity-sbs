@@ -7,6 +7,8 @@ import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { ProjectComponent } from './project/project.component';
+import { NewProjectComponent } from './new-project/new-project.component';
+import { ReactiveFormsModule } from '@angular/forms';
 import { TeamsComponent } from './teams/teams.component';
 import { FormsModule } from '@angular/forms';
 
@@ -15,6 +17,7 @@ import { FormsModule } from '@angular/forms';
     TitlebarComponent,
     CardComponent,
     ProjectComponent,
+    NewProjectComponent,
     TeamsComponent,
   ],
   imports: [
@@ -23,6 +26,7 @@ import { FormsModule } from '@angular/forms';
     MatCardModule,
     MatButtonModule,
     MatIconModule,
+    ReactiveFormsModule,
     FormsModule,
   ],
   exports: [TitlebarComponent, MatCardModule, MatButtonModule, MatIconModule],

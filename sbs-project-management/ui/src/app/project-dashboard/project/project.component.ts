@@ -19,6 +19,14 @@ export class ProjectComponent implements OnInit {
 
   ngOnInit(): void {
     this.id = this.route.snapshot.paramMap.get('slug');
+    console.log(this.route.snapshot.paramMap.get('slug'));
+    // this.projects = sessionStorage.getItem('Projects');
+    // if (this.projects) {
+    //   this.project = JSON.parse(this.projects).filter(
+    //     (e) => e.slug == this.id
+    //   )[0];
+    //   this.projectName = this.project.name;
+    //   this.projectDescription = this.project.description;
     const projectsString = sessionStorage.getItem('Projects');
     if (projectsString) {
       const projects = JSON.parse(projectsString);

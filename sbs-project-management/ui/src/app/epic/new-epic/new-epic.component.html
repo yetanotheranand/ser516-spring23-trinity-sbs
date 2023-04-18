@@ -1,3 +1,6 @@
+<div class="sidenav">
+  <a>New Epic</a>
+</div>
 <div id="form-container" style="max-height: 80%">
   <form [formGroup]="addEpicForm" (ngSubmit)="onSubmit()">
     <div class="formGroup">
@@ -19,12 +22,15 @@
       </textarea>
     </div>
     <div class="formGroup">
-      <label for="assignedTo">Assigned To: </label>
-      <select id="assignedTo" formControlName="assignedTo" class="form-control">
-        <option value="planned">User 1</option>
-        <option value="in-progress">User 2</option>
-        <option value="completed">User 3</option>
-        <option value="archived">User 4</option>
+      <label for="assigned_to">Assigned To: </label>
+      <select
+        id="assigned_to"
+        formControlName="assigned_to"
+        class="form-control"
+      >
+        <option *ngFor="let member of projectMembers" value="{{ member.id }}">
+          {{ member.full_name }}
+        </option>
       </select>
     </div>
     <div class="formGroup">

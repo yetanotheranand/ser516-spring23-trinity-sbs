@@ -18,8 +18,8 @@ export class CardComponent implements OnInit {
   }
 
   onProjectClick(project: any) {
-    console.log(project.slug);
-    this.router.navigateByUrl(`/projects/${project.slug}`);
+    console.log(project.target.id);
+    this.router.navigateByUrl(`/projects/${project.target.id}`);
   }
 
   deleteAlert(event: any) {

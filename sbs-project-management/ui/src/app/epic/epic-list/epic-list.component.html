@@ -13,8 +13,8 @@
       <thead>
         <tr>
           <th scope="col">Epic#</th>
-          <th scope="col">Subject</th>
-          <th scope="col">Description</th>
+          <th scope="col">Name</th>
+          <th scope="col">Project</th>
           <th scope="col">Client requirement</th>
           <th scope="col">Status</th>
           <th scope="col">Assigned To</th>
@@ -22,12 +22,12 @@
       </thead>
       <tbody>
         <tr *ngFor="let row of dataSource">
-          <td>{{ row.epicNo }}</td>
-          <td>{{ row.subject }}</td>
-          <td>{{ row.description }}</td>
-          <td>{{ row.clientRequirement }}</td>
-          <td>{{ row.status }}</td>
-          <td>{{ row.assignedTo }}</td>
+          <td>{{ row?.id }}</td>
+          <td>{{ row?.subject }}</td>
+          <td>{{ row?.project_extra_info.name }}</td>
+          <td>{{ row?.client_requirement }}</td>
+          <td>{{ row?.status_extra_info.name }}</td>
+          <td>{{ row?.assigned_to }}</td>
         </tr>
       </tbody>
     </table>
