@@ -8,7 +8,7 @@ interface TeamMember {
 @Component({
   selector: 'app-teams',
   templateUrl: './teams.component.html',
-  styleUrls: ['./teams.component.css']
+  styleUrls: ['./teams.component.css'],
 })
 export class TeamsComponent {
   teamMembers: TeamMember[] = [
