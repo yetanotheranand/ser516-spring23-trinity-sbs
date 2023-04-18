@@ -22,12 +22,12 @@
       </thead>
       <tbody>
         <tr *ngFor="let row of dataSource">
-          <td>{{ row.id }}</td>
-          <td>{{ row.subject }}</td>
-          <td>{{ row.project_extra_info.name }}</td>
-          <td>{{ row.client_requirement }}</td>
-          <td>{{ row.status_extra_info.name }}</td>
-          <td>{{ row.assigned_to }}</td>
+          <td>{{ row?.id }}</td>
+          <td>{{ row?.subject }}</td>
+          <td>{{ row?.project_extra_info.name }}</td>
+          <td>{{ row?.client_requirement }}</td>
+          <td>{{ row?.status_extra_info.name }}</td>
+          <td>{{ row?.assigned_to }}</td>
         </tr>
       </tbody>
     </table>

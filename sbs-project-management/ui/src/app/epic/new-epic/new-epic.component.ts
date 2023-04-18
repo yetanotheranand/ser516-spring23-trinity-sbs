@@ -20,6 +20,14 @@ export class NewEpicComponent implements OnInit {
 
   ngOnInit() {
     this.getProjMembers();
+    const id = this.epicService.getProjDetails(
+      this.route.snapshot.paramMap.get('slug')
+    )
+      ? this.epicService.getProjDetails(
+          this.route.snapshot.paramMap.get('slug')
+        ).id
+      : null;
+    const proj_slug_id = id ? id : null;
     this.addEpicForm = this.formBuilder.group({
       color: '',
       subject: ['', Validators.required],
@@ -28,16 +36,11 @@ export class NewEpicComponent implements OnInit {
       clientRequirement: false,
       status: '',
       tags: this.formBuilder.array([this.formBuilder.control('')]),
-      project: parseInt(
-        this.epicService.getProjDetails(
-          this.route.snapshot.paramMap.get('slug')
-        ).id
-      ),
+      project: parseInt(proj_slug_id),
     });
   }
 
   getProjMembers() {
-    console.log('Hello');
     this.epicService
       .getProjMembers(this.route.snapshot.paramMap.get('slug'))
       .subscribe(

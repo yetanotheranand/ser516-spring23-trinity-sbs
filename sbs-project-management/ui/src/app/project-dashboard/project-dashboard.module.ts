@@ -9,6 +9,8 @@ import { MatIconModule } from '@angular/material/icon';
 import { ProjectComponent } from './project/project.component';
 import { NewProjectComponent } from './new-project/new-project.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { TeamsComponent } from './teams/teams.component';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -16,6 +18,7 @@ import { ReactiveFormsModule } from '@angular/forms';
     CardComponent,
     ProjectComponent,
     NewProjectComponent,
+    TeamsComponent,
   ],
   imports: [
     CommonModule,
@@ -24,6 +27,7 @@ import { ReactiveFormsModule } from '@angular/forms';
     MatButtonModule,
     MatIconModule,
     ReactiveFormsModule,
+    FormsModule,
   ],
   exports: [TitlebarComponent, MatCardModule, MatButtonModule, MatIconModule],
 })

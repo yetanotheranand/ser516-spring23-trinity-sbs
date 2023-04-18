@@ -5,6 +5,7 @@ import { ProjectComponent } from './project/project.component';
 import { NewProjectComponent } from './new-project/new-project.component';
 import { EpicListComponent } from '../epic/epic-list/epic-list.component';
 import { NewEpicComponent } from '../epic/new-epic/new-epic.component';
+import { TeamsComponent } from './teams/teams.component';
 
 const routes: Routes = [
   {
@@ -18,6 +19,10 @@ const routes: Routes = [
       {
         path: 'new',
         component: NewProjectComponent,
+      },
+      {
+        path: 'teams',
+        component: TeamsComponent,
       },
       {
         path: ':slug',

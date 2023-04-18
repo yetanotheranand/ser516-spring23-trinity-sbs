@@ -14,11 +14,16 @@ export class EpicService {
   getEpicList(slug: any) {
     // this.slug= this.route.snapshot.paramMap.get('slug');
     const projectsString = sessionStorage.getItem('Projects');
+    console.log('string value from sessin storage', projectsString);
     if (projectsString) {
       const projects = JSON.parse(projectsString);
       this.project = projects.filter((project) => project.slug === slug)[0];
     }
-    const url = environment.base_url + `/epics?project=${this.project.id}`;
+    const url =
+      this.project && this.project.id
+        ? environment.base_url + `/epics?project=${this.project.id}`
+        : environment.base_url + `/epics`;
+
     return this.httpClient.get(url);
   }
 
@@ -39,14 +44,17 @@ export class EpicService {
 
   getProjMembers(slug: any) {
     let ProjectDetails: any;
-    const url = environment.base_url + '/users?project=';
+    //const url = environment.base_url + '/users?project=';
     console.log(slug);
     const projectsString = sessionStorage.getItem('Projects');
     if (projectsString) {
       const projects = JSON.parse(projectsString);
       ProjectDetails = projects.filter((project) => project.slug === slug)[0];
     }
-    console.log(ProjectDetails.id);
-    return this.httpClient.get(url + ProjectDetails.id);
+    const url =
+      ProjectDetails && ProjectDetails.id
+        ? environment.base_url + `/users?project=${ProjectDetails.id}`
+        : environment.base_url + `/users`;
+    return this.httpClient.get(url);
   }
 }

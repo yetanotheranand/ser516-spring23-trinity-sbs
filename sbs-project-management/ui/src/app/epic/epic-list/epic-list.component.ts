@@ -9,56 +9,6 @@ import { EpicService } from 'src/app/services/epic.service';
 })
 export class EpicListComponent implements OnInit {
   dataSource: any;
-  // [
-  //   {
-  //     epicNo: 1212,
-  //     subject: 'subject',
-  //     description: 'description',
-  //     clientRequirement: true,
-  //     status: 'Assigned',
-  //     assignedTo: 'U801951',
-  //   },
-  //   {
-  //     epicNo: 1566,
-  //     subject: 'subject 2',
-  //     description: 'test description',
-  //     clientRequirement: true,
-  //     status: 'Assigned',
-  //     assignedTo: 'u738273',
-  //   },
-  //   {
-  //     epicNo: 12781772,
-  //     subject: 'test subject',
-  //     description: 'description test test ',
-  //     clientRequirement: true,
-  //     status: 'Assigned',
-  //     assignedTo: 'U801951',
-  //   },
-  //   {
-  //     epicNo: 677187,
-  //     subject: 'test subject test',
-  //     description: 'test description test ',
-  //     clientRequirement: true,
-  //     status: 'Assigned',
-  //     assignedTo: 'U801951',
-  //   },
-  //   {
-  //     epicNo: 1212,
-  //     subject: 'test subject new',
-  //     description: 'test description test ',
-  //     clientRequirement: true,
-  //     status: 'Un-Assigned',
-  //     assignedTo: 'U801951',
-  //   },
-  //   {
-  //     epicNo: 1212,
-  //     subject: 'subject',
-  //     description: 'description',
-  //     clientRequirement: true,
-  //     status: 'Blocked',
-  //     assignedTo: 'U801951',
-  //   },
-  // ];
   slug: string;
 
   constructor(
@@ -68,13 +18,11 @@ export class EpicListComponent implements OnInit {
 
   ngOnInit(): void {
     this.getEpecList(this.route.snapshot.paramMap.get('slug'));
-    console.log('Hello from epics');
   }
 
   getEpecList(slug) {
     this.epicService.getEpicList(slug).subscribe(
       (data) => {
-        console.log(data);
         this.dataSource = data;
       },
       (error) => {

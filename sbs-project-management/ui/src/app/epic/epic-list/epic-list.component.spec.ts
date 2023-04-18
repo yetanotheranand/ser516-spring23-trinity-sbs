@@ -4,24 +4,40 @@ import { EpicListComponent } from './epic-list.component';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { EpicService } from 'src/app/services/epic.service';
 import { RouterTestingModule } from '@angular/router/testing';
-import { RouterModule } from '@angular/router';
+import { ActivatedRoute, RouterModule } from '@angular/router';
 
 fdescribe('EpicListComponent', () => {
   let component: EpicListComponent;
   let fixture: ComponentFixture<EpicListComponent>;
+  let service: EpicService;
+  let route: ActivatedRoute;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [EpicListComponent],
       imports: [HttpClientTestingModule, RouterTestingModule, RouterModule],
-      providers: [EpicService],
+      providers: [
+        EpicService,
+        {
+          provide: ActivatedRoute,
+          useValue: {
+            snapshot: {
+              paramMap: {
+                get: () => 'ser516proj2-456', // Provide a sample slug value
+              },
+            },
+          },
+        },
+      ],
     }).compileComponents();
 
     fixture = TestBed.createComponent(EpicListComponent);
+    service = TestBed.inject(EpicService);
     component = fixture.componentInstance;
     fixture.detectChanges();
     component.dataSource = [
       {
+        id: 1212,
         epicNo: 1212,
         subject: 'subject',
         description: 'description',
