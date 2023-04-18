@@ -77,6 +77,7 @@ export class NewEpicComponent implements OnInit {
         ).id
       ),
     };
+    console.log(EpicDetails);
     this.epicService.addEpic(this.addEpicForm.value).subscribe(
       (data) => console.log(data),
       (err) => console.log(err)

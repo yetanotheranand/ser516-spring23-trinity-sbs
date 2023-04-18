@@ -7,7 +7,6 @@ import { ActivatedRoute } from '@angular/router';
 fdescribe('NewEpicComponent', () => {
   let component: NewEpicComponent;
   let fixture: ComponentFixture<NewEpicComponent>;
-  let route: ActivatedRoute;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
