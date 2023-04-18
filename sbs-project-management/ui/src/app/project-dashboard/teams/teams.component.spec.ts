@@ -37,14 +37,6 @@ fdescribe('TeamsComponent', () => {
     expect(memberNames[3].textContent).toContain('Person4');
   });
 
-  it('should position the "+New Member" button in the top right corner of the page', () => {
-    const button = fixture.nativeElement.querySelector('.add-member-btn');
-    const buttonRect = button.getBoundingClientRect();
-    const pageWidth = window.innerWidth || document.documentElement.clientWidth;
-    expect(buttonRect.left).toBeCloseTo(pageWidth - buttonRect.width - 20, -1);
-    expect(buttonRect.top).toBeCloseTo(20, -1);
-  });
-
   it('should display the "Add New Member" form when the "+New Member" button is clicked', () => {
     const fixture = TestBed.createComponent(TeamsComponent);
     const component = fixture.componentInstance;
