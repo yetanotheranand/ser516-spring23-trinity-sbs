@@ -2,14 +2,24 @@ package edu.asu.ser516.trinity.sbs.metrics.model;
 
 public class ScrumboardData {
     private String date;
-    private int New;
-    private int InProgress;
+    private int todo;
+    private int inProgress;
 
-    private int ReadyForTest;
+    private int readyForTest;
 
-    private int Closed;
+    private int closed;
 
-    private int Blocked;
+    private int blocked;
+
+    public ScrumboardData(String date, int todo, int inProgress, int readyForTest, int closed,
+                          int blocked) {
+        this.date = date;
+        this.todo = todo;
+        this.inProgress = inProgress;
+        this.readyForTest = readyForTest;
+        this.closed = closed;
+        this.blocked = blocked;
+    }
 
     public String getDate() {
         return date;
@@ -19,44 +29,44 @@ public class ScrumboardData {
         this.date = date;
     }
 
-    public int getNew() {
-        return New;
+    public int getTodo() {
+        return todo;
     }
 
-    public void setNew(int New) {
-        this.New = New;
+    public void setTodo(int todo) {
+        this.todo = todo;
     }
 
     public int getInProgress() {
-        return InProgress;
+        return inProgress;
     }
 
     public void setInProgress(int inProgress) {
-        InProgress = inProgress;
+        this.inProgress = inProgress;
     }
 
     public int getReadyForTest() {
-        return ReadyForTest;
+        return readyForTest;
     }
 
     public void setReadyForTest(int readyForTest) {
-        ReadyForTest = readyForTest;
+        this.readyForTest = readyForTest;
     }
 
     public int getClosed() {
-        return Closed;
+        return closed;
     }
 
     public void setClosed(int closed) {
-        Closed = closed;
+        this.closed = closed;
     }
 
     public int getBlocked() {
-        return Blocked;
+        return blocked;
     }
 
     public void setBlocked(int blocked) {
-        Blocked = blocked;
+        this.blocked = blocked;
     }
 
 }
