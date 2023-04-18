@@ -73,31 +73,34 @@ fdescribe('TeamsComponent', () => {
   });
 
   it('should not add a new member to the team if fields are blank', () => {
-  // Set the fields to blank values
-  component.newMemberName = '';
-  component.newMemberRole = '';
-  
-  // Call the submitNewMember() method
-  component.submitNewMember();
+    // Set the fields to blank values
+    component.newMemberName = '';
+    component.newMemberRole = '';
 
-  // Expect the teamMembers array to have length of 0
-  expect(component.teamMembers.length).toBe(4);
-});
+    // Call the submitNewMember() method
+    component.submitNewMember();
 
-it('should add a new member to the team', () => {
-  // set up test data
-  component.newMemberName = 'New Person';
-  component.newMemberRole = 'Developer';
+    // Expect the teamMembers array to have length of 0
+    expect(component.teamMembers.length).toBe(4);
+  });
 
-  // call the method
-  component.submitNewMember();
+  it('should add a new member to the team', () => {
+    // set up test data
+    component.newMemberName = 'New Person';
+    component.newMemberRole = 'Developer';
 
-  // check that the new member was added to the team
-  expect(component.teamMembers).toContain({ name: 'New Person', role: 'Developer' });
+    // call the method
+    component.submitNewMember();
 
-  // reset test data
-  component.teamMembers = [];
-  component.newMemberName = '';
-  component.newMemberRole = '';
-});
+    // check that the new member was added to the team
+    expect(component.teamMembers).toContain({
+      name: 'New Person',
+      role: 'Developer',
+    });
+
+    // reset test data
+    component.teamMembers = [];
+    component.newMemberName = '';
+    component.newMemberRole = '';
+  });
 });
