@@ -1,4 +1,5 @@
 /* eslint-disable prettier/prettier */
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { Component, Inject } from '@angular/core';
 import { ApiService } from '../services/api.service';
 import { DialogBodyComponent } from './dialog-body/dialog-body.component';
