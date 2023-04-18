@@ -6,22 +6,61 @@
     <div>
       <button mat-button matStepperNext>Next</button>
     </div>
-    <div>
-      <mat-card>
-        <mat-card-content style="background-color: green">Done</mat-card-content>
-      </mat-card>
-    </div>
-    <div>
-      <mat-card style="background-color: lightsalmon">
-        <mat-card-content>In Progress</mat-card-content>
-      </mat-card>
-    </div>
-    <div >
-      <mat-card style="background-color: lightblue">
-        <mat-card-content>New</mat-card-content>
-      </mat-card>
+    <div class="row">
+      <div class="column">
+        <h1>User Story</h1>
+        <div class="card">
+          <h3>Card 1</h3>
+          <p>Some text</p>
+          <p>Some text</p>
+        </div>
+      </div>
+    
+      <div class="column">
+
+        <h1>Tasks</h1>
+        <div class="card">
+          <h3>Card 2</h3>
+          <p>Some text</p>
+          <p>Some text</p>
+        </div>
+      </div>
       
+      <div class="column">
+
+        <h1>Current Status</h1>
+        <div>
+          <mat-card>
+            <mat-card-content style="background-color: green">Done</mat-card-content>
+          </mat-card>
+        </div>
+        <br>
+        <div>
+          <mat-card style="background-color: lightsalmon">
+            <mat-card-content>In Progress</mat-card-content>
+          </mat-card>
+        </div>
+        <br>
+        <div >
+          <mat-card style="background-color: lightblue">
+            <mat-card-content>New</mat-card-content>
+          </mat-card>
+          
+        </div>
+      </div>
+      
+      <div class="column">
+
+        <h1>Completed Points</h1>
+        <div class="card">
+          <h3>Card 4</h3>
+          <p>Some text</p>
+          <p>Some text</p>
+        </div>
+      </div>
     </div>
+
+    
   </mat-step>
   <mat-step [editable]="isEditable">
     <ng-template matStepLabel>Run Simulations</ng-template>
