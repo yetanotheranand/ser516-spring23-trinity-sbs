@@ -7,15 +7,23 @@ import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { ProjectComponent } from './project/project.component';
+import { TeamsComponent } from './teams/teams.component';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
-  declarations: [TitlebarComponent, CardComponent, ProjectComponent],
+  declarations: [
+    TitlebarComponent,
+    CardComponent,
+    ProjectComponent,
+    TeamsComponent,
+  ],
   imports: [
     CommonModule,
     ProjectDashboardRoutingModule,
     MatCardModule,
     MatButtonModule,
     MatIconModule,
+    FormsModule,
   ],
   exports: [TitlebarComponent, MatCardModule, MatButtonModule, MatIconModule],
 })

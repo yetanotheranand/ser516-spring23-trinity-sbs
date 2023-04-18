@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-project',
@@ -14,7 +15,7 @@ export class ProjectComponent implements OnInit {
   projectSlug = '';
   project: { id: string; name: string; description: string; slug: any };
 
-  constructor(private route: ActivatedRoute) {}
+  constructor(private route: ActivatedRoute, private router: Router) {}
 
   ngOnInit(): void {
     this.id = this.route.snapshot.paramMap.get('slug');
@@ -31,6 +32,6 @@ export class ProjectComponent implements OnInit {
   }
 
   onTeamsClick() {
-    // write navigation on clicking the button here
+    this.router.navigate(['/teams']);
   }
 }
