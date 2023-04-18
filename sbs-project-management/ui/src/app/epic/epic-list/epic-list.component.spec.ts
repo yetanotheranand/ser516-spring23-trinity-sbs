@@ -9,7 +9,6 @@ import { ActivatedRoute, RouterModule } from '@angular/router';
 fdescribe('EpicListComponent', () => {
   let component: EpicListComponent;
   let fixture: ComponentFixture<EpicListComponent>;
-  let service: EpicService;
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [EpicListComponent],
@@ -30,7 +29,6 @@ fdescribe('EpicListComponent', () => {
     }).compileComponents();
 
     fixture = TestBed.createComponent(EpicListComponent);
-    service = TestBed.inject(EpicService);
     component = fixture.componentInstance;
     fixture.detectChanges();
     component.dataSource = [
