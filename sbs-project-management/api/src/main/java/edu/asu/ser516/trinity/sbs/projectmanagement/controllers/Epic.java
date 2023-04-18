@@ -107,7 +107,7 @@ public class Epic {
      * @throws JSONException error parsing the json request and response
      * @header containing the token
      */
-    @GetMapping("/{epic_id}")
+    @GetMapping("{epicId}")
     public ResponseEntity<String> getEpicById(@PathVariable int epicId,
                                               @RequestHeader("Authorization") String token)
             throws JSONException {
