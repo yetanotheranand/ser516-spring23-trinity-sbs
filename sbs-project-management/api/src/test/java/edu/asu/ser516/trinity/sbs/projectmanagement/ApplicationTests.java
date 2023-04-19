@@ -297,11 +297,11 @@ public class ApplicationTests {
         JSONObject j = new JSONObject();
         j.put("username" , username);
         j.put("password" , password);
-        j.put("type" ,"normal");
+        j.put("type" , "normal");
         HttpRequest request = HttpRequest.newBuilder()
                 .uri(URI.create(url))
                 .POST(HttpRequest.BodyPublishers.ofString(j.toString()))
-                .headers("Content-Type", "application/json")
+                .headers("Content-Type" , "application/json")
                 .build();
 
         HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
