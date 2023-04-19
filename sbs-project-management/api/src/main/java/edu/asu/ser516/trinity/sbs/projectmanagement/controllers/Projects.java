@@ -97,7 +97,6 @@ public class Projects {
         } else {
             return ResponseEntity.status(response.getStatus()).body(response.getBody().toString());
         }
-
     }
 
     /**
