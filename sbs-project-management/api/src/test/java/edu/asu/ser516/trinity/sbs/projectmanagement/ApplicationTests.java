@@ -242,7 +242,6 @@ public class ApplicationTests {
                 .header("Authorization", "Bearer " + token)
                 .contentType(MediaType.APPLICATION_JSON).content(j.toString()))
                 .andExpect(status().is(400));
-
     }
 
     @Test
