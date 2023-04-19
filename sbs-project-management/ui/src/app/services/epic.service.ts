@@ -9,7 +9,10 @@ import { environment } from 'src/environment/environment';
 export class EpicService {
   slug: string;
   project: any;
-  constructor(private httpClient: HttpClient, private route: ActivatedRoute,private router: Router) {}
+  constructor(
+        private httpClient: HttpClient, 
+        private route: ActivatedRoute,
+        private router: Router) {}
 
   getEpicList(slug: any) {
     // this.slug= this.route.snapshot.paramMap.get('slug');
@@ -30,11 +33,10 @@ export class EpicService {
   addEpic(epicDetails: any) {
     const url = environment.base_url + '/epics';
     console.log('addd epics called');
-    let assId = parseInt(epicDetails.assigned_to)
+    const assId = parseInt(epicDetails.assigned_to);
     delete epicDetails.assigned_to;
-    epicDetails.assigned_to = assId
+    epicDetails.assigned_to = assId;
     delete epicDetails.status;
-    console.log(typeof(parseInt(epicDetails.assigned_to)));
     return this.httpClient.post(url, epicDetails);
   }
   getProjDetails(slug: any) {
