@@ -233,8 +233,8 @@ public class ApplicationTests {
         JSONObject j = new JSONObject();
         j.put("is_closed", true);
         j.put("clientRequirement", true);
-        j.put("color","#AAAAAA");
-        j.put("name",epicStatusName);
+        j.put("color", "#AAAAAA");
+        j.put("name", epicStatusName);
         j.put("project", projectId);
         j.put("order", 8);
         String token = getAuthToken(user, pass);
