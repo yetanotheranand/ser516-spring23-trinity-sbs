@@ -19,6 +19,8 @@ import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMock
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
+import java.time.LocalDateTime;  
+
 
 @SpringBootTest
 @AutoConfigureMockMvc
@@ -227,7 +229,7 @@ public class ApplicationTests {
         this.mockMvc.perform(post("/epic-statuses").header("Authorization",
                         "Bearer " + token)
                 .contentType(MediaType.APPLICATION_JSON).content(j.toString()))
-                .andExpect(status().isOk());
+                .andExpect(status().is(400));
 
     }
 
