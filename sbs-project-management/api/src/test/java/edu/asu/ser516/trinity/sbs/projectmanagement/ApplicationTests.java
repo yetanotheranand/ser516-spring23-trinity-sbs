@@ -1,10 +1,10 @@
 package edu.asu.ser516.trinity.sbs.projectmanagement;
 
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.patch;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
 
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -70,8 +70,8 @@ public class ApplicationTests {
     @Test
     public void loginFail() throws Exception {
         JSONObject j = new JSONObject();
-        j.put("username", "user");
-        j.put("password", "user");
+        j.put("username" , "user");
+        j.put("password" , "user");
         this.mockMvc.perform(
                         post("/auth")
                                 .content(j.toString())
@@ -83,8 +83,8 @@ public class ApplicationTests {
     @Test
     public void loginSuccess() throws Exception {
         JSONObject j = new JSONObject();
-        j.put("username", user);
-        j.put("password", pass);
+        j.put("username" , user);
+        j.put("password" , pass);
         this.mockMvc.perform(
                         post("/auth").content(j.toString())
                                 .contentType(MediaType.APPLICATION_JSON))
@@ -95,7 +95,8 @@ public class ApplicationTests {
     public void getProjects() throws Exception {
         String token = getAuthToken(user, pass);
 
-        this.mockMvc.perform(get("/projects").header("Authorization", "Bearer " + token)
+        this.mockMvc.perform(get("/projects")
+                .header("Authorization", "Bearer " + token)
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk());
     }
@@ -104,7 +105,8 @@ public class ApplicationTests {
     public void getProjectById() throws Exception {
         String token = getAuthToken(user, pass);
 
-        this.mockMvc.perform(get("/projects/" + projectId).header("Authorization", "Bearer " + token)
+        this.mockMvc.perform(get("/projects/" + projectId)
+                .header("Authorization", "Bearer " + token)
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk());
 
@@ -124,10 +126,10 @@ public class ApplicationTests {
     @Test
     public void createProject() throws Exception {
         JSONObject j = new JSONObject();
-        j.put("name", projectName);
-        j.put("description", "test");
-        j.put("is_private", "false");
-        String token = getAuthToken(user, pass);
+        j.put("name" , projectName);
+        j.put("description" , "test");
+        j.put("is_private" , "false");
+        String token = getAuthToken(user , pass);
         this.mockMvc.perform(post("/projects").header("Authorization" ,
                         "Bearer " + token)
                 .contentType(MediaType.APPLICATION_JSON).content(j.toString()))
@@ -137,9 +139,9 @@ public class ApplicationTests {
 
     @Test
     public void likeProject() throws Exception {
-        String token = getAuthToken(user, pass);
-        this.mockMvc.perform(post("/projects/" + projectId + "/like").header("Authorization" ,
-                        "Bearer " + token)
+        String token = getAuthToken(user , pass);
+        this.mockMvc.perform(post("/projects/" + projectId + "/like")
+                .header("Authorization" , "Bearer " + token)
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk());
 
@@ -147,9 +149,9 @@ public class ApplicationTests {
 
     @Test
     public void unLikeProject() throws Exception {
-        String token = getAuthToken(user, pass);
-        this.mockMvc.perform(post("/projects/" + projectId + "/unlike").header("Authorization" ,
-                        "Bearer " + token)
+        String token = getAuthToken(user , pass);
+        this.mockMvc.perform(post("/projects/" + projectId + "/unlike")
+                .header("Authorization" , "Bearer " + token)
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk());
 
@@ -157,9 +159,10 @@ public class ApplicationTests {
 
     @Test
     public void getEpics() throws Exception {
-        String token = getAuthToken(user, pass);
+        String token = getAuthToken(user , pass);
 
-        this.mockMvc.perform(get("/epics").header("Authorization" , "Bearer " + token)
+        this.mockMvc.perform(get("/epics")
+                .header("Authorization" , "Bearer " + token)
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk());
 
@@ -167,7 +170,7 @@ public class ApplicationTests {
 
     @Test
     public void getEpicById() throws Exception {
-        String token = getAuthToken(user, pass);
+        String token = getAuthToken(user , pass);
 
         this.mockMvc.perform(get("/epics/" + epicId)
                 .header("Authorization" , "Bearer " + token)
@@ -193,11 +196,11 @@ public class ApplicationTests {
         j.put("assigned_to" , userId);
         j.put("clientRequirement" , true);
         j.put("color" , "");
-        j.put("description" ,"Testing");
+        j.put("description" , "Testing");
         j.put("project" , projectId);
         j.put("subject" , epicName);
 
-        String token = getAuthToken(user, pass);
+        String token = getAuthToken(user , pass);
         this.mockMvc.perform(post("/epics").header("Authorization" ,
                         "Bearer " + token)
                 .contentType(MediaType.APPLICATION_JSON).content(j.toString()))
@@ -206,9 +209,10 @@ public class ApplicationTests {
 
     @Test
     public void getEpicStatuses() throws Exception {
-        String token = getAuthToken(user, pass);
+        String token = getAuthToken(user , pass);
 
-        this.mockMvc.perform(get("/epic-statuses").header("Authorization", "Bearer " + token)
+        this.mockMvc.perform(get("/epic-statuses")
+                .header("Authorization", "Bearer " + token)
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk());
 
@@ -216,7 +220,7 @@ public class ApplicationTests {
 
     @Test
     public void getEpicStatus() throws Exception {
-        String token = getAuthToken(user, pass);
+        String token = getAuthToken(user , pass);
 
         this.mockMvc.perform(get("/epic-statuses/" + epicStatusId)
                 .header("Authorization", "Bearer " + token)
@@ -234,8 +238,8 @@ public class ApplicationTests {
         j.put("project" , projectId);
         j.put("order" , 8);
         String token = getAuthToken(user , pass);
-        this.mockMvc.perform(post("/epic-statuses").header("Authorization" ,
-                        "Bearer " + token)
+        this.mockMvc.perform(post("/epic-statuses")
+                .header("Authorization" , "Bearer " + token)
                 .contentType(MediaType.APPLICATION_JSON).content(j.toString()))
                 .andExpect(status().is(400));
 
@@ -246,13 +250,13 @@ public class ApplicationTests {
         JSONObject j = new JSONObject();
         j.put("is_closed" , true);
         j.put("clientRequirement" , true);
-        j.put("color" ,"#AAAAAA");
-        j.put("name" ,epicStatusName);
+        j.put("color" , "#AAAAAA");
+        j.put("name" , epicStatusName);
         j.put("project" , projectId);
         j.put("order" , 8);
-        String token = getAuthToken(user, pass);
-        this.mockMvc.perform(put("/epic-statuses/" + epicStatusId).header("Authorization",
-                        "Bearer " + token)
+        String token = getAuthToken(user , pass);
+        this.mockMvc.perform(put("/epic-statuses/" + epicStatusId)
+                .header("Authorization" , "Bearer " + token)
                 .contentType(MediaType.APPLICATION_JSON).content(j.toString()))
                 .andExpect(status().isForbidden());
     }
@@ -264,15 +268,15 @@ public class ApplicationTests {
         j.put("project" , projectId);
         j.put("order" , 8);
         String token = getAuthToken(user , pass);
-        this.mockMvc.perform(patch("/epic-statuses/" + epicStatusId).header("Authorization",
-                        "Bearer " + token)
+        this.mockMvc.perform(patch("/epic-statuses/" + epicStatusId)
+                .header("Authorization" , "Bearer " + token)
                 .contentType(MediaType.APPLICATION_JSON).content(j.toString()))
                 .andExpect(status().isForbidden());
     }
 
     @Test
     public void deleteEpicStatus() throws Exception {
-        String token = getAuthToken(user, pass);
+        String token = getAuthToken(user , pass);
         this.mockMvc.perform(delete("/epic-statuses/" + epicStatusId + 1)
                 .header("Authorization", "Bearer " + token)
                 .contentType(MediaType.APPLICATION_JSON))
@@ -281,7 +285,7 @@ public class ApplicationTests {
     
     @Test
     public void getUsers() throws Exception {
-        String token = getAuthToken(user, pass);
+        String token = getAuthToken(user , pass);
 
         this.mockMvc.perform(get("/users?project=" + projectId)
                 .header("Authorization", "Bearer " + token)
