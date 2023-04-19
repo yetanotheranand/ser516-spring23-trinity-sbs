@@ -10,9 +10,10 @@ export class EpicService {
   slug: string;
   project: any;
   constructor(
-  private httpClient: HttpClient, 
-  private route: ActivatedRoute,
-  private router: Router) {}
+    private httpClient: HttpClient,
+    private route: ActivatedRoute,
+    private router: Router
+  ) {}
 
   getEpicList(slug: any) {
     // this.slug= this.route.snapshot.paramMap.get('slug');
