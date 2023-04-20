@@ -6,6 +6,7 @@ import { NewProjectComponent } from './new-project/new-project.component';
 import { EpicListComponent } from '../epic/epic-list/epic-list.component';
 import { NewEpicComponent } from '../epic/new-epic/new-epic.component';
 import { TeamsComponent } from './teams/teams.component';
+import { ProductBacklogComponent } from '../product-backlog/product-backlog.component';
 
 const routes: Routes = [
   {
@@ -38,6 +39,10 @@ const routes: Routes = [
           {
             path: 'epics/new',
             component: NewEpicComponent,
+          },
+          {
+            path: 'backlog',
+            component: ProductBacklogComponent,
           },
         ],
       },

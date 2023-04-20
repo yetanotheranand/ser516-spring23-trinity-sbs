@@ -22,6 +22,11 @@ export class CardComponent implements OnInit {
     this.router.navigateByUrl(`/projects/${project.target.id}`);
   }
 
+  onProductBacklog(project: any) {
+    console.log(project.slug);
+    this.router.navigateByUrl(`/projects/${project.slug}/backlog`);
+  }
+
   deleteAlert(event: any) {
     const result = confirm('Are you sure to proceed?');
     if (result === false) {

@@ -1,0 +1,15 @@
+.example-button-row button,
+.example-button-row a {
+  margin-right: 8px;
+}
+
+/* Success styling */
+
+.mat-raised-button.mat-success {
+  color: #f0fff3;
+  background-color: #155724;
+}
+
+.mat-icon-button.mat-success {
+  color:#155724;
+}
