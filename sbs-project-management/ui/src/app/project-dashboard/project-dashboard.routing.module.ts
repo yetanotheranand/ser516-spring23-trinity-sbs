@@ -41,9 +41,9 @@ const routes: Routes = [
             component: NewEpicComponent,
           },
           {
-            path:'backlog',
-            component : ProductBacklogComponent
-          }
+            path: 'backlog',
+            component: ProductBacklogComponent,
+          },
         ],
       },
     ],
