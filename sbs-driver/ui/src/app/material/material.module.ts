@@ -1,5 +1,5 @@
 /* eslint-disable prettier/prettier */
-import { NgModule } from '@angular/core';
+import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatCardModule } from '@angular/material/card';
@@ -34,5 +34,6 @@ import { FormsModule } from '@angular/forms';
     MatButtonModule,
     MatIconModule,
   ],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class MaterialModule {}
