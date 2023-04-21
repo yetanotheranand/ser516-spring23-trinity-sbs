@@ -41,4 +41,13 @@ export class TeamsComponent {
     this.newMemberName = '';
     this.newMemberRole = '';
   }
+
+  deleteMember(member: TeamMember) {
+    if (confirm('Are you sure you want to delete this team member?')) {
+      const index = this.teamMembers.indexOf(member);
+      if (index !== -1) {
+        this.teamMembers.splice(index, 1);
+      }
+    }
+  }
 }
