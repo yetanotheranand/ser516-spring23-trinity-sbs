@@ -4,7 +4,9 @@
   <div class="team-member" *ngFor="let member of teamMembers">
     <div class="member-name">{{ member.name }}</div>
     <div class="member-role">{{ member.role }}</div>
-    <button class="delete-member-btn" (click)="deleteMember(member)">Delete</button>
+    <button class="delete-member-btn" (click)="deleteMember(member)">
+      Delete
+    </button>
   </div>
 </div>
 
