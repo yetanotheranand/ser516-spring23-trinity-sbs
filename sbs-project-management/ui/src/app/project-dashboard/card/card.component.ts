@@ -53,4 +53,6 @@ export class CardComponent implements OnInit {
       }
     );
   }
+
+  protected readonly event = event;
 }
