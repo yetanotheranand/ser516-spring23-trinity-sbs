@@ -21,6 +21,8 @@ export class TeamsComponent {
   showAddMemberDialog = false;
   newMemberName = '';
   newMemberRole = '';
+  isEditing = false;
+  editingMember: TeamMember | null = null;
 
   addMember() {
     this.showAddMemberDialog = true;
@@ -39,6 +41,26 @@ export class TeamsComponent {
   cancelAddMember() {
     this.showAddMemberDialog = false;
     this.newMemberName = '';
+    this.newMemberRole = '';
+  }
+
+  editMember(member: TeamMember) {
+    this.isEditing = true;
+    this.editingMember = member;
+    this.newMemberRole = member.role;
+    // show pop-up dialog
+  }
+
+  submitEditedMember() {
+    if (this.editingMember && this.newMemberRole) {
+      this.editingMember.role = this.newMemberRole;
+      this.cancelEditingMember();
+    }
+  }
+
+  cancelEditingMember() {
+    this.isEditing = false;
+    this.editingMember = null;
     this.newMemberRole = '';
   }
 

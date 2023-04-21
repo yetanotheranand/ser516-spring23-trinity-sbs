@@ -149,4 +149,81 @@ select:focus {
 .delete-member-btn:hover {
   background-color: #c82333;
 }
+.edit-member-btn {
+  padding: 5px 10px;
+  border-radius: 5px;
+  font-size: 14px;
+  cursor: pointer;
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  transition: background-color 0.3s ease-in-out;
+}
 
+.edit-member-btn:hover {
+  background-color: darkgreen;
+}
+
+#edit-member-dialog {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #f5f5f5;
+  border-radius: 5px;
+  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.3);
+  padding: 20px;
+  max-width: 500px;
+  width: 80%;
+  z-index: 9999;
+}
+
+#edit-member-dialog h3 {
+  font-size: 24px;
+  margin-bottom: 20px;
+}
+
+#edit-member-dialog label {
+  display: block;
+  margin-bottom: 10px;
+}
+
+#edit-member-dialog select {
+  width: 100%;
+  padding: 10px;
+  font-size: 16px;
+  border-radius: 5px;
+  border: none;
+  background-color: #fff;
+  margin-bottom: 20px;
+}
+
+.edit-member-btn-group {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.edit-member-submit,
+.edit-member-cancel {
+  padding: 10px 20px;
+  font-size: 16px;
+  border-radius: 5px;
+  border: none;
+  cursor: pointer;
+  margin-left: 10px;
+}
+
+.edit-member-submit {
+  background-color: #4CAF50;
+  color: #fff;
+}
+
+.edit-member-cancel {
+  background-color: dodgerblue;
+  color: #fff;
+}
+
+.edit-member-cancel:hover,
+.edit-member-submit:hover {
+  opacity: 0.8;
+}
