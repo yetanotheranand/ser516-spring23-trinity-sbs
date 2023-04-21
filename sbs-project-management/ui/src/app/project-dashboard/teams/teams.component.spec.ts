@@ -2,7 +2,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { FormsModule } from '@angular/forms';
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore
-import { TeamsComponent } from './teams.component';
+import { TeamsComponent, TeamMember } from './teams.component';
 
 fdescribe('TeamsComponent', () => {
   let component: TeamsComponent;
@@ -94,5 +94,22 @@ fdescribe('TeamsComponent', () => {
     component.teamMembers = [];
     component.newMemberName = '';
     component.newMemberRole = '';
+  });
+
+  it('should delete a team member', () => {
+    // Create a new team member to add
+    const newMember: TeamMember = { name: 'Person5', role: 'Tester' };
+
+    // Add the new team member to the list
+    component.teamMembers.push(newMember);
+
+    // Mock the window.confirm method to return true
+    spyOn(window, 'confirm').and.returnValue(true);
+
+    // Delete the new team member from the list
+    component.deleteMember(newMember);
+
+    // Check that the new team member is no longer in the list
+    expect(component.teamMembers).not.toContain(newMember);
   });
 });
