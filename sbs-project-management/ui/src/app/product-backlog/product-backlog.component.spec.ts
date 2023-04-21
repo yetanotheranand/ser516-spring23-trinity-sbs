@@ -8,6 +8,7 @@ import { ProductBacklogService } from '../services/product-backlog.service';
 import { By } from '@angular/platform-browser';
 // import { Router } from '@angular/router';
 
+
 fdescribe('ProductBacklogComponent', () => {
   let component: ProductBacklogComponent;
   let fixture: ComponentFixture<ProductBacklogComponent>;
@@ -33,6 +34,12 @@ fdescribe('ProductBacklogComponent', () => {
       By.css('.titlebar h1')
     ).nativeElement;
     expect(titleElement.textContent).toEqual('Product Backlog');
+  });
+
+  it('should navigate to the right path when User story button is clicked', () => {
+    const spy = spyOn(router, 'navigate');
+    component.navigateToUserStoryPage();
+    expect(spy).toHaveBeenCalledWith(['/user-story']);
   });
 
   it('should display all user stories correctly', () => {

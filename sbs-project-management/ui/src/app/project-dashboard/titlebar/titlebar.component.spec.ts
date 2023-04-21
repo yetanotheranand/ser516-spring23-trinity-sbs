@@ -43,11 +43,7 @@ fdescribe('TitlebarComponent', () => {
     expect(buttonEl).toBeTruthy();
     expect(buttonEl.textContent).toContain('User Story');
   });
-  it('should navigate to the right path when User story button is clicked', () => {
-    const spy = spyOn(router, 'navigate');
-    component.navigateToUserStoryPage();
-    expect(spy).toHaveBeenCalledWith(['/user-story']);
-  });
+
   it('should navigate to the right path when New project button is clicked', () => {
     const spy2 = spyOn(router, 'navigate');
     component.navigateToNewProjectPage();

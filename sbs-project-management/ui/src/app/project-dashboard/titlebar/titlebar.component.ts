@@ -9,10 +9,6 @@ import { Router } from '@angular/router';
 export class TitlebarComponent {
   constructor(private router: Router) {}
 
-  navigateToUserStoryPage() {
-    this.router.navigate(['/user-story']);
-  }
-
   navigateToNewProjectPage() {
     this.router.navigate(['/new-project']);
   }
