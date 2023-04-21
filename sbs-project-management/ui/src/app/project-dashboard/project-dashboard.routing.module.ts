@@ -22,10 +22,6 @@ const routes: Routes = [
         component: NewProjectComponent,
       },
       {
-        path: 'teams',
-        component: TeamsComponent,
-      },
-      {
         path: ':slug',
         children: [
           {
@@ -43,6 +39,10 @@ const routes: Routes = [
           {
             path: 'backlog',
             component: ProductBacklogComponent,
+          },
+          {
+            path: 'team',
+            component: TeamsComponent,
           },
         ],
       },

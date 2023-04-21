@@ -40,6 +40,6 @@ export class ProjectComponent implements OnInit {
   }
 
   onTeamsClick() {
-    this.router.navigate(['/teams']);
+    this.router.navigate(['/projects', this.projectSlug, 'team']);
   }
 }
