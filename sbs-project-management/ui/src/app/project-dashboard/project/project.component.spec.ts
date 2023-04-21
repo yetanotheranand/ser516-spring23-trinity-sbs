@@ -118,4 +118,23 @@ fdescribe('ProjectComponent', () => {
     expect(component.projectDescription).toBe('');
     expect(component.projectSlug).toBe('');
   });
+  it('should trigger onTeamsClick method when Teams button is clicked', () => {
+    // Create a spy for the onTeamsClick method
+    const onTeamsClickSpy = spyOn(component, 'onTeamsClick').and.callThrough();
+
+    // Trigger ngOnInit to set up the button
+    fixture.detectChanges();
+
+    // Get the Teams button element
+    const button = fixture.nativeElement.querySelector('.teams-button');
+
+    // Check that the button is visible
+    expect(button).toBeTruthy();
+
+    // Trigger the click event on the Teams button element
+    button.dispatchEvent(new Event('click'));
+
+    // Check that the onTeamsClick method was called
+    expect(onTeamsClickSpy).toHaveBeenCalled();
+  });
 });
