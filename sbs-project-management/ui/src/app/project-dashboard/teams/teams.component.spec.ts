@@ -103,6 +103,9 @@ fdescribe('TeamsComponent', () => {
     // Add the new team member to the list
     component.teamMembers.push(newMember);
 
+    // Mock the window.confirm method to return true
+    spyOn(window, 'confirm').and.returnValue(true);
+
     // Delete the new team member from the list
     component.deleteMember(newMember);
 
