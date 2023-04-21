@@ -8,6 +8,9 @@ import { Router } from '@angular/router';
 })
 export class ProductBacklogComponent {
   constructor(private router: Router) {}
+  navigateToUserStoryPage() {
+    this.router.navigate(['/user-story']);
+  }
   // Replace list of user story data obtained from Taiga API in productBacklogData.
   productBacklogData = [
     {
@@ -23,7 +26,4 @@ export class ProductBacklogComponent {
       status: 'Ready to Test',
     },
   ];
-  navigateToUserStoryPage() {
-    this.router.navigate(['/user-story']);
-  }
 }

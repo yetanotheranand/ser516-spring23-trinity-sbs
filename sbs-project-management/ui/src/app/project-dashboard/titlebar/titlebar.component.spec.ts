@@ -38,11 +38,6 @@ fdescribe('TitlebarComponent', () => {
     expect(buttonEl).toBeTruthy();
     expect(buttonEl.textContent).toContain('New Project');
   });
-  it('should display the "User Story" button', () => {
-    const buttonEl = fixture.nativeElement.querySelector('#user-story-button');
-    expect(buttonEl).toBeTruthy();
-    expect(buttonEl.textContent).toContain('User Story');
-  });
 
   it('should navigate to the right path when New project button is clicked', () => {
     const spy2 = spyOn(router, 'navigate');

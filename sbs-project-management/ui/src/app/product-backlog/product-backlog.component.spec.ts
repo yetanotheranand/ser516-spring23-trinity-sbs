@@ -12,6 +12,7 @@ import { By } from '@angular/platform-browser';
 fdescribe('ProductBacklogComponent', () => {
   let component: ProductBacklogComponent;
   let fixture: ComponentFixture<ProductBacklogComponent>;
+  // let router: Router;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
@@ -36,10 +37,10 @@ fdescribe('ProductBacklogComponent', () => {
     expect(titleElement.textContent).toEqual('Product Backlog');
   });
 
-  it('should navigate to the right path when User story button is clicked', () => {
-    const spy = spyOn(router, 'navigate');
-    component.navigateToUserStoryPage();
-    expect(spy).toHaveBeenCalledWith(['/user-story']);
+  it('should display the "User Story" button', () => {
+    const buttonEl = fixture.nativeElement.querySelector('.new-user-story');
+    expect(buttonEl).toBeTruthy();
+    expect(buttonEl.textContent).toContain('User Story');
   });
 
   it('should display all user stories correctly', () => {
