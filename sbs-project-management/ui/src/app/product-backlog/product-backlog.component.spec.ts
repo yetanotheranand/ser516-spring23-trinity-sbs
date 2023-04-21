@@ -8,9 +8,11 @@ import { ProductBacklogService } from '../services/product-backlog.service';
 import { By } from '@angular/platform-browser';
 // import { Router } from '@angular/router';
 
+
 fdescribe('ProductBacklogComponent', () => {
   let component: ProductBacklogComponent;
   let fixture: ComponentFixture<ProductBacklogComponent>;
+  // let router: Router;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
@@ -33,6 +35,12 @@ fdescribe('ProductBacklogComponent', () => {
       By.css('.titlebar h1')
     ).nativeElement;
     expect(titleElement.textContent).toEqual('Product Backlog');
+  });
+
+  it('should display the "User Story" button', () => {
+    const buttonEl = fixture.nativeElement.querySelector('.new-user-story');
+    expect(buttonEl).toBeTruthy();
+    expect(buttonEl.textContent).toContain('User Story');
   });
 
   it('should display all user stories correctly', () => {
