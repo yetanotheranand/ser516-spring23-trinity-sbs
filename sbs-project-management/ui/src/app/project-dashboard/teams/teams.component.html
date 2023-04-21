@@ -4,6 +4,7 @@
   <div class="team-member" *ngFor="let member of teamMembers">
     <div class="member-name">{{ member.name }}</div>
     <div class="member-role">{{ member.role }}</div>
+    <button class="edit-member-btn" (click)="editMember(member)">Edit</button>
     <button class="delete-member-btn" (click)="deleteMember(member)">
       Delete
     </button>
@@ -36,6 +37,35 @@
         class="add-member-cancel"
         type="button"
         (click)="cancelAddMember()"
+      >
+        Cancel
+      </button>
+    </div>
+  </form>
+</div>
+
+<div id="edit-member-dialog" *ngIf="isEditing">
+  <h3>Edit Member Role</h3>
+  <form class="edit-member-form">
+    <label>Role:</label>
+    <select [(ngModel)]="newMemberRole" name="role" required>
+      <option value="" disabled>Select Role</option>
+      <option value="Developer">Developer</option>
+      <option value="Stakeholder">Stakeholder</option>
+      <option value="Product Owner">Product Owner</option>
+    </select>
+    <div class="edit-member-btn-group">
+      <button
+        class="edit-member-submit"
+        type="submit"
+        (click)="submitEditedMember()"
+      >
+        Save
+      </button>
+      <button
+        class="edit-member-cancel"
+        type="button"
+        (click)="cancelEditingMember()"
       >
         Cancel
       </button>
