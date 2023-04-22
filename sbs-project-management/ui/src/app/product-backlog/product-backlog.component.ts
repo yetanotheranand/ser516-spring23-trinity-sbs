@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { ProductBacklogService } from '../services/product-backlog.service';
-import { ActivatedRoute, ParamMap } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-product-backlog',
@@ -35,6 +35,7 @@ export class ProductBacklogComponent {
       },
       (error) => {
         if (error.status === 401) {
+          console.log(error);
         }
         this.productBacklogData = undefined;
       }
@@ -47,6 +48,7 @@ export class ProductBacklogComponent {
       },
       (error) => {
         if (error.status === 401) {
+          console.log(error);
         }
       }
     );
