@@ -42,6 +42,7 @@ export class ProductBacklogComponent {
     );
   }
   delete(id) {
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     this.backlogService.deleteUserStory(this.id).subscribe(
       (data) => {
         this.getUserStories();
