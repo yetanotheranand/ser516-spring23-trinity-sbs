@@ -3,17 +3,36 @@
   <form>
     <div class="form-group">
       <label for="subject">Subject:</label>
-      <input type="text" id="subject" name="subject" [(ngModel)]="task.subject" required>
+      <input
+        type="text"
+        id="subject"
+        name="subject"
+        [(ngModel)]="task.subject"
+        required
+      />
     </div>
 
     <div class="form-group">
       <label for="description">Description:</label>
-      <textarea id="description" name="description" [(ngModel)]="task.description" rows="5" cols="30" required></textarea>
+      <textarea
+        id="description"
+        name="description"
+        [(ngModel)]="task.description"
+        rows="5"
+        cols="30"
+        required
+      ></textarea>
     </div>
 
     <div class="form-group">
       <label for="assignedTo">Assigned To:</label>
-      <input type="text" id="assignedTo" name="assignedTo" [(ngModel)]="task.assignedTo" required>
+      <input
+        type="text"
+        id="assignedTo"
+        name="assignedTo"
+        [(ngModel)]="task.assignedTo"
+        required
+      />
     </div>
 
     <div class="form-group">
