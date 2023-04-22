@@ -316,5 +316,18 @@ public class ApplicationTests {
         }
     }
 
+    @Test
+    public void getUserStories() throws Exception {
+        String token = getAuthToken(user, pass);
+
+        this.mockMvc.perform(get("/userstories")
+                        .header("Authorization", "Bearer " + token)
+                        .param("projectid", projectId) // Set a valid integer value for the projectId parameter
+                        .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk());
+    }
+
+
+
 
 }
