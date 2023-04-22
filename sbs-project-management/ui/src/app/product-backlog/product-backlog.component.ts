@@ -41,8 +41,11 @@ export class ProductBacklogComponent {
       }
     );
   }
+
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   delete(id) {
     this.backlogService.deleteUserStory(this.id).subscribe(
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
       (data) => {
         this.getUserStories();
       },
