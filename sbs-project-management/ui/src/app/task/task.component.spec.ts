@@ -1,6 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { By } from '@angular/platform-browser';
-
+import { FormsModule } from '@angular/forms';
 import { TaskComponent } from './task.component';
 
 fdescribe('TaskComponent', () => {
@@ -9,43 +8,34 @@ fdescribe('TaskComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
+      imports: [FormsModule],
       declarations: [TaskComponent],
     }).compileComponents();
+  });
 
+  beforeEach(() => {
     fixture = TestBed.createComponent(TaskComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
 
-  it('should create', () => {
+  it('should create the component', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should display the task subject and description', () => {
-    const subjectElement = fixture.debugElement.query(By.css('#subject'));
-    const descriptionElement = fixture.debugElement.query(
-      By.css('#description')
-    );
-
-    expect(subjectElement.nativeElement.textContent).toBe(
-      component.task.subject
-    );
-    expect(descriptionElement.nativeElement.textContent).toBe(
-      component.task.description
-    );
+  it('should have default task values', () => {
+    expect(component.task.subject).toEqual('');
+    expect(component.task.description).toEqual('');
+    expect(component.task.assignedTo).toEqual('');
+    expect(component.task.status).toEqual('New');
   });
 
-  it('should display the assigned user', () => {
-    const assignedToElement = fixture.debugElement.query(By.css('#assignedTo'));
+  it('should call createTask method when button is clicked', () => {
+    spyOn(component, 'createTask');
 
-    expect(assignedToElement.nativeElement.textContent).toBe(
-      component.task.assignedTo
-    );
-  });
+    const button = fixture.nativeElement.querySelector('button');
+    button.dispatchEvent(new Event('click'));
 
-  it('should display the task status', () => {
-    const statusElement = fixture.debugElement.query(By.css('#status'));
-
-    expect(statusElement.nativeElement.value).toBe(component.task.status);
+    expect(component.createTask).toHaveBeenCalled();
   });
 });
