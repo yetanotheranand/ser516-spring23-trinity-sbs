@@ -7,16 +7,12 @@ import { environment } from 'src/environment/environment';
 })
 export class ProductBacklogService {
   constructor(private httpClient: HttpClient) {}
-  listprojects(id:any): Observable<any> {
-    const url = environment.base_url + '/userstories?projectid='+id;
-    return this.httpClient.get(
-      url
-    );
+  listprojects(id: any): Observable<any> {
+    const url = environment.base_url + '/userstories?projectid=' + id;
+    return this.httpClient.get(url);
   }
-  deleteUserStory(id:any): Observable<any> {
-    const url = environment.base_url + '/userstories/'+id;
-    return this.httpClient.delete(
-      url
-    );
+  deleteUserStory(id: any): Observable<any> {
+    const url = environment.base_url + '/userstories/' + id;
+    return this.httpClient.delete(url);
   }
 }

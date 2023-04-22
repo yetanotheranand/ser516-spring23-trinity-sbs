@@ -22,21 +22,26 @@
     *ngFor="let item of productBacklogData"
     class="list-group-item d-flex justify-content-between align-items-center"
   >
-  <div fxLayout="column" class="list-group-item list-group-item-action active">
-    <a
-      href="product-backlog"
-       fxLayout="row" class="list-group-item list-group-item-action active"
+    <div
+      fxLayout="column"
+      class="list-group-item list-group-item-action active"
     >
+      <a
+        href="product-backlog"
+        fxLayout="row"
+        class="list-group-item list-group-item-action active"
+      >
         <span fxFlex="70">{{ item.subject }}</span>
 
-      <span fxFlex="20">{{item.status_extra_info.name}}</span>
-      <span class="badge badge-primary badge-pill" fxFlex="5">{{ item.total_points }}</span>
-  </a>
-  <div fxLayout="row" fxLayoutGap="10px">
-    <button mat-raised-button >Edit</button>
-    <button mat-raised-button (click)="delete(item.id)">Delete</button>
-  </div>
-  </div>
-
+        <span fxFlex="20">{{ item.status_extra_info.name }}</span>
+        <span class="badge badge-primary badge-pill" fxFlex="5">{{
+          item.total_points
+        }}</span>
+      </a>
+      <div fxLayout="row" fxLayoutGap="10px">
+        <button mat-raised-button>Edit</button>
+        <button mat-raised-button (click)="delete(item.id)">Delete</button>
+      </div>
+    </div>
   </li>
 </ul>
