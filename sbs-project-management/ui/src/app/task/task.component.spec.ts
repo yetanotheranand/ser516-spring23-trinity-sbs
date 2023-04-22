@@ -4,7 +4,7 @@ import { EventEmitter } from '@angular/core';
 
 import { TaskComponent } from './task.component';
 
-describe('TaskComponent', () => {
+fdescribe('TaskComponent', () => {
   let component: TaskComponent;
   let fixture: ComponentFixture<TaskComponent>;
 

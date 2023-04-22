@@ -59,4 +59,15 @@ fdescribe('ProductBacklogComponent', () => {
       component.productBacklogData.length
     );
   });
+  it('should navigate to user-story page', () => {
+    spyOn(router, 'navigate');
+    component.navigateToUserStoryPage();
+    expect(router.navigate).toHaveBeenCalledWith(['/user-story']);
+  });
+
+  it('should navigate to task page', () => {
+    spyOn(router, 'navigate');
+    component.openTaskPage();
+    expect(router.navigate).toHaveBeenCalledWith(['/task']);
+  });
 });
