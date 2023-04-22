@@ -2,8 +2,8 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { UserStoryComponent } from './user-story/user-story.component';
 import { LoginComponent } from './login/login.component';
-import { ProductBacklogComponent } from './product-backlog/product-backlog.component';
 import { TaskComponent } from './task/task.component';
+import { ProductBacklogComponent } from './product-backlog/product-backlog.component';
 
 const routes: Routes = [
   { path: '', component: LoginComponent },
