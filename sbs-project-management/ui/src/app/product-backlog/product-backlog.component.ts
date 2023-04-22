@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { ProductBacklogService } from '../services/product-backlog.service';
 import { ActivatedRoute } from '@angular/router';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-product-backlog',
@@ -11,9 +12,11 @@ export class ProductBacklogComponent {
   // Replace list of user story data obtained from Taiga API in productBacklogData.
   productBacklogData = [];
   id: any;
+  errorMessage: string;
   constructor(
     private backlogService: ProductBacklogService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private router: Router
   ) {
     // this.getUserStories();
     this.route.queryParamMap.subscribe((params) => {
@@ -55,5 +58,8 @@ export class ProductBacklogComponent {
         }
       }
     );
+  }
+  openTaskPage() {
+    this.router.navigate(['/task']);
   }
 }
