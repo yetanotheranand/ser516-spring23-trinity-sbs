@@ -322,7 +322,7 @@ public class ApplicationTests {
 
         this.mockMvc.perform(get("/userstories")
                         .header("Authorization", "Bearer " + token)
-                        .param("projectid", projectId) // Set a valid integer value for the projectId parameter
+                        .param("projectid", projectId)
                         .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk());
     }

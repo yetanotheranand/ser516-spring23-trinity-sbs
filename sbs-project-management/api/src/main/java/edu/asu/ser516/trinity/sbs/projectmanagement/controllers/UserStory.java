@@ -12,7 +12,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-
+/**
+ * The UserStory class is a REST controller that handles HTTP requests related to user stories in a project management tool.
+ * It provides methods for retrieving all user stories for a specific project using the Taiga API.
+ */
 @RestController
 public class UserStory {
 
