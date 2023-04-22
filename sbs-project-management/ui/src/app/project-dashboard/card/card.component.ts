@@ -24,7 +24,7 @@ export class CardComponent implements OnInit {
 
   onProductBacklog(project: any) {
     console.log(project.slug);
-    // this.router.navigate([`/projects/${project.slug}/backlog`],{ queryParams: { projectid: project.id } })
+    this.router.navigate([`/projects/${project.slug}/backlog`],{ queryParams: { projectid: project.id } })
     // this.router.navigateByUrl(`/projects/${project.slug}/backlog?projectid=`+project.id);
   }
 
