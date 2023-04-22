@@ -20,4 +20,10 @@ fdescribe('UserStoryComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+  it('should log userStoryData to console', () => {
+    spyOn(console, 'log');
+    component.userStoryData.name = 'Test User Story';
+    component.onSubmit();
+    expect(console.log).toHaveBeenCalledWith(component.userStoryData);
+  });
 });
