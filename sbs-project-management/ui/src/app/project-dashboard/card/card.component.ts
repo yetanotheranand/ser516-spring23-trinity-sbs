@@ -24,7 +24,7 @@ export class CardComponent implements OnInit {
 
   onProductBacklog(project: any) {
     console.log(project.slug);
-    this.router.navigateByUrl(`/projects/${project.slug}/backlog`);
+    this.router.navigateByUrl(`/projects/${project.slug}/backlog?projectid=`+project.id);
   }
 
   deleteAlert(event: any) {

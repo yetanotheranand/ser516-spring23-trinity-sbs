@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { of, throwError } from 'rxjs';
-import { convertToParamMap, ActivatedRoute, ParamMap } from '@angular/router';
+import { convertToParamMap, ActivatedRoute } from '@angular/router';
 import { ProductBacklogComponent } from './product-backlog.component';
 import { ProductBacklogService } from '../services/product-backlog.service';
 
@@ -16,15 +16,15 @@ fdescribe('ProductBacklogComponent', () => {
     ]);
 
     mockActivatedRoute = {
-      queryParamMap: of(convertToParamMap({}))
+      queryParamMap: of(convertToParamMap({})),
     };
 
     await TestBed.configureTestingModule({
       declarations: [ProductBacklogComponent],
       providers: [
         { provide: ProductBacklogService, useValue: mockBacklogService },
-        { provide: ActivatedRoute, useValue: mockActivatedRoute }
-      ]
+        { provide: ActivatedRoute, useValue: mockActivatedRoute },
+      ],
     }).compileComponents();
   });
 
@@ -55,11 +55,13 @@ fdescribe('ProductBacklogComponent', () => {
   });
 
   it('should not set the productBacklogData property when listprojects call fails', () => {
-    mockBacklogService.listprojects.and.returnValue(throwError({ status: 401 }));
+    mockBacklogService.listprojects.and.returnValue(
+      throwError({ status: 401 })
+    );
     component.id = '123';
     component.getUserStories();
     expect(component.productBacklogData).toBeUndefined();
-  });  
+  });
 
   it('should set the productBacklogData property to an empty array when listprojects returns an empty array', () => {
     mockBacklogService.listprojects.and.returnValue(of([]));
@@ -69,18 +71,22 @@ fdescribe('ProductBacklogComponent', () => {
   });
 
   it('should not set the productBacklogData property when listprojects call fails with a status other than 401', () => {
-    mockBacklogService.listprojects.and.returnValue(throwError({ status: 500 }));
+    mockBacklogService.listprojects.and.returnValue(
+      throwError({ status: 500 })
+    );
     component.id = '123';
     component.getUserStories();
     expect(component.productBacklogData).toBeUndefined();
   });
-  
+
   it('should not set the productBacklogData property when listprojects call fails', () => {
-    mockBacklogService.listprojects.and.returnValue(throwError({ status: 401 }));
+    mockBacklogService.listprojects.and.returnValue(
+      throwError({ status: 401 })
+    );
     component.id = '123';
     component.getUserStories();
     expect(component.productBacklogData).toBeUndefined();
-  }); 
+  });
 
   it('should not set the productBacklogData property when listprojects call returns an empty array', () => {
     mockBacklogService.listprojects.and.returnValue(of([]));
