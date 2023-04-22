@@ -1,0 +1,52 @@
+.titlebar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px;
+  background-color: #f5f5f5;
+  border-bottom: 1px solid #ddd;
+}
+
+.titlebar h1 {
+  margin: 0;
+  font-size: 24px;
+}
+
+.new-user-story {
+  background-color: green;
+  color: #fff;
+  border-radius: 4px;
+  border: none;
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.new-user-story:hover {
+  background-color: darkgreen;
+}
+
+.list-group {
+  margin-top: 20px;
+}
+
+.list-group-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transition: all 0.3s ease;
+}
+
+.list-group-item:hover {
+  background-color: lightblue;
+  color: black;
+}
+
+.list-group-item .btn {
+  margin-left: 20px;
+}
+
+.badge {
+  font-size: 14px;
+}

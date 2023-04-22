@@ -11,6 +11,10 @@ export class ProductBacklogComponent {
   navigateToUserStoryPage() {
     this.router.navigate(['/user-story']);
   }
+  openTaskPage() {
+    this.router.navigate(['/task']);
+  }
+
   // Replace list of user story data obtained from Taiga API in productBacklogData.
   productBacklogData = [
     {

@@ -6,13 +6,13 @@ import { HttpClientModule } from '@angular/common/http';
 import { ReactiveFormsModule } from '@angular/forms';
 import { ProductBacklogService } from '../services/product-backlog.service';
 import { By } from '@angular/platform-browser';
-// import { Router } from '@angular/router';
+import { Router } from '@angular/router';
 
 
 fdescribe('ProductBacklogComponent', () => {
   let component: ProductBacklogComponent;
   let fixture: ComponentFixture<ProductBacklogComponent>;
-  // let router: Router;
+  let router: Router;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
@@ -20,7 +20,7 @@ fdescribe('ProductBacklogComponent', () => {
       declarations: [ProductBacklogComponent],
       providers: [ProductBacklogService],
     }).compileComponents();
-
+    router = TestBed.inject(Router);
     fixture = TestBed.createComponent(ProductBacklogComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
