@@ -53,8 +53,10 @@ export class EpicListComponent implements OnInit {
         state: { epicData },
       });
       console.log(epicData);
+      return true;
     } else {
       console.log(`Epic with id ${id} not found in the dataSource.`);
+      return false;
     }
   }
 
