@@ -13,7 +13,13 @@ export class UserStoryComponent {
   designPoints: any;
   frontPoints: any;
   backPoints: any;
-  userStoryData : any;
+  userStoryData : any = {
+      "points": 0,
+      "description": '',
+      "project": '',
+      "status": '',
+      "subject": '',
+  };
   id: any;
   constructor(
     private userStoryService: UserStoryService,
