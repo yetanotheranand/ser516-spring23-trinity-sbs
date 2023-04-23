@@ -9,6 +9,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -157,5 +158,62 @@ public class Epic {
             return ResponseEntity.status(response.getStatus()).body(response.getBody().toString());
         }
     }
+
+    /**
+     * PUT UpdateEpic API.
+     *
+     * @param epicId   id of the epic to update
+     * @param epicData epic data containing name and description
+     * @param token    bearer token
+     * @return response of update epic
+     * @throws JSONException error parsing the json request and response
+     */
+    @PostMapping("/{epicId}")
+    public ResponseEntity<String> updateEpic(@PathVariable int epicId,
+                                             @RequestBody Map<String, Object> epicData,
+                                             @RequestHeader("Authorization") String token)
+            throws JSONException {
+
+        // Set the API endpoint URL
+        String url = TAIGA_BASE_URL + "epics/" + epicId;
+        System.out.println(token);
+        JSONObject body = new JSONObject(epicData);
+        kong.unirest.HttpResponse<JsonNode> response = Unirest.put(url)
+                .header("accept", "application/json")
+                .header("Authorization", String.format(token))
+                .contentType("application/json")
+                .body(body.toString())
+                .asJson();
+        if (response.getStatus() == 200) {
+            logger.info("Epic Update Success");
+            return ResponseEntity.ok(response.getBody().toString());
+
+        } else {
+            logger.warn("Epic Update Failed");
+            return ResponseEntity.status(response.getStatus()).body(response.getBody().toString());
+        }
+    }
+
+    @DeleteMapping("/{epicId}")
+    public ResponseEntity<String> deleteEpic(@PathVariable int epicId,
+                                             @RequestHeader("Authorization") String token) {
+
+        // Set the API endpoint URL
+        String url = TAIGA_BASE_URL + "epics/" + epicId;
+        kong.unirest.HttpResponse<JsonNode> response = Unirest.delete(url)
+                .header("accept", "application/json")
+                .header("Authorization", String.format(token))
+                .asJson();
+        if (response.getStatus() == 204) {
+            logger.info("Epic Delete Success");
+            return ResponseEntity.ok().build();
+
+        } else {
+            logger.warn("Epic Delete Failed");
+            return ResponseEntity.status(response.getStatus()).body(response.getBody().toString());
+        }
+    }
+
+
 
 }
