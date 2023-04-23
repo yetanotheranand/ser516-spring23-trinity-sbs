@@ -56,6 +56,7 @@ public class ApplicationTests {
     private String epicStatusId;
 
 
+
     public ApplicationTests() throws JSONException {
         Unirest.config().verifySsl(false);
 
@@ -326,6 +327,69 @@ public class ApplicationTests {
                         .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk());
     }
+
+    @Test
+    public void testUpdateEpic() throws Exception {
+        String token = getAuthToken(user, pass);
+
+        // Get the current state of the epic
+        String getResponse = this.mockMvc.perform(get("/epics/" + epicId)
+                        .header("Authorization", "Bearer " + token)
+                        .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk())
+                .andReturn()
+                .getResponse()
+                .getContentAsString();
+
+        JSONObject currentEpic = new JSONObject(getResponse);
+
+        // Update the epic name and status
+        String updatedName = "Updated Epic Name";
+        String updatedStatusId = "2"; // Assuming 2 is the ID for the desired status
+        String subject="test";
+        String version="1";
+        JSONObject updatedEpic = new JSONObject();
+        updatedEpic.put("name", updatedName);
+        updatedEpic.put("status", updatedStatusId);
+        updatedEpic.put("project",projectId);
+        updatedEpic.put("subject",subject);
+        updatedEpic.put("version",version);
+
+
+        // Send the update request
+        this.mockMvc.perform(post("/epics/" + epicId)
+                        .header("Authorization", "Bearer " + token)
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(updatedEpic.toString()))
+                .andExpect(status().isOk());
+
+        // Check that the epic was updated correctly
+       this.mockMvc.perform(get("/epics/" + epicId)
+                        .header("Authorization", "Bearer " + token)
+                        .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk())
+                .andReturn()
+                .getResponse()
+                .getContentAsString();
+    }
+
+    @Test
+    public void testDeleteEpic() throws Exception {
+        String token = getAuthToken(user, pass);
+
+        // Send the delete request
+        this.mockMvc.perform(delete("/epics/" + epicId)
+                        .header("Authorization", "Bearer " + token)
+                        .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk());
+
+        // Check that the epic was deleted
+        this.mockMvc.perform(get("/epics/" + epicId)
+                        .header("Authorization", "Bearer " + token)
+                        .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isNotFound());
+    }
+
 
 
 
