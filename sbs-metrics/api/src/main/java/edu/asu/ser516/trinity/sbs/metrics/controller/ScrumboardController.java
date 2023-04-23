@@ -41,8 +41,7 @@ public class ScrumboardController {
     int totalStoryPoints = 20;
     int workCapacity = calculateWorkCapacity(numMembers, totalWorkingHours, totalStoryPoints);
         
-    public int calculateWorkCapacity(int numMembers, int totalWorkingHours, int totalStoryPoints)
-    {
+    public int calculateWorkCapacity(int numMembers, int totalWorkingHours, int totalStoryPoints) {
         // Calculate work capacity of the team
         int workCapacity = (totalWorkingHours / numMembers) * totalStoryPoints;
         return workCapacity;
