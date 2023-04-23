@@ -1,31 +1,25 @@
 package edu.asu.ser516.trinity.sbs.driver;
 
-import jakarta.servlet.ServletException;
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
-import java.io.IOException;
-import org.eclipse.jetty.server.Request;
-import org.eclipse.jetty.server.Server;
-import org.eclipse.jetty.server.handler.AbstractHandler;
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.Bean;
+import org.springframework.web.servlet.config.annotation.CorsRegistry;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
-public class Application extends AbstractHandler {
+@SpringBootApplication
+public class Application {
 
-    public static void main(String[] args) throws Exception {
-        Server server = new Server(8080);
-        server.setHandler(new Application());
-
-        server.start();
-        server.join();
+    public static void main(String[] args) {
+        SpringApplication.run(Application.class, args);
     }
 
-    public void handle(String target,
-                       Request baseRequest,
-                       HttpServletRequest request,
-                       HttpServletResponse response)
-            throws IOException, ServletException {
-        response.setContentType("text/html;charset=utf-8");
-        response.setStatus(HttpServletResponse.SC_OK);
-        baseRequest.setHandled(true);
-        response.getWriter().println("<h1>Hello World from Driver API</h1>");
+    @Bean
+    public WebMvcConfigurer corsConfigurer() {
+        return new WebMvcConfigurer() {
+            @Override
+            public void addCorsMappings(CorsRegistry registry) {
+                registry.addMapping("/**").allowedOrigins("http://localhost:8080");
+            }
+        };
     }
 }
