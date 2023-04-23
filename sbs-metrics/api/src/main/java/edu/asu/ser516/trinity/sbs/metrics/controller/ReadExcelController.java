@@ -15,14 +15,15 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/readExcel")
 public class ReadExcelController {
+
+    @Autowired
+    private ReadExcelService readExcelService;
+
     /**
      * This method is used to retrieve excel data.
      *
      * @return  task info as list
      */
-
-    @Autowired
-    private ReadExcelService readExcelService;
 
     @GetMapping("/getSampleData")
     public List<TaskInfo> readExcelData() {
