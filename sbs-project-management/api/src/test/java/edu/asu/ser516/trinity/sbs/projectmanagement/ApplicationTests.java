@@ -372,22 +372,7 @@ public class ApplicationTests {
                 .getResponse()
                 .getContentAsString();
     }
-//     @Test
-//     public void testDeleteEpic() throws Exception {
-//         String token = getAuthToken(user, pass);
-//
-//         // Send the delete request
-//         this.mockMvc.perform(delete("/epics/" + epicId)
-//                 .header("Authorization", "Bearer " + token)
-//                 .contentType(MediaType.APPLICATION_JSON))
-//                 .andExpect(status().isOk());
-//
-//         // Check that the epic was deleted
-//         this.mockMvc.perform(get("/epics/" + epicId)
-//                 .header("Authorization", "Bearer " + token)
-//                 .contentType(MediaType.APPLICATION_JSON))
-//                 .andExpect(status().isNotFound());
-//    }
+
 
 
 
