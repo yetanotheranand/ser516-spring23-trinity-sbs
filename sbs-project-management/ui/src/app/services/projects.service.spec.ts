@@ -1,5 +1,8 @@
 import { TestBed } from '@angular/core/testing';
-import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
+import {
+  HttpClientTestingModule,
+  HttpTestingController,
+} from '@angular/common/http/testing';
 
 import { ProjectsService } from './projects.service';
 import { environment } from 'src/environment/environment';
@@ -39,25 +42,25 @@ fdescribe('ProjectsService', () => {
     });
   });
 
-    it('should send a POST request with the correct URL and request body', () => {
-      const userId = '1';
-      const expectedUrl = `${environment.base_url}/projects?member=${userId}`;
-      const projectDetails = { name: 'New Project' };
+  it('should send a POST request with the correct URL and request body', () => {
+    const userId = '1';
+    const expectedUrl = `${environment.base_url}/projects?member=${userId}`;
+    const projectDetails = { name: 'New Project' };
 
-      service.AddProjects(projectDetails).subscribe();
+    service.AddProjects(projectDetails).subscribe();
 
-      const req = httpMock.expectOne(expectedUrl);
-      expect(req.request.method).toBe('POST');
-      expect(req.request.body).toBe(projectDetails);
-      req.flush([]);
-    });
+    const req = httpMock.expectOne(expectedUrl);
+    expect(req.request.method).toBe('POST');
+    expect(req.request.body).toBe(projectDetails);
+    req.flush([]);
+  });
 
-    it('should send a GET request with the correct URL and query parameters', () => {
-      const slug = 'project-slug';
-      const expectedUrl = `${environment.base_url}/projects?slug=${slug}`;
-      service.GetTeam(slug).subscribe();
-      const req = httpMock.expectOne(expectedUrl);
-      expect(req.request.method).toBe('GET');
-      req.flush([]);
-    });
+  it('should send a GET request with the correct URL and query parameters', () => {
+    const slug = 'project-slug';
+    const expectedUrl = `${environment.base_url}/projects?slug=${slug}`;
+    service.GetTeam(slug).subscribe();
+    const req = httpMock.expectOne(expectedUrl);
+    expect(req.request.method).toBe('GET');
+    req.flush([]);
+  });
 });

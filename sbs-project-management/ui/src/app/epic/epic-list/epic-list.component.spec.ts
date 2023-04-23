@@ -10,7 +10,7 @@ import { of } from 'rxjs';
 fdescribe('EpicListComponent', () => {
   let component: EpicListComponent;
   let fixture: ComponentFixture<EpicListComponent>;
-  let service: EpicService
+  let service: EpicService;
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [EpicListComponent],
@@ -61,6 +61,5 @@ fdescribe('EpicListComponent', () => {
     spyOn(service, 'getEpicList').and.returnValue(of([]));
     component.getEpecList('ser516proj2-456');
     expect(service.getEpicList).toHaveBeenCalled();
-
   });
 });

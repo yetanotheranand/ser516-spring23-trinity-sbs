@@ -19,9 +19,11 @@ export class ProjectsService {
 
   AddProjects(projectDetails: any): Observable<any> {
     const url = environment.base_url + '/projects';
-    const userId = sessionStorage.getItem('UserId')? sessionStorage.getItem('UserId'): null ;
+    const userId = sessionStorage.getItem('UserId')
+      ? sessionStorage.getItem('UserId')
+      : null;
 
-    return this.httpClient.post(  url + `?member=${userId}`,  projectDetails );
+    return this.httpClient.post(url + `?member=${userId}`, projectDetails);
   }
 
   GetTeam(slug: string): Observable<any> {

@@ -22,7 +22,9 @@ const routes: Routes = [
   {
     path: 'scrum-board',
     loadChildren: () =>
-      import('../../src/app/scrum-board/scrum-board.module').then((m) => m.ScrumBoardModule),
+      import('../../src/app/scrum-board/scrum-board.module').then(
+        (m) => m.ScrumBoardModule
+      ),
   },
   // { path: 'new-project', component: NewProjectComponent },
   { path: 'user-story', component: UserStoryComponent },

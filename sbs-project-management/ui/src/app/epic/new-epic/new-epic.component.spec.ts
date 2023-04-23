@@ -61,13 +61,12 @@ fdescribe('NewEpicComponent', () => {
     spyOn(service, 'getProjMembers').and.returnValue(of([]));
     component.getProjMembers();
     expect(service.getProjMembers).toHaveBeenCalled();
-
   });
 
-  it('should test onSubmit method', ()=>{
-   spyOn(service, 'addEpic').and.returnValue(of([]));
-   component.onSubmit()
-   expect(service.addEpic).toHaveBeenCalled();
+  it('should test onSubmit method', () => {
+    spyOn(service, 'addEpic').and.returnValue(of([]));
+    component.onSubmit();
+    expect(service.addEpic).toHaveBeenCalled();
   });
 
   it('should add a tag to the tags array', () => {

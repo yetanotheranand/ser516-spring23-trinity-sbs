@@ -46,9 +46,9 @@ const routes: Routes = [
             component: TeamsComponent,
           },
           {
-            path:'scrum-board',
-            component: DragDropScrumBoardComponent
-          }
+            path: 'scrum-board',
+            component: DragDropScrumBoardComponent,
+          },
         ],
       },
     ],
