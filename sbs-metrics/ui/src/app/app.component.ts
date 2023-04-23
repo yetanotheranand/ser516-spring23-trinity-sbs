@@ -7,7 +7,7 @@ import { GetApiService } from './get-api.service';
 })
 export class AppComponent {
   tableData: any[] = [
-      { focusfactor: 88, wiplimit: 25, businessvalue: 99, storypoints: 22, storiescompleted: 10 }
+      { focusfactor: 0.75, wiplimit: 6, businessvalue: 100, storypoints: 122, storiescompleted: 38, velocity: 3.8 , workcapacity: 4.5 }
       ];
   title = 'ui';
   constructor(private api: GetApiService) {}
