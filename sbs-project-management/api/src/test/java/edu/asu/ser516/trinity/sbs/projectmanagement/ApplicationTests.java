@@ -23,7 +23,10 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.test.web.servlet.MockMvc;
+
+import edu.asu.ser516.trinity.sbs.projectmanagement.controllers.Tasks;
 
 
 @SpringBootTest
@@ -43,7 +46,7 @@ public class ApplicationTests {
     @Value("${TAIGA_DEMO_PROJID}")
     private String projectId;
     @Value("${TAIGA_DEMO_EPICJID}")
-    private String epicId;
+    private int epicId;
     @Value("${TAIGA_DEMO_PROJNAME}")
     private String projectName;
     @Value("${TAIGA_DEMO_PROJSLUG}")
@@ -53,7 +56,9 @@ public class ApplicationTests {
     @Value("${TAIGA_DEMO_EPICSTATUSNAME}")
     private String epicStatusName;
     @Value("${TAIGA_DEMO_EPICSTATUSID}")
-    private String epicStatusId;
+    private int epicStatusId;
+    @Value("${TAIGA_DEMO_TASKID}")
+    private int taskId;
 
 
     public ApplicationTests() throws JSONException {
@@ -292,6 +297,78 @@ public class ApplicationTests {
                 .andExpect(status().isOk());
     }
 
+    @Test
+    public void getTasks() throws Exception {
+        String token = getAuthToken(user, pass);
+
+        this.mockMvc.perform(get("/tasks")
+                .header("Authorization", "Bearer " + token)
+                .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk());
+
+    }
+
+    @Test
+    public void getTaskById() throws Exception {
+        String token = getAuthToken(user, pass);
+
+        this.mockMvc.perform(get("/tasks/" + taskId)
+                .header("Authorization", "Bearer " + token)
+                .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk());
+
+    }
+
+    @Test
+    public void getTaskByRef() throws Exception {
+        String token = getAuthToken(user, pass);
+
+        this.mockMvc.perform(get("/task/by_ref?ref=2&project=" + projectId)
+                .header("Authorization", "Bearer " + token)
+                .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isNotFound());
+
+    }
+
+    @Test
+    public void createTask() throws Exception {
+        JSONObject j = new JSONObject();
+        j.put("assigned_to", userId);
+        j.put("description", "Testing");
+        j.put("project", projectId);
+        j.put("subject", "demo task");
+
+        String token = getAuthToken(user, pass);
+        this.mockMvc.perform(post("/tasks").header("Authorization",
+                        "Bearer " + token)
+                .contentType(MediaType.APPLICATION_JSON).content(j.toString()))
+                .andExpect(status().isOk());
+    }
+
+    @Test
+    public void patchTask() throws Exception {
+        JSONObject j = new JSONObject();
+        String token = getAuthToken(user, pass);
+        j.put("description", "Testing");
+        j.put("version",3);
+        
+        this.mockMvc.perform(patch("/tasks/" + taskId)
+                .header("Authorization", "Bearer " + token)
+                .contentType(MediaType.APPLICATION_JSON).content(j.toString()))
+                .andExpect(status().isBadRequest());
+    }
+
+    @Test
+    public void getUserStories() throws Exception {
+        String token = getAuthToken(user, pass);
+
+        this.mockMvc.perform(get("/userstories")
+                        .header("Authorization", "Bearer " + token)
+                        .param("projectid", projectId)
+                        .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk());
+    }
+
     private String getAuthToken(String username,
                                 String password) throws IOException,
                                 InterruptedException, JSONException {
@@ -316,16 +393,7 @@ public class ApplicationTests {
         }
     }
 
-    @Test
-    public void getUserStories() throws Exception {
-        String token = getAuthToken(user, pass);
-
-        this.mockMvc.perform(get("/userstories")
-                        .header("Authorization", "Bearer " + token)
-                        .param("projectid", projectId)
-                        .contentType(MediaType.APPLICATION_JSON))
-                .andExpect(status().isOk());
-    }
+    
 
 
 
