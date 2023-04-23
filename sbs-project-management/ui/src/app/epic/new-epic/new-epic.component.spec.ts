@@ -3,11 +3,12 @@ import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
 import { NewEpicComponent } from './new-epic.component';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { ActivatedRoute } from '@angular/router';
-
+import { EpicService } from 'src/app/services/epic.service';
+import { of } from 'rxjs';
 fdescribe('NewEpicComponent', () => {
   let component: NewEpicComponent;
   let fixture: ComponentFixture<NewEpicComponent>;
-
+  let service: EpicService;
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [ReactiveFormsModule, HttpClientTestingModule],
@@ -31,6 +32,7 @@ fdescribe('NewEpicComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(NewEpicComponent);
     component = fixture.componentInstance;
+    service = TestBed.inject(EpicService);
     fixture.detectChanges();
   });
 
@@ -53,6 +55,19 @@ fdescribe('NewEpicComponent', () => {
     expect(subject.valid).toBeFalsy();
     subject.setValue('Test Subject');
     expect(subject.valid).toBeTruthy();
+  });
+
+  it('should test getProjMembers', () => {
+    spyOn(service, 'getProjMembers').and.returnValue(of([]));
+    component.getProjMembers();
+    expect(service.getProjMembers).toHaveBeenCalled();
+
+  });
+
+  it('should test onSubmit method', ()=>{
+   spyOn(service, 'addEpic').and.returnValue(of([]));
+   component.onSubmit()
+   expect(service.addEpic).toHaveBeenCalled();
   });
 
   it('should add a tag to the tags array', () => {
