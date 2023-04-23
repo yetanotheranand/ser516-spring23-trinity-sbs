@@ -4,6 +4,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { LoginComponent } from './login/login.component';
 import { TaskComponent } from './task/task.component';
 import { ProductBacklogComponent } from './product-backlog/product-backlog.component';
+import { EpicEditComponent } from './epic/epic-edit/epic-edit.component';
 
 const routes: Routes = [
   { path: '', component: LoginComponent },
@@ -19,9 +20,17 @@ const routes: Routes = [
     loadChildren: () =>
       import('../../src/app/epic/epic.module').then((m) => m.EpicModule),
   },
+  {
+    path: 'scrum-board',
+    loadChildren: () =>
+      import('../../src/app/scrum-board/scrum-board.module').then(
+        (m) => m.ScrumBoardModule
+      ),
+  },
   // { path: 'new-project', component: NewProjectComponent },
   { path: 'product-backlog', component: ProductBacklogComponent },
   { path: 'task', component: TaskComponent },
+  { path: 'projects/:slug/epics/:id/edit', component: EpicEditComponent },
 ];
 
 @NgModule({
