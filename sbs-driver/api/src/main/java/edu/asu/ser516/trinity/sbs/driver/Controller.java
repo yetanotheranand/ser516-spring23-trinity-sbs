@@ -31,6 +31,9 @@ public class Controller {
     @Autowired
     SimulationService simulationService;
 
+    /**
+     * Method to ...
+     */
     @PostConstruct
     public void init() {
         Runtime.getRuntime().addShutdownHook(new Thread(() -> {
@@ -43,6 +46,9 @@ public class Controller {
         }));
     }
 
+    /**
+     * @return
+     */
     @GetMapping("/simulate")
     public SseEmitter streamScrumSimulation() {
         Task task = new Task(1, "TG-1", "Task 1", LocalDateTime.now(), "AG", 1, 1);
@@ -81,9 +87,7 @@ public class Controller {
         data.setStrategy(StrategyType.PULL_BV);
         Comparator<UserStory> bvComparator = null;
         if (StrategyType.PULL_BV == data.getStrategy()) {
-            bvComparator =
-                    Comparator.comparing(userStory -> userStory.getBusinessValue(),
-                            Comparator.reverseOrder());
+            bvComparator = UserStory.getBusinessValueComparator();
         }
 
         Comparator<UserStory> finalBvComparator = bvComparator;

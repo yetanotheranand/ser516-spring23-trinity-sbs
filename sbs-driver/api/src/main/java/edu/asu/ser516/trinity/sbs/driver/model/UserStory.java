@@ -2,6 +2,7 @@ package edu.asu.ser516.trinity.sbs.driver.model;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 
 public class UserStory extends Entity {
@@ -76,6 +77,11 @@ public class UserStory extends Entity {
 
     public void setStoryPoints(PointTuple storyPoints) {
         this.storyPoints = storyPoints;
+    }
+
+    public static Comparator<UserStory> getBusinessValueComparator() {
+        return Comparator.comparing(userStory -> userStory.getBusinessValue(),
+                Comparator.reverseOrder());
     }
 
     @Override
