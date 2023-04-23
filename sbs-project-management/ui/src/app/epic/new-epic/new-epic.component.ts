@@ -63,22 +63,6 @@ export class NewEpicComponent implements OnInit {
   }
 
   onSubmit() {
-    console.log(this.addEpicForm.value);
-    const EpicDetails = {
-      color: '',
-      subject: ['', Validators.required],
-      description: '',
-      assigned_to: 0,
-      clientRequirement: false,
-      status: '',
-      tags: this.formBuilder.array([this.formBuilder.control('')]),
-      project: parseInt(
-        this.epicService.getProjDetails(
-          this.route.snapshot.paramMap.get('slug')
-        ).id
-      ),
-    };
-    console.log(EpicDetails);
     this.epicService.addEpic(this.addEpicForm.value).subscribe(
       () => this.router.navigate(['../'], { relativeTo: this.route }),
       (err) => console.log(err)

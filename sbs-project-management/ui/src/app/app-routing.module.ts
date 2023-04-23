@@ -20,6 +20,13 @@ const routes: Routes = [
     loadChildren: () =>
       import('../../src/app/epic/epic.module').then((m) => m.EpicModule),
   },
+  {
+    path: 'scrum-board',
+    loadChildren: () =>
+      import('../../src/app/scrum-board/scrum-board.module').then(
+        (m) => m.ScrumBoardModule
+      ),
+  },
   // { path: 'new-project', component: NewProjectComponent },
   { path: 'user-story', component: UserStoryComponent },
   { path: 'product-backlog', component: ProductBacklogComponent },
