@@ -6,7 +6,7 @@ import { EpicService } from 'src/app/services/epic.service';
 import { RouterTestingModule } from '@angular/router/testing';
 import { ActivatedRoute, RouterModule } from '@angular/router';
 
-import { of, throwError } from 'rxjs';
+import { of } from 'rxjs';
 
 fdescribe('EpicListComponent', () => {
   let component: EpicListComponent;
