@@ -8,9 +8,18 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+/**
+ * This class defines the API for retrieving excel data.
+ */
+
 @RestController
 @RequestMapping("/readExcel")
 public class ReadExcelController {
+    /**
+     * This method is used to retrieve excel data.
+     *
+     * @return  task info as list
+     */
 
     @Autowired
     private ReadExcelService readExcelService;
