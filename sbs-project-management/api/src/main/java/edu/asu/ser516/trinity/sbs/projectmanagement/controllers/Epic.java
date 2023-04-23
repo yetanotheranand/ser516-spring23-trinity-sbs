@@ -195,11 +195,12 @@ public class Epic {
     }
 
     /**
-
-     Deletes an epic by its ID.
-     @param epicId the ID of the epic to be deleted
-     @param token the authorization token
-     @return success or failure response of the deletion
+     * Deletes an epic by its ID.
+     *
+     * @param epicId the ID of the epic to be deleted
+     * @param token the authorization token
+     * @return success or failure response of the deletion
+     *
      */
     @DeleteMapping("/{epicId}")
     public ResponseEntity<String> deleteEpic(@PathVariable int epicId,
