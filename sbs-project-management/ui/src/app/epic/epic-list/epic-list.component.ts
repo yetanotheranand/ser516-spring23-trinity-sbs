@@ -12,9 +12,9 @@ export class EpicListComponent implements OnInit {
   slug: string;
 
   constructor(
-    private epicService: EpicService,
-    private route: ActivatedRoute,
-    private router: Router
+    public epicService: EpicService,
+    public route: ActivatedRoute,
+    public router: Router
   ) {}
 
   ngOnInit(): void {
@@ -37,25 +37,32 @@ export class EpicListComponent implements OnInit {
     const slug = this.route.snapshot.paramMap.get('slug');
     let epicData = null;
     for (const prop in this.dataSource) {
-      if (this.dataSource.hasOwnProperty(prop) && this.dataSource[prop].id === id) {
+      if (
+        // eslint-disable-next-line no-prototype-builtins
+        this.dataSource.hasOwnProperty(prop) &&
+        this.dataSource[prop].id === id
+      ) {
         epicData = this.dataSource[prop];
-        console.log(epicData)
+        console.log(epicData);
         break;
       }
     }
     if (epicData) {
       epicData = { ...epicData, version: epicData.version };
-      this.router.navigate(['/projects', slug, 'epics', id, 'edit'], { state: { epicData } });
+      this.router.navigate(['/projects', slug, 'epics', id, 'edit'], {
+        state: { epicData },
+      });
       console.log(epicData);
     } else {
       console.log(`Epic with id ${id} not found in the dataSource.`);
     }
-  }  
+  }
 
   deleteEpic(id) {
     const slug = this.route.snapshot.paramMap.get('slug');
     if (confirm('Are you sure you want to delete this epic?')) {
       this.epicService.deleteEpic(id).subscribe(
+        // eslint-disable-next-line @typescript-eslint/no-unused-vars
         (data) => {
           this.getEpecList(slug);
         },

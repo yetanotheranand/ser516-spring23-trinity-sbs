@@ -6,7 +6,7 @@ import { EpicService } from 'src/app/services/epic.service';
 @Component({
   selector: 'app-epic-edit',
   templateUrl: './epic-edit.component.html',
-  styleUrls: ['./epic-edit.component.css']
+  styleUrls: ['./epic-edit.component.css'],
 })
 export class EpicEditComponent implements OnInit {
   addEpicForm: FormGroup;
@@ -15,9 +15,9 @@ export class EpicEditComponent implements OnInit {
 
   constructor(
     private formBuilder: FormBuilder,
-    private epicService: EpicService,
-    private route: ActivatedRoute,
-    private router: Router
+    public epicService: EpicService,
+    public route: ActivatedRoute,
+    public router: Router
   ) {
     this.addEpicForm = this.formBuilder.group({
       color: ['', Validators.required],
@@ -26,7 +26,7 @@ export class EpicEditComponent implements OnInit {
       assigned_to: ['', Validators.required],
       clientRequirement: [''],
       tags: this.formBuilder.array([]),
-      version : ['']
+      version: [''],
     });
   }
 
@@ -34,28 +34,30 @@ export class EpicEditComponent implements OnInit {
     this.getProjMembers();
     this.epicId = +this.route.snapshot.params['id'];
     const epicData = history.state?.epicData;
-  
+
     if (!epicData) {
       this.router.navigate(['/projects']);
       return;
     }
-  
-    const epic = Array.isArray(epicData) ? epicData.find((epic: any) => epic.id === this.epicId) : epicData;
-  
+
+    const epic = Array.isArray(epicData)
+      ? epicData.find((epic: any) => epic.id === this.epicId)
+      : epicData;
+
     this.addEpicForm = this.formBuilder.group({
       color: [epic?.color || '', Validators.required],
       subject: [epic?.subject || '', Validators.required],
       assigned_to: [epic?.assigned_to || '', Validators.required],
       clientRequirement: [epic?.clientRequirement || true],
       tags: this.formBuilder.array([]),
-      version : [epic?.version]
+      version: [epic?.version],
     });
-  
+
     if (epic?.tags?.length > 0) {
       for (const tag of epic.tags) {
         this.tags.push(this.formBuilder.control(tag));
       }
-    };
+    }
   }
 
   getProjMembers() {
@@ -71,7 +73,6 @@ export class EpicEditComponent implements OnInit {
         }
       );
   }
-  
 
   get tags(): FormArray {
     return this.addEpicForm.get('tags') as FormArray;
@@ -85,16 +86,15 @@ export class EpicEditComponent implements OnInit {
     const formData = this.addEpicForm.value;
     formData.id = this.epicId;
     const projectId = parseInt(
-      this.epicService.getProjDetails(
-        this.route.snapshot.paramMap.get('slug')
-      ).id
+      this.epicService.getProjDetails(this.route.snapshot.paramMap.get('slug'))
+        .id
     );
     formData.project = projectId;
     formData.version = this.addEpicForm.get('version').value;
-    
+
     this.epicService.updateEpic(formData).subscribe(
       (data) => {
-        () => this.router.navigate(['../'], { relativeTo: this.route })
+        this.router.navigate(['../..'], { relativeTo: this.route });
         console.log(data);
       },
       (error) => {
