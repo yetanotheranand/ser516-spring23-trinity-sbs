@@ -84,6 +84,11 @@ public class UserStory extends Entity {
                 Comparator.reverseOrder());
     }
 
+    public static Comparator<UserStory> getStoryPointsComparator() {
+        return Comparator.comparing(userStory -> userStory.getStoryPoints().getTotal(),
+                Comparator.reverseOrder());
+    }
+
     @Override
     public String toString() {
         return "UserStory{"

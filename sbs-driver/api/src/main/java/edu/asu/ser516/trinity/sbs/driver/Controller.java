@@ -88,6 +88,8 @@ public class Controller {
         Comparator<UserStory> bvComparator = null;
         if (StrategyType.PULL_BV == data.getStrategy()) {
             bvComparator = UserStory.getBusinessValueComparator();
+        } else if (StrategyType.PULL_SP == data.getStrategy()) {
+            bvComparator = UserStory.getStoryPointsComparator();
         }
 
         Comparator<UserStory> finalBvComparator = bvComparator;
