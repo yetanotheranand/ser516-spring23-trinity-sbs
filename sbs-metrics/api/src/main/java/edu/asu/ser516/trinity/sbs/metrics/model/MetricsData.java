@@ -12,11 +12,10 @@ public class MetricsData {
     private int workCapacity;
     private int workVelocity;
 
-    public MetricsData(int storyPoints, int storiesCompleted, int businessValue, int focusFactor, int wip, int storiesTargeted, int workCapacity, int workVelocity) {
+    public MetricsData(int storyPoints, int storiesCompleted, int businessValue, int wip, int storiesTargeted, int workCapacity, int workVelocity) {
         this.storyPoints = storyPoints;
         this.storiesCompleted = storiesCompleted;
         this.businessValue = businessValue;
-        this.focusFactor = focusFactor;
         this.wip = wip;
         this.storiesTargeted = storiesTargeted;
         this.workCapacity = workCapacity;
