@@ -1,4 +1,5 @@
 package edu.asu.ser516.trinity.sbs.metrics.controller;
+
 import edu.asu.ser516.trinity.sbs.metrics.model.MetricsData;
 import java.util.ArrayList;
 import java.util.List;
@@ -12,6 +13,12 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/metrics")
 public class MetricsController {
+
+    /**
+     * This method is used to GET metrics data.
+     *
+     * @return  metrics for each day of the simulation as a list
+     */
 
     @GetMapping("/data")
     public List<MetricsData> getMetrics() {
