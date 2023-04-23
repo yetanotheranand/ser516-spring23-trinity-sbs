@@ -62,16 +62,14 @@ export class EpicListComponent implements OnInit {
 
   deleteEpic(id) {
     const slug = this.route.snapshot.paramMap.get('slug');
-    if (confirm('Are you sure you want to delete this epic?')) {
-      this.epicService.deleteEpic(id).subscribe(
-        // eslint-disable-next-line @typescript-eslint/no-unused-vars
-        (data) => {
-          this.getEpecList(slug);
-        },
-        (error) => {
-          console.log(error);
-        }
-      );
-    }
+    this.epicService.deleteEpic(id).subscribe(
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
+      (data) => {
+        this.getEpecList(slug);
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
   }
 }
