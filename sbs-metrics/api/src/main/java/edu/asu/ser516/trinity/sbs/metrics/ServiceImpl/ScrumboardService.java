@@ -1,4 +1,4 @@
-package edu.asu.ser516.trinity.sbs.metrics.service;
+package edu.asu.ser516.trinity.sbs.metrics.ServiceImpl;
 
 import java.util.List;
 
