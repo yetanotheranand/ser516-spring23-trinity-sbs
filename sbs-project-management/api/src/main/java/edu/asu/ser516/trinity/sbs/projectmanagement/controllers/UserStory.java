@@ -95,11 +95,7 @@ public class UserStory {
                 .contentType("application/json")
                 .body(j.toString())
                 .asJson();
-        logger.info(url);
-        logger.info(j.toString());
-        logger.info(String.valueOf(response.getStatus()));
-
-        logger.info(String.valueOf(response.getBody()));
+        
         if (response.getStatus() == 201) {
             logger.info("User Story Creation Success");
             return ResponseEntity.ok(response.getBody().toString());
