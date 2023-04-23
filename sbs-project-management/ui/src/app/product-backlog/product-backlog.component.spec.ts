@@ -3,12 +3,15 @@ import { of, throwError } from 'rxjs';
 import { convertToParamMap, ActivatedRoute } from '@angular/router';
 import { ProductBacklogComponent } from './product-backlog.component';
 import { ProductBacklogService } from '../services/product-backlog.service';
+import { Router } from '@angular/router';
+import { RouterTestingModule } from '@angular/router/testing';
 
 fdescribe('ProductBacklogComponent', () => {
   let component: ProductBacklogComponent;
   let fixture: ComponentFixture<ProductBacklogComponent>;
   let mockBacklogService: jasmine.SpyObj<ProductBacklogService>;
   let mockActivatedRoute: any;
+  let router: Router;
 
   beforeEach(async () => {
     mockBacklogService = jasmine.createSpyObj<ProductBacklogService>([
@@ -21,6 +24,7 @@ fdescribe('ProductBacklogComponent', () => {
 
     await TestBed.configureTestingModule({
       declarations: [ProductBacklogComponent],
+      imports: [RouterTestingModule],
       providers: [
         { provide: ProductBacklogService, useValue: mockBacklogService },
         { provide: ActivatedRoute, useValue: mockActivatedRoute },
@@ -31,6 +35,7 @@ fdescribe('ProductBacklogComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(ProductBacklogComponent);
     component = fixture.componentInstance;
+    router = TestBed.inject(Router);
   });
 
   it('should create', () => {
@@ -93,5 +98,10 @@ fdescribe('ProductBacklogComponent', () => {
     component.id = '123';
     component.getUserStories();
     expect(component.productBacklogData).toEqual([]);
+  });
+  it('should navigate to task component on add task', () => {
+    const navigateSpy = spyOn(router, 'navigate');
+    component.openTaskPage();
+    expect(navigateSpy).toHaveBeenCalledWith(['/task']);
   });
 });
