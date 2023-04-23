@@ -6,9 +6,13 @@ import { EpicService } from 'src/app/services/epic.service';
 import { RouterTestingModule } from '@angular/router/testing';
 import { ActivatedRoute, RouterModule } from '@angular/router';
 
+import { of } from 'rxjs';
+
 fdescribe('EpicListComponent', () => {
   let component: EpicListComponent;
   let fixture: ComponentFixture<EpicListComponent>;
+
+  let service: EpicService;
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [EpicListComponent],
@@ -30,6 +34,7 @@ fdescribe('EpicListComponent', () => {
 
     fixture = TestBed.createComponent(EpicListComponent);
     component = fixture.componentInstance;
+    service = TestBed.inject(EpicService);
     fixture.detectChanges();
     component.dataSource = [
       {
@@ -48,9 +53,14 @@ fdescribe('EpicListComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should test ngOniInit', () => {
+  it('should test ngOnInit', () => {
     spyOn(component, 'getEpecList');
     component.ngOnInit();
     expect(component.getEpecList).toHaveBeenCalled();
+  });
+  it('should test getEpecList method', () => {
+    spyOn(service, 'getEpicList').and.returnValue(of([]));
+    component.getEpecList('ser516proj2-456');
+    expect(service.getEpicList).toHaveBeenCalled();
   });
 });
