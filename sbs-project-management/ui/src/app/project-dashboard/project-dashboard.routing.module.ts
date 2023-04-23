@@ -7,6 +7,7 @@ import { EpicListComponent } from '../epic/epic-list/epic-list.component';
 import { NewEpicComponent } from '../epic/new-epic/new-epic.component';
 import { TeamsComponent } from './teams/teams.component';
 import { ProductBacklogComponent } from '../product-backlog/product-backlog.component';
+import { DragDropScrumBoardComponent } from '../scrum-board/drag-drop-scrum-board/drag-drop-scrum-board.component';
 
 const routes: Routes = [
   {
@@ -44,6 +45,10 @@ const routes: Routes = [
             path: 'team',
             component: TeamsComponent,
           },
+          {
+            path:'scrum-board',
+            component: DragDropScrumBoardComponent
+          }
         ],
       },
     ],
