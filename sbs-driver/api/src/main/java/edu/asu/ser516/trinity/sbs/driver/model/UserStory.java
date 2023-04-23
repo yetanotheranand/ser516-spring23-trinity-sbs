@@ -82,6 +82,7 @@ public class UserStory extends Entity {
     public String toString() {
         return "UserStory{"
                 + "storyPoints=" + storyPoints.getDone() + "/" + storyPoints.getTotal()
+                + ", bv=" + businessValue
                 + ", id=" + id
                 + ", title='" + title + '\''
                 + ", status=" + status

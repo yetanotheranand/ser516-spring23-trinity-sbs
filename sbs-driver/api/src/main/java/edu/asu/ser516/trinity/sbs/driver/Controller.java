@@ -2,6 +2,7 @@ package edu.asu.ser516.trinity.sbs.driver;
 
 import edu.asu.ser516.trinity.sbs.driver.model.SimulationData;
 import edu.asu.ser516.trinity.sbs.driver.model.Sprint;
+import edu.asu.ser516.trinity.sbs.driver.model.StrategyType;
 import edu.asu.ser516.trinity.sbs.driver.model.Task;
 import edu.asu.ser516.trinity.sbs.driver.model.TeamMember;
 import edu.asu.ser516.trinity.sbs.driver.model.UserStory;
@@ -9,6 +10,7 @@ import jakarta.annotation.PostConstruct;
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -48,13 +50,13 @@ public class Controller {
                 2, 1);
         us1.addTask(task);
         UserStory us2 = new UserStory(2, "US-2", "Desc 2", LocalDateTime.now(), "AG", 1, 13,
-                2, 1);
+                4, 1);
         us2.addTask(task);
         UserStory us3 = new UserStory(3, "US-3", "Desc 3", LocalDateTime.now(), "AG", 1, 8,
-                2, 1);
+                3, 1);
         us3.addTask(task);
         UserStory us4 = new UserStory(4, "US-4", "Desc 4", LocalDateTime.now(), "AG", 1, 21,
-                2, 1);
+                8, 1);
         us4.addTask(task);
 
         Sprint sprint1 = new Sprint(1, "Sprint 1", LocalDateTime.now(),
@@ -75,6 +77,21 @@ public class Controller {
         SimulationData data = new SimulationData();
         data.addSprint(sprint1);
         data.addSprint(sprint2);
+
+        data.setStrategy(StrategyType.PULL_BV);
+        Comparator<UserStory> bvComparator = null;
+        if (StrategyType.PULL_BV == data.getStrategy()) {
+            bvComparator =
+                    Comparator.comparing(userStory -> userStory.getBusinessValue(),
+                            Comparator.reverseOrder());
+        }
+
+        Comparator<UserStory> finalBvComparator = bvComparator;
+        data.getSprints().forEach(sprint -> {
+            List<UserStory> userStories = sprint.getUserStories();
+            userStories.sort(finalBvComparator);
+            sprint.setUserStories(userStories);
+        });
 
         SseEmitter sseEmitter = new SseEmitter(5 * 60 * 1000L);
         sseEmitter.onCompletion(() -> LOGGER.info("SseEmitter is completed"));
