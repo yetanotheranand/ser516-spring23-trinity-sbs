@@ -1,5 +1,6 @@
 package edu.asu.ser516.trinity.sbs.driver;
 
+import edu.asu.ser516.trinity.sbs.driver.model.ModeType;
 import edu.asu.ser516.trinity.sbs.driver.model.SimulationData;
 import edu.asu.ser516.trinity.sbs.driver.model.Sprint;
 import edu.asu.ser516.trinity.sbs.driver.model.StrategyType;
@@ -19,6 +20,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.mvc.method.annotation.SseEmitter;
 
@@ -50,7 +52,9 @@ public class Controller {
      * @return
      */
     @GetMapping("/simulate")
-    public SseEmitter streamScrumSimulation() {
+    public SseEmitter streamScrumSimulation(
+            @RequestParam(defaultValue = "AUTO") ModeType mode,
+            @RequestParam(defaultValue = "PULL_BV") StrategyType strategy) {
         Task task = new Task(1, "TG-1", "Task 1", LocalDateTime.now(), "AG", 1, 1);
         UserStory us1 = new UserStory(1, "US-1", "Desc 1", LocalDateTime.now(), "AG", 1, 5,
                 2, 1);
@@ -84,18 +88,13 @@ public class Controller {
         data.addSprint(sprint1);
         data.addSprint(sprint2);
 
-        data.setStrategy(StrategyType.PULL_BV);
-        Comparator<UserStory> bvComparator = null;
-        if (StrategyType.PULL_BV == data.getStrategy()) {
-            bvComparator = UserStory.getBusinessValueComparator();
-        } else if (StrategyType.PULL_SP == data.getStrategy()) {
-            bvComparator = UserStory.getStoryPointsComparator();
-        }
+        data.setMode(mode);
+        data.setStrategy(strategy);
 
-        Comparator<UserStory> finalBvComparator = bvComparator;
+        Comparator<UserStory> usComparator = UserStory.getComparatorByStrategyType(data.getStrategy());
         data.getSprints().forEach(sprint -> {
             List<UserStory> userStories = sprint.getUserStories();
-            userStories.sort(finalBvComparator);
+            userStories.sort(usComparator);
             sprint.setUserStories(userStories);
         });
 

@@ -79,14 +79,19 @@ public class UserStory extends Entity {
         this.storyPoints = storyPoints;
     }
 
-    public static Comparator<UserStory> getBusinessValueComparator() {
-        return Comparator.comparing(userStory -> userStory.getBusinessValue(),
-                Comparator.reverseOrder());
-    }
-
-    public static Comparator<UserStory> getStoryPointsComparator() {
-        return Comparator.comparing(userStory -> userStory.getStoryPoints().getTotal(),
-                Comparator.reverseOrder());
+    public static Comparator<UserStory> getComparatorByStrategyType(StrategyType strategyType) {
+        switch (strategyType) {
+            case PULL_BV -> {
+                return Comparator.comparing(UserStory::getBusinessValue,
+                        Comparator.reverseOrder());
+            }
+            case PULL_SP -> {
+                return Comparator.comparing(userStory -> userStory.getStoryPoints().getTotal());
+            }
+            default -> {
+                return Comparator.comparing(UserStory::getPriority);
+            }
+        }
     }
 
     @Override
