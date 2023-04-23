@@ -1,0 +1,271 @@
+<div class="sidenav">
+  <a [routerLink]="['scrum-board']">Scrum</a>
+</div>
+<div class="main">
+  <div class="row" style="padding: 10px; margin-top: 20px">
+    <div class="formGroup col-sm-4 d-flex">
+      <label for="sprint">Sprint: </label>
+      <select id="sprint" class="form-control mx-2">
+        <option *ngFor="let sprint of sprints" value="{{ sprint.id }}">
+          {{ sprint.name }} {{ sprint.startDt }} to {{ sprint.endDt }}
+        </option>
+      </select>
+    </div>
+    <button
+      class="col-sm-2"
+      type="button"
+      data-bs-toggle="modal"
+      data-bs-target="#addSprint"
+    >
+      + Add Sprint
+    </button>
+  </div>
+  <div class="board">
+    <div
+      class="list col mx-2"
+      cdkDropList
+      style="padding-right: 10px; border-right: 1px solid lightgray"
+      [cdkDropListConnectedTo]="[
+        'ready',
+        'inProgress',
+        'testing',
+        'review',
+        'done',
+        'waiting',
+        'blocking'
+      ]"
+      [cdkDropListData]="containers[0].userStories"
+      (cdkDropListDropped)="onDrop($event)"
+      id="toDo"
+    >
+      <h2 class="title">{{ containers[0].name }}</h2>
+      <div
+        class="card-container"
+        *ngFor="let card of containers[0].userStories"
+        cdkDrag
+      >
+        <div class="card" style="background-color: beige">
+          <a>{{ card.title }}</a>
+          <p class="description">{{ card.description }}</p>
+          <p class="status">{{ containers[0].status }}</p>
+        </div>
+      </div>
+    </div>
+    <div
+      class="list col mx-2"
+      cdkDropList
+      style="padding-right: 10px; border-right: 1px solid lightgray"
+      [cdkDropListConnectedTo]="[
+        'toDo',
+        'ready',
+        'testing',
+        'done',
+        'waiting',
+        'blocking'
+      ]"
+      [cdkDropListData]="containers[1].userStories"
+      (cdkDropListDropped)="onDrop($event)"
+      id="inProgress"
+    >
+      <h2 class="title">{{ containers[1].name }}</h2>
+      <div
+        class="card-container"
+        *ngFor="let card of containers[1].userStories"
+        cdkDrag
+      >
+        <div class="card" style="background-color: beige">
+          <a>{{ card.title }}</a>
+          <p class="description">{{ card.description }}</p>
+          <p class="status">{{ containers[1].status }}</p>
+        </div>
+      </div>
+    </div>
+    <!-- <div class="list col mx-2" cdkDropList style="padding-right: 10px; border-right: 1px solid lightgray;"
+            [cdkDropListData]="containers[2].userStories" (cdkDropListDropped)="onDrop($event)" id="ready"
+            [cdkDropListConnectedTo]="['toDo','inProgress','testing', 'done', 'waiting', 'blocking']">
+            <h2 class="title">{{ containers[2].name }}</h2>
+            <div class="card-container"*ngFor="let card of containers[2].userStories" cdkDrag>
+                <div class="card" style="background-color: aquamarine;">
+                    <a>{{ card.title }}</a>
+                    <p class="description">{{ card.description }}</p>
+                    <p class="status">{{ containers[2].status }}</p>
+                </div>
+            </div>
+        </div> -->
+    <div
+      class="list col mx-2"
+      cdkDropList
+      style="padding-right: 10px; border-right: 1px solid lightgray"
+      [cdkDropListConnectedTo]="[
+        'ready',
+        'inProgress',
+        'testing',
+        'done',
+        'waiting',
+        'blocking'
+      ]"
+      [cdkDropListData]="containers[2].userStories"
+      (cdkDropListDropped)="onDrop($event)"
+      id="testing"
+      style="padding-right: 10px; border-right: 1px solid lightgray"
+    >
+      <h2 class="title">{{ containers[2].name }}</h2>
+      <div
+        class="card-container"
+        *ngFor="let card of containers[2].userStories"
+        cdkDrag
+      >
+        <div class="card" style="background-color: aqua">
+          <a>{{ card.title }}</a>
+          <p class="description">{{ card.description }}</p>
+          <p class="status">{{ containers[2].status }}</p>
+        </div>
+      </div>
+    </div>
+    <div
+      class="list col mx-2"
+      cdkDropList
+      [cdkDropListConnectedTo]="[
+        'toDo',
+        'ready',
+        'inProgress',
+        'testing',
+        'done',
+        'blocking'
+      ]"
+      [cdkDropListData]="containers[3].userStories"
+      (cdkDropListDropped)="onDrop($event)"
+      id="waiting"
+      style="padding-right: 10px; border-right: 1px solid lightgray"
+    >
+      <h2 class="title">{{ containers[3].name }}</h2>
+      <div
+        class="card-container"
+        *ngFor="let card of containers[3].userStories"
+        cdkDrag
+      >
+        <div class="card" style="background-color: orange">
+          <a>{{ card.title }}</a>
+          <p class="description">{{ card.description }}</p>
+          <p class="status">{{ containers[3].status }}</p>
+        </div>
+      </div>
+    </div>
+    <div
+      class="list col mx-2"
+      cdkDropList
+      style="padding-right: 10px; border-right: 1px solid lightgray"
+      [cdkDropListConnectedTo]="[
+        'toDo',
+        'ready',
+        'inProgress',
+        'testing',
+        'waiting',
+        'blocking'
+      ]"
+      [cdkDropListData]="containers[4].userStories"
+      (cdkDropListDropped)="onDrop($event)"
+      id="done"
+    >
+      <h2 class="title">{{ containers[4].name }}</h2>
+      <div
+        class="card-container"
+        *ngFor="let card of containers[4].userStories"
+        cdkDrag
+      >
+        <div class="card" style="background-color: lightgreen">
+          <a>{{ card.title }}</a>
+          <p class="description">{{ card.description }}</p>
+          <p class="status">{{ containers[4].status }}</p>
+        </div>
+      </div>
+    </div>
+    <div
+      class="list col mx-2"
+      cdkDropList
+      [cdkDropListConnectedTo]="[
+        'toDo',
+        'ready',
+        'inProgress',
+        'testing',
+        'waiting',
+        'done'
+      ]"
+      [cdkDropListData]="containers[5].userStories"
+      (cdkDropListDropped)="onDrop($event)"
+      id="blocking"
+    >
+      <h2 class="title">{{ containers[5].name }}</h2>
+      <div
+        class="card-container"
+        *ngFor="let card of containers[4].userStories"
+        cdkDrag
+      >
+        <div class="card" style="background-color: orange">
+          <a>{{ card.title }}</a>
+          <p class="description">{{ card.description }}</p>
+          <p class="status">{{ containers[5].status }}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div
+  class="modal fade"
+  id="addSprint"
+  tabindex="-1"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Add Sprint</h1>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body">
+        <div class="row d-flex">
+          <label>Name:</label>
+          <input
+            class="form-control form-control-sm"
+            type="text"
+            placeholder="name"
+            aria-label=".form-control-sm example"
+          />
+        </div>
+        <div class="row d-flex">
+          <label for="start">Start Date:</label>
+          <input
+            type="date"
+            id="start"
+            name="trip-start"
+            value="2018-07-22"
+            min="2018-01-01"
+            max="2018-12-31"
+          />
+          <label for="end">End Date:</label>
+          <input
+            type="date"
+            id="end"
+            name="trip-end"
+            value="2018-07-22"
+            min="2018-01-01"
+            max="2018-12-31"
+          />
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+          Close
+        </button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
