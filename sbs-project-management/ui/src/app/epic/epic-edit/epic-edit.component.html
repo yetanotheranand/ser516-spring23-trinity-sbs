@@ -1,0 +1,108 @@
+<div class="container m-5 border border-secondary">
+  <h1>Edit Epic</h1>
+  <form [formGroup]="addEpicForm" (ngSubmit)="onSubmit()">
+    <div class="form-group">
+      <label for="color">Color</label>
+      <input
+        type="color"
+        class="form-control"
+        id="color"
+        formControlName="color"
+        [value]="addEpicForm.controls['color'].value"
+      />
+      <div
+        *ngIf="
+          addEpicForm.controls['color'].invalid &&
+          (addEpicForm.controls['color'].dirty ||
+            addEpicForm.controls['color'].touched)
+        "
+        class="alert alert-danger mt-1"
+      >
+        <div *ngIf="addEpicForm.controls['color'].errors['required']">
+          Color is required.
+        </div>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="subject">Subject</label>
+      <input
+        type="text"
+        class="form-control"
+        id="subject"
+        formControlName="subject"
+      />
+      <div
+        *ngIf="
+          addEpicForm.controls['subject'].invalid &&
+          (addEpicForm.controls['subject'].dirty ||
+            addEpicForm.controls['subject'].touched)
+        "
+        class="alert alert-danger mt-1"
+      >
+        <div *ngIf="addEpicForm.controls['subject'].errors['required']">
+          Subject is required.
+        </div>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="assigned_to">Assigned To</label>
+      <select
+        class="form-control"
+        id="assigned_to"
+        formControlName="assigned_to"
+      >
+        <option *ngFor="let member of projectMembers" [value]="member.id">
+          {{ member.full_name }}
+        </option>
+      </select>
+      <div
+        *ngIf="
+          addEpicForm.controls['assigned_to'].invalid &&
+          (addEpicForm.controls['assigned_to'].dirty ||
+            addEpicForm.controls['assigned_to'].touched)
+        "
+        class="alert alert-danger mt-1"
+      >
+        <div *ngIf="addEpicForm.controls['assigned_to'].errors['required']">
+          Assigned To is required.
+        </div>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="clientRequirement">Client Requirement</label>
+      <input
+        type="checkbox"
+        id="clientRequirement"
+        formControlName="clientRequirement"
+      />
+      <label class="ml-2" for="clientRequirement">Client Requirement</label>
+      <span class="ml-3">{{
+        addEpicForm.controls["clientRequirement"].value
+          ? "Checked"
+          : "Unchecked"
+      }}</span>
+    </div>
+    <div class="form-group">
+      <label for="tags">Tags</label>
+      <div formArrayName="tags">
+        <div
+          *ngFor="let tag of tags.controls; let i = index"
+          class="d-flex align-items-center mb-2"
+        >
+          <input type="text" class="form-control mr-2" [formControlName]="i" />
+          <button
+            type="button"
+            class="btn btn-danger"
+            (click)="tags.removeAt(i)"
+          >
+            Remove
+          </button>
+        </div>
+        <button type="button" class="btn btn-primary" (click)="addTag()">
+          Add Tag
+        </button>
+      </div>
+    </div>
+    <button type="submit" class="btn btn-primary mt-5">Update Epic</button>
+  </form>
+</div>
