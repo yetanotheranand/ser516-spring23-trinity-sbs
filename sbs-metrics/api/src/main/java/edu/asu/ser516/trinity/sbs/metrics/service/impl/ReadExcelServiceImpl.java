@@ -33,7 +33,6 @@ public class ReadExcelServiceImpl implements ReadExcelService {
                 XSSFRow row = sheet.getRow(i);
 
                 if (row != null) {
-                    System.out.println("Row= " + row);
                     taskInfo.setToDo(dataFormatter.formatCellValue(row.getCell(0)));
                     taskInfo.setInProgress(dataFormatter.formatCellValue(row.getCell(1)));
                     taskInfo.setReview(dataFormatter.formatCellValue(row.getCell(2)));
