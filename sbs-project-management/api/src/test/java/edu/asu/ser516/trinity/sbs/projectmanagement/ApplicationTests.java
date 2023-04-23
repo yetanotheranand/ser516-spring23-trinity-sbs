@@ -14,6 +14,7 @@ import java.net.URI;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
+
 import kong.unirest.Unirest;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -54,7 +55,6 @@ public class ApplicationTests {
     private String epicStatusName;
     @Value("${TAIGA_DEMO_EPICSTATUSID}")
     private String epicStatusId;
-
 
 
     public ApplicationTests() throws JSONException {
@@ -296,7 +296,7 @@ public class ApplicationTests {
     private String getAuthToken(String username,
                                 String password) throws IOException,
             InterruptedException, JSONException {
-        String url = taigaBaseUrl+"auth";
+        String url = taigaBaseUrl + "auth";
         HttpClient client = HttpClient.newHttpClient();
         JSONObject j = new JSONObject();
         j.put("username", username);
@@ -346,14 +346,14 @@ public class ApplicationTests {
         // Update the epic name and status
         String updatedName = "Updated Epic Name";
         String updatedStatusId = "2"; // Assuming 2 is the ID for the desired status
-        String subject="test";
-        String version="1";
+        String subject = "test";
+        String version = "1";
         JSONObject updatedEpic = new JSONObject();
         updatedEpic.put("name", updatedName);
         updatedEpic.put("status", updatedStatusId);
-        updatedEpic.put("project",projectId);
-        updatedEpic.put("subject",subject);
-        updatedEpic.put("version",version);
+        updatedEpic.put("project", projectId);
+        updatedEpic.put("subject", subject);
+        updatedEpic.put("version", version);
 
 
         // Send the update request
@@ -389,9 +389,6 @@ public class ApplicationTests {
                         .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isNotFound());
     }
-
-
-
 
 
 }
