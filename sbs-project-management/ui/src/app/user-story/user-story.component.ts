@@ -26,7 +26,7 @@ export class UserStoryComponent {
     private route: ActivatedRoute,
   ) {
     this.route.queryParamMap.subscribe((params) => {
-    this.id = params.get('projectid');
+    this.id = params.get('projectid') || '';
     console.log(this.id);
     if (this.id != null) {
       this.userStoryData = {
@@ -48,6 +48,9 @@ export class UserStoryComponent {
       this.frontPoints +
       this.backPoints;
       console.log(this.userStoryData);
-      this.userStoryService.addUserStory(this.userStoryData).subscribe(res => console.log(res));
+      this.userStoryService.addUserStory(this.userStoryData).subscribe(
+        res => console.log(res),
+        err => console.error(err)
+      );
   }
 }
