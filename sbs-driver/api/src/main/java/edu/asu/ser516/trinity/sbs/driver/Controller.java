@@ -24,6 +24,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.mvc.method.annotation.SseEmitter;
 
+/**
+ This class serves as the main controller for the application, handling HTTP
+ requests and responses. It contains methods annotated with various HTTP verbs
+ (e.g., @GetMapping, @PostMapping) that map to specific request URLs.
+ */
 @RestController
 public class Controller {
 
@@ -34,7 +39,8 @@ public class Controller {
     SimulationService simulationService;
 
     /**
-     * Method to ...
+     * Initializes the controller by adding a shutdown hook to gracefully
+     * shutdown the ExecutorService when the application is stopped
      */
     @PostConstruct
     public void init() {
@@ -49,7 +55,9 @@ public class Controller {
     }
 
     /**
-     * @return
+     * Handles HTTP GET requests to simulate a scrum setup
+     *
+     * @return the name of the view to display the simulation results
      */
     @GetMapping("/simulate")
     public SseEmitter streamScrumSimulation(
