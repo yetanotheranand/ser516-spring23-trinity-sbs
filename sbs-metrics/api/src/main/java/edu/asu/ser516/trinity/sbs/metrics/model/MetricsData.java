@@ -11,14 +11,14 @@ public class MetricsData {
     private int workCapacity;
     private int workVelocity;
 
-    public MetricsData(int storyPoints, int storiesCompleted, int businessValue, int wip, int storiesTargeted, int workCapacity, int workVelocity) {
-        this.storyPoints = storyPoints;
-        this.storiesCompleted = storiesCompleted;
-        this.businessValue = businessValue;
+    public MetricsData(int sp, int sc, int bv, int wip, int st, int wc, int wv) {
+        this.storyPoints = sp;
+        this.storiesCompleted = sc;
+        this.businessValue = bv;
         this.wip = wip;
-        this.storiesTargeted = storiesTargeted;
-        this.workCapacity = workCapacity;
-        this.workVelocity = workVelocity;
+        this.storiesTargeted = st;
+        this.workCapacity = wc;
+        this.workVelocity = wv;
     }
 
     public int getStoryPoints() {
@@ -45,7 +45,7 @@ public class MetricsData {
         this.businessValue = businessValue;
     }
 
-    
+
     public int getWip() {
         return wip;
     }
