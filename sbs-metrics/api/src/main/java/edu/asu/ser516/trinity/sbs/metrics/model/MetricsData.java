@@ -17,8 +17,6 @@ public class MetricsData {
     /**
      * This is a constructor to initialize MetricsData.
      *
-     * metrics data constructor.
-     *
      * @param sp storyPoints
      * @param wc workCapacity
      * @param wv workVelocity
