@@ -98,4 +98,9 @@ public class MetricsData {
     public void setWorkVelocity(int workVelocity) {
         this.workVelocity = workVelocity;
     }
+
+    public int getFocusFactor() {
+        return focusFactor;
+    }
+
 }
