@@ -14,6 +14,10 @@ import java.net.URI;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
+import java.util.HashMap;
+import java.util.Map;
+
+import kong.unirest.ObjectMapper;
 import kong.unirest.Unirest;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -24,6 +28,7 @@ import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMock
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.MvcResult;
 
 
 @SpringBootTest
@@ -327,6 +332,28 @@ public class ApplicationTests {
                 .andExpect(status().isOk());
     }
 
+    @Test
+    void testCreateUserStory() throws Exception {
+        String projectId = "1";
+        String token = "auth-token";
+        Map<String, Object> userStoryData = new HashMap<>();
+        userStoryData.put("description", "test description");
+        userStoryData.put("project", 1);
+        userStoryData.put("subject", "test subject");
+
+        MvcResult result = this.mockMvc.perform(post("/userstories")
+                        .param("projectid", projectId)
+                        .header("Authorization", token)
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(userStoryData.toString()))
+                .andExpect(status().is(400))
+                .andReturn();
+
+        String responseJson = result.getResponse().getContentAsString();
+
+        // Assert that the response JSON contains the newly created user story
+//        assertThat(responseJson).contains("\"subject\":\"test subject\"");
+    }
 
 
 
