@@ -1,5 +1,6 @@
 package edu.asu.ser516.trinity.sbs.driver.model;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -18,6 +19,17 @@ public class UserStory extends Entity {
         this.storyPoints = new PointTuple(storyPoints);
         this.businessValue = businessValue;
         this.tasks = new ArrayList<>();
+        this.sprintRef = sprintRef;
+    }
+
+    @JsonCreator
+    public UserStory(int id, String title, String description, LocalDateTime createdAt,
+                     String assignedTo, int priority, int storyPoints, int businessValue,
+                     List<Task> tasks,int sprintRef) {
+        super(id, title, description, createdAt, assignedTo, priority);
+        this.storyPoints = new PointTuple(storyPoints);
+        this.businessValue = businessValue;
+        this.tasks = tasks;
         this.sprintRef = sprintRef;
     }
 
@@ -92,6 +104,14 @@ public class UserStory extends Entity {
                 return Comparator.comparing(UserStory::getPriority);
             }
         }
+    }
+
+    public void reset() {
+        this.setStartedAt(null);
+        this.setFinishedAt(null);
+        this.setStatus(Status.TODO);
+        this.storyPoints = new PointTuple(this.getStoryPoints().getTotal());
+        this.tasks.forEach(Task::reset);
     }
 
     @Override

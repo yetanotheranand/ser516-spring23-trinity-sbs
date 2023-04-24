@@ -1,5 +1,8 @@
 package edu.asu.ser516.trinity.sbs.driver;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.google.gson.Gson;
 import edu.asu.ser516.trinity.sbs.driver.model.ModeType;
 import edu.asu.ser516.trinity.sbs.driver.model.SimulationData;
 import edu.asu.ser516.trinity.sbs.driver.model.Sprint;
@@ -10,21 +13,36 @@ import edu.asu.ser516.trinity.sbs.driver.model.UserStory;
 import jakarta.annotation.PostConstruct;
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
+import java.util.AbstractMap;
+import java.util.AbstractMap.SimpleEntry;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Map;
+import java.util.UUID;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.server.ResponseStatusException;
 import org.springframework.web.servlet.mvc.method.annotation.SseEmitter;
 
 @RestController
+@RequestMapping("/api/v1/simulate")
 public class Controller {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(Controller.class);
@@ -33,12 +51,16 @@ public class Controller {
     @Autowired
     SimulationService simulationService;
 
-    /**
-     * Method to ...
-     */
+    @Autowired
+    SimpleCache<String, SimulationData> cache;
+
+    @Autowired
+    ObjectMapper objectMapper;
+
     @PostConstruct
     public void init() {
         Runtime.getRuntime().addShutdownHook(new Thread(() -> {
+            cache.clear();
             executor.shutdown();
             try {
                 executor.awaitTermination(1, TimeUnit.SECONDS);
@@ -48,49 +70,36 @@ public class Controller {
         }));
     }
 
-    /**
-     * @return
-     */
-    @GetMapping("/simulate")
-    public SseEmitter streamScrumSimulation(
+    @PostMapping(value = "/", consumes = "application/json", produces = "application/json")
+    @ResponseStatus(HttpStatus.CREATED)
+    public String create(@RequestBody SimulationData data) {
+        String uniqueId = UUID.randomUUID().toString();
+        cache.put(uniqueId, data);
+        return uniqueId;
+    }
+
+    @GetMapping(value = "/{id}")
+    public SimulationData get(@PathVariable String id) {
+        SimulationData data = cache.getIfPresent(id);
+        if (data == null) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Scrumboard data expired");
+        }
+        return data;
+    }
+
+    @GetMapping("/{id}/stream")
+    public SseEmitter stream(
+            @PathVariable(required = true) String id,
             @RequestParam(defaultValue = "AUTO") ModeType mode,
             @RequestParam(defaultValue = "PULL_BV") StrategyType strategy) {
-        Task task = new Task(1, "TG-1", "Task 1", LocalDateTime.now(), "AG", 1, 1);
-        UserStory us1 = new UserStory(1, "US-1", "Desc 1", LocalDateTime.now(), "AG", 1, 5,
-                2, 1);
-        us1.addTask(task);
-        UserStory us2 = new UserStory(2, "US-2", "Desc 2", LocalDateTime.now(), "AG", 1, 13,
-                4, 1);
-        us2.addTask(task);
-        UserStory us3 = new UserStory(3, "US-3", "Desc 3", LocalDateTime.now(), "AG", 1, 8,
-                3, 1);
-        us3.addTask(task);
-        UserStory us4 = new UserStory(4, "US-4", "Desc 4", LocalDateTime.now(), "AG", 1, 21,
-                8, 1);
-        us4.addTask(task);
 
-        Sprint sprint1 = new Sprint(1, "Sprint 1", LocalDateTime.now(),
-                LocalDateTime.now().plusDays(7));
-        List<TeamMember> membersSprint1 = new ArrayList<>();
-        membersSprint1.add(new TeamMember(1, "A", 4));
-        membersSprint1.add(new TeamMember(2, "B", 8));
-        sprint1.setMembers(membersSprint1);
-        Sprint sprint2 = new Sprint(2, "Sprint 2", LocalDateTime.now().plusDays(8),
-                LocalDateTime.now().plusDays(15));
-        sprint1.addUserStory(us1);
-        sprint1.addUserStory(us2);
-        sprint2.addUserStory(us3);
-        sprint2.addUserStory(us4);
-        List<TeamMember> membersSprint2 = new ArrayList<>();
-        membersSprint2.add(new TeamMember(1, "A", 8));
-        sprint2.setMembers(membersSprint2);
-        SimulationData data = new SimulationData();
-        data.addSprint(sprint1);
-        data.addSprint(sprint2);
+        SimulationData data = cache.getIfPresent(id);
+        if (data == null) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Scrumboard data expired");
+        }
 
         data.setMode(mode);
         data.setStrategy(strategy);
-
         Comparator<UserStory> usComparator = UserStory.getComparatorByStrategyType(data.getStrategy());
         data.getSprints().forEach(sprint -> {
             List<UserStory> userStories = sprint.getUserStories();
@@ -110,8 +119,11 @@ public class Controller {
                 for (int day = 1; day <= days; day++) {
                     try {
                         simulationService.doSimulateSprint(sprint, capacity, day);
-                        sseEmitter.send("Sprint: " + sprint.getId() + " Day: " + day + "\n" + data);
-                        sleep(5, sseEmitter);
+                        sseEmitter.send(Map.ofEntries(
+                                new SimpleEntry<String, Integer>("sprint", sprint.getId()),
+                                new SimpleEntry<String, Integer>("day", day),
+                                new SimpleEntry<String, SimulationData>("data", data)
+                        ));
                     } catch (Exception e) {
                         LOGGER.error(e.getMessage());
                         sseEmitter.completeWithError(e);
@@ -124,12 +136,28 @@ public class Controller {
         return sseEmitter;
     }
 
-    private void sleep(int seconds, SseEmitter sseEmitter) {
-        try {
-            Thread.sleep(seconds * 1000L);
-        } catch (InterruptedException e) {
-            LOGGER.error(e.getMessage());
-            sseEmitter.completeWithError(e);
+    @PutMapping(value = "/{id}")
+    public String update(@PathVariable String id, @RequestBody SimulationData data) {
+        if (cache.getIfPresent(id) == null) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Scrumboard simulation "
+                    + "data has expired");
         }
+        cache.put(id, data);
+        return id;
+    }
+
+    @PatchMapping(value = "/{id}")
+    public void reset(@PathVariable String id) {
+        SimulationData data = cache.getIfPresent(id);
+        if (data == null) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Scrumboard data expired");
+        }
+        data.getSprints().forEach(Sprint::reset);
+        cache.put(id, data);
+    }
+
+    @DeleteMapping(value = "/{id}")
+    public void delete(@PathVariable String id) {
+        cache.remove(id);
     }
 }

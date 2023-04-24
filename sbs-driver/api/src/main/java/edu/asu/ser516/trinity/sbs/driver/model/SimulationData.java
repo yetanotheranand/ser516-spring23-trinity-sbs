@@ -1,5 +1,6 @@
 package edu.asu.ser516.trinity.sbs.driver.model;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,8 +16,9 @@ public class SimulationData {
         this.mode = mode;
     }
 
+    @JsonCreator
     public SimulationData(List<Sprint> sprints) {
-        this(sprints, StrategyType.PULL_SP, ModeType.AUTO);
+        this(sprints, StrategyType.PULL_BV, ModeType.AUTO);
     }
 
     public SimulationData() {

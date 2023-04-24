@@ -1,8 +1,19 @@
 package edu.asu.ser516.trinity.sbs.driver.model;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonSubTypes;
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import java.time.LocalDateTime;
 
-public class Entity implements Comparable<Entity> {
+@JsonTypeInfo(
+        use = JsonTypeInfo.Id.NAME,
+        include = JsonTypeInfo.As.PROPERTY,
+        property = "type")
+@JsonSubTypes({
+        @JsonSubTypes.Type(value = UserStory.class, name = "us"),
+        @JsonSubTypes.Type(value = Task.class, name = "task")
+})
+public abstract class Entity implements Comparable<Entity> {
     protected int id;
     protected String title;
     protected String description;

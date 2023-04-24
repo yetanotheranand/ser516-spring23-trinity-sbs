@@ -1,5 +1,7 @@
 package edu.asu.ser516.trinity.sbs.driver.model;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -19,6 +21,17 @@ public class Sprint {
         this.finishAt = finishAt;
         this.userStories = new ArrayList<>();
         this.members = new ArrayList<>();
+    }
+
+    @JsonCreator
+    public Sprint(int id, String name, LocalDateTime startAt, LocalDateTime finishAt,
+                  List<UserStory> userStories, List<TeamMember> members) {
+        this.id = id;
+        this.name = name;
+        this.startAt = startAt;
+        this.finishAt = finishAt;
+        this.userStories = userStories;
+        this.members = members;
     }
 
     public int getId() {
@@ -77,12 +90,18 @@ public class Sprint {
         this.members = members;
     }
 
+    @JsonIgnore
     public int getCapacity() {
         return this.members.stream().map(member -> member.getCapacity()).reduce(0, Integer::sum);
     }
 
+    @JsonIgnore
     public int getTeamMembersCount() {
         return this.members.size();
+    }
+
+    public void reset() {
+        this.userStories.forEach(UserStory::reset);
     }
 
     @Override
