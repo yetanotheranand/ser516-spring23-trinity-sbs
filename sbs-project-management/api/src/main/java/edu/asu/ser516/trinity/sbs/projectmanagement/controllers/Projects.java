@@ -27,11 +27,11 @@ import org.springframework.web.bind.annotation.RestController;
 public class Projects {
 
     private static final Logger logger = LoggerFactory.getLogger(Projects.class);
-    private static String TAIGA_BASE_URL;
+    private static String taigaBaseURL;
 
     @Value("${TAIGA_BASE_URL}")
-    public void setTaigaBaseUrl(String url) {
-        TAIGA_BASE_URL = url;
+    public static void setTaigaBaseUrl(String url) {
+        taigaBaseURL = url;
     }
     
     @Value("${TAIGA_DEMO_USER}")
@@ -53,15 +53,15 @@ public class Projects {
             throws JSONException {
 
         // Set the API endpoint URL
-        String url = TAIGA_BASE_URL + "projects";
+        String url = taigaBaseURL + "projects";
         String params = allParams.toString().replace("{", "").replace("}", "").replace(", ", "&");
-        System.out.println(params);
+        logger.info(params);
         kong.unirest.HttpResponse<JsonNode> response = Unirest.get(
                 url + "?" + params)
                 .header("accept", "application/json")
                 .header("Authorization", String.format(token))
                 .asJson();
-        System.out.println(url + "?" + params);
+        logger.info(url + "?" + params);
         
         if (response.getStatus() == 200) {
             return ResponseEntity.ok(response.getBody().toString());
@@ -86,7 +86,7 @@ public class Projects {
             throws JSONException {
 
         // Set the API endpoint URL
-        String url = TAIGA_BASE_URL + "projects/" + projectId;
+        String url = taigaBaseURL + "projects/" + projectId;
         kong.unirest.HttpResponse<JsonNode> response = Unirest.get(
                 url)
                 .header("accept", "application/json")
@@ -114,7 +114,7 @@ public class Projects {
             throws JSONException {
 
         // Set the API endpoint URL
-        String url = TAIGA_BASE_URL + "projects";
+        String url = taigaBaseURL + "projects";
         JSONObject j = new JSONObject();
         j.put("name", projectMap.get("name").toString());
         j.put("is_private", projectMap.get("is_private").toString());
@@ -150,7 +150,7 @@ public class Projects {
             throws JSONException {
 
         // Set the API endpoint URL
-        String url = TAIGA_BASE_URL + "projects/" + projectId + "/like";
+        String url = taigaBaseURL + "projects/" + projectId + "/like";
         kong.unirest.HttpResponse<JsonNode> response = Unirest.post(url)
                 .header("accept", "application/json")
                 .header("Authorization", String.format(token))
@@ -178,7 +178,7 @@ public class Projects {
             throws JSONException {
 
         // Set the API endpoint URL
-        String url = TAIGA_BASE_URL + "projects/" + projectId + "/unlike";
+        String url = taigaBaseURL + "projects/" + projectId + "/unlike";
         kong.unirest.HttpResponse<JsonNode> response = Unirest.post(url)
                 .header("accept", "application/json")
                 .header("Authorization", String.format(token))
@@ -207,13 +207,13 @@ public class Projects {
             throws JSONException {
 
         // Set the API endpoint URL
-        String url = TAIGA_BASE_URL + "projects/by_slug?slug=" + projectName;
+        String url = taigaBaseURL + "projects/by_slug?slug=" + projectName;
         kong.unirest.HttpResponse<JsonNode> response = Unirest.get(
                         url)
                 .header("accept", "application/json")
                 .header("Authorization", String.format(token))
                 .asJson();
-        System.out.println(url);
+        logger.info(url);
 
         if (response.getStatus() == 200) {
             return ResponseEntity.ok(response.getBody().toString());
