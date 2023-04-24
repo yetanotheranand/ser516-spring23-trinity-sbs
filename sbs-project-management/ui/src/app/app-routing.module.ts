@@ -5,7 +5,6 @@ import { LoginComponent } from './login/login.component';
 import { TaskComponent } from './task/task.component';
 import { ProductBacklogComponent } from './product-backlog/product-backlog.component';
 import { EpicEditComponent } from './epic/epic-edit/epic-edit.component';
-import { UserStoryDetailsComponent } from './user-story-details/user-story-details.component';
 
 const routes: Routes = [
   { path: '', component: LoginComponent },
