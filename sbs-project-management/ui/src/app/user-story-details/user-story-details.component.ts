@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { Component} from '@angular/core';
+import { Component } from '@angular/core';
 import { UserStoryService } from '../services/user-story.service';
 import { ActivatedRoute, Router } from '@angular/router';
 
@@ -18,7 +18,6 @@ export class UserStoryDetailsComponent {
   id: any;
   userStory: any;
   OnInit(): void {
-    
     this.id = this.route.snapshot.paramMap.get('usid');
     console.log(this.route.snapshot.paramMap.get('slug'));
     this.UserStoryService.getUserStoryDetails(this.id).subscribe(
