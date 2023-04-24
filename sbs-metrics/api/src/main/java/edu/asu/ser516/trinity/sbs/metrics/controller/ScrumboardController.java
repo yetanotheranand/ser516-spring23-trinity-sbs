@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
- * This class defines the API for managing sbs-metrics.
+ * This class defines the API for managing sbs-metrics data.
  */
 @RestController
 @RequestMapping("/scrumboard/v1")
@@ -34,5 +34,16 @@ public class ScrumboardController {
         dataList.add(data5);
 
         return dataList;
+    }
+
+    int numMembers = 5;
+    int totalWorkingHours = 40;
+    int totalStoryPoints = 20;
+    int workCapacity = calculateWorkCapacity(numMembers, totalWorkingHours, totalStoryPoints);
+        
+    public int calculateWorkCapacity(int numMembers, int totalWorkingHours, int totalStoryPoints) {
+        // Calculate work capacity of the team
+        int workCapacity = (totalWorkingHours / numMembers) * totalStoryPoints;
+        return workCapacity;
     }
 }

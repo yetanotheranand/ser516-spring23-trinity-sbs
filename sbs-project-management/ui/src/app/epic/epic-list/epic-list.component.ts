@@ -53,23 +53,23 @@ export class EpicListComponent implements OnInit {
         state: { epicData },
       });
       console.log(epicData);
+      return true;
     } else {
       console.log(`Epic with id ${id} not found in the dataSource.`);
+      return false;
     }
   }
 
   deleteEpic(id) {
     const slug = this.route.snapshot.paramMap.get('slug');
-    if (confirm('Are you sure you want to delete this epic?')) {
-      this.epicService.deleteEpic(id).subscribe(
-        // eslint-disable-next-line @typescript-eslint/no-unused-vars
-        (data) => {
-          this.getEpecList(slug);
-        },
-        (error) => {
-          console.log(error);
-        }
-      );
-    }
+    this.epicService.deleteEpic(id).subscribe(
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
+      (data) => {
+        this.getEpecList(slug);
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
   }
 }

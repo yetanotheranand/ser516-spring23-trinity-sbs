@@ -1,1 +1,39 @@
-<app-graph> </app-graph>
+<table>
+  <caption>
+    Metrics Table
+  </caption>
+  <thead>
+    <tr *ngFor="let item of tableData">
+      <th>Story Points</th>
+      <td>{{ item.storypoints }}</td>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let item of tableData">
+      <th>Stories Completed</th>
+      <td>{{ item.storiescompleted }}</td>
+    </tr>
+    <tr *ngFor="let item of tableData">
+      <th>Velocity</th>
+      <td>{{ item.velocity }}</td>
+    </tr>
+    <tr *ngFor="let item of tableData">
+      <th>Work Capacity</th>
+      <td>{{ item.workcapacity }}</td>
+    </tr>
+    <tr *ngFor="let item of tableData">
+      <th>Business value</th>
+      <td>{{ item.businessvalue }}</td>
+    </tr>
+    <tr *ngFor="let item of tableData">
+      <th>Focus Factor</th>
+      <td>{{ item.focusfactor }}</td>
+    </tr>
+    <tr *ngFor="let item of tableData">
+      <th>WIP Limit</th>
+      <td>{{ item.wiplimit }}</td>
+    </tr>
+  </tbody>
+</table>
+<app-graph></app-graph>
+<app-defectinjectionRate></app-defectinjectionRate>
