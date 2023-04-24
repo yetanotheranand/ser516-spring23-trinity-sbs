@@ -369,6 +369,17 @@ public class ApplicationTests {
                 .andExpect(status().isOk());
     }
 
+    @Test
+    public void getUserStoriesById() throws Exception {
+        String token = getAuthToken(user, pass);
+
+        this.mockMvc.perform(get("/userstories/4562067")
+                        .header("Authorization", "Bearer " + token)
+                        .param("projectid", projectId)
+                        .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk());
+    }
+
     private String getAuthToken(String username,
                                 String password) throws IOException,
                                 InterruptedException, JSONException {

@@ -5,6 +5,7 @@ import { LoginComponent } from './login/login.component';
 import { TaskComponent } from './task/task.component';
 import { ProductBacklogComponent } from './product-backlog/product-backlog.component';
 import { EpicEditComponent } from './epic/epic-edit/epic-edit.component';
+import { UserStoryDetailsComponent } from './user-story-details/user-story-details.component';
 
 const routes: Routes = [
   { path: '', component: LoginComponent },
@@ -30,7 +31,7 @@ const routes: Routes = [
   // { path: 'new-project', component: NewProjectComponent },
   { path: 'user-story', component: UserStoryComponent },
   { path: 'product-backlog', component: ProductBacklogComponent },
-  { path: 'task', component: TaskComponent },
+  // { path: 'task', component: TaskComponent },
   { path: 'projects/:slug/epics/:id/edit', component: EpicEditComponent },
 ];
 

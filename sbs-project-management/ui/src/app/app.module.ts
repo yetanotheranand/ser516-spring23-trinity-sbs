@@ -14,12 +14,15 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { Interceptor } from '../app/services/interceptor';
 import { ProductBacklogComponent } from './product-backlog/product-backlog.component';
 import { TaskComponent } from './task/task.component';
+import { CommonModule } from '@angular/common';
+import { UserStoryDetailsComponent } from './user-story-details/user-story-details.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
     UserStoryComponent,
+    UserStoryDetailsComponent,
     ProductBacklogComponent,
     TaskComponent,
   ],
@@ -33,6 +36,7 @@ import { TaskComponent } from './task/task.component';
     BrowserAnimationsModule,
     MatFormFieldModule,
     HttpClientModule,
+    CommonModule
   ],
   exports: [FlexLayoutModule],
   providers: [
