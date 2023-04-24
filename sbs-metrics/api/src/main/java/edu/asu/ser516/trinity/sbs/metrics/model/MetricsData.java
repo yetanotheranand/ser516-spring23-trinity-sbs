@@ -1,5 +1,10 @@
 package edu.asu.ser516.trinity.sbs.metrics.model;
 
+
+/**
+ * This is a model for representing metrics data.
+ */
+
 public class MetricsData {
     private int storyPoints;
     private int storiesCompleted;
@@ -10,6 +15,18 @@ public class MetricsData {
     private int storiesTargeted;
     private int workCapacity;
     private int workVelocity;
+
+ /**
+     * metrics data constructor.
+     *
+     * @param storyPoints storyPoints
+     * @param storiesCompleted storiesCompleted
+     * @param businessValue businessValue
+     * @param wip wip
+     * @param storiesTargeted storiesTargeted
+     * @param workCapacity workCapacity
+     * @param workVelocity workVelocity
+     */
 
     public MetricsData(int sp, int sc, int bv, int wip, int st, int wc, int wv) {
         this.storyPoints = sp;
