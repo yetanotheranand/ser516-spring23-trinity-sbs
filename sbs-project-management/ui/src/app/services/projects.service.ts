@@ -10,10 +10,7 @@ export class ProjectsService {
   GetProjects(): Observable<any> {
     const url = environment.base_url + '/projects';
     return this.httpClient.get(
-      url +
-        `?member=${sessionStorage.getItem(
-          'UserId'
-        )}&order_by=user_order&slight=true`
+      url + `?member=${sessionStorage.getItem('UserId')}&slight=true`
     );
   }
 

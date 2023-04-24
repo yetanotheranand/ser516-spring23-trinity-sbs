@@ -12,4 +12,8 @@ export class UserStoryService {
     const url = environment.base_url + '/userstories/' + usID;
     return this.httpClient.get(url);
   }
+  getUserStoryTasks(usID: any) {
+    const url = environment.base_url + '/tasks?user_story=' + usID;
+    return this.httpClient.get(url);
+  }
 }
