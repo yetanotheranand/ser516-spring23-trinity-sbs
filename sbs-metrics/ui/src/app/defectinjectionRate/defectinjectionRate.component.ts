@@ -2,13 +2,13 @@ import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
 @Component({
-   selector: 'app-defect-injection-rate',
-   templateUrl: './defect-injection-rate.component.html',
-   styleUrls: ['./defect-injection-rate.component.css']
+   selector: 'app-defectinjectionRate',
+   templateUrl: './defectinjectionRate.component.html',
+   styleUrls: ['./defectinjectionRate.component.css']
 })
 export class DefectInjectionRateComponent implements OnInit {
 
-   defectInjectionRate: number;
+   defectInjectionRate: number = 2.5; // initializing the property here
 
    constructor(private http: HttpClient) { }
 
@@ -20,11 +20,12 @@ export class DefectInjectionRateComponent implements OnInit {
       });
    }
 
-   calculateDefectInjectionRate(numberOfDefects: number, sizeOfCodebase: number): number {
-      let defectInjectionRate = 0.0;
-      if (sizeOfCodebase > 0) {
+   calculateDefectInjectionRate(numberOfDefects: number, sizeOfCodebase: number ): number {
+      let defectInjectionRate = 2.5;
+      if (sizeOfCodebase > 100) {
          defectInjectionRate = (numberOfDefects / sizeOfCodebase) * 100.0;
       }
       return defectInjectionRate;
    }
 }
+
