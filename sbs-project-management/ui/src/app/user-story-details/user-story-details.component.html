@@ -1,0 +1,48 @@
+<link
+  rel="stylesheet"
+  href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"
+/>
+
+<!-- jQuery library -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+
+<!-- Latest compiled JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+<div class="titlebar">
+  <h1>{{ userStory.milestone_name }}</h1>
+  <button class="new-user-story" routerLink="./new">New Task</button>
+</div>
+
+<div class="main">
+  <!-- <div *ngFor="userStory.tasks.length !=0 ">
+
+        <h2>Available tasks</h2>
+    </div> -->
+  <div class="row mt-1">
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">Subject</th>
+          <th scope="col">Status</th>
+          <th scope="col">Assigned to</th>
+
+          <!-- <th scope="col"></th> -->
+          <!-- Edit button column -->
+          <!-- <th scope="col"></th> -->
+          <!-- Delete button column -->
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let row of userStory.tasks">
+          <td>{{ row?.subject }}</td>
+          <td>{{ row?.status_extra_info.name }}</td>
+          <td>{{ row?.assigned_to_extra_info.name }}</td>
+
+          <!-- <td><button (click)="editEpic(row.id)">Edit</button></td>
+              <td><button (click)="deleteEpic(row.id)">Delete</button></td> -->
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

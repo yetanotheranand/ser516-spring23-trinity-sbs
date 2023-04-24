@@ -55,6 +55,7 @@ public class Projects {
         // Set the API endpoint URL
         String url = TAIGA_BASE_URL + "projects";
         String params = allParams.toString().replace("{", "").replace("}", "").replace(", ", "&");
+        System.out.println(params);
         kong.unirest.HttpResponse<JsonNode> response = Unirest.get(
                 url + "?" + params)
                 .header("accept", "application/json")
