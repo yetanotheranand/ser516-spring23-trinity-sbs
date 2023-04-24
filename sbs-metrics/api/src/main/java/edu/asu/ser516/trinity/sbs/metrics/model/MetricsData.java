@@ -14,6 +14,8 @@ public class MetricsData {
     private int workCapacity;
     private int workVelocity;
 
+    private int focusFactor;
+
     /**
      * This is a constructor to initialize MetricsData.
      *
@@ -24,10 +26,11 @@ public class MetricsData {
      * @param bv businessValue
      * @param wip wip
      * @param st storiesTargeted
+     * @param ff focusFactor
      */
 
 
-    public MetricsData(int sp, int sc, int bv, int wip, int st, int wc, int wv) {
+    public MetricsData(int sp, int sc, int bv, int wip, int st, int wc, int wv, int ff) {
         this.storyPoints = sp;
         this.storiesCompleted = sc;
         this.businessValue = bv;
@@ -35,6 +38,8 @@ public class MetricsData {
         this.storiesTargeted = st;
         this.workCapacity = wc;
         this.workVelocity = wv;
+        ff = wv/wc;
+        this.focusFactor = ff;
     }
 
     public int getStoryPoints() {

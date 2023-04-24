@@ -24,7 +24,7 @@ public class MetricsController {
     public List<MetricsData> getMetrics() {
         List<MetricsData> dataList = new ArrayList();
 
-        MetricsData data1 = new MetricsData(20, 5, 3, 2, 3, 11, 2);
+        MetricsData data1 = new MetricsData(20, 5, 3, 2, 3, 11, 2, 10);
         dataList.add(data1);
 
         return dataList;
