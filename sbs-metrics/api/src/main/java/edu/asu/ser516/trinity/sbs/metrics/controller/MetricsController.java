@@ -14,6 +14,12 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/metrics")
 public class MetricsController {
 
+    /**
+     * This method is used to GET metrics data.
+     *
+     * @return  metrics for each day of the simulation as a list
+     */
+
     @GetMapping("/data")
     public List<MetricsData> getMetrics() {
         List<MetricsData> dataList = new ArrayList();

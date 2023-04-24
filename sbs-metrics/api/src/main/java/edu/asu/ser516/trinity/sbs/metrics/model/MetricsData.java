@@ -1,6 +1,10 @@
 package edu.asu.ser516.trinity.sbs.metrics.model;
 
 
+/**
+ * This is a model for representing metrics data.
+ */
+
 public class MetricsData {
     private int storyPoints;
     private int storiesCompleted;
@@ -11,7 +15,7 @@ public class MetricsData {
     private int workVelocity;
 
     /**
-     * This is a constructor to initialize ScrumboardData.
+     * This is a constructor to initialize MetricsData.
      *
      * metrics data constructor.
      *
