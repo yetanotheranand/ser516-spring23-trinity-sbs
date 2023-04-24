@@ -26,11 +26,11 @@ import org.springframework.web.bind.annotation.RestController;
 public class Users {
 
     private static final Logger logger = LoggerFactory.getLogger(Epic.class);
-    private static String TAIGA_BASE_URL;
+    private static String taigaBaseURL;
 
     @Value("${TAIGA_BASE_URL}")
-    public void setTaigaBaseUrl(String url) {
-        TAIGA_BASE_URL = url;
+    public static void setTaigaBaseUrl(String url) {
+        taigaBaseURL = url;
     }
 
     /**
@@ -49,12 +49,12 @@ public class Users {
                 .replace("{", "").replace("}", "")
                 .replace(", ", "&");
         // Set the API endpoint URL
-        String url = TAIGA_BASE_URL + "users?" + params;
+        String url = taigaBaseURL + "users?" + params;
         kong.unirest.HttpResponse<JsonNode> response = Unirest.get(url)
                 .header("accept", "application/json")
                 .header("Authorization", String.format(token))
                 .asJson();
-        System.out.println(url);
+        logger.info(url);
         if (response.getStatus() == 200) {
             return ResponseEntity.ok(response.getBody().toString());
 
