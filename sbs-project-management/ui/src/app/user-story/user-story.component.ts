@@ -1,6 +1,6 @@
 /* eslint-disable prettier/prettier */
 import { Component } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { UserStoryService } from '../services/user-story.service';
 
 @Component({
@@ -24,6 +24,7 @@ export class UserStoryComponent {
   constructor(
     private userStoryService: UserStoryService,
     private route: ActivatedRoute,
+    private router: Router,
   ) {
     this.route.queryParamMap.subscribe((params) => {
     this.id = params.get('projectid') || '';
@@ -49,7 +50,7 @@ export class UserStoryComponent {
       this.backPoints;
       console.log(this.userStoryData);
       this.userStoryService.addUserStory(this.userStoryData).subscribe(
-        res => console.log(res),
+        () => this.router.navigate(['../'], { relativeTo: this.route }),
         err => console.error(err)
       );
   }

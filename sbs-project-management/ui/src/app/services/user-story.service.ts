@@ -14,6 +14,7 @@ export class UserStoryService {
       environment.base_url + '/userstories?projectid=' + userStoryData.project;
     console.log(userStoryData);
     return this.httpClient.post(url, userStoryData);
+  }
   getUserStoryDetails(usID: any) {
     const url = environment.base_url + '/userstories/' + usID;
     return this.httpClient.get(url);
