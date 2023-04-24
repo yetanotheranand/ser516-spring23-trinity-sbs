@@ -98,7 +98,7 @@ public class EpicStatus {
         String url = taigaBaseUrl + "epic-statuses";
         JSONObject body = new JSONObject(epicStatusMap);
 
-        System.out.println(body);
+        logger.info(body);
         HttpResponse<JsonNode> response = Unirest.post(url)
                 .header("accept", "application/json")
                 .header("Authorization", String.format(token))
@@ -133,7 +133,7 @@ public class EpicStatus {
         String url = taigaBaseUrl + "epic-statuses/" + epicStatusId;
         JSONObject body = new JSONObject(epicStatusMap);
 
-        System.out.println(body);
+        logger.info(body);
         HttpResponse<JsonNode> response = Unirest.put(url)
                 .header("accept", "application/json")
                 .header("Authorization", String.format(token))
@@ -167,7 +167,7 @@ public class EpicStatus {
         String url = taigaBaseUrl + "epic-statuses/" + epicStatusId;
         JSONObject body = new JSONObject(epicStatusMap);
 
-        System.out.println(body);
+        logger.info(body);
         HttpResponse<JsonNode> response = Unirest.put(url)
                 .header("accept", "application/json")
                 .header("Authorization", String.format(token))
@@ -203,8 +203,8 @@ public class EpicStatus {
                 .header("Authorization", String.format(token))
                 .header("Content-Type", "application/json")
                 .asJson();
-        System.out.println(response.getBody().toString());
-        System.out.println(response.getStatus());
+        logger.info(response.getBody().toString());
+        logger.info(response.getStatus());
         if (response.getStatus() == 204) {
             logger.info("Epic Deletion success");
             return ResponseEntity.ok(response.getBody().toString());
