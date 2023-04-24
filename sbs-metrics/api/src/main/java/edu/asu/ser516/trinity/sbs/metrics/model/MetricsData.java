@@ -6,7 +6,6 @@ public class MetricsData {
 
     private int businessValue;
 
-    private int focusFactor;
     private int wip;
     private int storiesTargeted;
     private int workCapacity;
@@ -46,14 +45,7 @@ public class MetricsData {
         this.businessValue = businessValue;
     }
 
-    public int getFocusFactor() {
-        return focusFactor;
-    }
-
-    public void setFocusFactor(int focusFactor) {
-        this.focusFactor = focusFactor;
-    }
-
+    
     public int getWip() {
         return wip;
     }
