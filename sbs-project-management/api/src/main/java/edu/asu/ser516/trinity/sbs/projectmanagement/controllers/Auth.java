@@ -29,11 +29,11 @@ public class Auth {
 
     private static final Logger logger = LoggerFactory.getLogger(Auth.class);
 
-    private static String TAIGA_BASE_URL;
+    private static String taigaBaseURL;
 
     @Value("${TAIGA_BASE_URL}")
-    public void setTaigaBaseUrl(String url) {
-        TAIGA_BASE_URL = url;
+    public static void setTaigaBaseUrl(String url) {
+        taigaBaseURL = url;
     }
 
     @GetMapping("")
@@ -56,7 +56,7 @@ public class Auth {
         String password = userMap.get("password").toString();
 
         // Set the API endpoint URL
-        String url = TAIGA_BASE_URL + "auth";
+        String url = taigaBaseURL + "auth";
 
         JSONObject j = new JSONObject();
         j.put("username", username);
@@ -90,7 +90,7 @@ public class Auth {
             @RequestParam String refreshToken) throws JSONException {
 
         // Set the API endpoint URL
-        String url = TAIGA_BASE_URL + "auth/refresh";
+        String url = taigaBaseURL + "auth/refresh";
         JSONObject j = new JSONObject();
         j.put("refresh", String.format("%s", refreshToken));
         HttpResponse<JsonNode> response = Unirest.post(url)
