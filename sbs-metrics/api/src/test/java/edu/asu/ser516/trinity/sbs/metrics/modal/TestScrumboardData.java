@@ -6,11 +6,15 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.util.Assert;
 
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-
+/**
+ * TaskInfo testing .
+ */
 @ExtendWith(MockitoExtension.class)
 public class TestScrumboardData {
 
+    /**
+     * ScrumboardData should not be null.
+     */
 
     @Test
     public void testNullScrumboardData()  {
