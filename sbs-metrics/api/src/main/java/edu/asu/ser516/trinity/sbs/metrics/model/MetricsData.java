@@ -8,35 +8,33 @@ package edu.asu.ser516.trinity.sbs.metrics.model;
 public class MetricsData {
     private int storyPoints;
     private int storiesCompleted;
-
     private int businessValue;
-
-    private int focusFactor;
     private int wip;
     private int storiesTargeted;
     private int workCapacity;
     private int workVelocity;
 
     /**
-     * metrics data constructor.
+     * This is a constructor to initialize MetricsData.
      *
-     * @param storyPoints storyPoints
-     * @param storiesCompleted storiesCompleted
-     * @param businessValue businessValue
+     * @param sp storyPoints
+     * @param wc workCapacity
+     * @param wv workVelocity
+     * @param sc storiesCompleted
+     * @param bv businessValue
      * @param wip wip
-     * @param storiesTargeted storiesTargeted
-     * @param workCapacity workCapacity
-     * @param workVelocity workVelocity
+     * @param st storiesTargeted
      */
-    public MetricsData(int storyPoints, int storiesCompleted, int businessValue, int wip,
-                       int storiesTargeted, int workCapacity, int workVelocity) {
-        this.storyPoints = storyPoints;
-        this.storiesCompleted = storiesCompleted;
-        this.businessValue = businessValue;
+
+
+    public MetricsData(int sp, int sc, int bv, int wip, int st, int wc, int wv) {
+        this.storyPoints = sp;
+        this.storiesCompleted = sc;
+        this.businessValue = bv;
         this.wip = wip;
-        this.storiesTargeted = storiesTargeted;
-        this.workCapacity = workCapacity;
-        this.workVelocity = workVelocity;
+        this.storiesTargeted = st;
+        this.workCapacity = wc;
+        this.workVelocity = wv;
     }
 
     public int getStoryPoints() {
@@ -63,13 +61,6 @@ public class MetricsData {
         this.businessValue = businessValue;
     }
 
-    public int getFocusFactor() {
-        return focusFactor;
-    }
-
-    public void setFocusFactor(int focusFactor) {
-        this.focusFactor = focusFactor;
-    }
 
     public int getWip() {
         return wip;
