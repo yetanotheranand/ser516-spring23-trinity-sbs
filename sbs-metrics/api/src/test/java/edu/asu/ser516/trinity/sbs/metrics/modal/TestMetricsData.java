@@ -1,12 +1,12 @@
 package edu.asu.ser516.trinity.sbs.metrics.modal;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
 import edu.asu.ser516.trinity.sbs.metrics.model.MetricsData;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class TestMetricsData {
 
@@ -21,6 +21,7 @@ public class TestMetricsData {
 
     /**
      * Parameterized test for calculating the focus factor.
+     *
      * @param wc work capacity
      * @param wv work velocity
      * @param expected expected focus factor
@@ -34,6 +35,7 @@ public class TestMetricsData {
 
     /**
      * Parameterized test for calculating the work velocity.
+     *
      * @param sc stories completed
      * @param sp story points
      * @param expected expected work velocity
