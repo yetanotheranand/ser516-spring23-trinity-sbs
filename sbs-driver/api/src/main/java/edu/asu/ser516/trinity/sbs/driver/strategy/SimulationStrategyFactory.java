@@ -15,8 +15,9 @@ public class SimulationStrategyFactory {
 
     public SimulationStrategy getSimulationStrategy(StrategyType strategyType) {
         String type = switch (strategyType) {
-            case PUSH, DIVIDE_AND_CONQUER -> "push";
+            case PUSH -> "push";
             case PULL_BV, PULL_SP -> "pull";
+            case DNC -> "dnc";
         };
         SimulationStrategy strategy = simulationStrategyMap.get(type);
         if (null == strategy) {

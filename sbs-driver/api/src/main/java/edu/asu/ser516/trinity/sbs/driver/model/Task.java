@@ -13,10 +13,9 @@ public class Task extends Entity {
                 @JsonProperty(required = true) String title,
                 @JsonProperty(required = true) String description,
                 @JsonProperty(required = true) LocalDateTime createdAt,
-                String assignedTo,
                 @JsonProperty(required = true) int priority,
                 @JsonProperty(required = true) int userStoryRef) {
-        super(id, title, description, createdAt, assignedTo, priority);
+        super(id, title, description, createdAt, null, priority);
         this.userStoryRef = userStoryRef;
     }
 
@@ -31,6 +30,7 @@ public class Task extends Entity {
     public void reset() {
         this.setStartedAt(null);
         this.setFinishedAt(null);
+        this.setAssignedTo(null);
         this.setStatus(Status.TODO);
     }
 }

@@ -46,13 +46,12 @@ public class UserStory extends Entity {
                      @JsonProperty(required = true) String title,
                      @JsonProperty(required = true) String description,
                      @JsonProperty(required = true) LocalDateTime createdAt,
-                     String assignedTo,
                      @JsonProperty(required = true) int priority,
                      @JsonProperty(required = true) int storyPoints,
                      @JsonProperty(required = true) int businessValue,
                      @JsonProperty(required = true) List<Task> tasks,
                      @JsonProperty(required = true) int sprintRef) {
-        super(id, title, description, createdAt, assignedTo, priority);
+        super(id, title, description, createdAt, null, priority);
         this.storyPoints = new PointTuple(storyPoints);
         this.businessValue = businessValue;
         this.tasks = tasks;
@@ -89,6 +88,14 @@ public class UserStory extends Entity {
      */
     public void setBusinessValue(int businessValue) {
         this.businessValue = businessValue;
+    }
+
+    public PointTuple getStoryPoints() {
+        return storyPoints;
+    }
+
+    public void setStoryPoints(PointTuple storyPoints) {
+        this.storyPoints = storyPoints;
     }
 
     /**
@@ -168,17 +175,10 @@ public class UserStory extends Entity {
         return leftover;
     }
 
-    public PointTuple getStoryPoints() {
-        return storyPoints;
-    }
-
-    public void setStoryPoints(PointTuple storyPoints) {
-        this.storyPoints = storyPoints;
-    }
-
     public void reset() {
         this.setStartedAt(null);
         this.setFinishedAt(null);
+        this.setAssignedTo(null);
         this.setStatus(Status.TODO);
         this.storyPoints = new PointTuple(this.getStoryPoints().getTotal());
         this.tasks.forEach(Task::reset);
@@ -186,6 +186,14 @@ public class UserStory extends Entity {
 
     @Override
     public String toString() {
-        return "UserStory{" + "storyPoints=" + storyPoints.getDone() + "/" + storyPoints.getTotal() + ", bv=" + businessValue + ", id=" + id + ", title='" + title + '\'' + ", status=" + status + ", createdAt=" + createdAt + ", startedAt=" + startedAt + ", finishedAt=" + finishedAt + '}';
+        return "UserStory{"
+                + "storyPoints=" + storyPoints.getDone() + "/" + storyPoints.getTotal()
+                + ", bv=" + businessValue
+                + ", id=" + id
+                + ", title='" + title + '\''
+                + ", status=" + status
+                + ", createdAt=" + createdAt
+                + ", startedAt=" + startedAt
+                + ", finishedAt=" + finishedAt + '}';
     }
 }

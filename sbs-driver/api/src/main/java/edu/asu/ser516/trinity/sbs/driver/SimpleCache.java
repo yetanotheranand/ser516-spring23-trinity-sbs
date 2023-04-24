@@ -13,6 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package edu.asu.ser516.trinity.sbs.driver;
 
 import java.time.Duration;
@@ -31,6 +32,7 @@ import java.util.function.Supplier;
 
 /**
  * Simple in-memory cache with LRU eviction policy. All operations on this cache are thread-safe.
+ *
  * @param <K> the key type
  * @param <V> the value type
  */
@@ -46,8 +48,8 @@ public final class SimpleCache<K, V> {
     private final long defaultExpiryAfter;
     private final TemporalUnit defaultExpiryUnit;
 
-    private SimpleCache(Map<K, V> cacheMap, Function<K, V> valueLoader,
-                        long defaultExpiryAfter, TemporalUnit defaultExpiryUnit) {
+    private SimpleCache(Map<K, V> cacheMap, Function<K, V> valueLoader, long defaultExpiryAfter,
+                        TemporalUnit defaultExpiryUnit) {
         this.cacheMap = cacheMap;
         this.valueLoader = valueLoader;
         this.rwl = new ReentrantReadWriteLock();
@@ -58,7 +60,19 @@ public final class SimpleCache<K, V> {
     }
 
     /**
+     * Create a new cache builder.
+     *
+     * @param <K> the key type
+     * @param <V> the value type
+     * @return a new instance of cache builder
+     */
+    public static <K, V> CacheBuilder<K, V> builder() {
+        return new CacheBuilder<>();
+    }
+
+    /**
      * Put the given key and value into cache.
+     *
      * @param key   the key
      * @param value the value
      * @return a previously associated value, if it was present; can be {@code null}
@@ -74,8 +88,30 @@ public final class SimpleCache<K, V> {
         }
     }
 
+    private void doCleanup() {
+        DelayedKey<K> delayedKey = delayQueue.poll();
+        while (delayedKey != null) {
+            cacheMap.remove(delayedKey.getKey());
+            expiringKeys.remove(delayedKey.getKey());
+            delayedKey = delayQueue.poll();
+        }
+    }
+
+    private V internalPutValue(K key, V value) {
+        if (defaultExpiryAfter > 0) {
+            DelayedKey<K> delayedKey = new DelayedKey<>(key, defaultExpiryAfter, defaultExpiryUnit);
+            DelayedKey<K> oldKey = expiringKeys.put(key, delayedKey);
+            if (oldKey != null) {
+                delayQueue.remove(oldKey);
+            }
+            delayQueue.offer(delayedKey);
+        }
+        return cacheMap.put(key, value);
+    }
+
     /**
      * Put the given key and value into cache if the key is not already present.
+     *
      * @param key   the key
      * @param value the value
      * @return the existing value if present or the given value; can be {@code null}
@@ -85,7 +121,9 @@ public final class SimpleCache<K, V> {
     }
 
     /**
-     * Put the key into cache with the value provided by the given supplier, if key is not already present.
+     * Put the key into cache with the value provided by the given supplier,
+     * if key is not already present.
+     *
      * @param key           the key
      * @param valueSupplier the value supplier
      * @return the existing value if present or the given value by supplier; can be {@code null}
@@ -97,9 +135,9 @@ public final class SimpleCache<K, V> {
             doCleanup();
             V value = cacheMap.get(key);
             if (value == null && valueSupplier != null) { // cache miss
-                rwl.readLock().unlock();// Must release read lock before acquiring write lock
+                rwl.readLock().unlock(); // Must release read lock before acquiring write lock
                 rwl.writeLock().lock();
-                try {// recheck state because another thread might have
+                try { // recheck state because another thread might have
                     // acquired write lock and changed state before we did.
                     value = cacheMap.get(key);
                     if (value == null) { // not present in the cache
@@ -119,21 +157,12 @@ public final class SimpleCache<K, V> {
 
     /**
      * Get the value in the cache if present for the given key.
+     *
      * @param key the key
      * @return the value if present; can be {@code null}
      */
     public V getIfPresent(K key) {
         return doGetValue(key, false);
-    }
-
-    /**
-     * Get the value in the cache for the given key. If the value is {@code null}, it tries to load it from
-     * the @{code valueLoader} if configured.
-     * @param key the key
-     * @return the value from the cache or from value loader
-     */
-    public V get(K key) {
-        return doGetValue(key, true);
     }
 
     private V doGetValue(K key, boolean loadIfAbsent) {
@@ -143,9 +172,10 @@ public final class SimpleCache<K, V> {
             doCleanup();
             V value = cacheMap.get(key);
             if (value == null && loadIfAbsent && valueLoader != null) { // cache miss
-                rwl.readLock().unlock();// must release read lock before acquiring write lock
+                rwl.readLock().unlock(); // must release read lock before acquiring write lock
                 rwl.writeLock().lock();
-                try {// recheck state because another thread might have
+                try {
+                    // recheck state because another thread might have
                     // acquired write lock and changed state before we did.
                     value = cacheMap.get(key);
                     if (value == null) { // not present in the cache
@@ -165,20 +195,35 @@ public final class SimpleCache<K, V> {
         }
     }
 
-    private V internalPutValue(K key, V value) {
-        if(defaultExpiryAfter > 0) {
-            DelayedKey<K> delayedKey = new DelayedKey<>(key, defaultExpiryAfter, defaultExpiryUnit);
-            DelayedKey<K> oldKey = expiringKeys.put(key, delayedKey);
-            if (oldKey != null) {
-                delayQueue.remove(oldKey);
-            }
-            delayQueue.offer(delayedKey);
+    /**
+     * Renews the specified key, by setting the life time to the initial value.
+     *
+     * @param key the key
+     * @return {@code true} if the key can be renewed, {@code false} otherwise
+     */
+    public boolean renewKey(K key) {
+        DelayedKey<K> delayedKey = expiringKeys.get(key);
+        if (delayedKey != null) {
+            delayedKey.renew();
+            return true;
         }
-        return cacheMap.put(key, value);
+        return false;
+    }
+
+    /**
+     * Get the value in the cache for the given key. If the value is {@code null},
+     * it tries to load it from the @{code valueLoader} if configured.
+     *
+     * @param key the key
+     * @return the value from the cache or from value loader
+     */
+    public V get(K key) {
+        return doGetValue(key, true);
     }
 
     /**
      * Remove the key and value from the cache, if present.
+     *
      * @param key the key
      * @return the removed value if present; can be {@code null}
      */
@@ -211,25 +256,12 @@ public final class SimpleCache<K, V> {
 
     /**
      * Get the number of keys in this cache.
+     *
      * @return the size of this cache
      */
     public long size() {
         cleanup();
         return cacheMap.size();
-    }
-
-    /**
-     * Renews the specified key, by setting the life time to the initial value.
-     * @param key the key
-     * @return {@code true} if the key can be renewed, {@code false} otherwise
-     */
-    public boolean renewKey(K key) {
-        DelayedKey<K> delayedKey = expiringKeys.get(key);
-        if (delayedKey != null) {
-            delayedKey.renew();
-            return true;
-        }
-        return false;
     }
 
     /**
@@ -244,25 +276,6 @@ public final class SimpleCache<K, V> {
         }
     }
 
-    private void doCleanup() {
-        DelayedKey<K> delayedKey = delayQueue.poll();
-        while (delayedKey != null) {
-            cacheMap.remove(delayedKey.getKey());
-            expiringKeys.remove(delayedKey.getKey());
-            delayedKey = delayQueue.poll();
-        }
-    }
-
-    /**
-     * Create a new cache builder.
-     * @param <K> the key type
-     * @param <V> the value type
-     * @return a new instance of cache builder
-     */
-    public static <K, V> CacheBuilder<K, V> builder() {
-        return new CacheBuilder<>();
-    }
-
     /**
      * A simple cache builder which allows easier configuration.
      */
@@ -274,11 +287,13 @@ public final class SimpleCache<K, V> {
 
         /**
          * Sets the minimum total size for the internal hash tables.
+         *
          * @param initialCapacity the initial capacity
          * @return {@code this} instance to support method chaining
          * @throws IllegalArgumentException if {@code initialCapacity} is negative
          */
-        public CacheBuilder<K, V> initialCapacity(int initialCapacity) throws IllegalArgumentException {
+        public CacheBuilder<K, V> initialCapacity(
+                int initialCapacity) throws IllegalArgumentException {
             if (initialCapacity < 0) {
                 throw new IllegalArgumentException("initialCapacity should be >= 0");
             }
@@ -288,6 +303,7 @@ public final class SimpleCache<K, V> {
 
         /**
          * Sets the maximum total size for the internal hash tables.
+         *
          * @param maximumSize the maximum size
          * @return {@code this} instance to support method chaining
          * @throws IllegalArgumentException if {@code maximumSize} is zero or negative
@@ -302,14 +318,18 @@ public final class SimpleCache<K, V> {
 
         /**
          * Sets the default time-to-live, in the given unit, for all keys in this cache.
+         *
          * @param expiryAfter the amount of time to live
          * @param expiryUnit  the temporal unit of the expiry amount
          * @return {@code this} instance to support method chaining
          * @throws IllegalArgumentException if {@code expiryAfter} is zero or negative
          */
-        public CacheBuilder<K, V> expireAfter(long expiryAfter, TemporalUnit expiryUnit) throws IllegalArgumentException {
+        public CacheBuilder<K, V> expireAfter(
+                long expiryAfter,
+                TemporalUnit expiryUnit) throws IllegalArgumentException {
             if (expiryAfter <= 0) {
-                throw new IllegalArgumentException("value for expiryAfter should be greater than zero");
+                throw new IllegalArgumentException(
+                        "value for expiryAfter should be greater than zero");
             }
             this.defaultExpiryAfter = expiryAfter;
             this.defaultExpiryUnit = Objects.requireNonNull(expiryUnit);
@@ -318,6 +338,7 @@ public final class SimpleCache<K, V> {
 
         /**
          * Build a new instance of the {@link SimpleCache} with all configured parameters.
+         *
          * @param <K1> the key type
          * @param <V1> the value type
          * @return a new instance of the cache
@@ -327,13 +348,16 @@ public final class SimpleCache<K, V> {
         }
 
         /**
-         * Build a new instance of the {@link SimpleCache} with all configured parameters and given value loader.
+         * Build a new instance of the {@link SimpleCache} with all configured parameters
+         * and given value loader.
+         *
          * @param valueLoader the value loader
-         * @param <K1> the key type
-         * @param <V1> the value type
+         * @param <K1>        the key type
+         * @param <V1>        the value type
          * @return a new instance of the cache
          */
-        public <K1 extends K, V1 extends V> SimpleCache<K1, V1> build(Function<K1, V1> valueLoader) {
+        public <K1 extends K, V1 extends V> SimpleCache<K1, V1> build(
+                Function<K1, V1> valueLoader) {
             initialCapacity = Math.max(initialCapacity, 0);
             Map<K1, V1> cacheMap;
             if (maximumSize > 0) {
@@ -358,15 +382,15 @@ public final class SimpleCache<K, V> {
         private TemporalUnit expiryUnit;
         private Instant startTime;
 
-        public DelayedKey(K key) {
-            this.key = key;
-        }
-
         public DelayedKey(K key, long expireAfter, TemporalUnit expiryUnit) {
             this(key);
             this.expiryUnit = expiryUnit;
             this.startTime = Instant.now();
             this.expireAfter = expireAfter;
+        }
+
+        public DelayedKey(K key) {
+            this.key = key;
         }
 
         public K getKey() {
@@ -378,6 +402,12 @@ public final class SimpleCache<K, V> {
         }
 
         @Override
+        public int compareTo(Delayed that) {
+            return Long.compare(this.getDelay(TimeUnit.NANOSECONDS),
+                    that.getDelay(TimeUnit.NANOSECONDS));
+        }
+
+        @Override
         public long getDelay(TimeUnit timeUnit) {
             long diff = startTime == null ? 0 : Duration.between(Instant.now(),
                     startTime.plus(expireAfter, expiryUnit)).toMillis();
@@ -385,8 +415,8 @@ public final class SimpleCache<K, V> {
         }
 
         @Override
-        public int compareTo(Delayed that) {
-            return Long.compare(this.getDelay(TimeUnit.NANOSECONDS), that.getDelay(TimeUnit.NANOSECONDS));
+        public int hashCode() {
+            return Objects.hash(key);
         }
 
         @Override
@@ -397,11 +427,6 @@ public final class SimpleCache<K, V> {
                 return false;
             }
             return key.equals(((DelayedKey<?>) o).key);
-        }
-
-        @Override
-        public int hashCode() {
-            return Objects.hash(key);
         }
     }
 }

@@ -35,8 +35,7 @@ public class Application {
      * Returns a WebMvcConfigurer object that configures cross-origin resource
      * sharing (CORS) for the application.
      *
-     * @return a WebMvcConfigurer object that allows requests from
-     * localhost to access all endpoints
+     * @return a WebMvcConfigurer object that allows requests from localhost to access all endpoints
      */
     @Bean
     public WebMvcConfigurer corsConfigurer() {

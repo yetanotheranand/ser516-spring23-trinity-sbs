@@ -59,7 +59,7 @@ public class Controller {
 
     /**
      * Initializes the controller by adding a shutdown hook to gracefully
-     * shutdown the ExecutorService when the application is stopped
+     * shutdown the ExecutorService when the application is stopped.
      */
     @PostConstruct
     public void init() {
@@ -92,7 +92,7 @@ public class Controller {
     }
 
     /**
-     * Handles HTTP GET requests to simulate a scrum setup
+     * Handles HTTP GET requests to simulate a scrum setup.
      *
      * @return the name of the view to display the simulation results
      */
@@ -106,7 +106,6 @@ public class Controller {
         if (data == null) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Scrumboard data expired");
         }
-
         data.setMode(mode);
         data.setStrategy(strategy);
         Comparator<UserStory> usComparator = UserStory.getComparatorByStrategyType(
