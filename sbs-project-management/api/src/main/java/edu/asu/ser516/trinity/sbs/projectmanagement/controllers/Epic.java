@@ -27,11 +27,11 @@ import org.springframework.web.bind.annotation.RestController;
 public class Epic {
 
     private static final Logger logger = LoggerFactory.getLogger(Epic.class);
-    private static String taigaBaseURL;
+    private static String TAIGA_BASE_URL;
 
     @Value("${TAIGA_BASE_URL}")
-    public static void setTaigaBaseUrl(String url) {
-        taigaBaseURL = url;
+    public void setTaigaBaseUrl(String url) {
+        TAIGA_BASE_URL = url;
     }
 
     /**
@@ -50,7 +50,7 @@ public class Epic {
                 .replace("{", "").replace("}", "")
                 .replace(", ", "&");
         // Set the API endpoint URL
-        String url = taigaBaseURL + "epics?" + params;
+        String url = TAIGA_BASE_URL + "epics?" + params;
         kong.unirest.HttpResponse<JsonNode> response = Unirest.get(url)
                 .header("accept", "application/json")
                 .header("Authorization", String.format(token))
@@ -81,9 +81,9 @@ public class Epic {
             throws JSONException {
 
         // Set the API endpoint URL
-        String url = taigaBaseURL + "epics";
+        String url = TAIGA_BASE_URL + "epics";
         JSONObject body = new JSONObject(epicMap);
-        logger.info(body.getClass().getSimpleName());
+        System.out.println(body.getClass().getSimpleName());
         kong.unirest.HttpResponse<JsonNode> response = Unirest.post(url)
                 .header("accept", "application/json")
                 .header("Authorization", String.format(token))
@@ -114,7 +114,7 @@ public class Epic {
             throws JSONException {
 
         // Set the API endpoint URL
-        String url = taigaBaseURL + "epics/" + epicId;
+        String url = TAIGA_BASE_URL + "epics/" + epicId;
         kong.unirest.HttpResponse<JsonNode> response = Unirest.get(url)
                 .header("accept", "application/json")
                 .header("Authorization", String.format(token))
@@ -145,8 +145,8 @@ public class Epic {
                 .toString()
                 .replace("{", "").replace("}", "")
                 .replace(", ", "&");
-        String url = taigaBaseURL + "epics/by_ref?" + params;
-        logger.info(url);
+        String url = TAIGA_BASE_URL + "epics/by_ref?" + params;
+        System.out.println(url);
         kong.unirest.HttpResponse<JsonNode> response = Unirest.get(url)
                 .header("accept", "application/json")
                 .header("Authorization", String.format(token))
@@ -175,8 +175,8 @@ public class Epic {
             throws JSONException {
 
         // Set the API endpoint URL
-        String url = taigaBaseURL + "epics/" + epicId;
-        logger.info(token);
+        String url = TAIGA_BASE_URL + "epics/" + epicId;
+        System.out.println(token);
         JSONObject body = new JSONObject(epicData);
         kong.unirest.HttpResponse<JsonNode> response = Unirest.put(url)
                 .header("accept", "application/json")
@@ -207,7 +207,7 @@ public class Epic {
                                              @RequestHeader("Authorization") String token) {
 
         // Set the API endpoint URL
-        String url = taigaBaseURL + "epics/" + epicId;
+        String url = TAIGA_BASE_URL + "epics/" + epicId;
         kong.unirest.HttpResponse<JsonNode> response = Unirest.delete(url)
                 .header("accept", "application/json")
                 .header("Authorization", String.format(token))
