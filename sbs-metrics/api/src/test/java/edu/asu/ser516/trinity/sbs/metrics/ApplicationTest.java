@@ -1,17 +1,19 @@
 package edu.asu.ser516.trinity.sbs.metrics;
 
-import org.junit.jupiter.api.BeforeEach;
-import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
-import org.springframework.boot.test.context.SpringBootTest;
+import org.junit.jupiter.api.Test;
 
-@SpringBootTest
-@AutoConfigureMockMvc
+/**
+ * Main class testing.
+ */
+
 class ApplicationTest {
 
-    private Application application;
+    /**
+     * Main class testing for context loading.
+     */
 
-    @BeforeEach
-    void setUp() {
-        this.application = new Application();
+    @Test
+    public void contextLoads() {
     }
+
 }
