@@ -21,7 +21,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class UserStory {
 
-    private static String TAIGA_BASE_URL;
+    private static String taigaBaseURL;
 
     /**
      * Sets the Taiga base URL from the application properties file.
@@ -29,8 +29,8 @@ public class UserStory {
      * @param url the Taiga base URL
      */
     @Value("${TAIGA_BASE_URL}")
-    public void setTaigaBaseUrl(String url) {
-        TAIGA_BASE_URL = url;
+    public static void setTaigaBaseUrl(String url) {
+        taigaBaseURL = url;
     }
 
     /**
@@ -46,7 +46,7 @@ public class UserStory {
             @RequestParam(name = "projectid", required = false) String projectId,
             @RequestHeader("Authorization") String token) throws JSONException {
 
-        String url = TAIGA_BASE_URL + "userstories?project=" + projectId;
+        String url = taigaBaseURL + "userstories?project=" + projectId;
         HttpResponse<JsonNode> response = Unirest.get(url)
                 .header("Accept", "application/json")
                 .header("Authorization", token)
