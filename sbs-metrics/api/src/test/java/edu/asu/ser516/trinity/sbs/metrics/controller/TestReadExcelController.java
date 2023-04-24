@@ -7,9 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.web.servlet.MockMvc;
-
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import org.springframework.test.web.servlet.request.*;
+import org.springframework.test.web.servlet.result.*;
 
 /**
  * ReadExcelController testing.
@@ -32,8 +31,8 @@ public class TestReadExcelController {
     @Test
     public void readExcelData() throws Exception {
 
-        this.mockMvc.perform(get("/readExcel/getSampleData"))
-                .andExpect(status().isOk());
+        this.mockMvc.perform(MockMvcRequestBuilders.get("/readExcel/getSampleData"))
+                .andExpect(MockMvcResultMatchers.status().isOk());
 
     }
 }

@@ -3,12 +3,11 @@ package edu.asu.ser516.trinity.sbs.metrics.service;
 import edu.asu.ser516.trinity.sbs.metrics.model.TaskInfo;
 import edu.asu.ser516.trinity.sbs.metrics.service.impl.ReadExcelServiceImpl;
 import java.util.List;
+import org.assertj.core.api.*;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.junit.jupiter.MockitoExtension;
-
-import static org.assertj.core.api.Assertions.assertThat;
 
 
 /**
@@ -30,7 +29,7 @@ public class TestReadExcelServiceImpl {
 
         List<TaskInfo> taskInfoList = readExcelService.readSampleExcelData();
 
-        assertThat(taskInfoList).isNotNull();
+        Assertions.assertThat(taskInfoList).isNotNull();
 
     }
 }
