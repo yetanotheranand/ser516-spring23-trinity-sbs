@@ -1,15 +1,29 @@
 package edu.asu.ser516.trinity.sbs.metrics.model;
 
+
 public class MetricsData {
     private int storyPoints;
     private int storiesCompleted;
-
     private int businessValue;
-
     private int wip;
     private int storiesTargeted;
     private int workCapacity;
     private int workVelocity;
+
+    /**
+     * This is a constructor to initialize ScrumboardData.
+     *
+     * metrics data constructor.
+     *
+     * @param sp storyPoints
+     * @param wc workCapacity
+     * @param wv workVelocity
+     * @param sc storiesCompleted
+     * @param bv businessValue
+     * @param wip wip
+     * @param st storiesTargeted
+     */
+
 
     public MetricsData(int sp, int sc, int bv, int wip, int st, int wc, int wv) {
         this.storyPoints = sp;
