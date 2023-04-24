@@ -473,7 +473,7 @@ public class ApplicationTests {
         String responseJson = result.getResponse().getContentAsString();
 
         // Assert that the response JSON contains the newly created user story
-//        assertThat(responseJson).contains("\"subject\":\"test subject\"");
+        // assertThat(responseJson).contains("\"subject\":\"test subject\"");
     }
 
 
