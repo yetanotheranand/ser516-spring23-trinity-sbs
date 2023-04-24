@@ -1,5 +1,7 @@
 /* eslint-disable prettier/prettier */
 import { Component } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
+import { UserStoryService } from '../services/user-story.service';
 
 @Component({
   selector: 'app-user-story',
@@ -7,23 +9,49 @@ import { Component } from '@angular/core';
   styleUrls: ['./user-story.component.css'],
 })
 export class UserStoryComponent {
-  userStoryData = {
-    name: '',
-    description: '',
-    status: '',
-    uxPoints: 0,
-    designPoints: 0,
-    frontPoints: 0,
-    backPoints: 0,
-    points: 0,
+  uxPoints: any;
+  designPoints: any;
+  frontPoints: any;
+  backPoints: any;
+  userStoryData : any = {
+      "points": 0,
+      "description": '',
+      "project": '',
+      "status": '',
+      "subject": '',
   };
-
+  id: any;
+  constructor(
+    private userStoryService: UserStoryService,
+    private route: ActivatedRoute,
+    private router: Router,
+  ) {
+    this.route.queryParamMap.subscribe((params) => {
+    this.id = params.get('projectid') || '';
+    console.log(this.id);
+    if (this.id != null) {
+      this.userStoryData = {
+        "points": 0,
+        "description": '',
+        "project": this.id,
+        "status": '',
+        "subject": '',
+      };
+      this.onSubmit();
+    }
+  });
+  
+}
   onSubmit() {
     this.userStoryData.points =
-      this.userStoryData.uxPoints +
-      this.userStoryData.designPoints +
-      this.userStoryData.frontPoints +
-      this.userStoryData.backPoints;
-    console.log(this.userStoryData);
+      this.uxPoints +
+      this.designPoints +
+      this.frontPoints +
+      this.backPoints;
+      console.log(this.userStoryData);
+      this.userStoryService.addUserStory(this.userStoryData).subscribe(
+        () => this.router.navigate(['../'], { relativeTo: this.route }),
+        err => console.error(err)
+      );
   }
 }

@@ -11,7 +11,11 @@
 
 <div class="titlebar">
   <h1>Product Backlog</h1>
-  <button class="new-user-story" routerLink="/user-story">
+  <button
+    class="new-user-story"
+    [routerLink]="['/projects', 'backlog', 'user-story']"
+    [queryParams]="{ projectid: id }"
+  >
     New User Story
   </button>
 </div>

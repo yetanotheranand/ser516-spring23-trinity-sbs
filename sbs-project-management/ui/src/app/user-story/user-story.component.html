@@ -10,6 +10,7 @@
 
 <!-- Latest compiled JavaScript -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
 <div class="titlebar">
   <h1>New User Story</h1>
 </div>
@@ -23,7 +24,7 @@
         <input
           type="text"
           class="form-control"
-          [(ngModel)]="userStoryData.name"
+          [(ngModel)]="userStoryData.subject"
           name="name"
           placeholder="Subject"
         />
@@ -59,7 +60,7 @@
           <label>UX:</label>
           <input
             type="number"
-            [(ngModel)]="userStoryData.uxPoints"
+            [(ngModel)]="uxPoints"
             name="name"
           />
         </div>
@@ -67,7 +68,7 @@
           <label>Design:</label>
           <input
             type="number"
-            [(ngModel)]="userStoryData.designPoints"
+            [(ngModel)]="designPoints"
             name="name"
           />
         </div>
@@ -75,7 +76,7 @@
           <label>Front:</label>
           <input
             type="number"
-            [(ngModel)]="userStoryData.frontPoints"
+            [(ngModel)]="frontPoints"
             name="name"
           />
         </div>
@@ -83,7 +84,7 @@
           <label>Back:</label>
           <input
             type="number"
-            [(ngModel)]="userStoryData.backPoints"
+            [(ngModel)]="backPoints"
             name="name"
           />
         </div>
