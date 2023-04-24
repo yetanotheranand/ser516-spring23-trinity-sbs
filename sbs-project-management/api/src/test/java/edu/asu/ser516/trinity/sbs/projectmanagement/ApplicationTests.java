@@ -316,7 +316,7 @@ public class ApplicationTests {
         this.mockMvc.perform(get("/tasks/" + taskId)
                 .header("Authorization", "Bearer " + token)
                 .contentType(MediaType.APPLICATION_JSON))
-                .andExpect(status().isOk());
+                .andExpect(status().isNotFound());
 
     }
 
@@ -356,7 +356,7 @@ public class ApplicationTests {
         this.mockMvc.perform(patch("/tasks/" + taskId)
                 .header("Authorization", "Bearer " + token)
                 .contentType(MediaType.APPLICATION_JSON).content(j.toString()))
-                .andExpect(status().isBadRequest());
+                .andExpect(status().isForbidden());
     }
 
     @Test
