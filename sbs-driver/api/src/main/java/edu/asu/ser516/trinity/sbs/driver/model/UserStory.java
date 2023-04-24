@@ -6,12 +6,30 @@ import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 
+/**
+ * Represents a User Story entity which contains a title, description, story
+ * points, business value, assigned tasks, and sprint reference. It can also
+ * perform work and be compared based on business value.
+ */
 public class UserStory extends Entity {
     private PointTuple storyPoints;
     private int businessValue;
     private List<Task> tasks;
     private int sprintRef;
 
+    /**
+     * This constructor initializes a UserStory object with the provided parameters.
+     *
+     * @param id the ID of the UserStory
+     * @param title the title of the UserStory
+     * @param description the description of the UserStory
+     * @param createdAt the date and time when the UserStory was created
+     * @param assignedTo the person assigned to complete the UserStory
+     * @param priority the priority level of the UserStory
+     * @param storyPoints the estimated story points for the UserStory
+     * @param businessValue the business value of the UserStory
+     * @param sprintRef the reference ID of the sprint that the UserStory is assigned to
+     */
     public UserStory(int id, String title, String description, LocalDateTime createdAt,
                      String assignedTo, int priority, int storyPoints, int businessValue,
                      int sprintRef) {
@@ -33,34 +51,79 @@ public class UserStory extends Entity {
         this.sprintRef = sprintRef;
     }
 
+    /**
+     * Gets the business value of the UserStory.
+     *
+     * @return the business value of the UserStory
+     */
     public int getBusinessValue() {
         return businessValue;
     }
 
+    /**
+     * Sets the business value of the UserStory.
+     *
+     * @param businessValue the new business value of the UserStory
+     */
     public void setBusinessValue(int businessValue) {
         this.businessValue = businessValue;
     }
 
+    /**
+     * Gets the list of tasks assigned to the UserStory.
+     *
+     * @return the list of tasks assigned to the UserStory
+     */
     public List<Task> getTasks() {
         return tasks;
     }
 
+    /**
+     * Sets the list of tasks assigned to the UserStory.
+     *
+     * @param tasks the new list of tasks assigned to the UserStory
+     */
     public void setTasks(List<Task> tasks) {
         this.tasks = tasks;
     }
 
+    /**
+     * Adds a task to the list of tasks assigned to the UserStory.
+     *
+     * @param task the task to add
+     */
     public void addTask(Task task) {
         this.tasks.add(task);
     }
 
+    /**
+     * Gets the reference ID of the sprint that the UserStory is assigned to.
+     *
+     * @return the reference ID of the sprint that the UserStory is assigned to
+     */
     public int getSprintRef() {
         return sprintRef;
     }
 
+    /**
+     * Sets the reference ID of the sprint that the UserStory is assigned to.
+     *
+     * @param sprintRef the new reference ID of the sprint that the UserStory is assigned to
+     */
     public void setSprintRef(int sprintRef) {
         this.sprintRef = sprintRef;
     }
 
+    /**
+     * Updates the status of the User Story to 'In Progress' and sets the start
+     * date if the status was 'To Do'. Applies the specified number of points
+     * to the User Story, updates the status to 'Done' and sets the finish
+     * date if the remaining points are 0 or less.
+     *
+     * @param points the number of points to apply to the User Story
+     * @param day the date on which the work is being done
+     * @return the number of leftover points, if any
+     */
     public int doWork(int points, LocalDateTime day) {
         if (this.status == Status.TODO) {
             this.setStatus(Status.INPROGRESS);
