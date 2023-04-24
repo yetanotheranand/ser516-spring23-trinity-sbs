@@ -24,10 +24,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
 import org.springframework.test.web.servlet.MockMvc;
-
-import edu.asu.ser516.trinity.sbs.projectmanagement.controllers.Tasks;
 
 
 @SpringBootTest
@@ -351,7 +348,7 @@ public class ApplicationTests {
         JSONObject j = new JSONObject();
         String token = getAuthToken(user, pass);
         j.put("description", "Testing");
-        j.put("version",3);
+        j.put("version", 3);
         
         this.mockMvc.perform(patch("/tasks/" + taskId)
                 .header("Authorization", "Bearer " + token)

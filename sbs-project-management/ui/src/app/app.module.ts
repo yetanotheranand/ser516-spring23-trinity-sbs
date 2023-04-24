@@ -36,7 +36,7 @@ import { UserStoryDetailsComponent } from './user-story-details/user-story-detai
     BrowserAnimationsModule,
     MatFormFieldModule,
     HttpClientModule,
-    CommonModule
+    CommonModule,
   ],
   exports: [FlexLayoutModule],
   providers: [

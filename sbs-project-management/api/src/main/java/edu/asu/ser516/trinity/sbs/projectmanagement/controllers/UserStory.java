@@ -63,7 +63,7 @@ public class UserStory {
     /**
      * Retrieves user story by id using the Taiga API.
      *
-     * @param usId the ID of the userstory
+     * @param usid the ID of the userstory
      * @param token the authorization token for accessing the API
      * @return a ResponseEntity containing the JSON response from the API
      * @throws JSONException if there is an error parsing the JSON response

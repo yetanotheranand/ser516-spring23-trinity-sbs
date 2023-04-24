@@ -74,7 +74,6 @@ public class Tasks {
     /**
      * GET task API.
      *
-     * @param allParams form containing requesst task details
      * @return response from Taiga API
      * @throws JSONException error parsing the json request and response
      */

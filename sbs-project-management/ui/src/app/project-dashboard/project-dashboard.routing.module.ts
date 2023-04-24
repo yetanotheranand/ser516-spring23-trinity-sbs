@@ -51,15 +51,14 @@ const routes: Routes = [
             path: 'scrum-board',
             component: DragDropScrumBoardComponent,
           },
-          { 
+          {
             path: 'user-story/:usid',
-            component: UserStoryDetailsComponent
+            component: UserStoryDetailsComponent,
           },
           {
             path: 'user-story/:usid/new',
-            component: TaskComponent
-          }
-
+            component: TaskComponent,
+          },
         ],
       },
     ],
