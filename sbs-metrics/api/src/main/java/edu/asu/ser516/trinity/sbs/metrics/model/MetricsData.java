@@ -38,7 +38,7 @@ public class MetricsData {
         this.storiesTargeted = st;
         this.workCapacity = wc;
         this.workVelocity = wv;
-        ff = wv/wc;
+        ff = wv / wc;
         this.focusFactor = ff;
     }
 
