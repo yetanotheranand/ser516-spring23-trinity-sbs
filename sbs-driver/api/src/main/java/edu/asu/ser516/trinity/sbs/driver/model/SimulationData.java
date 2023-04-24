@@ -1,8 +1,10 @@
 package edu.asu.ser516.trinity.sbs.driver.model;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.ArrayList;
 import java.util.List;
+import org.springframework.lang.NonNull;
 
 public class SimulationData {
     private List<Sprint> sprints;
@@ -17,7 +19,7 @@ public class SimulationData {
     }
 
     @JsonCreator
-    public SimulationData(List<Sprint> sprints) {
+    public SimulationData(@JsonProperty(required = true) List<Sprint> sprints) {
         this(sprints, StrategyType.PULL_BV, ModeType.AUTO);
     }
 

@@ -1,4 +1,4 @@
-package edu.asu.ser516.trinity.sbs.driver;
+package edu.asu.ser516.trinity.sbs.driver.strategy;
 
 import edu.asu.ser516.trinity.sbs.driver.model.Sprint;
 import edu.asu.ser516.trinity.sbs.driver.model.Status;
@@ -8,9 +8,14 @@ import java.util.List;
 import java.util.Optional;
 import org.springframework.stereotype.Service;
 
-@Service
-public class SimulationService {
-    public Sprint doSimulateSprint(Sprint data, int dailyCapacity, int days) {
+@Service("pull")
+public class PullSimulationStrategy implements SimulationStrategy {
+    @Override
+    public void simulateDay(Sprint data, int day) {
+        doSimulateSprint(data, data.getCapacity(), day);
+    }
+
+    private void doSimulateSprint(Sprint data, int dailyCapacity, int days) {
         while (dailyCapacity > 0) {
             Optional<UserStory> userStory = this.getStory(data.getUserStories());
             if (userStory.isPresent()) {
@@ -20,7 +25,6 @@ public class SimulationService {
                 break;
             }
         }
-        return data;
     }
 
     private Optional<UserStory> getStory(List<UserStory> userStories) {

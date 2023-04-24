@@ -1,6 +1,7 @@
 package edu.asu.ser516.trinity.sbs.driver.model;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -20,15 +21,15 @@ public class UserStory extends Entity {
     /**
      * This constructor initializes a UserStory object with the provided parameters.
      *
-     * @param id the ID of the UserStory
-     * @param title the title of the UserStory
-     * @param description the description of the UserStory
-     * @param createdAt the date and time when the UserStory was created
-     * @param assignedTo the person assigned to complete the UserStory
-     * @param priority the priority level of the UserStory
-     * @param storyPoints the estimated story points for the UserStory
+     * @param id            the ID of the UserStory
+     * @param title         the title of the UserStory
+     * @param description   the description of the UserStory
+     * @param createdAt     the date and time when the UserStory was created
+     * @param assignedTo    the person assigned to complete the UserStory
+     * @param priority      the priority level of the UserStory
+     * @param storyPoints   the estimated story points for the UserStory
      * @param businessValue the business value of the UserStory
-     * @param sprintRef the reference ID of the sprint that the UserStory is assigned to
+     * @param sprintRef     the reference ID of the sprint that the UserStory is assigned to
      */
     public UserStory(int id, String title, String description, LocalDateTime createdAt,
                      String assignedTo, int priority, int storyPoints, int businessValue,
@@ -41,14 +42,35 @@ public class UserStory extends Entity {
     }
 
     @JsonCreator
-    public UserStory(int id, String title, String description, LocalDateTime createdAt,
-                     String assignedTo, int priority, int storyPoints, int businessValue,
-                     List<Task> tasks,int sprintRef) {
+    public UserStory(@JsonProperty(required = true) int id,
+                     @JsonProperty(required = true) String title,
+                     @JsonProperty(required = true) String description,
+                     @JsonProperty(required = true) LocalDateTime createdAt,
+                     String assignedTo,
+                     @JsonProperty(required = true) int priority,
+                     @JsonProperty(required = true) int storyPoints,
+                     @JsonProperty(required = true) int businessValue,
+                     @JsonProperty(required = true) List<Task> tasks,
+                     @JsonProperty(required = true) int sprintRef) {
         super(id, title, description, createdAt, assignedTo, priority);
         this.storyPoints = new PointTuple(storyPoints);
         this.businessValue = businessValue;
         this.tasks = tasks;
         this.sprintRef = sprintRef;
+    }
+
+    public static Comparator<UserStory> getComparatorByStrategyType(StrategyType strategyType) {
+        switch (strategyType) {
+            case PULL_BV -> {
+                return Comparator.comparing(UserStory::getBusinessValue, Comparator.reverseOrder());
+            }
+            case PULL_SP -> {
+                return Comparator.comparing(userStory -> userStory.getStoryPoints().getTotal());
+            }
+            default -> {
+                return Comparator.comparing(UserStory::getPriority);
+            }
+        }
     }
 
     /**
@@ -121,7 +143,7 @@ public class UserStory extends Entity {
      * date if the remaining points are 0 or less.
      *
      * @param points the number of points to apply to the User Story
-     * @param day the date on which the work is being done
+     * @param day    the date on which the work is being done
      * @return the number of leftover points, if any
      */
     public int doWork(int points, LocalDateTime day) {
@@ -154,21 +176,6 @@ public class UserStory extends Entity {
         this.storyPoints = storyPoints;
     }
 
-    public static Comparator<UserStory> getComparatorByStrategyType(StrategyType strategyType) {
-        switch (strategyType) {
-            case PULL_BV -> {
-                return Comparator.comparing(UserStory::getBusinessValue,
-                        Comparator.reverseOrder());
-            }
-            case PULL_SP -> {
-                return Comparator.comparing(userStory -> userStory.getStoryPoints().getTotal());
-            }
-            default -> {
-                return Comparator.comparing(UserStory::getPriority);
-            }
-        }
-    }
-
     public void reset() {
         this.setStartedAt(null);
         this.setFinishedAt(null);
@@ -179,14 +186,6 @@ public class UserStory extends Entity {
 
     @Override
     public String toString() {
-        return "UserStory{"
-                + "storyPoints=" + storyPoints.getDone() + "/" + storyPoints.getTotal()
-                + ", bv=" + businessValue
-                + ", id=" + id
-                + ", title='" + title + '\''
-                + ", status=" + status
-                + ", createdAt=" + createdAt
-                + ", startedAt=" + startedAt
-                + ", finishedAt=" + finishedAt + '}';
+        return "UserStory{" + "storyPoints=" + storyPoints.getDone() + "/" + storyPoints.getTotal() + ", bv=" + businessValue + ", id=" + id + ", title='" + title + '\'' + ", status=" + status + ", createdAt=" + createdAt + ", startedAt=" + startedAt + ", finishedAt=" + finishedAt + '}';
     }
 }

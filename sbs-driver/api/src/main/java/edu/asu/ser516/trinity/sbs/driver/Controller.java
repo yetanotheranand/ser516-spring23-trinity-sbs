@@ -1,21 +1,16 @@
 package edu.asu.ser516.trinity.sbs.driver;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.google.gson.Gson;
 import edu.asu.ser516.trinity.sbs.driver.model.ModeType;
 import edu.asu.ser516.trinity.sbs.driver.model.SimulationData;
 import edu.asu.ser516.trinity.sbs.driver.model.Sprint;
 import edu.asu.ser516.trinity.sbs.driver.model.StrategyType;
-import edu.asu.ser516.trinity.sbs.driver.model.Task;
-import edu.asu.ser516.trinity.sbs.driver.model.TeamMember;
 import edu.asu.ser516.trinity.sbs.driver.model.UserStory;
+import edu.asu.ser516.trinity.sbs.driver.strategy.SimulationStrategy;
+import edu.asu.ser516.trinity.sbs.driver.strategy.SimulationStrategyFactory;
 import jakarta.annotation.PostConstruct;
-import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
-import java.util.AbstractMap;
 import java.util.AbstractMap.SimpleEntry;
-import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
@@ -42,9 +37,9 @@ import org.springframework.web.server.ResponseStatusException;
 import org.springframework.web.servlet.mvc.method.annotation.SseEmitter;
 
 /**
- This class serves as the main controller for the application, handling HTTP
- requests and responses. It contains methods annotated with various HTTP verbs
- (e.g., @GetMapping, @PostMapping) that map to specific request URLs.
+ * This class serves as the main controller for the application, handling HTTP
+ * requests and responses. It contains methods annotated with various HTTP verbs
+ * (e.g., @GetMapping, @PostMapping) that map to specific request URLs.
  */
 @RestController
 @RequestMapping("/api/v1/simulate")
@@ -54,7 +49,7 @@ public class Controller {
     private final ExecutorService executor = Executors.newSingleThreadExecutor();
 
     @Autowired
-    SimulationService simulationService;
+    SimulationStrategyFactory strategyFactory;
 
     @Autowired
     SimpleCache<String, SimulationData> cache;
@@ -114,7 +109,8 @@ public class Controller {
 
         data.setMode(mode);
         data.setStrategy(strategy);
-        Comparator<UserStory> usComparator = UserStory.getComparatorByStrategyType(data.getStrategy());
+        Comparator<UserStory> usComparator = UserStory.getComparatorByStrategyType(
+                data.getStrategy());
         data.getSprints().forEach(sprint -> {
             List<UserStory> userStories = sprint.getUserStories();
             userStories.sort(usComparator);
@@ -126,18 +122,22 @@ public class Controller {
         sseEmitter.onTimeout(() -> LOGGER.warn("SseEmitter is timed out"));
         sseEmitter.onError((ex) -> LOGGER.error("SseEmitter got error:", ex.getMessage()));
 
+        SimulationStrategy simulationStrategy = strategyFactory.getSimulationStrategy(
+                data.getStrategy());
+
         executor.execute(() -> {
             for (Sprint sprint : data.getSprints()) {
                 int days = (int) sprint.getStartAt().until(sprint.getFinishAt(), ChronoUnit.DAYS);
                 int capacity = sprint.getCapacity();
                 for (int day = 1; day <= days; day++) {
                     try {
-                        simulationService.doSimulateSprint(sprint, capacity, day);
+                        simulationStrategy.simulateDay(sprint, day);
                         sseEmitter.send(Map.ofEntries(
                                 new SimpleEntry<String, Integer>("sprint", sprint.getId()),
                                 new SimpleEntry<String, Integer>("day", day),
                                 new SimpleEntry<String, SimulationData>("data", data)
                         ));
+                        sleep(1, sseEmitter);
                     } catch (Exception e) {
                         LOGGER.error(e.getMessage());
                         sseEmitter.completeWithError(e);
@@ -173,5 +173,14 @@ public class Controller {
     @DeleteMapping(value = "/{id}")
     public void delete(@PathVariable String id) {
         cache.remove(id);
+    }
+
+    private void sleep(int seconds, SseEmitter sseEmitter) {
+        try {
+            Thread.sleep(seconds * 1000L);
+        } catch (InterruptedException e) {
+            LOGGER.error(e.getMessage());
+            sseEmitter.completeWithError(e);
+        }
     }
 }

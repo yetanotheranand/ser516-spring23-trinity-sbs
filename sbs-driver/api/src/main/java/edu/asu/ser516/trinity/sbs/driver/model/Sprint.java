@@ -2,6 +2,7 @@ package edu.asu.ser516.trinity.sbs.driver.model;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -24,8 +25,12 @@ public class Sprint {
     }
 
     @JsonCreator
-    public Sprint(int id, String name, LocalDateTime startAt, LocalDateTime finishAt,
-                  List<UserStory> userStories, List<TeamMember> members) {
+    public Sprint(@JsonProperty(required = true) int id,
+                  @JsonProperty(required = true) String name,
+                  @JsonProperty(required = true) LocalDateTime startAt,
+                  @JsonProperty(required = true) LocalDateTime finishAt,
+                  @JsonProperty(required = true) List<UserStory> userStories,
+                  @JsonProperty(required = true) List<TeamMember> members) {
         this.id = id;
         this.name = name;
         this.startAt = startAt;

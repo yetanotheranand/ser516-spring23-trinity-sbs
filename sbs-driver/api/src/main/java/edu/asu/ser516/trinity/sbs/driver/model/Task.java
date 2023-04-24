@@ -1,6 +1,7 @@
 package edu.asu.ser516.trinity.sbs.driver.model;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import java.time.LocalDateTime;
 
 public class Task extends Entity {
@@ -8,8 +9,13 @@ public class Task extends Entity {
     private int userStoryRef;
 
     @JsonCreator
-    public Task(int id, String title, String description, LocalDateTime createdAt,
-                String assignedTo, int priority, int userStoryRef) {
+    public Task(@JsonProperty(required = true) int id,
+                @JsonProperty(required = true) String title,
+                @JsonProperty(required = true) String description,
+                @JsonProperty(required = true) LocalDateTime createdAt,
+                String assignedTo,
+                @JsonProperty(required = true) int priority,
+                @JsonProperty(required = true) int userStoryRef) {
         super(id, title, description, createdAt, assignedTo, priority);
         this.userStoryRef = userStoryRef;
     }
