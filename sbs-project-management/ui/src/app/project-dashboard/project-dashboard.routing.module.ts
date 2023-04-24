@@ -8,6 +8,8 @@ import { NewEpicComponent } from '../epic/new-epic/new-epic.component';
 import { TeamsComponent } from './teams/teams.component';
 import { ProductBacklogComponent } from '../product-backlog/product-backlog.component';
 import { DragDropScrumBoardComponent } from '../scrum-board/drag-drop-scrum-board/drag-drop-scrum-board.component';
+import { UserStoryDetailsComponent } from '../user-story-details/user-story-details.component';
+import { TaskComponent } from '../task/task.component';
 
 const routes: Routes = [
   {
@@ -48,6 +50,14 @@ const routes: Routes = [
           {
             path: 'scrum-board',
             component: DragDropScrumBoardComponent,
+          },
+          {
+            path: 'user-story/:usid',
+            component: UserStoryDetailsComponent,
+          },
+          {
+            path: 'user-story/:usid/new',
+            component: TaskComponent,
           },
         ],
       },
