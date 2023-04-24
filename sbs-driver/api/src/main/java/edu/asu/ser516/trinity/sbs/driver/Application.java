@@ -1,31 +1,72 @@
 package edu.asu.ser516.trinity.sbs.driver;
 
-import jakarta.servlet.ServletException;
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
-import java.io.IOException;
-import org.eclipse.jetty.server.Request;
-import org.eclipse.jetty.server.Server;
-import org.eclipse.jetty.server.handler.AbstractHandler;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.databind.DeserializationFeature;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.SerializationFeature;
+import com.fasterxml.jackson.databind.json.JsonMapper;
+import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
+import com.fasterxml.jackson.module.paramnames.ParameterNamesModule;
+import java.time.temporal.ChronoUnit;
+import org.springframework.beans.factory.config.ConfigurableBeanFactory;
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Scope;
+import org.springframework.web.servlet.config.annotation.CorsRegistry;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
-public class Application extends AbstractHandler {
+/**
+ * The main class for starting a Spring Boot application.
+ */
+@SpringBootApplication
+public class Application {
 
-    public static void main(String[] args) throws Exception {
-        Server server = new Server(8080);
-        server.setHandler(new Application());
-
-        server.start();
-        server.join();
+    /**
+     * Main method to start the Spring Boot application.
+     *
+     * @param args command-line arguments passed to the application
+     */
+    public static void main(String[] args) {
+        SpringApplication.run(Application.class, args);
     }
 
-    public void handle(String target,
-                       Request baseRequest,
-                       HttpServletRequest request,
-                       HttpServletResponse response)
-            throws IOException, ServletException {
-        response.setContentType("text/html;charset=utf-8");
-        response.setStatus(HttpServletResponse.SC_OK);
-        baseRequest.setHandled(true);
-        response.getWriter().println("<h1>Hello World from Driver API</h1>");
+    /**
+     * Returns a WebMvcConfigurer object that configures cross-origin resource
+     * sharing (CORS) for the application.
+     *
+     * @return a WebMvcConfigurer object that allows requests from localhost to access all endpoints
+     */
+    @Bean
+    public WebMvcConfigurer corsConfigurer() {
+        return new WebMvcConfigurer() {
+            @Override
+            public void addCorsMappings(CorsRegistry registry) {
+                registry.addMapping("/**").allowedOrigins("http://localhost:8080");
+            }
+        };
+    }
+
+    @Bean
+    @Scope(value = ConfigurableBeanFactory.SCOPE_SINGLETON)
+    public SimpleCache simpleCache() {
+        return SimpleCache.builder()
+                .initialCapacity(16)
+                .maximumSize(100)
+                .expireAfter(12, ChronoUnit.HOURS)
+                .build(null);
+    }
+
+    @Bean
+    public ObjectMapper objectMapper() {
+        ObjectMapper mapper = JsonMapper.builder()
+                .addModule(new JavaTimeModule())
+                .addModule(new ParameterNamesModule())
+                .disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS)
+                .disable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES)
+                .serializationInclusion(JsonInclude.Include.NON_NULL)
+                .build();
+
+        return mapper;
     }
 }
