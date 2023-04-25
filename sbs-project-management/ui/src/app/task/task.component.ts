@@ -21,7 +21,7 @@ export class TaskComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router
   ) {}
-  ngOnInit(): void {
+  ngOnInit() {
     // throw new Error('Method not implemented.');
     this.getProjMembers();
     this.id = this.route.snapshot.paramMap.get('slug');

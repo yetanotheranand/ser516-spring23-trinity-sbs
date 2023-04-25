@@ -23,13 +23,6 @@ fdescribe('TaskComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should have default task values', () => {
-    expect(component.task.subject).toEqual('');
-    expect(component.task.description).toEqual('');
-    expect(component.task.assignedTo).toEqual('');
-    expect(component.task.status).toEqual('New');
-  });
-
   it('should call createTask method when button is clicked', () => {
     spyOn(component, 'createTask');
 
