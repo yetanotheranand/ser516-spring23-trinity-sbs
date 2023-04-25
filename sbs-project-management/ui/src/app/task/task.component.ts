@@ -21,8 +21,8 @@ export class TaskComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router
   ) {}
-  ngOnInit() {
-    // throw new Error('Method not implemented.');
+
+  ngOnInit(): void {
     this.getProjMembers();
     this.id = this.route.snapshot.paramMap.get('slug');
 
@@ -45,21 +45,6 @@ export class TaskComponent implements OnInit {
     });
   }
 
-  // task: {
-  //   subject: string;
-  //   description: string;
-  //   assignedTo: string;
-  //   status: string;
-  // } = {
-  //   subject: '',
-  //   description: '',
-  //   assignedTo: '',
-  //   status: 'New',
-  // };
-
-  // ngOnit(){
-
-  // }
   getProjMembers() {
     this.taskService
       .getProjMembers(this.route.snapshot.paramMap.get('slug'))
@@ -73,12 +58,12 @@ export class TaskComponent implements OnInit {
         }
       );
   }
+
   createTask() {
     this.taskService.addTask(this.addTaskForm.value).subscribe(
       () => this.router.navigate(['../'], { relativeTo: this.route }),
       (err) => console.log(err)
     );
     console.log(this.addTaskForm.value);
-    // code to store the task in the database or other storage
   }
 }
