@@ -10,7 +10,7 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 
 <div class="titlebar">
-  <h1>{{ userStory.milestone_name }}</h1>
+  <h1>{{ Tasks[0].user_story_extra_info.subject }}</h1>
   <button class="new-user-story" routerLink="./new">New Task</button>
 </div>
 
@@ -34,10 +34,10 @@
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let row of userStory.tasks">
+        <tr *ngFor="let row of Tasks">
           <td>{{ row?.subject }}</td>
           <td>{{ row?.status_extra_info.name }}</td>
-          <td>{{ row?.assigned_to_extra_info.name }}</td>
+          <td>{{ row.assigned_to_extra_info?.username }}</td>
 
           <!-- <td><button (click)="editEpic(row.id)">Edit</button></td>
               <td><button (click)="deleteEpic(row.id)">Delete</button></td> -->

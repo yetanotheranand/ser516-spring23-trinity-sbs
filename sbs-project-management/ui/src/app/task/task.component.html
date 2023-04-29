@@ -1,13 +1,13 @@
 <div class="task-form">
   <h2>Create New Task</h2>
-  <form>
+  <form [formGroup]="addTaskForm" (ngSubmit)="createTask()">
     <div class="form-group">
       <label for="subject">Subject:</label>
       <input
         type="text"
         id="subject"
         name="subject"
-        [(ngModel)]="task.subject"
+        formControlName="subject"
         required
       />
     </div>
@@ -17,7 +17,7 @@
       <textarea
         id="description"
         name="description"
-        [(ngModel)]="task.description"
+        formControlName="description"
         rows="5"
         cols="30"
         required
@@ -26,29 +26,33 @@
 
     <div class="form-group">
       <label for="assignedTo">Assigned To:</label>
-      <input
+      <select id="assigned_to" formControlName="assigned_to">
+        <option *ngFor="let member of projectMembers" value="{{ member.id }}">
+          {{ member.full_name }}
+        </option>
+      </select>
+      <!-- <input
         type="text"
         id="assignedTo"
         name="assignedTo"
         [(ngModel)]="task.assignedTo"
         required
-      />
+      /> -->
     </div>
 
     <div class="form-group">
       <label for="status">Status:</label>
-      <select id="status" name="status" [(ngModel)]="task.status">
-        <option value="New">New</option>
-        <option value="In Progress">In Progress</option>
-        <option value="Ready for Test">Ready for Test</option>
-        <option value="Closed">Closed</option>
-        <option value="Needs Info">Needs Info</option>
-        <option value="Waiting">Waiting</option>
+      <select id="status" name="status" formControlName="status">
+        <option value="3819444">New</option>
+        <option value="3819445">In Progress</option>
+        <option value="3819446">Ready for Test</option>
+        <option value="3819447">Closed</option>
+        <option value="3819448">Needs Info</option>
       </select>
     </div>
 
     <div class="form-group">
-      <button type="submit" (click)="createTask()">Create Task</button>
+      <button type="submit" [disabled]="!addTaskForm.valid">Create Task</button>
     </div>
   </form>
 </div>
