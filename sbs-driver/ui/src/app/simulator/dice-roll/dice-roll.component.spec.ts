@@ -1,17 +1,17 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { TestComponent } from './test.component';
+import { DiceRollComponent } from './dice-roll.component';
 
-describe('TestComponent', () => {
-  let component: TestComponent;
-  let fixture: ComponentFixture<TestComponent>;
+describe('DiceRollComponent', () => {
+  let component: DiceRollComponent;
+  let fixture: ComponentFixture<DiceRollComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [TestComponent],
+      declarations: [DiceRollComponent],
     }).compileComponents();
 
-    fixture = TestBed.createComponent(TestComponent);
+    fixture = TestBed.createComponent(DiceRollComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

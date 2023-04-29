@@ -1,0 +1,25 @@
+<!-- eslint-disable prettier/prettier -->
+<mat-stepper linear #stepper>
+  <mat-step [editable]="isEditable">
+    <ng-template matStepLabel>Enter project details</ng-template>
+    <div>
+      <button mat-button matStepperNext>Next</button>
+    </div>
+  </mat-step>
+  <mat-step [editable]="isEditable">
+    <ng-template matStepLabel>Run Simulations</ng-template>
+    <div>
+      <mat-dialog-actions>
+        <button mat-raised-button color = "primary" (click) = "openDialog()">Open User Story</button>
+      </mat-dialog-actions>
+      <button mat-button matStepperPrevious>Back</button>
+      <button mat-button matStepperNext>Next</button>
+    </div>
+  </mat-step>
+  <mat-step [editable]="isEditable">
+    <ng-template matStepLabel>View Statistics</ng-template>
+    <div>
+      <button mat-button matStepperPrevious>Back</button>
+    </div>
+  </mat-step>
+</mat-stepper>
