@@ -64,6 +64,8 @@ services:
     build:
       context: ./sbs-project-management/api
       target: prod
+    ports:
+      - 8085:8080
     networks:
       sbs-network:
         aliases:
